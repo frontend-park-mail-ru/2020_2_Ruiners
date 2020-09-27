@@ -326,3 +326,92 @@ background-repeat: no-repeat;
     margin: auto;
 }
 
+body.profile{
+    background-color:  #6c649c;
+}
+
+.shadow {
+    background-color:  #6251c2;
+    box-shadow: 0 -1px 15px #333333 !important;
+}
+
+.shadow {
+    width: 850px;
+    box-shadow: #333 0 0 15px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+dev a {
+	text-decoration: none;
+}
+
+dev ul {
+	margin: 0;
+	padding: 0;
+}
+
+dev li {
+	list-style-position: inside;
+	font: 14px 'Oswald', sans-serif;
+	padding: 10px;
+}
+
+.top-menu li {
+	display: inline-block;
+	padding: 10px 30px;
+	margin: 0;
+}
+
+.top-menu li.active {
+	background: #29c5e6;
+	color: #fff;
+}
+
+.top-menu a {
+	color: #b2b2b2;
+}
+
+.profileInsertsMenu li {
+    margin: 5px 0 0 0;
+    border-right: 1px solid #2e2e2e;
+    border-bottom: 2px solid #2e2e2e;
+    background: #ffffff;
+}
+
+.profileInfoWrapLeft {
+    margin: 0px;
+    padding: 0px 0 30px 0;
+    width: 180px;
+    float: left;
+}
+
+.profileInfoWrapRight {
+    float: left;
+    width: 400px;
+    margin: 10px;
+}
+
+.infoUser{
+    font-family: Arial;
+}
+
+#avatarUserBox {
+    border: 5px solid #ffffff;
+    box-shadow: 0px 1px 2px #999999;
+    width: 120px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.avatarUserBoxP {
+    margin-left: 25px;
+}
+
+.infoUserAuth {
+    font-family: Arial;
+    color: #be1e1e;
+    margin-top: 100px;
+}
+
