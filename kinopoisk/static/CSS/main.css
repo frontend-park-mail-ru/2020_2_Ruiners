@@ -93,7 +93,7 @@ form.login {
 form.register{
     display: flex;
     flex-direction: column;
-    height: 40%;
+    height: 38%;
     width: 20%;
     border-radius: 20px;
     background-color: #000000;
