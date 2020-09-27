@@ -38,8 +38,10 @@
     text-decoration: none;
 }
 
-body {
+body.film1 {
     background-image: url("../images/test.jpg");
+    height: 100vh;
+    margin: 0;
 }
 
 .menu-main ul {
@@ -76,8 +78,8 @@ body {
 
 
 
-button:hover { background: rgba(255,255,255,.2); }
-button:active { background: white; }
+.menu-main button:hover { background: rgba(255,255,255,.2); }
+.menu-main button:active { background: white; }
 
 .main {
     font-family: 'Playfair Display', serif;
@@ -172,25 +174,11 @@ button:active { background: white; }
     box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
 }
 
-
-a:focus {
-    box-shadow: 0 0 0 2px #FFFFFF,
-                0 0 0 4px #FBD1DC;
-    outline: none;
-}
-
-
-a {
+.brand a:hover {
     text-decoration: none;
+    cursor: default;
 }
-
-a:hover {
+.menu-secondary a:hover {
     text-decoration: underline;
 }
 
-
-
-body {
-    height: 100vh;
-    margin: 0;
-}
