@@ -415,3 +415,8 @@ dev li {
     margin-top: 100px;
 }
 
+a {
+    font-size: 22px;
+    display: block;
+}
+
