@@ -4,7 +4,7 @@ const nav = document.getElementById('navbar');
 
 const menu = {
     signup: {
-        href: '/static/register.html',
+        href: '/signup',
         text: 'Зарегистрироваться',
     },
     film: {
@@ -12,7 +12,7 @@ const menu = {
         text: 'Страница фильма',
     },
     login: {
-        href: '/static/login.html',
+        href: '/login',
         text: 'Войти',
     },
     profile: {
@@ -46,16 +46,22 @@ function createNavbar() {
     ul.appendChild(li5);
 }
 
-createNavbar();
+function menuPage() {
+    application.innerHTML = '';
+    application.className = ''
+    Object.keys(menu).map((menuKey) => {
+        const {href, text} = menu[menuKey];
+        const menuItem = document.createElement('a');
+        menuItem.href = href;
+        menuItem.textContent = text;
+        menuItem.dataset.section = menuKey;
+        application.appendChild(menuItem);
+    });
+}
 
-Object.keys(menu).map((menuKey) => {
-    const {href, text} = menu[menuKey];
-    const menuItem = document.createElement('a');
-    menuItem.href = href;
-    menuItem.textContent = text;
-    menuItem.dataset.section = menuKey;
-    application.appendChild(menuItem);
-});
+createNavbar();
+menuPage()
+
 
 function createLi(className, child) {
     const li = document.createElement('li');
@@ -71,10 +77,70 @@ function createA(href, text) {
     return a;
 }
 
-const signupLink = application.querySelector('[data-section="film"]');
+function createInput(type, text) {
+    const input = document.createElement('input');
+    input.type = type;
+    input.placeholder = text;
+    return input;
+}
+
+const signupLink = application.querySelector('[data-section="signup"]');
+const loginLink = application.querySelector('[data-section="login"]');
 
 signupLink.addEventListener('click', (event) => {
     event.preventDefault();
     application.innerHTML = '';
+    const body = document.getElementById('body');
+    body.className = 'page';
+    const form = document.createElement('form');
+    form.className = 'wrapper__form register';
+    body.appendChild(form);
+    const header = document.createElement('h2')
+    header.textContent = 'Регистрация'
+    header.style = 'color:#FFFFFF; margin-left: 10px'
+    form.appendChild(header)
+    const loginInput = createInput('login', 'Логин')
+    const emailInput = createInput('email', 'e-mail')
+    const passwordInput = createInput('password', 'Пароль')
+    form.appendChild(loginInput)
+    form.appendChild(emailInput)
+    form.appendChild(passwordInput)
+    const button = document.createElement('button')
+    button.href = '/'
+    button.textContent = 'Регистрация'
+    button.className = 'secondary'
+    form.appendChild(button)
+    const linkLogin = createA('/login', 'Войти в имеющийся')
+    linkLogin.style = 'color: #FFFFFF; margin-left: 10px'
+    form.appendChild(linkLogin)
+});
 
+loginLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    application.innerHTML = '';
+    //const body = document.getElementById('body');
+    application.className = 'page';
+    const form = document.createElement('form');
+    form.className = 'wrapper__form login';
+    application.appendChild(form);
+    const header = document.createElement('h2');
+    header.textContent = 'Войти';
+    header.style = 'color:#FFFFFF; margin-left: 10px';
+    form.appendChild(header);
+    const loginInput = createInput('login', 'Логин');
+    const passwordInput = createInput('password', 'Пароль');
+    form.appendChild(loginInput);
+    form.appendChild(passwordInput);
+    const button = document.createElement('button');
+    button.href = '/';
+    button.textContent = 'Войти';
+    button.className = 'secondary';
+    form.appendChild(button);
+    const linkSignup = createA('/', 'Создать новый');
+    linkSignup.style = 'color: #FFFFFF; margin-left: 10px';
+    form.appendChild(linkSignup);
+    linkSignup.addEventListener('click', (event) => {
+        event.preventDefault();
+        menuPage();
+    });
 });
