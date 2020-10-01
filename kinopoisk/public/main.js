@@ -1,5 +1,6 @@
 
 const application = document.getElementById('app');
+const nav = document.getElementById('navbar');
 
 const menu = {
     signup: {
@@ -20,29 +21,32 @@ const menu = {
     },
 };
 
-application.innerHTML = '';
-const navbar = document.createElement('nav');
-application.appendChild(navbar);
-const ul = document.createElement('ul');
-ul.className = 'menu-main';
-navbar.appendChild(ul);
-const kinopoisk = createA("/", "Kinopoisk.ru");
-const films = createA("/", "Фильмы");
-const search = createA("/", "Поиск");
-const login = document.createElement('button');
-const signup = document.createElement('button');
-login.textContent = "Войти";
-signup.textContent = "Зарегистрироваться";
-const li1 = createLi("brand", kinopoisk);
-const li2 = createLi("menu-secondary", films);
-const li3 = createLi("menu-secondary", search);
-const li4 = createLi("menu-buttons", login);
-const li5 = createLi("menu-buttons", signup);
-ul.appendChild(li1);
-ul.appendChild(li2);
-ul.appendChild(li3);
-ul.appendChild(li4);
-ul.appendChild(li5);
+function createNavbar() {
+    const navbar = document.createElement('nav');
+    nav.appendChild(navbar);
+    const ul = document.createElement('ul');
+    ul.className = 'menu-main';
+    navbar.appendChild(ul);
+    const kinopoisk = createA("/", "Kinopoisk.ru");
+    const films = createA("/", "Фильмы");
+    const search = createA("/", "Поиск");
+    const login = document.createElement('button');
+    const signup = document.createElement('button');
+    login.textContent = "Войти";
+    signup.textContent = "Зарегистрироваться";
+    const li1 = createLi("brand", kinopoisk);
+    const li2 = createLi("menu-secondary", films);
+    const li3 = createLi("menu-secondary", search);
+    const li4 = createLi("menu-buttons", login);
+    const li5 = createLi("menu-buttons", signup);
+    ul.appendChild(li1);
+    ul.appendChild(li2);
+    ul.appendChild(li3);
+    ul.appendChild(li4);
+    ul.appendChild(li5);
+}
+
+createNavbar();
 
 Object.keys(menu).map((menuKey) => {
     const {href, text} = menu[menuKey];
@@ -70,28 +74,7 @@ function createA(href, text) {
 const signupLink = application.querySelector('[data-section="film"]');
 
 signupLink.addEventListener('click', (event) => {
-    /*event.preventDefault();
+    event.preventDefault();
     application.innerHTML = '';
-    const navbar = document.createElement('nav');
-    application.appendChild(navbar);
-    const ul = document.createElement('ul');
-    ul.className = 'menu-main';
-    navbar.appendChild(ul);
-    const kinopoisk = createA("/", "Kinopoisk.ru");
-    const films = createA("/", "Фильмы");
-    const search = createA("/", "Поиск");
-    const login = document.createElement('button');
-    const signup = document.createElement('button');
-    login.textContent = "Войти";
-    signup.textContent = "Зарегистрироваться";
-    const li1 = createLi("brand", kinopoisk);
-    const li2 = createLi("menu-secondary", films);
-    const li3 = createLi("menu-secondary", search);
-    const li4 = createLi("menu-buttons", login);
-    const li5 = createLi("menu-buttons", signup);
-    ul.appendChild(li1);
-    ul.appendChild(li2);
-    ul.appendChild(li3);
-    ul.appendChild(li4);
-    ul.appendChild(li5);*/
+
 });
