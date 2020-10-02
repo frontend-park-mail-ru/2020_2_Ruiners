@@ -323,7 +323,7 @@ body, .page {
     align-items: center;
     justify-content: flex-start;
     background-image: url(../images/login.jpg);
-background-repeat: no-repeat;
+    background-repeat: no-repeat;
 }
 
 .page .wrapper__form {
@@ -348,33 +348,33 @@ body.profile{
 }
 
 dev a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 dev ul {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 dev li {
-	list-style-position: inside;
-	font: 14px 'Oswald', sans-serif;
-	padding: 10px;
+    list-style-position: inside;
+    font: 14px 'Oswald', sans-serif;
+    padding: 10px;
 }
 
 .top-menu li {
-	display: inline-block;
-	padding: 10px 30px;
-	margin: 0;
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 0;
 }
 
 .top-menu li.active {
-	background: #29c5e6;
-	color: #fff;
+    background: #29c5e6;
+    color: #fff;
 }
 
 .top-menu a {
-	color: #b2b2b2;
+    color: #b2b2b2;
 }
 
 .profileInsertsMenu li {
@@ -423,4 +423,3 @@ a {
     font-size: 22px;
     display: block;
 }
-

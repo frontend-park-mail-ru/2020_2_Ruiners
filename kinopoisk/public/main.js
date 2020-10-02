@@ -1,4 +1,3 @@
-
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
 
@@ -48,6 +47,16 @@ function createNavbar() {
         event.preventDefault();
         application.innerHTML = '';
         menuPage();
+    });
+    login.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        loginPage();
+    });
+    signup.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        signupPage();
     });
 }
 
@@ -110,6 +119,11 @@ function signupPage () {
     const linkLogin = createA('/login', 'Войти в имеющийся');
     linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
     form.appendChild(linkLogin);
+    linkLogin.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        loginPage();
+    });
 }
 
 function filmPage() {
@@ -185,12 +199,13 @@ function loginPage () {
     button.textContent = 'Войти';
     button.className = 'secondary';
     form.appendChild(button);
-    const linkSignup = createA('/', 'Создать новый');
+    const linkSignup = createA('/signup', 'Создать новый');
     linkSignup.style = 'color: #FFFFFF; margin-left: 10px';
     form.appendChild(linkSignup);
     linkSignup.addEventListener('click', (event) => {
         event.preventDefault();
-        menuPage();
+        application.innerHTML = '';
+        signupPage();
     });
 }
 
