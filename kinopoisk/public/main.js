@@ -56,6 +56,7 @@ function menuPage() {
     application.className = '';
     const body = document.getElementById('body');
     body.className = '';
+    //body.removeChild(form)
     Object.keys(menu).map((menuKey) => {
         const {href, text} = menu[menuKey];
         const menuItem = document.createElement('a');
@@ -88,8 +89,9 @@ function signupPage () {
     const body = document.getElementById('body');
     body.className = 'page';
     const form = document.createElement('form');
-    form.className = 'wrapper__form register';
-    body.appendChild(form);
+    application.className = "wrapper__form register"
+    //form.className = 'wrapper__form register';
+    application.appendChild(form);
     const header = document.createElement('h2');
     header.textContent = 'Регистрация';
     header.style = 'color:#FFFFFF; margin-left: 10px';
@@ -168,8 +170,8 @@ function loginPage () {
     const body = document.getElementById('body');
     body.className = 'page';
     const form = document.createElement('form');
-    form.className = 'wrapper__form login';
-    body.appendChild(form);
+    application.className = 'wrapper__form login';
+    application.appendChild(form);
     const header = document.createElement('h2');
     header.textContent = 'Войти';
     header.style = 'color:#FFFFFF; margin-left: 10px';
