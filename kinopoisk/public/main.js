@@ -1,10 +1,9 @@
-
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
 
 const menu = {
     signup: {
-        href: '/static/register.html',
+        href: '/signup',
         text: 'Зарегистрироваться',
     },
     film: {
@@ -12,7 +11,7 @@ const menu = {
         text: 'Страница фильма',
     },
     login: {
-        href: '/static/login.html',
+        href: '/login',
         text: 'Войти',
     },
     profile: {
@@ -21,7 +20,52 @@ const menu = {
     },
 };
 
+function createNavbar() {
+    const navbar = document.createElement('nav');
+    nav.appendChild(navbar);
+    const ul = document.createElement('ul');
+    ul.className = 'menu-main';
+    navbar.appendChild(ul);
+    const kinopoisk = createA("/", "Kinopoisk.ru");
+    const films = createA("/", "Фильмы");
+    const search = createA("/", "Поиск");
+    const login = document.createElement('button');
+    const signup = document.createElement('button');
+    login.textContent = "Войти";
+    signup.textContent = "Зарегистрироваться";
+    const li1 = createLi("brand", kinopoisk);
+    const li2 = createLi("menu-secondary", films);
+    const li3 = createLi("menu-secondary", search);
+    const li4 = createLi("menu-buttons", login);
+    const li5 = createLi("menu-buttons", signup);
+    ul.appendChild(li1);
+    ul.appendChild(li2);
+    ul.appendChild(li3);
+    ul.appendChild(li4);
+    ul.appendChild(li5);
+    kinopoisk.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        menuPage();
+    });
+    login.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        loginPage();
+    });
+    signup.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        signupPage();
+    });
+}
+
 function menuPage() {
+    application.innerHTML = '';
+    application.className = '';
+    const body = document.getElementById('body');
+    body.className = '';
+    //body.removeChild(form)
     Object.keys(menu).map((menuKey) => {
         const {href, text} = menu[menuKey];
         const menuItem = document.createElement('a');
@@ -30,14 +74,55 @@ function menuPage() {
         menuItem.dataset.section = menuKey;
         application.appendChild(menuItem);
     });
-    const body = document.getElementById("body");
-    body.className = "";
+    const signupLink = application.querySelector('[data-section="signup"]');
     const filmLink = application.querySelector('[data-section="film"]');
-
+    const loginLink = application.querySelector('[data-section="login"]');
+    signupLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        signupPage();
+    });
+    loginLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        loginPage();
+    });
     filmLink.addEventListener('click', (event) => {
         event.preventDefault();
         application.innerHTML = '';
         filmPage();
+    });
+}
+
+function signupPage () {
+    const body = document.getElementById('body');
+    body.className = 'page';
+    const form = document.createElement('form');
+    application.className = "wrapper__form register"
+    //form.className = 'wrapper__form register';
+    application.appendChild(form);
+    const header = document.createElement('h2');
+    header.textContent = 'Регистрация';
+    header.style = 'color:#FFFFFF; margin-left: 10px';
+    form.appendChild(header);
+    const loginInput = createInput('login', 'Логин');
+    const emailInput = createInput('email', 'e-mail');
+    const passwordInput = createInput('password', 'Пароль');
+    form.appendChild(loginInput);
+    form.appendChild(emailInput);
+    form.appendChild(passwordInput);
+    const button = document.createElement('button');
+    button.href = '/';
+    button.textContent = 'Регистрация';
+    button.className = 'secondary';
+    form.appendChild(button);
+    const linkLogin = createA('/login', 'Войти в имеющийся');
+    linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
+    form.appendChild(linkLogin);
+    linkLogin.addEventListener('click', (event) => {
+        event.preventDefault();
+        application.innerHTML = '';
+        loginPage();
     });
 }
 
@@ -95,40 +180,32 @@ function filmPage() {
     p.appendChild(span4);
 }
 
-function createSpan(classname, text) {
-    const span = document.createElement('span');
-    span.className = classname;
-    span.textContent = text;
-    return span;
-}
-
-function createNavbar() {
-    const navbar = document.createElement('nav');
-    nav.appendChild(navbar);
-    const ul = document.createElement('ul');
-    ul.className = 'menu-main';
-    navbar.appendChild(ul);
-    const kinopoisk = createA("/", "Kinopoisk.ru");
-    const films = createA("/", "Фильмы");
-    const search = createA("/", "Поиск");
-    const login = document.createElement('button');
-    const signup = document.createElement('button');
-    login.textContent = "Войти";
-    signup.textContent = "Зарегистрироваться";
-    const li1 = createLi("brand", kinopoisk);
-    const li2 = createLi("menu-secondary", films);
-    const li3 = createLi("menu-secondary", search);
-    const li4 = createLi("menu-buttons", login);
-    const li5 = createLi("menu-buttons", signup);
-    ul.appendChild(li1);
-    ul.appendChild(li2);
-    ul.appendChild(li3);
-    ul.appendChild(li4);
-    ul.appendChild(li5);
-    kinopoisk.addEventListener('click', (event) => {
+function loginPage () {
+    const body = document.getElementById('body');
+    body.className = 'page';
+    const form = document.createElement('form');
+    application.className = 'wrapper__form login';
+    application.appendChild(form);
+    const header = document.createElement('h2');
+    header.textContent = 'Войти';
+    header.style = 'color:#FFFFFF; margin-left: 10px';
+    form.appendChild(header);
+    const loginInput = createInput('login', 'Логин');
+    const passwordInput = createInput('password', 'Пароль');
+    form.appendChild(loginInput);
+    form.appendChild(passwordInput);
+    const button = document.createElement('button');
+    button.href = '/';
+    button.textContent = 'Войти';
+    button.className = 'secondary';
+    form.appendChild(button);
+    const linkSignup = createA('/signup', 'Создать новый');
+    linkSignup.style = 'color: #FFFFFF; margin-left: 10px';
+    form.appendChild(linkSignup);
+    linkSignup.addEventListener('click', (event) => {
         event.preventDefault();
         application.innerHTML = '';
-        menuPage();
+        signupPage();
     });
 }
 
@@ -144,6 +221,20 @@ function createA(href, text) {
     a.href = href;
     a.textContent = text;
     return a;
+}
+
+function createSpan(classname, text) {
+    const span = document.createElement('span');
+    span.className = classname;
+    span.textContent = text;
+    return span;
+}
+
+function createInput(type, text) {
+    const input = document.createElement('input');
+    input.type = type;
+    input.placeholder = text;
+    return input;
 }
 
 createNavbar();
