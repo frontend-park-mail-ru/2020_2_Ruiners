@@ -218,10 +218,9 @@ function loginPage () {
 
 function profilePage() {
     const body = document.getElementById('body');
-
-    const div = createDiv('page', body);
-    const divshadow = createDiv('shadow', div);
-
+    body.className = "page";
+    const divshadow = createDiv('shadow', application);
+    application.appendChild(divshadow);
     const ul = document.createElement('ul');
     ul.className = 'top-menu';
     divshadow.appendChild(ul);
