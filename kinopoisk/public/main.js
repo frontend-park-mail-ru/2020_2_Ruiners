@@ -1,22 +1,31 @@
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
 
-const menu = {
+const config = {
+    menu: {
+        href: '/menu',
+        text: 'Главная',
+        open: menuPage,
+    },
     signup: {
         href: '/signup',
         text: 'Зарегистрироваться',
+        open: signupPage,
     },
     film: {
         href: '/film',
         text: 'Страница фильма',
+        open: filmPage,
     },
     login: {
         href: '/login',
         text: 'Войти',
+        open: loginPage,
     },
     profile: {
         href: '/profile',
         text: 'Профиль',
+        open: profilePage,
     },
 };
 
@@ -26,7 +35,8 @@ function createNavbar() {
     const ul = document.createElement('ul');
     ul.className = 'menu-main';
     navbar.appendChild(ul);
-    const kinopoisk = createA("/", "Kinopoisk.ru");
+    const kinopoisk = createA("/menu", "Kinopoisk.ru");
+    kinopoisk.dataset.section = 'menu';
     const films = createA("/", "Фильмы");
     const search = createA("/", "Поиск");
     const login = document.createElement('button');
@@ -43,11 +53,6 @@ function createNavbar() {
     ul.appendChild(li3);
     ul.appendChild(li4);
     ul.appendChild(li5);
-    kinopoisk.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        menuPage();
-    });
     login.addEventListener('click', (event) => {
         event.preventDefault();
         application.innerHTML = '';
@@ -66,46 +71,23 @@ function menuPage() {
     const body = document.getElementById('body');
     body.className = '';
     //body.removeChild(form)
-    Object.keys(menu).map((menuKey) => {
-        const {href, text} = menu[menuKey];
+    Object.keys(config).map((menuKey) => {
+        const {href, text} = config[menuKey];
         const menuItem = document.createElement('a');
         menuItem.href = href;
         menuItem.textContent = text;
         menuItem.dataset.section = menuKey;
         application.appendChild(menuItem);
     });
-    const signupLink = application.querySelector('[data-section="signup"]');
-    const filmLink = application.querySelector('[data-section="film"]');
-    const loginLink = application.querySelector('[data-section="login"]');
-    const profileLink = application.querySelector('[data-section="profile"]');
-    profileLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        profilePage();
-    });
-    signupLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        signupPage();
-    });
-    loginLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        loginPage();
-    });
-    filmLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        filmPage();
-    });
 }
 
 
 function signupPage () {
+    application.innerHTML = '';
     const body = document.getElementById('body');
     body.className = 'page';
     const form = document.createElement('form');
-    application.className = "wrapper__form register"
+    application.className = "wrapper__form register";
     //form.className = 'wrapper__form register';
     application.appendChild(form);
     const header = document.createElement('h2');
@@ -126,11 +108,7 @@ function signupPage () {
     const linkLogin = createA('/login', 'Войти в имеющийся');
     linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
     form.appendChild(linkLogin);
-    linkLogin.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        loginPage();
-    });
+    linkLogin.dataset.section = 'login';
 }
 
 function filmPage() {
@@ -188,6 +166,7 @@ function filmPage() {
 }
 
 function loginPage () {
+    application.innerHTML = '';
     const body = document.getElementById('body');
     body.className = 'page';
     const form = document.createElement('form');
@@ -209,14 +188,11 @@ function loginPage () {
     const linkSignup = createA('/signup', 'Создать новый');
     linkSignup.style = 'color: #FFFFFF; margin-left: 10px';
     form.appendChild(linkSignup);
-    linkSignup.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        signupPage();
-    });
+    linkSignup.dataset.section = 'signup';
 }
 
 function profilePage() {
+    application.innerHTML = '';
     const body = document.getElementById('body');
     body.className = "page";
     const divshadow = createDiv('shadow', application);
@@ -340,5 +316,22 @@ function createDiv(cla, child) {
     return div;
 }
 
+application.addEventListener('click', (evt) => {
+    const {target} = evt;
+
+    if (target instanceof HTMLAnchorElement) {
+        evt.preventDefault();
+        config[target.dataset.section].open();
+    }
+});
+
+nav.addEventListener('click', (evt) => {
+    const {target} = evt;
+
+    if (target instanceof HTMLAnchorElement) {
+        evt.preventDefault();
+        config[target.dataset.section].open();
+    }
+});
 createNavbar();
 menuPage();
