@@ -326,6 +326,7 @@ body, .page {
     background-repeat: no-repeat;
 }
 
+
 .page .wrapper__form {
     margin: auto;
 }
@@ -337,8 +338,10 @@ body, .page {
     margin: auto;
     position: relative;
     z-index: 1;
-    background-color: #fff;
+    /* background-color: #fff; */
     min-height: 850px;
+
+    background-color: rgba(0,0,0,0.7);
 }
 
 .top-menu li {
@@ -375,6 +378,7 @@ body, .page {
 
 .infoUser{
     font-family: Arial;
+    color: #ffffff;
 }
 
 .avatarUserBoxP {
@@ -386,9 +390,10 @@ body, .page {
     margin-left: 25px;
 }
 
+
 .infoUserAuth {
     font-family: Arial;
-    color: #be1e1e;
+    color: #c94747;
     margin-top: 100px;
 }
 

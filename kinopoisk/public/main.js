@@ -278,7 +278,7 @@ function profilePage() {
     button.addEventListener('click', (event) => {
         event.preventDefault();
         application.innerHTML = '';
-        loginPage();
+        filmPage();
     });
 
     divLeft.appendChild(button);
