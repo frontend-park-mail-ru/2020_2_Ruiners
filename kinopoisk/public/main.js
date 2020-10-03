@@ -27,6 +27,11 @@ const config = {
         text: 'Профиль',
         open: profilePage,
     },
+    profileChenge: {
+        href: '/profileChenge',
+        text: 'Изменить профиль',
+        open: profileChengePage,
+    },
 };
 
 function createNavbar() {
@@ -53,16 +58,18 @@ function createNavbar() {
     ul.appendChild(li3);
     ul.appendChild(li4);
     ul.appendChild(li5);
-    login.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        loginPage();
-    });
-    signup.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        signupPage();
-    });
+    // login.addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     application.innerHTML = '';
+    //     loginPage();
+    // });
+    // signup.addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     application.innerHTML = '';
+    //     signupPage();
+    // });
+    login.dataset.section = 'login';
+    signup.dataset.section = 'signup';
 }
 
 function menuPage() {
@@ -80,7 +87,6 @@ function menuPage() {
         application.appendChild(menuItem);
     });
 }
-
 
 function signupPage () {
     application.innerHTML = '';
@@ -114,7 +120,8 @@ function signupPage () {
 function filmPage() {
     const body = document.getElementById("body");
     body.className = "film1";
-    application.innerHTML = '';
+    application.innerHTML = '';application.className = '';
+    application.className = '';
     const main = document.createElement('div');
     main.className = "main";
     application.appendChild(main);
@@ -191,12 +198,58 @@ function loginPage () {
     linkSignup.dataset.section = 'signup';
 }
 
-function profilePage() {
+function profileChengePage() {
     application.innerHTML = '';
     const body = document.getElementById('body');
     body.className = "page";
-    const divshadow = createDiv('shadow', application);
-    application.appendChild(divshadow);
+
+    const form = document.createElement('form');
+    application.className = 'wrapper__form chenge';
+    application.appendChild(form);
+
+    const header = document.createElement('h2');
+    header.textContent = 'Настройки пользователя';
+    header.style = 'color:#FFFFFF; margin-left: 10px';
+    form.appendChild(header);
+
+    let loginName = "mgovyadkin"; // доставать из запроса
+
+    const loginInput = createInput('login', loginName);
+    form.appendChild(loginInput);
+
+    const submitLogin = createInputSubmit('Изменить логин', 'secondary');
+    form.appendChild(submitLogin);
+
+    const formPass = document.createElement('form');
+    application.appendChild(formPass);
+
+    const passwordInputOld = createInput('password', 'Старый пароль');
+    formPass.appendChild(passwordInputOld);
+
+    const passwordInputNew1 = createInput('password', 'Новый пароль');
+    formPass.appendChild(passwordInputNew1);
+
+    const passwordInputNew2 = createInput('password', 'Повторите новый пароль');
+    formPass.appendChild(passwordInputNew2);
+
+    const submitpass = createInputSubmit('Изменить пароль', 'secondary');
+    formPass.appendChild(submitpass);
+
+    const buttonBack = document.createElement('button');
+    buttonBack.href = '/';
+    buttonBack.textContent = 'Назад';
+    buttonBack.className = 'secondary';
+    buttonBack.dataset.section = 'profile';
+    application.appendChild(buttonBack);
+}
+
+function profilePage() {
+    application.innerHTML = '';
+    application.className = '';
+    const body = document.getElementById('body');
+    body.className = "page";
+    const divshadow = createDiv('shadow profile', application);
+
     const ul = document.createElement('ul');
     ul.className = 'top-menu';
     divshadow.appendChild(ul);
@@ -242,27 +295,20 @@ function profilePage() {
 
     const img = document.createElement('img');
     img.src = '/static/static/images/user-no-big.gif';
-
     divAvatar.appendChild(img);
 
     const button = document.createElement('button');
     button.className = 'secondary';
     button.textContent = 'Изменить данные';
-    button.href = '/hh';
-
-    button.addEventListener('click', (event) => {
-        event.preventDefault();
-        application.innerHTML = '';
-        filmPage();
-    });
-
+    button.href = '/';
+    button.dataset.section = 'profileChenge';
     divLeft.appendChild(button);
 
 
     const divRight = createDiv('profileInfoWrapRight', divshadow);
     const divInfo = createDiv('infoUser', divRight);
 
-    const nick = document.createElement('a');
+    const nick = document.createElement('h1');
     nick.className = 'nick_name';
     nick.textContent = 'mgovyadkinya';
 
@@ -278,7 +324,6 @@ function profilePage() {
     span2.textContent = 'Рейтинг комментариев:';
     divInfoAuth.appendChild(span2);
 }
-
 
 function createLi(className, child) {
     const li = document.createElement('li');
@@ -308,6 +353,14 @@ function createInput(type, text) {
     return input;
 }
 
+function createInputSubmit(value, className) {
+    const input = document.createElement('input');
+    input.type = 'submit';
+    input.className = className;
+    input.value = value;
+    return input;
+}
+
 function createDiv(cla, child) {
     const div = document.createElement('div');
     div.className = cla;
@@ -319,8 +372,16 @@ function createDiv(cla, child) {
 application.addEventListener('click', (evt) => {
     const {target} = evt;
 
+    console.log("click application " + target);
     if (target instanceof HTMLAnchorElement) {
         evt.preventDefault();
+        console.log("click application " + target.dataset.section);
+        config[target.dataset.section].open();
+    }
+
+    if (target instanceof HTMLButtonElement) {
+        evt.preventDefault();
+        console.log("click application Button " + target.dataset.section);
         config[target.dataset.section].open();
     }
 });
@@ -328,10 +389,19 @@ application.addEventListener('click', (evt) => {
 nav.addEventListener('click', (evt) => {
     const {target} = evt;
 
+    console.log("click nav " + target);
     if (target instanceof HTMLAnchorElement) {
+        console.log("click nav " + target.dataset.section);
         evt.preventDefault();
         config[target.dataset.section].open();
     }
+
+    if (target instanceof HTMLButtonElement) {
+        evt.preventDefault();
+        console.log("click nav Button " + target.dataset.section);
+        config[target.dataset.section].open();
+    }
 });
+
 createNavbar();
 menuPage();
