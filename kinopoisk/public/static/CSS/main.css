@@ -271,6 +271,7 @@ a:hover {
     height: 32%;
     width: 15%;
     border-radius: 20px;
+    margin-top: 200px;
     background-color: rgba(0,0,0,0.7);
     box-shadow: 1px 2px 10px 0px black;
     padding: 0px 20px 0px;
@@ -326,21 +327,56 @@ body, .page {
     background-repeat: no-repeat;
 }
 
-
+wrapper__form
 .page .wrapper__form {
     margin: auto;
 }
 
-.shadow {
+input.secondary {
+    height: 32px;
+    font-size: 15px;
+    padding: 0 16px;
+
+    border-radius: 100px;
+    border: none;
+    background: #D2691E;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* .shadow {
     box-shadow: 0 -1px 15px #333333 !important;
     width: 850px;
     box-shadow: #333 0 0 15px;
     margin: auto;
     position: relative;
     z-index: 1;
-    /* background-color: #fff; */
     min-height: 850px;
+    background-color: rgba(0,0,0,0.7);
+} */
 
+.chenge {
+    display: flex;
+    flex-direction: column;
+    /* width: 15%; */
+    border-radius: 20px;
+    background-color: rgba(0,0,0,0.7);
+    box-shadow: 1px 2px 10px 0px black;
+    padding: 10px 20px 30px;
+    opacity: 100%;
+    margin: auto;
+}
+
+.profile{
+    width: 850px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+    min-height: 850px;
+}
+
+.shadow{
+    box-shadow: #333 0 0 15px;
     background-color: rgba(0,0,0,0.7);
 }
 
