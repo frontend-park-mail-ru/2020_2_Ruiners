@@ -88,7 +88,7 @@ function menuPage() {
     });
 }
 
-function signupPage () {
+function signupPage() {
     application.innerHTML = '';
     const body = document.getElementById('body');
     body.className = 'page';
@@ -120,7 +120,8 @@ function signupPage () {
 function filmPage() {
     const body = document.getElementById("body");
     body.className = "film1";
-    application.innerHTML = '';application.className = '';
+    application.innerHTML = '';
+    application.className = '';
     application.className = '';
     const main = document.createElement('div');
     main.className = "main";
@@ -151,11 +152,11 @@ function filmPage() {
     const li3 = document.createElement("li");
     ul2.appendChild(li3);
     const frame = document.createElement("iframe");
-    frame.width="560";
-    frame.height="315";
-    frame.src="https://www.youtube.com/embed/85Zz1CCXyDI";
-    frame.frameborder="1";
-    frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    frame.width = "560";
+    frame.height = "315";
+    frame.src = "https://www.youtube.com/embed/85Zz1CCXyDI";
+    frame.frameborder = "1";
+    frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
     frame.allowFullscreen = true;
     li3.appendChild(frame);
     const film = document.createElement('div');
@@ -172,7 +173,7 @@ function filmPage() {
     p.appendChild(span4);
 }
 
-function loginPage () {
+function loginPage() {
     application.innerHTML = '';
     const body = document.getElementById('body');
     body.className = 'page';
@@ -218,12 +219,14 @@ function profileChengePage() {
     form.appendChild(loginInput);
 
     const submitLogin = createInputSubmit('Изменить логин', 'secondary');
+    
     form.appendChild(submitLogin);
 
     const formPass = document.createElement('form');
     application.appendChild(formPass);
 
     const passwordInputOld = createInput('password', 'Старый пароль');
+    passwordInputOld.required = true;
     formPass.appendChild(passwordInputOld);
 
     const passwordInputNew1 = createInput('password', 'Новый пароль');
