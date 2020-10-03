@@ -34,6 +34,26 @@ const config = {
     },
 };
 
+function ajax(method, url, body = null, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.withCredentials = true;
+
+    xhr.addEventListener('readystatechange', function() {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+        callback(xhr.status, xhr.responseText);
+    });
+
+    if (body) {
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf8');
+        xhr.send(JSON.stringify(body));
+        return;
+    }
+
+    xhr.send();
+}
+
 function createNavbar() {
     const navbar = document.createElement('nav');
     nav.appendChild(navbar);
@@ -86,6 +106,33 @@ function menuPage() {
         menuItem.dataset.section = menuKey;
         application.appendChild(menuItem);
     });
+    const signupLink = application.querySelector('[data-section="signup"]');
+    signupLink.addEventListener('click', (evt => {
+        evt.preventDefault();
+        signupPage();
+    }))
+    const filmLink = application.querySelector('[data-section="film"]');
+    filmLink.addEventListener('click', (evt => {
+        evt.preventDefault();
+        filmPage();
+    }))
+    const loginLink = application.querySelector('[data-section="login"]');
+    loginLink.addEventListener('click', (evt => {
+        evt.preventDefault();
+        loginPage();
+    }))
+    const profileLink = application.querySelector('[data-section="profile"]');
+    profileLink.addEventListener('click', (evt => {
+        evt.preventDefault();
+        profilePage();
+    }))
+    const profileChengeLink = application.querySelector('[data-section="profileChenge"]');
+    profileChengeLink.addEventListener('click', (evt => {
+        evt.preventDefault();
+        profileChengePage();
+    }))
+
+
 }
 
 function signupPage() {
@@ -184,15 +231,39 @@ function loginPage() {
     header.textContent = 'Войти';
     header.style = 'color:#FFFFFF; margin-left: 10px';
     form.appendChild(header);
-    const loginInput = createInput('login', 'Логин');
-    const passwordInput = createInput('password', 'Пароль');
+    const loginInput = createInput('login', 'login', 'Логин или почта');
+    const passwordInput = createInput('password', 'password','Пароль');
     form.appendChild(loginInput);
     form.appendChild(passwordInput);
     const button = document.createElement('button');
-    button.href = '/';
+    button.type = 'submit';
     button.textContent = 'Войти';
     button.className = 'secondary';
     form.appendChild(button);
+    form.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+
+        const login = loginInput.value.trim();
+        const password = passwordInput.value.trim();
+        console.log("login =  " + login)
+
+        ajax(
+            'POST',
+            '/login',
+            {login, password},
+            (status, response) => {
+                if (status === 200) {
+                    menuPage();
+                } else if (status === 301) {
+                    loginPage();
+                } else {
+                    const {error} = JSON.parse(response);
+                    alert(error);
+                }
+            }
+        )
+
+    });
     const linkSignup = createA('/signup', 'Создать новый');
     linkSignup.style = 'color: #FFFFFF; margin-left: 10px';
     form.appendChild(linkSignup);
@@ -249,83 +320,100 @@ function profileChengePage() {
 function profilePage() {
     application.innerHTML = '';
     application.className = '';
-    const body = document.getElementById('body');
-    body.className = "page";
-    const divshadow = createDiv('shadow profile', application);
+    ajax('GET', '/me', null, (status, responseText) => {
+        let isAuthorized = false
+        if (status == 200) {
+            console.log("true")
+            isAuthorized = true;
+        }
 
-    const ul = document.createElement('ul');
-    ul.className = 'top-menu';
-    divshadow.appendChild(ul);
+        if (status == 401) {
+            console.log("false")
+            isAuthorized = false;
+        }
+        if (isAuthorized) {
+            const body = document.getElementById('body');
+            body.className = "page";
+            const divshadow = createDiv('shadow profile', application);
 
-    const menuItem = document.createElement('li');
-    const menuItema = document.createElement('span');
+            const ul = document.createElement('ul');
+            ul.className = 'top-menu';
+            divshadow.appendChild(ul);
 
-    menuItema.textContent = "Профиль";
+            const menuItem = document.createElement('li');
+            const menuItema = document.createElement('span');
 
-    menuItem.appendChild(menuItema);
-    ul.appendChild(menuItem);
+            menuItema.textContent = "Профиль";
 
-    const menu_top = {
-        rech: {
-            href: '/rech',
-            text: 'Рецензии',
-        },
-        mark: {
-            href: '/mark',
-            text: 'Оценки',
-        },
-        films: {
-            href: '/films',
-            text: 'Фильмы',
-        },
-        stars: {
-            href: '/stars',
-            text: 'Звёзды',
-        },
-    };
+            menuItem.appendChild(menuItema);
+            ul.appendChild(menuItem);
 
-    Object.keys(menu_top).map((menuKey) => {
-        const {href, text} = menu_top[menuKey];
-        const menuItem = document.createElement('li');
-        const menuItema = createA(href, text);
-        menuItema.dataset.section = menuKey;
-        menuItem.appendChild(menuItema);
-        ul.appendChild(menuItem);
-    });
+            const menu_top = {
+                rech: {
+                    href: '/rech',
+                    text: 'Рецензии',
+                },
+                mark: {
+                    href: '/mark',
+                    text: 'Оценки',
+                },
+                films: {
+                    href: '/films',
+                    text: 'Фильмы',
+                },
+                stars: {
+                    href: '/stars',
+                    text: 'Звёзды',
+                },
+            };
 
-    const divLeft = createDiv('profileInfoWrapLeft', divshadow);
-    const divAvatar = createDiv('avatarUserBoxP', divLeft);
+            Object.keys(menu_top).map((menuKey) => {
+                const {href, text} = menu_top[menuKey];
+                const menuItem = document.createElement('li');
+                const menuItema = createA(href, text);
+                menuItema.dataset.section = menuKey;
+                menuItem.appendChild(menuItema);
+                ul.appendChild(menuItem);
+            });
 
-    const img = document.createElement('img');
-    img.src = '/static/static/images/user-no-big.gif';
-    divAvatar.appendChild(img);
+            const divLeft = createDiv('profileInfoWrapLeft', divshadow);
+            const divAvatar = createDiv('avatarUserBoxP', divLeft);
 
-    const button = document.createElement('button');
-    button.className = 'secondary';
-    button.textContent = 'Изменить данные';
-    button.href = '/';
-    button.dataset.section = 'profileChenge';
-    divLeft.appendChild(button);
+            const img = document.createElement('img');
+            img.src = '/static/static/images/user-no-big.gif';
+            divAvatar.appendChild(img);
+
+            const button = document.createElement('button');
+            button.className = 'secondary';
+            button.textContent = 'Изменить данные';
+            button.href = '/';
+            button.dataset.section = 'profileChenge';
+            divLeft.appendChild(button);
 
 
-    const divRight = createDiv('profileInfoWrapRight', divshadow);
-    const divInfo = createDiv('infoUser', divRight);
+            const divRight = createDiv('profileInfoWrapRight', divshadow);
+            const divInfo = createDiv('infoUser', divRight);
 
-    const nick = document.createElement('h1');
-    nick.className = 'nick_name';
-    nick.textContent = 'mgovyadkinya';
+            const nick = document.createElement('h1');
+            nick.className = 'nick_name';
+            nick.textContent = 'mgovyadkinya';
 
-    divInfo.appendChild(nick);
+            divInfo.appendChild(nick);
 
-    const divInfoAuth = createDiv('infoUserAuth', divRight);
+            const divInfoAuth = createDiv('infoUserAuth', divRight);
 
-    const span1 = document.createElement('span');
-    span1.textContent = 'Регистрация: 11 марта 2020';
-    divInfoAuth.appendChild(span1);
+            const span1 = document.createElement('span');
+            span1.textContent = 'Регистрация: 11 марта 2020';
+            divInfoAuth.appendChild(span1);
 
-    const span2 = document.createElement('span');
-    span2.textContent = 'Рейтинг комментариев:';
-    divInfoAuth.appendChild(span2);
+            const span2 = document.createElement('span');
+            span2.textContent = 'Рейтинг комментариев:';
+            divInfoAuth.appendChild(span2);
+        } else {
+            alert('АХТУНГ, нет авторизации');
+            loginPage();
+        }
+    })
 }
 
 function createLi(className, child) {
@@ -349,9 +437,10 @@ function createSpan(classname, text) {
     return span;
 }
 
-function createInput(type, text) {
+function createInput(type, name, text) {
     const input = document.createElement('input');
     input.type = type;
+    input.name = name
     input.placeholder = text;
     return input;
 }
@@ -372,22 +461,6 @@ function createDiv(cla, child) {
     return div;
 }
 
-application.addEventListener('click', (evt) => {
-    const {target} = evt;
-
-    console.log("click application " + target);
-    if (target instanceof HTMLAnchorElement) {
-        evt.preventDefault();
-        console.log("click application " + target.dataset.section);
-        config[target.dataset.section].open();
-    }
-
-    if (target instanceof HTMLButtonElement) {
-        evt.preventDefault();
-        console.log("click application Button " + target.dataset.section);
-        config[target.dataset.section].open();
-    }
-});
 
 nav.addEventListener('click', (evt) => {
     const {target} = evt;
