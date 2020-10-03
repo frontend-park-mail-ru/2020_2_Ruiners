@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"time"
-
 	"github.com/lithammer/shortuuid"
 )
 
@@ -17,21 +16,24 @@ type Login struct {
 }
 
 type User struct {
-	login string
-	email string
-	password string
+	Login string `json:"login"`
+	Email string `json:"email"`
+	Password string `json:"password"`
 }
 
+
 var users = map[string]User{
-	"AdmiralArkadiy": User{login: "AdmiralArkadiy", email: "chekryzhov2000@mail.ru", password: "Arkadiy1"},
-	"ErikDoter": User{login: "ErikDoter", email: "ErikDoter@mail.ru", password: "commonbaby537"},
+	"AdmiralArkadiy": User{Login: "AdmiralArkadiy", Email: "chekryzhov2000@mail.ru", Password: "Arkadiy1"},
+	"ErikDoter": User{Login: "ErikDoter", Email: "ErikDoter@mail.ru", Password: "commonbaby537"},
 }
 
 var ids = map[string]string{}
 
 func main() {
+	http.HandleFunc("/signup", signupPage)
 	http.HandleFunc("/login", loginPage)
 	http.HandleFunc("/me", isMe)
+	http.HandleFunc("/whois", Whois)
 	//http.HandleFunc("/logout", logoutPage)
 	http.HandleFunc("/", mainPage)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../public"))))
@@ -58,7 +60,7 @@ func loginPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	if l.Password == users[l.Login].password {
+	if l.Password == users[l.Login].Password && l.Password != ""{
 		fmt.Println(l)
 		var id = shortuuid.New()
 		ids[id] = l.Login
@@ -77,6 +79,23 @@ func loginPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func signupPage(w http.ResponseWriter, r *http.Request) {
+	u := User{}
+	err := json.NewDecoder(r.Body).Decode(&u)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	if users[u.Login].Login != u.Login {
+		users[u.Login] = u
+		fmt.Println(users)
+		http.Redirect(w, r, "/", http.StatusOK)
+	} else {
+		fmt.Println("hui")
+		http.Redirect(w, r, "/signup", http.StatusBadRequest)
+	}
+}
+
 func isMe(w http.ResponseWriter, r *http.Request) {
 	id, _ := r.Cookie("session_id")
 	login := ids[id.Value]
@@ -85,8 +104,27 @@ func isMe(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("401")
 		http.Redirect(w, r, "/login", 401)
 	} else {
-		fmt.Println("200")
-		http.Redirect(w, r, "/profile", 200)
+		user := users[login]
+		u := &user
+		result, _ := json.Marshal(u)
+		w.Write(result)
+	}
+}
+
+func Whois(w http.ResponseWriter, r *http.Request) {
+	id, _ := r.Cookie("session_id")
+	login := ids[id.Value]
+	fmt.Println(login)
+	if login == ""  {
+		var u User
+		u = User{"null", "null", "null"}
+		result, _ := json.Marshal(&u)
+		w.Write(result)
+	} else {
+		user := users[login]
+		u := &user
+		result, _ := json.Marshal(u)
+		w.Write(result)
 	}
 }
 
