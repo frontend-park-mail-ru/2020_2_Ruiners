@@ -55,41 +55,58 @@ function ajax(method, url, body = null, callback) {
 }
 
 function createNavbar() {
-    const navbar = document.createElement('nav');
-    nav.appendChild(navbar);
-    const ul = document.createElement('ul');
-    ul.className = 'menu-main';
-    navbar.appendChild(ul);
-    const kinopoisk = createA("/menu", "Kinopoisk.ru");
-    kinopoisk.dataset.section = 'menu';
-    const films = createA("/", "Фильмы");
-    const search = createA("/", "Поиск");
-    const login = document.createElement('button');
-    const signup = document.createElement('button');
-    login.textContent = "Войти";
-    signup.textContent = "Зарегистрироваться";
-    const li1 = createLi("brand", kinopoisk);
-    const li2 = createLi("menu-secondary", films);
-    const li3 = createLi("menu-secondary", search);
-    const li4 = createLi("menu-buttons", login);
-    const li5 = createLi("menu-buttons", signup);
-    ul.appendChild(li1);
-    ul.appendChild(li2);
-    ul.appendChild(li3);
-    ul.appendChild(li4);
-    ul.appendChild(li5);
-    // login.addEventListener('click', (event) => {
-    //     event.preventDefault();
-    //     application.innerHTML = '';
-    //     loginPage();
-    // });
-    // signup.addEventListener('click', (event) => {
-    //     event.preventDefault();
-    //     application.innerHTML = '';
-    //     signupPage();
-    // });
-    login.dataset.section = 'login';
-    signup.dataset.section = 'signup';
+    let responseBody;
+    let isAuthorized = false;
+    ajax('GET', '/whois', null, (status, responseText) => {
+        responseBody = JSON.parse(responseText);
+        if (responseBody.login === "null") {
+            isAuthorized = false;
+        } else {
+            isAuthorized = true;
+        }
+        const navbar = document.createElement('nav');
+        nav.appendChild(navbar);
+        const ul = document.createElement('ul');
+        ul.className = 'menu-main';
+        navbar.appendChild(ul);
+        const kinopoisk = createA("/menu", "Kinopoisk.ru");
+        kinopoisk.dataset.section = 'menu';
+        const films = createA("/", "Фильмы");
+        const search = createA("/", "Поиск");
+        const login = document.createElement('button');
+        const signup = document.createElement('button');
+        login.textContent = "Войти";
+        signup.textContent = "Зарегистрироваться";
+        const li1 = createLi("brand", kinopoisk);
+        const li2 = createLi("menu-secondary", films);
+        const li3 = createLi("menu-secondary", search);
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        ul.appendChild(li3);
+        if (!isAuthorized) {
+            const li4 = createLi("menu-buttons", login);
+            const li5 = createLi("menu-buttons", signup);
+            ul.appendChild(li4);
+            ul.appendChild(li5);
+        } else {
+            const profile = createA("/", `${responseBody.login}`);
+            const li33 = createLi("menu-secondary", profile);
+            ul.appendChild(li33);
+        }
+        // login.addEventListener('click', (event) => {
+        //     event.preventDefault();
+        //     application.innerHTML = '';
+        //     loginPage();
+        // });
+        // signup.addEventListener('click', (event) => {
+        //     event.preventDefault();
+        //     application.innerHTML = '';
+        //     signupPage();
+        // });
+        login.dataset.section = 'login';
+        signup.dataset.section = 'signup';
+    });
+
 }
 
 function menuPage() {
@@ -110,27 +127,27 @@ function menuPage() {
     signupLink.addEventListener('click', (evt => {
         evt.preventDefault();
         signupPage();
-    }))
+    }));
     const filmLink = application.querySelector('[data-section="film"]');
     filmLink.addEventListener('click', (evt => {
         evt.preventDefault();
         filmPage();
-    }))
+    }));
     const loginLink = application.querySelector('[data-section="login"]');
     loginLink.addEventListener('click', (evt => {
         evt.preventDefault();
         loginPage();
-    }))
+    }));
     const profileLink = application.querySelector('[data-section="profile"]');
     profileLink.addEventListener('click', (evt => {
         evt.preventDefault();
         profilePage();
-    }))
+    }));
     const profileChengeLink = application.querySelector('[data-section="profileChenge"]');
     profileChengeLink.addEventListener('click', (evt => {
         evt.preventDefault();
         profileChengePage();
-    }))
+    }));
 
 
 }
@@ -147,9 +164,9 @@ function signupPage() {
     header.textContent = 'Регистрация';
     header.style = 'color:#FFFFFF; margin-left: 10px';
     form.appendChild(header);
-    const loginInput = createInput('login', 'Логин');
-    const emailInput = createInput('email', 'e-mail');
-    const passwordInput = createInput('password', 'Пароль');
+    const loginInput = createInput('login', 'login','Логин');
+    const emailInput = createInput('email', 'email','e-mail');
+    const passwordInput = createInput('password', 'password','Пароль');
     form.appendChild(loginInput);
     form.appendChild(emailInput);
     form.appendChild(passwordInput);
@@ -162,6 +179,28 @@ function signupPage() {
     linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
     form.appendChild(linkLogin);
     linkLogin.dataset.section = 'login';
+    form.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+
+        const login = loginInput.value.trim();
+        const password = passwordInput.value.trim();
+        const email = emailInput.value.trim();
+        console.log(login, password, email);
+        ajax(
+            'POST',
+            '/signup',
+            {email, login, password},
+            (status, response) => {
+                if (status === 200) {
+                    loginPage();
+                }  else {
+                    const {error} = JSON.parse(response);
+                    alert(error);
+                }
+            }
+        );
+
+    });
 }
 
 function filmPage() {
@@ -253,6 +292,8 @@ function loginPage() {
             {login, password},
             (status, response) => {
                 if (status === 200) {
+                    nav.innerHTML = '';
+                    createNavbar();
                     menuPage();
                 } else if (status === 301) {
                     loginPage();
@@ -321,14 +362,12 @@ function profilePage() {
     application.innerHTML = '';
     application.className = '';
     ajax('GET', '/me', null, (status, responseText) => {
-        let isAuthorized = false
-        if (status == 200) {
-            console.log("true")
+        let isAuthorized = false;
+        if (status === 200) {
             isAuthorized = true;
         }
 
-        if (status == 401) {
-            console.log("false")
+        if (status === 401) {
             isAuthorized = false;
         }
         if (isAuthorized) {
@@ -396,7 +435,9 @@ function profilePage() {
 
             const nick = document.createElement('h1');
             nick.className = 'nick_name';
-            nick.textContent = 'mgovyadkinya';
+
+            const responseBody = JSON.parse(responseText);
+            nick.textContent = `${responseBody.login}`;
 
             divInfo.appendChild(nick);
 
@@ -413,7 +454,7 @@ function profilePage() {
             alert('АХТУНГ, нет авторизации');
             loginPage();
         }
-    })
+    });
 }
 
 function createLi(className, child) {
