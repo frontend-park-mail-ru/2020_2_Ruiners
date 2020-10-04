@@ -73,6 +73,8 @@ body.film1 {
     text-transform: uppercase;
     align: center;
 }
+
+
 .menu-secondary a, .menu-secondary a:visited {color: white;}
 .menu-secondary a.current, .menu-secondary a:hover{color: orange;}
 
@@ -431,9 +433,4 @@ input.secondary {
     font-family: Arial;
     color: #c94747;
     margin-top: 100px;
-}
-
-a {
-    font-size: 22px;
-    display: block;
 }

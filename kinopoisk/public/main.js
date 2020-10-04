@@ -89,9 +89,14 @@ function createNavbar() {
             ul.appendChild(li4);
             ul.appendChild(li5);
         } else {
-            const profile = createA("/", `${responseBody.login}`);
-            const li33 = createLi("menu-secondary", profile);
+            const logout = document.createElement('button');
+            logout.textContent = "Выйти";
+            const li34 = createLi("menu-buttons", logout);
+            const profile = document.createElement('button');
+            profile.textContent = `${responseBody.login}`;
+            const li33 = createLi("menu-buttons", profile);
             ul.appendChild(li33);
+            ul.appendChild(li34);
         }
         // login.addEventListener('click', (event) => {
         //     event.preventDefault();
