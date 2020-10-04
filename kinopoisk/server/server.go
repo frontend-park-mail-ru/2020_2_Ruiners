@@ -34,7 +34,7 @@ func main() {
 	http.HandleFunc("/login", loginPage)
 	http.HandleFunc("/me", isMe)
 	http.HandleFunc("/whois", Whois)
-	//http.HandleFunc("/logout", logoutPage)
+	http.HandleFunc("/logout", logoutPage)
 	http.HandleFunc("/", mainPage)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../public"))))
 	fmt.Println("starting server at :3000")
@@ -99,7 +99,6 @@ func signupPage(w http.ResponseWriter, r *http.Request) {
 func isMe(w http.ResponseWriter, r *http.Request) {
 	id, _ := r.Cookie("session_id")
 	login := ids[id.Value]
-	fmt.Println(login)
 	if login == ""  {
 		fmt.Println("401")
 		http.Redirect(w, r, "/login", 401)
@@ -112,36 +111,42 @@ func isMe(w http.ResponseWriter, r *http.Request) {
 }
 
 func Whois(w http.ResponseWriter, r *http.Request) {
-	id, _ := r.Cookie("session_id")
-	var login string
-	if len(ids) == 0 {
-		login = ""
-	} else {
-		login = ids[id.Value]
-	}
-	fmt.Println(login)
-	if login == ""  {
+	id, err := r.Cookie("session_id")
+	if err != nil {
 		var u User
 		u = User{"null", "null", "null"}
 		result, _ := json.Marshal(&u)
 		w.Write(result)
 	} else {
-		user := users[login]
-		u := &user
-		result, _ := json.Marshal(u)
-		w.Write(result)
+		var login string
+		if len(ids) == 0 {
+			login = ""
+		} else {
+			login = ids[id.Value]
+			fmt.Println("login who is = ", login)
+		}
+		fmt.Println(login)
+		if login == "" {
+			var u User
+			u = User{"null", "null", "null"}
+			result, _ := json.Marshal(&u)
+			w.Write(result)
+		} else {
+			user := users[login]
+			u := &user
+			result, _ := json.Marshal(u)
+			w.Write(result)
+		}
 	}
 }
 
-/*func logoutPage(w http.ResponseWriter, r *http.Request)  {
+func logoutPage(w http.ResponseWriter, r *http.Request)  {
 	session, err := r.Cookie("session_id")
 	if err == http.ErrNoCookie {
-		http.Redirect(w, r, "/", http.StatusFound)
+		http.Redirect(w, r, "/", 401)
 		return
 	}
-
 	session.Expires = time.Now().AddDate(0, 0, -1)
 	http.SetCookie(w, session)
-
-	http.Redirect(w, r, "/", http.StatusFound)
-}*/
+	http.Redirect(w, r, "/", http.StatusOK)
+}
