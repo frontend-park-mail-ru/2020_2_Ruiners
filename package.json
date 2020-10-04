@@ -1,0 +1,26 @@
+{
+  "name": "2020_2_ruiners",
+  "version": "1.0.0",
+  "description": "Frontend репозиторий команды Ruiners! Привет! ![kinopoisk/public/static/images/Ruiners.png](kinopoisk/public/static/images/Ruiners.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2020_2_Ruiners.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2020_2_Ruiners/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2020_2_Ruiners#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}
