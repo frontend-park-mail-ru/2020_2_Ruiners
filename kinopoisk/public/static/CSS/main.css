@@ -447,3 +447,8 @@ input.secondary {
     color: #c94747;
     margin-top: 100px;
 }
+
+a {
+    font-size: 22px;
+    display: block;
+}
