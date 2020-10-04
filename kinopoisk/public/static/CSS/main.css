@@ -78,6 +78,7 @@ body.film1 {
     align: center;
 }
 
+
 .menu-secondary a, .menu-secondary a:visited {
     color: white;
 }
@@ -347,7 +348,7 @@ body, .page {
     background-repeat: no-repeat;
 }
 
-wrapper__form,
+wrapper__form
 .page .wrapper__form {
     margin: auto;
 }
@@ -449,9 +450,4 @@ input.secondary {
     font-family: Arial, Helvetica, sans-serif;
     color: #c94747;
     margin-top: 100px;
-}
-
-a {
-    font-size: 22px;
-    display: block;
 }
