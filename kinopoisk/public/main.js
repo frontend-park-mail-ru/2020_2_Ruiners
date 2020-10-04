@@ -39,7 +39,7 @@ function ajax(method, url, body = null, callback) {
     xhr.open(method, url, true);
     xhr.withCredentials = true;
 
-    xhr.addEventListener('readystatechange', function() {
+    xhr.addEventListener('readystatechange', function () {
         if (xhr.readyState !== XMLHttpRequest.DONE) return;
 
         callback(xhr.status, xhr.responseText);
@@ -153,8 +153,6 @@ function menuPage() {
         evt.preventDefault();
         profileChengePage();
     }));
-
-
 }
 
 function signupPage() {
@@ -169,9 +167,9 @@ function signupPage() {
     header.textContent = 'Регистрация';
     header.style = 'color:#FFFFFF; margin-left: 10px';
     form.appendChild(header);
-    const loginInput = createInput('login', 'login','Логин');
-    const emailInput = createInput('email', 'email','e-mail');
-    const passwordInput = createInput('password', 'password','Пароль');
+    const loginInput = createInput('login', 'login', 'Логин');
+    const emailInput = createInput('email', 'email', 'e-mail');
+    const passwordInput = createInput('password', 'password', 'Пароль');
     form.appendChild(loginInput);
     form.appendChild(emailInput);
     form.appendChild(passwordInput);
@@ -190,7 +188,7 @@ function signupPage() {
         const login = loginInput.value.trim();
         const password = passwordInput.value.trim();
         const email = emailInput.value.trim();
-        console.log(login, password, email);
+        form.log(login, password, email);
         ajax(
             'POST',
             '/signup',
@@ -198,13 +196,12 @@ function signupPage() {
             (status, response) => {
                 if (status === 200) {
                     loginPage();
-                }  else {
+                } else {
                     const {error} = JSON.parse(response);
                     alert(error);
                 }
             }
         );
-
     });
 }
 
@@ -276,7 +273,7 @@ function loginPage() {
     header.style = 'color:#FFFFFF; margin-left: 10px';
     form.appendChild(header);
     const loginInput = createInput('login', 'login', 'Логин или почта');
-    const passwordInput = createInput('password', 'password','Пароль');
+    const passwordInput = createInput('password', 'password', 'Пароль');
     form.appendChild(loginInput);
     form.appendChild(passwordInput);
     const button = document.createElement('button');
@@ -308,7 +305,6 @@ function loginPage() {
                 }
             }
         )
-
     });
     const linkSignup = createA('/signup', 'Создать новый');
     linkSignup.style = 'color: #FFFFFF; margin-left: 10px';
@@ -318,64 +314,131 @@ function loginPage() {
 
 function profileChengePage() {
     application.innerHTML = '';
-    const body = document.getElementById('body');
-    body.className = "page";
+    application.className = '';
+    ajax('GET', '/me', null, (status, responseText) => {
+        if (status === 200) {
+            const body = document.getElementById('body');
+            body.className = "page";
 
-    const form = document.createElement('form');
-    application.className = 'wrapper__form chenge';
-    application.appendChild(form);
+            const form = document.createElement('form');
+            application.className = 'wrapper__form chenge';
+            application.appendChild(form);
 
-    const header = document.createElement('h2');
-    header.textContent = 'Настройки пользователя';
-    header.style = 'color:#FFFFFF; margin-left: 10px';
-    form.appendChild(header);
+            const header = document.createElement('h2');
+            header.textContent = 'Настройки пользователя';
+            header.style = 'color:#FFFFFF; margin-left: 10px';
+            form.appendChild(header);
+            const responseBody = JSON.parse(responseText);
+            const loginInput = createInput('login', 'login', `${responseBody.login}`);
+            form.appendChild(loginInput);
 
-    let loginName = "mgovyadkin"; // доставать из запроса
+            const submitLogin = createInputSubmit('Изменить логин', 'secondary');
+            form.appendChild(submitLogin);
+            form.addEventListener('submit', (evt) => {
+                evt.preventDefault();
 
-    const loginInput = createInput('login', loginName);
-    form.appendChild(loginInput);
+                const login = loginInput.value.trim();
+                ajax(
+                    'POST',
+                    '/chengelogin',
+                    {login},
+                    (status, response) => {
+                        if (status === 200) {
+                            profilePage();
+                        } else {
+                            const {error} = JSON.parse(response);
+                            alert(error);
+                        }
+                    }
+                );
+            });
 
-    const submitLogin = createInputSubmit('Изменить логин', 'secondary');
-    
-    form.appendChild(submitLogin);
+            const formPass = document.createElement('form');
+            application.appendChild(formPass);
 
-    const formPass = document.createElement('form');
-    application.appendChild(formPass);
+            const passwordInputOld = createInput('password', 'password', 'Старый пароль');
+            passwordInputOld.required = true;
+            formPass.appendChild(passwordInputOld);
 
-    const passwordInputOld = createInput('password', 'Старый пароль');
-    passwordInputOld.required = true;
-    formPass.appendChild(passwordInputOld);
+            const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
+            formPass.appendChild(passwordInputNew1);
 
-    const passwordInputNew1 = createInput('password', 'Новый пароль');
-    formPass.appendChild(passwordInputNew1);
+            const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
+            formPass.appendChild(passwordInputNew2);
 
-    const passwordInputNew2 = createInput('password', 'Повторите новый пароль');
-    formPass.appendChild(passwordInputNew2);
+            const submitpass = createInputSubmit('Изменить пароль', 'secondary');
+            formPass.appendChild(submitpass);
 
-    const submitpass = createInputSubmit('Изменить пароль', 'secondary');
-    formPass.appendChild(submitpass);
+            formPass.addEventListener('submit', (evt) => {
+                evt.preventDefault();
 
-    const buttonBack = document.createElement('button');
-    buttonBack.href = '/';
-    buttonBack.textContent = 'Назад';
-    buttonBack.className = 'secondary';
-    buttonBack.dataset.section = 'profile';
-    application.appendChild(buttonBack);
+                const pass0 = passwordInputOld.value.trim();
+                const pass1 = passwordInputNew1.value.trim();
+                const pass2 = passwordInputNew2.value.trim();
+
+                ajax(
+                    'POST',
+                    '/chengepass',
+                    {pass1},
+                    (status, response) => {
+                        if (status === 200) {
+                            profilePage();
+                        } else {
+                            const {error} = JSON.parse(response);
+                            alert(error);
+                        }
+                    }
+                );
+            });
+
+            const formAvatar = document.createElement('form');
+            application.appendChild(formAvatar);
+
+            const imgAvatar = createInput('file', 'file', 'Фото');
+            formAvatar.appendChild(imgAvatar);
+
+            const submitAvatar = createInputSubmit('Изменить аватар', 'secondary');
+            formAvatar.appendChild(submitAvatar);
+
+            formPass.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+
+                const img = imgAvatar.value;///&&&
+
+                ajax(
+                    'POST',
+                    '/chengeavatar',
+                    {img},
+                    (status, response) => {
+                        if (status === 200) {
+                            profilePage();
+                        } else {
+                            const {error} = JSON.parse(response);
+                            alert(error);
+                        }
+                    }
+                );
+            });
+
+            const buttonBack = document.createElement('button');
+            buttonBack.href = '/';
+            buttonBack.textContent = 'Назад';
+            buttonBack.className = 'secondary';
+            buttonBack.dataset.section = 'profile';
+            application.appendChild(buttonBack);
+        } else {
+            alert('АХТУНГ, нет авторизации');
+            loginPage();
+        }
+    });
 }
 
 function profilePage() {
     application.innerHTML = '';
     application.className = '';
     ajax('GET', '/me', null, (status, responseText) => {
-        let isAuthorized = false;
-        if (status === 200) {
-            isAuthorized = true;
-        }
 
-        if (status === 401) {
-            isAuthorized = false;
-        }
-        if (isAuthorized) {
+        if (status === 200) {
             const body = document.getElementById('body');
             body.className = "page";
             const divshadow = createDiv('shadow profile', application);
