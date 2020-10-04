@@ -188,7 +188,6 @@ function signupPage() {
         const login = loginInput.value.trim();
         const password = passwordInput.value.trim();
         const email = emailInput.value.trim();
-        form.log(login, password, email);
         ajax(
             'POST',
             '/signup',
