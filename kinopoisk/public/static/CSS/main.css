@@ -78,7 +78,6 @@ body.film1 {
     align: center;
 }
 
-
 .menu-secondary a, .menu-secondary a:visited {
     color: white;
 }
@@ -86,7 +85,6 @@ body.film1 {
 .menu-secondary a.current, .menu-secondary a:hover {
     color: orange;
 }
-
 
 .menu-main button:hover {
     background: rgba(255, 255, 255, .2);
