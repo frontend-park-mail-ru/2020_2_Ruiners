@@ -64,6 +64,7 @@ function createNavbar() {
         } else {
             isAuthorized = true;
         }
+        console.log(isAuthorized);
         const navbar = document.createElement('nav');
         nav.appendChild(navbar);
         const ul = document.createElement('ul');
@@ -97,6 +98,23 @@ function createNavbar() {
             const li33 = createLi("menu-buttons", profile);
             ul.appendChild(li33);
             ul.appendChild(li34);
+            logout.addEventListener('click', (evt ) => {
+                evt.preventDefault();
+                ajax(
+                    'GET',
+                    '/logout',
+                        null,
+                    (status, response) => {
+                        if (status === 200) {
+                            nav.innerHTML = '';
+                            createNavbar();
+                            loginPage();
+                        } else {
+                            alert("lox");
+                        }
+                    }
+                );
+            });
         }
         // login.addEventListener('click', (event) => {
         //     event.preventDefault();
