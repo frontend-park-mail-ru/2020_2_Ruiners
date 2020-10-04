@@ -113,7 +113,12 @@ func isMe(w http.ResponseWriter, r *http.Request) {
 
 func Whois(w http.ResponseWriter, r *http.Request) {
 	id, _ := r.Cookie("session_id")
-	login := ids[id.Value]
+	var login string
+	if len(ids) == 0 {
+		login = ""
+	} else {
+		login = ids[id.Value]
+	}
 	fmt.Println(login)
 	if login == ""  {
 		var u User
