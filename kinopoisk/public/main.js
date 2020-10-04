@@ -511,16 +511,13 @@ function createDiv(cla, child) {
 nav.addEventListener('click', (evt) => {
     const {target} = evt;
 
-    console.log("click nav " + target);
     if (target instanceof HTMLAnchorElement) {
-        console.log("click nav " + target.dataset.section);
         evt.preventDefault();
         config[target.dataset.section].open();
     }
 
     if (target instanceof HTMLButtonElement) {
         evt.preventDefault();
-        console.log("click nav Button " + target.dataset.section);
         config[target.dataset.section].open();
     }
 });
