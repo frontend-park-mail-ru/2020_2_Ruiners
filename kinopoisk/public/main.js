@@ -182,7 +182,8 @@ function menuPage() {
   const body = document.getElementById('body');
   body.className = '';
   // body.removeChild(form)
-  Object.keys(config).map((menuKey) => {
+
+  Object.keys(config).forEach((menuKey) => {
     const { href, text } = config[menuKey];
     const menuItem = document.createElement('a');
     menuItem.href = href;
@@ -534,7 +535,7 @@ function profilePage() {
         },
       };
 
-      Object.keys(menuTop).map((menuKey) => {
+      Object.keys(menuTop).forEach((menuKey) => {
         const { href, text } = menuTop[menuKey];
         const menuItem = document.createElement('li');
         const menuItema = createA(href, text);
