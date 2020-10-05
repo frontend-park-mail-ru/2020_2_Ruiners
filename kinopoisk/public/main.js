@@ -392,6 +392,7 @@ function profileChengePage() {
       form.appendChild(header);
       const responseBody = JSON.parse(responseText);
       const loginInput = createInput('login', 'login', `${responseBody.login}`);
+      loginInput.required = true;
       form.appendChild(loginInput);
 
       const submitLogin = createInputSubmit('Изменить логин', 'secondary');
@@ -423,9 +424,11 @@ function profileChengePage() {
       formPass.appendChild(passwordInputOld);
 
       const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
+      passwordInputNew1.required = true;
       formPass.appendChild(passwordInputNew1);
 
       const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
+      passwordInputNew2.required = true;
       formPass.appendChild(passwordInputNew2);
 
       const submitpass = createInputSubmit('Изменить пароль', 'secondary');
@@ -437,11 +440,11 @@ function profileChengePage() {
         const pass0 = passwordInputOld.value.trim();
         const pass1 = passwordInputNew1.value.trim();
         const pass2 = passwordInputNew2.value.trim();
-
+        console.log(pass0 + pass1 + pass2);
         ajax(
           'POST',
           '/chengepass',
-          { pass1 },
+          { pass0, pass1 },
           (status, response) => {
             if (status === 200) {
               profilePage();
@@ -459,34 +462,92 @@ function profileChengePage() {
       const imgAvatar = createInput('file', 'file', 'Фото');
       formAvatar.appendChild(imgAvatar);
 
-      const submitAvatar = createInputSubmit('Изменить аватар', 'secondary');
-      formAvatar.appendChild(submitAvatar);
+      imgAvatar.addEventListener('change', (event) => {
+        const fileList = event.target.files;
+        console.log(fileList);
 
-      formPass.addEventListener('submit', (evt) => {
-        evt.preventDefault();
+        files = this.files;
 
-        const img = imgAvatar.value;/// &&&
+        event.stopPropagation(); // остановка всех текущих JS событий
+        event.preventDefault(); // остановка дефолтного события для текущего элемента - клик для <a> тега
 
-        ajax(
-          'POST',
-          '/chengeavatar',
-          { img },
-          (status, response) => {
-            if (status === 200) {
+        // ничего не делаем если files пустой
+        if (typeof files === 'undefined') return;
+
+        // создадим объект данных формы
+        const data = new FormData();
+
+        // заполняем объект данных файлами в подходящем для отправки формате
+        Object.keys(files).forEach((key, value) => {
+          data.append(key, value);
+        });
+
+        // добавим переменную для идентификации запроса
+        data.append('my_file_upload', 1);
+
+        // AJAX запрос
+        ajax({
+          url: './chengeavatar',
+          type: 'POST', // важно!
+          data,
+          cache: false,
+          dataType: 'json',
+          // отключаем обработку передаваемых данных, пусть передаются как есть
+          processData: false,
+          // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
+          contentType: false,
+          // функция успешного ответа сервера
+          success(respond, status, jqXHR) {
+            // ОК - файлы загружены
+            if (typeof respond.error === 'undefined') {
               profilePage();
-            } else {
-              const { error } = JSON.parse(response);
-              alert(error);
+            }
+            // ошибка
+            else {
+              console.log(`ОШИБКА: ${respond.data}`);
             }
           },
-        );
+          // функция ошибки ответа сервера
+          error(jqXHR, status, errorThrown) {
+            console.log(`ОШИБКА AJAX запроса: ${status}`, jqXHR);
+          },
+
+        });
       });
+
+      // const submitAvatar = createInputSubmit('Изменить аватар', 'secondary');
+      // formAvatar.appendChild(submitAvatar);
+
+      // formPass.addEventListener('submit', (evt) => {
+      //   evt.preventDefault();
+
+      //   const img = imgAvatar.value;/// &&&
+
+      //   ajax(
+      //     'POST',
+      //     '/chengeavatar',
+      //     { img },
+      //     (status, response) => {
+      //       if (status === 200) {
+      //         profilePage();
+      //       } else {
+      //         const { error } = JSON.parse(response);
+      //         alert(error);
+      //       }
+      //     },
+      //   );
+      // });
 
       const buttonBack = document.createElement('button');
       buttonBack.href = '/';
       buttonBack.textContent = 'Назад';
       buttonBack.className = 'secondary';
       buttonBack.dataset.section = 'profile';
+      buttonBack.addEventListener('click', (evt) => {
+        evt.preventDefault();
+
+        profilePage();
+      });
       application.appendChild(buttonBack);
     } else {
       alert('АХТУНГ, нет авторизации');
@@ -557,6 +618,12 @@ function profilePage() {
       button.href = '/';
       button.dataset.section = 'profileChenge';
       divLeft.appendChild(button);
+
+      button.addEventListener('click', (evt) => {
+        evt.preventDefault();
+
+        profileChengePage();
+      });
 
       const divRight = createDiv('profileInfoWrapRight', divshadow);
       const divInfo = createDiv('infoUser', divRight);
