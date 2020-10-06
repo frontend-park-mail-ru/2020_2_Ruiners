@@ -273,12 +273,12 @@ function profileChengePage() {
         formPass.appendChild(passwordInputOld);
 
         const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
-        passwordInputNew1.pattern = '/.{8-16}/';
+        passwordInputNew1.pattern = `.{8-16}/`;
         passwordInputNew1.required = true;
         formPass.appendChild(passwordInputNew1);
 
         const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
-        passwordInputNew2.pattern = '/.{8-16}/';
+        passwordInputNew2.pattern = `.{8-16}`;
         passwordInputNew2.required = true;
         formPass.appendChild(passwordInputNew2);
 
