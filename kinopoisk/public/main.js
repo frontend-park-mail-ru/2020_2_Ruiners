@@ -107,6 +107,23 @@ function menuPage() {
   profileChange.render(profileChengePage);
 }
 
+function valid(form, reg, input, text) {
+  const diver = createDiv('error', form);
+  input.onblur = function () {
+    if (!reg.test(this.value)) {
+      this.classList.add('invalid');
+      diver.innerHTML = text;
+    }
+  };
+
+  input.onfocus = function () {
+    if (this.classList.contains('invalid')) {
+      this.classList.remove('invalid');
+      diver.innerHTML = '';
+    }
+  };
+}
+
 function signupPage() {
   application.innerHTML = '';
   const body = document.getElementById('body');
@@ -127,39 +144,13 @@ function signupPage() {
   // passwordInput.pattern = '.{8-16}';
   passwordInput.required = true;
   form.appendChild(loginInput);
-  const diver = createDiv('error', form);
-  const loginInputreg = /[A-Za-z0-9]{5,15}/;
-  loginInput.onblur = function () {
-    if (!loginInputreg.test(loginInput.value)) {
-      loginInput.classList.add('invalid');
-      diver.innerHTML = 'Недопустимый логин';
-    }
-  };
 
-  loginInput.onfocus = function () {
-    if (this.classList.contains('invalid')) {
-      this.classList.remove('invalid');
-      diver.innerHTML = '';
-    }
-  };
+  valid(form, /[A-Za-z0-9]{5,15}/, loginInput, 'Недопустимый логин');
+
   form.appendChild(emailInput);
   form.appendChild(passwordInput);
 
-  const divpass = createDiv('error', form);
-  const passPatt = /.{8,16}/;
-  passwordInput.onblur = function () {
-    if (!passPatt.test(passwordInput.value)) {
-      passwordInput.classList.add('invalid');
-      divpass.innerHTML = 'Недопустимый пароль';
-    }
-  };
-
-  passwordInput.onfocus = function () {
-    if (this.classList.contains('invalid')) {
-      this.classList.remove('invalid');
-      divpass.innerHTML = '';
-    }
-  };
+  valid(form, /.{8,16}/, passwordInput, 'Недопустимый пароль');
 
   const button = document.createElement('button');
   button.href = '/';
@@ -172,6 +163,7 @@ function signupPage() {
   form.appendChild(linkLogin);
   linkLogin.dataset.section = 'login';
   const formLink = new navLink(form);
+
   formLink.render(() => {
     if (!loginInput.classList.contains('invalid')
           || !passwordInput.classList.contains('invalid')) {
@@ -195,7 +187,7 @@ function signupPage() {
 }
 
 function filmPage() {
-  const film = new FilmPage(application);
+  const film = new FilmPage(application);:
   film.render();
 }
 
@@ -219,7 +211,7 @@ function loginPage() {
   button.textContent = 'Войти';
   button.className = 'secondary';
   form.appendChild(button);
-  const formLink = new navLink(form)
+  const formLink = new navLink(form);
   formLink.render(() => {
     const login = loginInput.value.trim();
     const password = passwordInput.value.trim();
@@ -275,21 +267,7 @@ function profileChengePage() {
         const submitLogin = createInputSubmit('Изменить логин', 'secondary');
         form.appendChild(submitLogin);
 
-        const diver = createDiv('error', form);
-        const loginInputreg = /[A-Za-z0-9]{5,15}/;
-        loginInput.onblur = function () {
-          if (!loginInputreg.test(loginInput.value)) {
-            loginInput.classList.add('invalid');
-            diver.innerHTML = 'Недопустимый логин';
-          }
-        };
-
-        loginInput.onfocus = function () {
-          if (this.classList.contains('invalid')) {
-            this.classList.remove('invalid');
-            diver.innerHTML = '';
-          }
-        };
+        valid(form, /[A-Za-z0-9]{5,15}/, loginInput, 'Недопустимый логин');
 
         const formLink = new navLink(form);
         formLink.render(() => {
@@ -322,47 +300,18 @@ function profileChengePage() {
         formPass.appendChild(passwordInputOld);
 
         const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
-        // passwordInputNew1.pattern = '.{8-16}/';
         passwordInputNew1.required = true;
         formPass.appendChild(passwordInputNew1);
 
         const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
-        // passwordInputNew2.pattern = '.{8-16}';
         passwordInputNew2.required = true;
         formPass.appendChild(passwordInputNew2);
 
         const submitpass = createInputSubmit('Изменить пароль', 'secondary');
         formPass.appendChild(submitpass);
 
-        const divpass = createDiv('error', formPass);
-        const passPatt = /.{8,16}/;
-        passwordInputNew1.onblur = function () {
-          if (!passPatt.test(passwordInputNew1.value)) {
-            passwordInputNew1.classList.add('invalid');
-            divpass.innerHTML = 'Недопустимый пароль';
-          }
-        };
-
-        passwordInputNew1.onfocus = function () {
-          if (this.classList.contains('invalid')) {
-            this.classList.remove('invalid');
-            divpass.innerHTML = '';
-          }
-        };
-
-        passwordInputNew2.onblur = function () {
-          if (!passPatt.test(passwordInputNew2.value)) {
-            passwordInputNew2.classList.add('invalid');
-            divpass.innerHTML = 'Недопустимый пароль';
-          }
-        };
-
-        passwordInputNew2.onfocus = function () {
-          if (this.classList.contains('invalid')) {
-            this.classList.remove('invalid');
-            divpass.innerHTML = '';
-          }
-        };
+        valid(formPass, /.{8,16}/, passwordInputNew1, 'Недопустимый пароль 1');
+        valid(formPass, /.{8,16}/, passwordInputNew2, 'Недопустимый пароль 2');
 
         const formPassLink = new navLink(formPass);
         formPassLink.render(() => {
@@ -394,58 +343,60 @@ function profileChengePage() {
         const imgAvatar = createInput('file', 'file', 'Фото');
         formAvatar.appendChild(imgAvatar);
 
-        imgAvatar.addEventListener('change', (event) => {
-          const fileList = event.target.files;
-          // console.log(fileList);
+        // imgAvatar.addEventListener('change', (event) => {
+        //   const fileList = event.target.files;
+        //   // console.log(fileList);
 
-          files = this.files;
+        //   files = this.files;
 
-          event.stopPropagation(); // остановка всех текущих JS событий
-          event.preventDefault(); // остановка дефолтного события для текущего элемента - клик для <a> тега
+        //   event.stopPropagation(); // остановка всех текущих JS событий
+        //   event.preventDefault();
+        //     // остановка дефолтного события для текущего элемента - клик для <a> тега
 
-          // ничего не делаем если files пустой
-          if (typeof files === 'undefined') return;
+        //   // ничего не делаем если files пустой
+        //   if (typeof files === 'undefined') return;
 
-          // создадим объект данных формы
-          const data = new FormData();
+        //   // создадим объект данных формы
+        //   const data = new FormData();
 
-          // заполняем объект данных файлами в подходящем для отправки формате
-          Object.keys(files).forEach((key, value) => {
-            data.append(key, value);
-          });
+        //   // заполняем объект данных файлами в подходящем для отправки формате
+        //   Object.keys(files).forEach((key, value) => {
+        //     data.append(key, value);
+        //   });
 
-          // добавим переменную для идентификации запроса
-          data.append('my_file_upload', 1);
+        //   // добавим переменную для идентификации запроса
+        //   data.append('my_file_upload', 1);
 
-          // AJAX запрос
-          ajaxPost({
-            url: './chengeavatar',
-            type: 'POST', // важно!
-            data,
-            cache: false,
-            dataType: 'json',
-            // отключаем обработку передаваемых данных, пусть передаются как есть
-            processData: false,
-            // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
-            contentType: false,
-            // функция успешного ответа сервера
-            success(respond, status, jqXHR) {
-            // ОК - файлы загружены
-              if (typeof respond.error === 'undefined') {
-                profilePage();
-              }
-              // ошибка
-              else {
-                // console.log(`ОШИБКА: ${respond.data}`);
-              }
-            },
-            // функция ошибки ответа сервера
-            error(jqXHR, status, errorThrown) {
-              // console.log(`ОШИБКА AJAX запроса: ${status}`, jqXHR);
-            },
+        //   // AJAX запрос
+        //   ajaxPost({
+        //     url: './chengeavatar',
+        //     type: 'POST', // важно!
+        //     data,
+        //     cache: false,
+        //     dataType: 'json',
+        //     // отключаем обработку передаваемых данных, пусть передаются как есть
+        //     processData: false,
+        //     // отключаем установку заголовка типа запроса.
+        //     // Так jQuery скажет серверу что это строковой запрос
+        //     contentType: false,
+        //     // функция успешного ответа сервера
+        //     success(respond, status, jqXHR) {
+        //     // ОК - файлы загружены
+        //       if (typeof respond.error === 'undefined') {
+        //         profilePage();
+        //       }
+        //       // ошибка
+        //       else {
+        //         // console.log(`ОШИБКА: ${respond.data}`);
+        //       }
+        //     },
+        //     // функция ошибки ответа сервера
+        //     error(jqXHR, status, errorThrown) {
+        //       // console.log(`ОШИБКА AJAX запроса: ${status}`, jqXHR);
+        //     },
 
-          });
-        });
+        //   });
+        // });
 
         // const submitAvatar = createInputSubmit('Изменить аватар', 'secondary');
         // formAvatar.appendChild(submitAvatar);
