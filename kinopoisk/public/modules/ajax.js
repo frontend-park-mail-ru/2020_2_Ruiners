@@ -1,6 +1,6 @@
 (function() {
     const noop = () => {};
-    const domain = 'http://95.163.208.72:8080';
+    const domain = 'http://95.163.208.72:8000';
     class AjaxModule {
         ajaxGet = (ajaxArgs) => {
             this.#ajax({method: 'GET', ...ajaxArgs});
