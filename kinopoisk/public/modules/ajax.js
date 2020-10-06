@@ -29,6 +29,7 @@
 
             if (body) {
                 xhr.setRequestHeader('Content-type', 'application/json; charset=utf8');
+                console.log(JSON.stringify(body))
                 xhr.send(JSON.stringify(body));
                 return;
             }
