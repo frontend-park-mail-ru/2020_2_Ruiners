@@ -18,6 +18,7 @@
               } = {}) {
             const xhr = new XMLHttpRequest();
             xhr.open(method, domain + url, true);
+            xhr.crossOrigin = true
             xhr.withCredentials = true;
 
             xhr.addEventListener('readystatechange', function() {
