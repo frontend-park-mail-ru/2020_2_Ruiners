@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/lithammer/shortuuid"
 	"html/template"
 	"log"
@@ -40,25 +41,33 @@ func CreateSession(w http.ResponseWriter, login string) {
 	ids[id] = login
 }
 
+func setupResponse(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:3000")
+    (*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+    (*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+}
+
 func main() {
-	http.HandleFunc("/signup", signupPage)
-	http.HandleFunc("/login", loginPage)
-	http.HandleFunc("/me", isMe)
-	http.HandleFunc("/whois", Whois)
-	http.HandleFunc("/chengelogin", chengelogin)
-	http.HandleFunc("/chengepass", chengepass)
-	http.HandleFunc("/chengeavatar", chengeavatar)
-	http.HandleFunc("/logout", logoutPage)
-	http.HandleFunc("/", mainPage)
+	router := mux.NewRouter()
+	router.HandleFunc("/signup", signupPage)
+	router.HandleFunc("/login", loginPage)
+	router.HandleFunc("/me", isMe)
+	router.HandleFunc("/whois", Whois).Methods("GET", "OPTIONS")
+	router.HandleFunc("/chengelogin", chengelogin)
+	router.HandleFunc("/chengepass", chengepass)
+	router.HandleFunc("/chengeavatar", chengeavatar)
+	router.HandleFunc("/logout", logoutPage)
+	router.HandleFunc("/", mainPage)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../public"))))
 	fmt.Println("starting server at :3000")
-	err := http.ListenAndServe(":3000", nil)
+	err := http.ListenAndServe(":8000", router)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
 }
 
 func mainPage(w http.ResponseWriter, r *http.Request) {
+    setupResponse(&w, r)
 	tmpl := template.Must(template.ParseGlob("../public/*.html"))
 	err := tmpl.ExecuteTemplate(w, "index.html", nil)
 	if err != nil {
@@ -67,6 +76,7 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func loginPage(w http.ResponseWriter, r *http.Request) {
+    setupResponse(&w, r)
 	l := Login{}
 	err := json.NewDecoder(r.Body).Decode(&l)
 	if err != nil {
@@ -82,6 +92,7 @@ func loginPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func signupPage(w http.ResponseWriter, r *http.Request) {
+    setupResponse(&w, r)
 	u := User{}
 	err := json.NewDecoder(r.Body).Decode(&u)
 	if err != nil {
@@ -98,6 +109,7 @@ func signupPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func isMe(w http.ResponseWriter, r *http.Request) {
+    setupResponse(&w, r)
 	id, err := r.Cookie("session_id")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -116,6 +128,7 @@ func isMe(w http.ResponseWriter, r *http.Request) {
 }
 
 func Whois(w http.ResponseWriter, r *http.Request) {
+    setupResponse(&w, r)
 	id, err := r.Cookie("session_id")
 	if err != nil {
 		var u User
@@ -154,6 +167,7 @@ type LoginChenge struct {
 }
 
 func chengelogin(w http.ResponseWriter, r *http.Request) {
+    setupResponse(&w, r)
 	l := LoginChenge{}
 	err := json.NewDecoder(r.Body).Decode(&l)
 	if err != nil {
@@ -206,6 +220,7 @@ type passChenge struct {
 }
 
 func chengepass(w http.ResponseWriter, r *http.Request) {
+    setupResponse(&w, r)
 	l := passChenge{}
 	fmt.Println(r.Body)
 	err := json.NewDecoder(r.Body).Decode(&l)
@@ -247,6 +262,7 @@ func chengeavatar(w http.ResponseWriter, r *http.Request) {
 }
 
 func logoutPage(w http.ResponseWriter, r *http.Request) {
+    setupResponse(&w, r)
 	session, err := r.Cookie("session_id")
 	if err == http.ErrNoCookie {
 		http.Redirect(w, r, "/", 401)
