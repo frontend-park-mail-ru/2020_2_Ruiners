@@ -122,42 +122,79 @@ function signupPage() {
   header.style = 'color:#FFFFFF; margin-left: 10px';
   form.appendChild(header);
   const loginInput = createInput('login', 'login', 'Логин');
-  loginInput.pattern = '[A-Za-z0-9]{5-15}';
+  // loginInput.pattern = '[A-Za-z0-9]{5-15}';
   loginInput.required = true;
   const emailInput = createInput('email', 'email', 'e-mail');
   const passwordInput = createInput('password', 'password', 'Пароль');
-  passwordInput.pattern = '.{8-16}';
+  // passwordInput.pattern = '.{8-16}';
   passwordInput.required = true;
   form.appendChild(loginInput);
+  const diver = createDiv('error', form);
+  const loginInputreg = /[A-Za-z0-9]{5,15}/;
+  loginInput.onblur = function () {
+    if (!loginInputreg.test(loginInput.value)) {
+      loginInput.classList.add('invalid');
+      diver.innerHTML = 'Недопустимый логин';
+    }
+  };
+
+  loginInput.onfocus = function () {
+    if (this.classList.contains('invalid')) {
+      this.classList.remove('invalid');
+      diver.innerHTML = '';
+    }
+  };
   form.appendChild(emailInput);
   form.appendChild(passwordInput);
+
+  const divpass = createDiv('error', form);
+  const passPatt = /.{8,16}/;
+  passwordInput.onblur = function () {
+    if (!passPatt.test(passwordInput.value)) {
+      passwordInput.classList.add('invalid');
+      divpass.innerHTML = 'Недопустимый пароль';
+    }
+  };
+
+  passwordInput.onfocus = function () {
+    if (this.classList.contains('invalid')) {
+      this.classList.remove('invalid');
+      divpass.innerHTML = '';
+    }
+  };
+
   const button = document.createElement('button');
   button.href = '/';
   button.textContent = 'Регистрация';
   button.className = 'secondary';
+
   form.appendChild(button);
   const linkLogin = createA('/login', 'Войти в имеющийся');
   linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
   form.appendChild(linkLogin);
   linkLogin.dataset.section = 'login';
+
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    const login = loginInput.value.trim();
-    const password = passwordInput.value.trim();
-    const email = emailInput.value.trim();
-    ajaxPost({
-      url: '/signup',
-      body: { email, login, password },
-      callback: (status, response) => {
-        if (status === 200) {
-          loginPage();
-        } else {
-          const { error } = JSON.parse(response);
-          alert(error);
-        }
-      },
-    });
+    if (!loginInput.classList.contains('invalid')
+          || !passwordInput.classList.contains('invalid')) {
+      const login = loginInput.value.trim();
+      const password = passwordInput.value.trim();
+      const email = emailInput.value.trim();
+      ajaxPost({
+        url: '/signup',
+        body: { email, login, password },
+        callback: (status, response) => {
+          if (status === 200) {
+            loginPage();
+          } else {
+            const { error } = JSON.parse(response);
+            alert(error);
+          }
+        },
+      });
+    }
   });
 }
 
@@ -191,7 +228,7 @@ function loginPage() {
 
     const login = loginInput.value.trim();
     const password = passwordInput.value.trim();
-    console.log(`login =  ${login}`);
+    // console.log(`login =  ${login}`);
 
     ajaxPost({
       url: '/login',
@@ -237,68 +274,40 @@ function profileChengePage() {
         form.appendChild(header);
         const responseBody = JSON.parse(responseText);
         const loginInput = createInput('login', 'login', `${responseBody.login}`);
-        loginInput.pattern = "/[A-Za-z0-9]{5-15}/";
         loginInput.required = true;
-        form.appendChild(loginInput);
 
+        form.appendChild(loginInput);
         const submitLogin = createInputSubmit('Изменить логин', 'secondary');
         form.appendChild(submitLogin);
+
+        const diver = createDiv('error', form);
+        const loginInputreg = /[A-Za-z0-9]{5,15}/;
+        loginInput.onblur = function () {
+          if (!loginInputreg.test(loginInput.value)) {
+            loginInput.classList.add('invalid');
+            diver.innerHTML = 'Недопустимый логин';
+          }
+        };
+
+        loginInput.onfocus = function () {
+          if (this.classList.contains('invalid')) {
+            this.classList.remove('invalid');
+            diver.innerHTML = '';
+          }
+        };
+
         form.addEventListener('submit', (evt) => {
           evt.preventDefault();
 
-          const login = loginInput.value.trim();
-          ajaxPost({
-            url: '/chengelogin',
-            body: { login },
-            callback: (status, response) => {
-              if (status === 200) {
-                nav.innerHTML = '';
-                createNavbar();
-                profilePage();
-              } else {
-                const { error } = JSON.parse(response);
-                alert(error);
-              }
-            },
-          });
-        });
-        const formPass = document.createElement('form');
-        application.appendChild(formPass);
-
-        const passwordInputOld = createInput('password', 'password', 'Старый пароль');
-        passwordInputOld.pattern = '/.{8-16}/';
-        passwordInputOld.minlength = 8;
-        passwordInputOld.maxlength = 16;
-        passwordInputOld.required = true;
-        formPass.appendChild(passwordInputOld);
-
-        const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
-        passwordInputNew1.pattern = `.{8-16}/`;
-        passwordInputNew1.required = true;
-        formPass.appendChild(passwordInputNew1);
-
-        const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
-        passwordInputNew2.pattern = `.{8-16}`;
-        passwordInputNew2.required = true;
-        formPass.appendChild(passwordInputNew2);
-
-        const submitpass = createInputSubmit('Изменить пароль', 'secondary');
-        formPass.appendChild(submitpass);
-
-        formPass.addEventListener('submit', (evt) => {
-          evt.preventDefault();
-
-          const PasswordOld = passwordInputOld.value.trim();
-          const Password = passwordInputNew1.value.trim();
-          const pass = passwordInputNew2.value.trim();
-
-          console.log(PasswordOld, Password, pass);
-          if (Password=== pass) {
+          if (!loginInput.classList.contains('invalid')) {
+            const login = loginInput.value.trim();
             ajaxPost({
-              url: '/chengepass',
-              body: { PasswordOld, Password },
+              url: '/chengelogin',
+              body: { login },
               callback: (status, response) => {
                 if (status === 200) {
+                  nav.innerHTML = '';
+                  createNavbar();
                   profilePage();
                 } else {
                   const { error } = JSON.parse(response);
@@ -306,6 +315,85 @@ function profileChengePage() {
                 }
               },
             });
+          }
+        });
+        const formPass = document.createElement('form');
+        application.appendChild(formPass);
+
+        const passwordInputOld = createInput('password', 'password', 'Старый пароль');
+        // passwordInputOld.pattern = '/.{8-16}/';
+        // passwordInputOld.minlength = 8;
+        // passwordInputOld.maxlength = 16;
+        passwordInputOld.required = true;
+        formPass.appendChild(passwordInputOld);
+
+        const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
+        // passwordInputNew1.pattern = '.{8-16}/';
+        passwordInputNew1.required = true;
+        formPass.appendChild(passwordInputNew1);
+
+        const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
+        // passwordInputNew2.pattern = '.{8-16}';
+        passwordInputNew2.required = true;
+        formPass.appendChild(passwordInputNew2);
+
+        const submitpass = createInputSubmit('Изменить пароль', 'secondary');
+        formPass.appendChild(submitpass);
+
+        const divpass = createDiv('error', formPass);
+        const passPatt = /.{8,16}/;
+        passwordInputNew1.onblur = function () {
+          if (!passPatt.test(passwordInputNew1.value)) {
+            passwordInputNew1.classList.add('invalid');
+            divpass.innerHTML = 'Недопустимый пароль';
+          }
+        };
+
+        passwordInputNew1.onfocus = function () {
+          if (this.classList.contains('invalid')) {
+            this.classList.remove('invalid');
+            divpass.innerHTML = '';
+          }
+        };
+
+        passwordInputNew2.onblur = function () {
+          if (!passPatt.test(passwordInputNew2.value)) {
+            passwordInputNew2.classList.add('invalid');
+            divpass.innerHTML = 'Недопустимый пароль';
+          }
+        };
+
+        passwordInputNew2.onfocus = function () {
+          if (this.classList.contains('invalid')) {
+            this.classList.remove('invalid');
+            divpass.innerHTML = '';
+          }
+        };
+
+        formPass.addEventListener('submit', (evt) => {
+          evt.preventDefault();
+
+          if (!passwordInputNew1.classList.contains('invalid')
+          || !passwordInputNew2.classList.contains('invalid')) {
+            const PasswordOld = passwordInputOld.value.trim();
+            const Password = passwordInputNew1.value.trim();
+            const pass = passwordInputNew2.value.trim();
+
+            // console.log(PasswordOld, Password, pass);
+            if (Password === pass) {
+              ajaxPost({
+                url: '/chengepass',
+                body: { PasswordOld, Password },
+                callback: (status, response) => {
+                  if (status === 200) {
+                    profilePage();
+                  } else {
+                    const { error } = JSON.parse(response);
+                    alert(error);
+                  }
+                },
+              });
+            }
           }
         });
 
@@ -317,7 +405,7 @@ function profileChengePage() {
 
         imgAvatar.addEventListener('change', (event) => {
           const fileList = event.target.files;
-          console.log(fileList);
+          // console.log(fileList);
 
           files = this.files;
 
@@ -357,12 +445,12 @@ function profileChengePage() {
               }
               // ошибка
               else {
-                console.log(`ОШИБКА: ${respond.data}`);
+                // console.log(`ОШИБКА: ${respond.data}`);
               }
             },
             // функция ошибки ответа сервера
             error(jqXHR, status, errorThrown) {
-              console.log(`ОШИБКА AJAX запроса: ${status}`, jqXHR);
+              // console.log(`ОШИБКА AJAX запроса: ${status}`, jqXHR);
             },
 
           });
