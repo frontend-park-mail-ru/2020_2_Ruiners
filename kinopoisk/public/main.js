@@ -447,7 +447,7 @@ function profilePage() {
         const divAvatar = createDiv('avatarUserBoxP', divLeft);
 
         const img = document.createElement('img');
-        img.src = '/static/static/images/user-no-big.gif';
+        img.src = '/static/images/user-no-big.gif';
         divAvatar.appendChild(img);
 
         const button = document.createElement('button');
