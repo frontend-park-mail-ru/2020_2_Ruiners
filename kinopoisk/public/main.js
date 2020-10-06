@@ -286,15 +286,15 @@ function profileChengePage() {
         formPass.addEventListener('submit', (evt) => {
           evt.preventDefault();
 
-          const pass0 = passwordInputOld.value.trim();
-          const pass1 = passwordInputNew1.value.trim();
-          const pass2 = passwordInputNew2.value.trim();
+          const PasswordOld = passwordInputOld.value.trim();
+          const Password = passwordInputNew1.value.trim();
+          const pass = passwordInputNew2.value.trim();
 
           console.log(pass0 + pass1 + pass2);
-          if (pass1 === pass2) {
+          if (Password=== pass) {
             ajaxPost({
               url: '/chengepass',
-              body: { pass0, pass1 },
+              body: { PasswordOld, Password },
               callback: (status, response) => {
                 if (status === 200) {
                   profilePage();
