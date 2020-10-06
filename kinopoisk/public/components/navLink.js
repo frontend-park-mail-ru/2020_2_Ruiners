@@ -1,4 +1,4 @@
-export default class evtListener {
+export default class navLink {
     #link;
 
     constructor(link) {

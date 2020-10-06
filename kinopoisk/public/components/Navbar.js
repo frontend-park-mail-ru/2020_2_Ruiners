@@ -1,4 +1,4 @@
-import evtListener from './EvtListeners.js';
+import evtListener from './navLink.js';
 
 const { ajaxGet, ajaxPost } = globalThis.AjaxModule;
 

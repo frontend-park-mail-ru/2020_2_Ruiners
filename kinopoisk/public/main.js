@@ -1,5 +1,5 @@
 import FilmPage from './components/FilmPage/FilmPage.js';
-import evtListener from './components/EvtListeners.js';
+import navLink from './components/navLink.js';
 import Navbar from './components/Navbar.js';
 
 const { ajaxGet, ajaxPost } = globalThis.AjaxModule;
@@ -82,8 +82,6 @@ function menuPage() {
   application.className = '';
   const body = document.getElementById('body');
   body.className = '';
-  // body.removeChild(form)
-
   Object.keys(config).forEach((menuKey) => {
     const { href, text } = config[menuKey];
     const menuItem = document.createElement('a');
@@ -93,19 +91,19 @@ function menuPage() {
     application.appendChild(menuItem);
   });
   const signupLink = application.querySelector('[data-section="signup"]');
-  const signup = new evtListener(signupLink);
+  const signup = new navLink(signupLink);
   signup.render(signupPage);
   const filmLink = application.querySelector('[data-section="film"]');
-  const film = new evtListener(filmLink);
+  const film = new navLink(filmLink);
   film.render(filmPage);
   const loginLink = application.querySelector('[data-section="login"]');
-  const login = new evtListener(loginLink);
+  const login = new navLink(loginLink);
   login.render(loginPage);
   const profileLink = application.querySelector('[data-section="profile"]');
-  const profile = new evtListener(profileLink);
+  const profile = new navLink(profileLink);
   profile.render(profilePage);
   const profileChengeLink = application.querySelector('[data-section="profileChenge"]');
-  const profileChange = new evtListener(profileChengeLink);
+  const profileChange = new navLink(profileChengeLink);
   profileChange.render(profileChengePage);
 }
 
@@ -173,10 +171,8 @@ function signupPage() {
   linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
   form.appendChild(linkLogin);
   linkLogin.dataset.section = 'login';
-
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
+  const formLink = new navLink(form);
+  formLink.render(() => {
     if (!loginInput.classList.contains('invalid')
           || !passwordInput.classList.contains('invalid')) {
       const login = loginInput.value.trim();
@@ -223,9 +219,8 @@ function loginPage() {
   button.textContent = 'Войти';
   button.className = 'secondary';
   form.appendChild(button);
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
+  const formLink = new navLink(form)
+  formLink.render(() => {
     const login = loginInput.value.trim();
     const password = passwordInput.value.trim();
     // console.log(`login =  ${login}`);
@@ -296,9 +291,8 @@ function profileChengePage() {
           }
         };
 
-        form.addEventListener('submit', (evt) => {
-          evt.preventDefault();
-
+        const formLink = new navLink(form);
+        formLink.render(() => {
           if (!loginInput.classList.contains('invalid')) {
             const login = loginInput.value.trim();
             ajaxPost({
@@ -370,16 +364,13 @@ function profileChengePage() {
           }
         };
 
-        formPass.addEventListener('submit', (evt) => {
-          evt.preventDefault();
-
+        const formPassLink = new navLink(formPass);
+        formPassLink.render(() => {
           if (!passwordInputNew1.classList.contains('invalid')
           || !passwordInputNew2.classList.contains('invalid')) {
             const PasswordOld = passwordInputOld.value.trim();
             const Password = passwordInputNew1.value.trim();
             const pass = passwordInputNew2.value.trim();
-
-            // console.log(PasswordOld, Password, pass);
             if (Password === pass) {
               ajaxPost({
                 url: '/chengepass',
@@ -484,9 +475,8 @@ function profileChengePage() {
         buttonBack.textContent = 'Назад';
         buttonBack.className = 'secondary';
         buttonBack.dataset.section = 'profile';
-        buttonBack.addEventListener('click', (evt) => {
-          evt.preventDefault();
-
+        const buttonBackLink = new navLink(buttonBack);
+        buttonBackLink.render(() => {
           profilePage();
         });
         application.appendChild(buttonBack);
