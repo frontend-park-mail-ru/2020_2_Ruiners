@@ -29,6 +29,8 @@
 
             if (body) {
                 xhr.setRequestHeader('Content-type', 'application/json;charset=utf8');
+                xhr.crossOrigin = true
+                xhr.withCredentials = true;
                 console.log(JSON.stringify(body));
                 xhr.send(JSON.stringify(body));
                 return;
