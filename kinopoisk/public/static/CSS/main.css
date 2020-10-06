@@ -260,8 +260,6 @@ input:-webkit-autofill:focus {
 input:focus,
 button:focus,
 a:focus {
-    box-shadow: 0 0 0 2px #FFFFFF,
-    0 0 0 4px #FBD1DC;
     outline: none;
 }
 
