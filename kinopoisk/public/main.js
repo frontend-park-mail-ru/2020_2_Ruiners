@@ -267,6 +267,8 @@ function profileChengePage() {
 
         const passwordInputOld = createInput('password', 'password', 'Старый пароль');
         passwordInputOld.pattern = '.{8-16}';
+        passwordInputOld.minlength = 8;
+        passwordInputOld.maxlength = 16;
         passwordInputOld.required = true;
         formPass.appendChild(passwordInputOld);
 
