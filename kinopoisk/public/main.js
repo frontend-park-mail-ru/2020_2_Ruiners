@@ -237,7 +237,7 @@ function profileChengePage() {
         form.appendChild(header);
         const responseBody = JSON.parse(responseText);
         const loginInput = createInput('login', 'login', `${responseBody.login}`);
-        loginInput.pattern = '/[A-Za-z0-9]{5-15}/';
+        loginInput.pattern = /[A-Za-z0-9]{5-15}/;
         loginInput.required = true;
         form.appendChild(loginInput);
 
