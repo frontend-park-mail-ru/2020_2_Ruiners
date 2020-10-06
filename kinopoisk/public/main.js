@@ -237,7 +237,7 @@ function profileChengePage() {
         form.appendChild(header);
         const responseBody = JSON.parse(responseText);
         const loginInput = createInput('login', 'login', `${responseBody.login}`);
-        loginInput.pattern = '[A-Za-z0-9]{5-15}';
+        loginInput.pattern = '/[A-Za-z0-9]{5-15}/';
         loginInput.required = true;
         form.appendChild(loginInput);
 
@@ -266,19 +266,19 @@ function profileChengePage() {
         application.appendChild(formPass);
 
         const passwordInputOld = createInput('password', 'password', 'Старый пароль');
-        passwordInputOld.pattern = '.{8-16}';
+        passwordInputOld.pattern = '/.{8-16}/';
         passwordInputOld.minlength = 8;
         passwordInputOld.maxlength = 16;
         passwordInputOld.required = true;
         formPass.appendChild(passwordInputOld);
 
         const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
-        passwordInputNew1.pattern = '.{8-16}';
+        passwordInputNew1.pattern = '/.{8-16}/';
         passwordInputNew1.required = true;
         formPass.appendChild(passwordInputNew1);
 
         const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
-        passwordInputNew2.pattern = '.{8-16}';
+        passwordInputNew2.pattern = '/.{8-16}/';
         passwordInputNew2.required = true;
         formPass.appendChild(passwordInputNew2);
 
@@ -292,7 +292,7 @@ function profileChengePage() {
           const Password = passwordInputNew1.value.trim();
           const pass = passwordInputNew2.value.trim();
 
-          console.log(Passwordold, Password, pass);
+          console.log(PasswordOld, Password, pass);
           if (Password=== pass) {
             ajaxPost({
               url: '/chengepass',
