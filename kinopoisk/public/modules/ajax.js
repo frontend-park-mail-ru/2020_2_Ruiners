@@ -1,6 +1,6 @@
 (function() {
     const noop = () => {};
-
+    const domain = 'http://95.163.208.72:8080';
     class AjaxModule {
         ajaxGet = (ajaxArgs) => {
             this.#ajax({method: 'GET', ...ajaxArgs});
@@ -17,7 +17,6 @@
                   callback = noop
               } = {}) {
             const xhr = new XMLHttpRequest();
-            const domain = 'http://95.163.208.72:8080'
             xhr.open(method, domain + url, true);
             xhr.withCredentials = true;
 
