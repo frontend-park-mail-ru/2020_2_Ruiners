@@ -5,8 +5,8 @@ export default class navLink {
       this.#link = link;
     }
 
-    render(callback) {
-      this.#link.addEventListener('click', ((evt) => {
+    render(event, callback) {
+      this.#link.addEventListener(`${event}`, ((evt) => {
         evt.preventDefault();
         callback();
       }));

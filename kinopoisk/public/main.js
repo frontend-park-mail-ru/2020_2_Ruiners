@@ -92,19 +92,19 @@ function menuPage() {
   });
   const signupLink = application.querySelector('[data-section="signup"]');
   const signup = new navLink(signupLink);
-  signup.render(signupPage);
+  signup.render('click', signupPage);
   const filmLink = application.querySelector('[data-section="film"]');
   const film = new navLink(filmLink);
-  film.render(filmPage);
+  film.render('click', filmPage);
   const loginLink = application.querySelector('[data-section="login"]');
   const login = new navLink(loginLink);
-  login.render(loginPage);
+  login.render('click', loginPage);
   const profileLink = application.querySelector('[data-section="profile"]');
   const profile = new navLink(profileLink);
-  profile.render(profilePage);
+  profile.render('click', profilePage);
   const profileChengeLink = application.querySelector('[data-section="profileChenge"]');
   const profileChange = new navLink(profileChengeLink);
-  profileChange.render(profileChengePage);
+  profileChange.render('click', profileChengePage);
 }
 
 function signupPage() {
@@ -172,7 +172,7 @@ function signupPage() {
   form.appendChild(linkLogin);
   linkLogin.dataset.section = 'login';
   const formLink = new navLink(form);
-  formLink.render(() => {
+  formLink.render('submit',() => {
     if (!loginInput.classList.contains('invalid')
           || !passwordInput.classList.contains('invalid')) {
       const login = loginInput.value.trim();
@@ -220,7 +220,7 @@ function loginPage() {
   button.className = 'secondary';
   form.appendChild(button);
   const formLink = new navLink(form)
-  formLink.render(() => {
+  formLink.render('submit',() => {
     const login = loginInput.value.trim();
     const password = passwordInput.value.trim();
     // console.log(`login =  ${login}`);
@@ -292,7 +292,7 @@ function profileChengePage() {
         };
 
         const formLink = new navLink(form);
-        formLink.render(() => {
+        formLink.render('submit',() => {
           if (!loginInput.classList.contains('invalid')) {
             const login = loginInput.value.trim();
             ajaxPost({
@@ -365,7 +365,7 @@ function profileChengePage() {
         };
 
         const formPassLink = new navLink(formPass);
-        formPassLink.render(() => {
+        formPassLink.render('submit',() => {
           if (!passwordInputNew1.classList.contains('invalid')
           || !passwordInputNew2.classList.contains('invalid')) {
             const PasswordOld = passwordInputOld.value.trim();
@@ -476,7 +476,7 @@ function profileChengePage() {
         buttonBack.className = 'secondary';
         buttonBack.dataset.section = 'profile';
         const buttonBackLink = new navLink(buttonBack);
-        buttonBackLink.render(() => {
+        buttonBackLink.render('click',() => {
           profilePage();
         });
         application.appendChild(buttonBack);

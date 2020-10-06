@@ -24,7 +24,7 @@ export default class Navbar {
       navbar.appendChild(ul);
       const kinopoisk = createA('/menu', 'Kinopoisk.ru');
       const kino = new evtListener(kinopoisk);
-      kino.render(menu);
+      kino.render('click', menu);
       const films = createA('/', 'Фильмы');
       const search = createA('/', 'Поиск');
       const login = document.createElement('button');
@@ -52,7 +52,7 @@ export default class Navbar {
         ul.appendChild(li33);
         ul.appendChild(li34);
         const logoutEvnt = new evtListener(logout);
-        logoutEvnt.render(() => {
+        logoutEvnt.render('click', () => {
           ajaxGet({
             url: '/logout',
             body: null,
@@ -69,8 +69,8 @@ export default class Navbar {
         });
       }
       const loginEvnt = new evtListener(login);
-      loginEvnt.render(loginf);
+      loginEvnt.render('click', loginf);
       const signupEvnt = new evtListener(signup);
-      signupEvnt.render(signupf);
+      signupEvnt.render('click', signupf);
     }
 }
