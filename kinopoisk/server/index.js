@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 app.get('*', function (req, res) {
   var xhr = new XMLHttpRequest();
   var domain = req.headers.host
-  domain = 'http://' + domain.substring(0, domain.length - 5) + ':8080'
+  domain = 'http://' + domain.substring(0, domain.length - 5) + ':8000'
   var url = domain + req.url;
   xhr.open("GET", url, false);
   xhr.setRequestHeader("Content-type", "text/html");
@@ -28,7 +28,7 @@ app.get('*', function (req, res) {
 app.post('*', function (req, res) {
   var xhr = new XMLHttpRequest();
   var domain = req.headers.host
-  domain = 'http://' + domain.substring(0, domain.length - 5) + ':8080'
+  domain = 'http://' + domain.substring(0, domain.length - 5) + ':8000'
   var url = domain + req.url;
   xhr.open("POST", url, false);
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
