@@ -2,7 +2,7 @@ import FilmPage from './components/FilmPage/FilmPage.js';
 import evtListener from './components/EvtListeners.js';
 import Navbar from './components/Navbar.js';
 
-const {ajaxGet, ajaxPost} = globalThis.AjaxModule;
+const { ajaxGet, ajaxPost } = globalThis.AjaxModule;
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
 
@@ -39,10 +39,32 @@ const config = {
   },
 };
 
+const menuTop = {
+  rech: {
+    href: '/rech',
+    text: 'Рецензии',
+  },
+  mark: {
+    href: '/mark',
+    text: 'Оценки',
+  },
+  films: {
+    href: '/films',
+    text: 'Фильмы',
+  },
+  stars: {
+    href: '/stars',
+    text: 'Звёзды',
+  },
+};
+
 function createNavbar() {
   let responseBody;
   let isAuthorized = false;
-  ajaxGet({ url: '/whois', body: null, callback: (status, responseText) => {
+  ajaxGet({
+    url: '/whois',
+    body: null,
+    callback: (status, responseText) => {
       responseBody = JSON.parse(responseText);
       if (status === 202) {
         isAuthorized = false;
@@ -51,7 +73,8 @@ function createNavbar() {
       }
       const navbar = new Navbar(responseBody.login, isAuthorized, nav);
       navbar.render(createNavbar, loginPage, signupPage, menuPage);
-    }});
+    },
+  });
 }
 
 function menuPage() {
@@ -76,7 +99,7 @@ function menuPage() {
   const film = new evtListener(filmLink);
   film.render(filmPage);
   const loginLink = application.querySelector('[data-section="login"]');
-  const login = new evtListener(loginLink)
+  const login = new evtListener(loginLink);
   login.render(loginPage);
   const profileLink = application.querySelector('[data-section="profile"]');
   const profile = new evtListener(profileLink);
@@ -99,8 +122,12 @@ function signupPage() {
   header.style = 'color:#FFFFFF; margin-left: 10px';
   form.appendChild(header);
   const loginInput = createInput('login', 'login', 'Логин');
+  loginInput.pattern = '[A-Za-z0-9]{5-15}';
+  loginInput.required = true;
   const emailInput = createInput('email', 'email', 'e-mail');
   const passwordInput = createInput('password', 'password', 'Пароль');
+  passwordInput.pattern = '.{8-16}';
+  passwordInput.required = true;
   form.appendChild(loginInput);
   form.appendChild(emailInput);
   form.appendChild(passwordInput);
@@ -121,12 +148,12 @@ function signupPage() {
     const email = emailInput.value.trim();
     ajaxPost({
       url: '/signup',
-      body: {email, login, password},
+      body: { email, login, password },
       callback: (status, response) => {
         if (status === 200) {
           loginPage();
         } else {
-          const {error} = JSON.parse(response);
+          const { error } = JSON.parse(response);
           alert(error);
         }
       },
@@ -168,7 +195,7 @@ function loginPage() {
 
     ajaxPost({
       url: '/login',
-      body: {login, password},
+      body: { login, password },
       callback: (status, response) => {
         if (status === 200) {
           nav.innerHTML = '';
@@ -177,7 +204,7 @@ function loginPage() {
         } else if (status === 301) {
           loginPage();
         } else {
-          const {error} = JSON.parse(response);
+          const { error } = JSON.parse(response);
           alert(error);
         }
       },
@@ -189,192 +216,205 @@ function loginPage() {
   linkSignup.dataset.section = 'signup';
 }
 
-
 function profileChengePage() {
   application.innerHTML = '';
   application.className = '';
-  ajaxGet({ url: '/me', body: null, callback: (status, responseText) => {
-    if (status === 200) {
-      const body = document.getElementById('body');
-      body.className = 'page';
+  ajaxGet({
+    url: '/me',
+    body: null,
+    callback: (status, responseText) => {
+      if (status === 200) {
+        const body = document.getElementById('body');
+        body.className = 'page';
 
-      const form = document.createElement('form');
-      application.className = 'wrapper__form chenge';
-      application.appendChild(form);
+        const form = document.createElement('form');
+        application.className = 'wrapper__form chenge';
+        application.appendChild(form);
 
-      const header = document.createElement('h2');
-      header.textContent = 'Настройки пользователя';
-      header.style = 'color:#FFFFFF; margin-left: 10px';
-      form.appendChild(header);
-      const responseBody = JSON.parse(responseText);
-      const loginInput = createInput('login', 'login', `${responseBody.login}`);
-      loginInput.required = true;
-      form.appendChild(loginInput);
+        const header = document.createElement('h2');
+        header.textContent = 'Настройки пользователя';
+        header.style = 'color:#FFFFFF; margin-left: 10px';
+        form.appendChild(header);
+        const responseBody = JSON.parse(responseText);
+        const loginInput = createInput('login', 'login', `${responseBody.login}`);
+        loginInput.pattern = '[A-Za-z0-9]{5-15}';
+        loginInput.required = true;
+        form.appendChild(loginInput);
 
-      const submitLogin = createInputSubmit('Изменить логин', 'secondary');
-      form.appendChild(submitLogin);
-      form.addEventListener('submit', (evt) => {
-        evt.preventDefault();
+        const submitLogin = createInputSubmit('Изменить логин', 'secondary');
+        form.appendChild(submitLogin);
+        form.addEventListener('submit', (evt) => {
+          evt.preventDefault();
 
-        const login = loginInput.value.trim();
-        ajaxPost({
-          url: '/chengelogin',
-          body: {login},
-          callback: (status, response) => {
-            if (status === 200) {
-              nav.innerHTML = ''
-              createNavbar()
-              profilePage();
-            } else {
-              const {error} = JSON.parse(response);
-              alert(error);
-            }
-          },
+          const login = loginInput.value.trim();
+          ajaxPost({
+            url: '/chengelogin',
+            body: { login },
+            callback: (status, response) => {
+              if (status === 200) {
+                nav.innerHTML = '';
+                createNavbar();
+                profilePage();
+              } else {
+                const { error } = JSON.parse(response);
+                alert(error);
+              }
+            },
+          });
         });
-      });
-      const formPass = document.createElement('form');
-      application.appendChild(formPass);
+        const formPass = document.createElement('form');
+        application.appendChild(formPass);
 
-      const passwordInputOld = createInput('password', 'password', 'Старый пароль');
-      passwordInputOld.required = true;
-      formPass.appendChild(passwordInputOld);
+        const passwordInputOld = createInput('password', 'password', 'Старый пароль');
+        passwordInputOld.pattern = '.{8-16}';
+        passwordInputOld.required = true;
+        formPass.appendChild(passwordInputOld);
 
-      const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
-      passwordInputNew1.required = true;
-      formPass.appendChild(passwordInputNew1);
+        const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
+        passwordInputNew1.pattern = '.{8-16}';
+        passwordInputNew1.required = true;
+        formPass.appendChild(passwordInputNew1);
 
-      const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
-      passwordInputNew2.required = true;
-      formPass.appendChild(passwordInputNew2);
+        const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
+        passwordInputNew2.pattern = '.{8-16}';
+        passwordInputNew2.required = true;
+        formPass.appendChild(passwordInputNew2);
 
-      const submitpass = createInputSubmit('Изменить пароль', 'secondary');
-      formPass.appendChild(submitpass);
+        const submitpass = createInputSubmit('Изменить пароль', 'secondary');
+        formPass.appendChild(submitpass);
 
-      formPass.addEventListener('submit', (evt) => {
-        evt.preventDefault();
+        formPass.addEventListener('submit', (evt) => {
+          evt.preventDefault();
 
-        const pass0 = passwordInputOld.value.trim();
-        const pass1 = passwordInputNew1.value.trim();
-        const pass2 = passwordInputNew2.value.trim();
-        console.log(pass0 + pass1 + pass2);
-        ajaxPost({
-          url: '/chengepass',
-          body: {pass0, pass1},
-          callback: (status, response) => {
-            if (status === 200) {
-              profilePage();
-            } else {
-              const {error} = JSON.parse(response);
-              alert(error);
-            }
-          },
-        });
-      });
+          const pass0 = passwordInputOld.value.trim();
+          const pass1 = passwordInputNew1.value.trim();
+          const pass2 = passwordInputNew2.value.trim();
 
-      const formAvatar = document.createElement('form');
-      application.appendChild(formAvatar);
-
-      const imgAvatar = createInput('file', 'file', 'Фото');
-      formAvatar.appendChild(imgAvatar);
-
-      imgAvatar.addEventListener('change', (event) => {
-        const fileList = event.target.files;
-        console.log(fileList);
-
-        files = this.files;
-
-        event.stopPropagation(); // остановка всех текущих JS событий
-        event.preventDefault(); // остановка дефолтного события для текущего элемента - клик для <a> тега
-
-        // ничего не делаем если files пустой
-        if (typeof files === 'undefined') return;
-
-        // создадим объект данных формы
-        const data = new FormData();
-
-        // заполняем объект данных файлами в подходящем для отправки формате
-        Object.keys(files).forEach((key, value) => {
-          data.append(key, value);
+          console.log(pass0 + pass1 + pass2);
+          if (pass1 === pass2) {
+            ajaxPost({
+              url: '/chengepass',
+              body: { pass0, pass1 },
+              callback: (status, response) => {
+                if (status === 200) {
+                  profilePage();
+                } else {
+                  const { error } = JSON.parse(response);
+                  alert(error);
+                }
+              },
+            });
+          }
         });
 
-        // добавим переменную для идентификации запроса
-        data.append('my_file_upload', 1);
+        const formAvatar = document.createElement('form');
+        application.appendChild(formAvatar);
 
-        // AJAX запрос
-        ajaxPost({
-          url: './chengeavatar',
-          type: 'POST', // важно!
-          data,
-          cache: false,
-          dataType: 'json',
-          // отключаем обработку передаваемых данных, пусть передаются как есть
-          processData: false,
-          // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
-          contentType: false,
-          // функция успешного ответа сервера
-          success(respond, status, jqXHR) {
+        const imgAvatar = createInput('file', 'file', 'Фото');
+        formAvatar.appendChild(imgAvatar);
+
+        imgAvatar.addEventListener('change', (event) => {
+          const fileList = event.target.files;
+          console.log(fileList);
+
+          files = this.files;
+
+          event.stopPropagation(); // остановка всех текущих JS событий
+          event.preventDefault(); // остановка дефолтного события для текущего элемента - клик для <a> тега
+
+          // ничего не делаем если files пустой
+          if (typeof files === 'undefined') return;
+
+          // создадим объект данных формы
+          const data = new FormData();
+
+          // заполняем объект данных файлами в подходящем для отправки формате
+          Object.keys(files).forEach((key, value) => {
+            data.append(key, value);
+          });
+
+          // добавим переменную для идентификации запроса
+          data.append('my_file_upload', 1);
+
+          // AJAX запрос
+          ajaxPost({
+            url: './chengeavatar',
+            type: 'POST', // важно!
+            data,
+            cache: false,
+            dataType: 'json',
+            // отключаем обработку передаваемых данных, пусть передаются как есть
+            processData: false,
+            // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
+            contentType: false,
+            // функция успешного ответа сервера
+            success(respond, status, jqXHR) {
             // ОК - файлы загружены
-            if (typeof respond.error === 'undefined') {
-              profilePage();
-            }
-            // ошибка
-            else {
-              console.log(`ОШИБКА: ${respond.data}`);
-            }
-          },
-          // функция ошибки ответа сервера
-          error(jqXHR, status, errorThrown) {
-            console.log(`ОШИБКА AJAX запроса: ${status}`, jqXHR);
-          },
+              if (typeof respond.error === 'undefined') {
+                profilePage();
+              }
+              // ошибка
+              else {
+                console.log(`ОШИБКА: ${respond.data}`);
+              }
+            },
+            // функция ошибки ответа сервера
+            error(jqXHR, status, errorThrown) {
+              console.log(`ОШИБКА AJAX запроса: ${status}`, jqXHR);
+            },
 
+          });
         });
-      });
 
-      // const submitAvatar = createInputSubmit('Изменить аватар', 'secondary');
-      // formAvatar.appendChild(submitAvatar);
+        // const submitAvatar = createInputSubmit('Изменить аватар', 'secondary');
+        // formAvatar.appendChild(submitAvatar);
 
-      // formPass.addEventListener('submit', (evt) => {
-      //   evt.preventDefault();
+        // formPass.addEventListener('submit', (evt) => {
+        //   evt.preventDefault();
 
-      //   const img = imgAvatar.value;/// &&&
+        //   const img = imgAvatar.value;/// &&&
 
-      //   ajax(
-      //     'POST',
-      //     '/chengeavatar',
-      //     { img },
-      //     (status, response) => {
-      //       if (status === 200) {
-      //         profilePage();
-      //       } else {
-      //         const { error } = JSON.parse(response);
-      //         alert(error);
-      //       }
-      //     },
-      //   );
-      // });
+        //   ajax(
+        //     'POST',
+        //     '/chengeavatar',
+        //     { img },
+        //     (status, response) => {
+        //       if (status === 200) {
+        //         profilePage();
+        //       } else {
+        //         const { error } = JSON.parse(response);
+        //         alert(error);
+        //       }
+        //     },
+        //   );
+        // });
 
-      const buttonBack = document.createElement('button');
-      buttonBack.href = '/';
-      buttonBack.textContent = 'Назад';
-      buttonBack.className = 'secondary';
-      buttonBack.dataset.section = 'profile';
-      buttonBack.addEventListener('click', (evt) => {
-        evt.preventDefault();
+        const buttonBack = document.createElement('button');
+        buttonBack.href = '/';
+        buttonBack.textContent = 'Назад';
+        buttonBack.className = 'secondary';
+        buttonBack.dataset.section = 'profile';
+        buttonBack.addEventListener('click', (evt) => {
+          evt.preventDefault();
 
-        profilePage();
-      });
-      application.appendChild(buttonBack);
-    } else {
-      alert('АХТУНГ, нет авторизации');
-      loginPage();
-    }
-  }});
+          profilePage();
+        });
+        application.appendChild(buttonBack);
+      } else {
+        alert('АХТУНГ, нет авторизации');
+        loginPage();
+      }
+    },
+  });
 }
 
 function profilePage() {
   application.innerHTML = '';
   application.className = '';
-  ajaxGet({url: '/me', body: null, callback: (status, responseText) => {
+  ajaxGet({
+    url: '/me',
+    body: null,
+    callback: (status, responseText) => {
       if (status === 200) {
         const body = document.getElementById('body');
         body.className = 'page';
@@ -391,25 +431,6 @@ function profilePage() {
 
         menuItem0.appendChild(menuItema0);
         ul.appendChild(menuItem0);
-
-        const menuTop = {
-          rech: {
-            href: '/rech',
-            text: 'Рецензии',
-          },
-          mark: {
-            href: '/mark',
-            text: 'Оценки',
-          },
-          films: {
-            href: '/films',
-            text: 'Фильмы',
-          },
-          stars: {
-            href: '/stars',
-            text: 'Звёзды',
-          },
-        };
 
         Object.keys(menuTop).forEach((menuKey) => {
           const { href, text } = menuTop[menuKey];
@@ -458,9 +479,9 @@ function profilePage() {
         alert('АХТУНГ, нет авторизации');
         loginPage();
       }
-    }});
+    },
+  });
 }
 
 createNavbar();
 menuPage();
-
