@@ -17,7 +17,8 @@
                   callback = noop
               } = {}) {
             const xhr = new XMLHttpRequest();
-            xhr.open(method, url, true);
+            const domain = 'http://95.163.208.72:8080'
+            xhr.open(method, domain + url, true);
             xhr.withCredentials = true;
 
             xhr.addEventListener('readystatechange', function() {
