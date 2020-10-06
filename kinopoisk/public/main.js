@@ -290,7 +290,7 @@ function profileChengePage() {
           const Password = passwordInputNew1.value.trim();
           const pass = passwordInputNew2.value.trim();
 
-          console.log(pass0 + pass1 + pass2);
+          console.log(Passwordold, Password, pass);
           if (Password=== pass) {
             ajaxPost({
               url: '/chengepass',
