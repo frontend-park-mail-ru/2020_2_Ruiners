@@ -1,5 +1,6 @@
-import FilmPage from './components/FilmPage/FilmPage.js'
+import FilmPage from './components/FilmPage/FilmPage.js';
 import evtListener from './components/EvtListeners.js';
+import Navbar from './components/Navbar.js';
 
 const {ajaxGet, ajaxPost} = globalThis.AjaxModule;
 const application = document.getElementById('app');
@@ -48,59 +49,8 @@ function createNavbar() {
       } else {
         isAuthorized = true;
       }
-      console.log(isAuthorized);
-      const navbar = document.createElement('nav');
-      nav.appendChild(navbar);
-      const ul = document.createElement('ul');
-      ul.className = 'menu-main';
-      navbar.appendChild(ul);
-      const kinopoisk = createA('/menu', 'Kinopoisk.ru');
-      kinopoisk.dataset.section = 'menu';
-      const films = createA('/', 'Фильмы');
-      const search = createA('/', 'Поиск');
-      const login = document.createElement('button');
-      const signup = document.createElement('button');
-      login.textContent = 'Войти';
-      signup.textContent = 'Зарегистрироваться';
-      const li1 = createLi('brand', kinopoisk);
-      const li2 = createLi('menu-secondary', films);
-      const li3 = createLi('menu-secondary', search);
-      ul.appendChild(li1);
-      ul.appendChild(li2);
-      ul.appendChild(li3);
-      if (!isAuthorized) {
-        const li4 = createLi('menu-buttons', login);
-        const li5 = createLi('menu-buttons', signup);
-        ul.appendChild(li4);
-        ul.appendChild(li5);
-      } else {
-        const logout = document.createElement('button');
-        logout.textContent = 'Выйти';
-        const li34 = createLi('menu-buttons', logout);
-        const profile = document.createElement('button');
-        profile.textContent = `${responseBody.login}`;
-        const li33 = createLi('menu-buttons', profile);
-        ul.appendChild(li33);
-        ul.appendChild(li34);
-        logout.addEventListener('click', (evt) => {
-          evt.preventDefault();
-          ajaxGet({
-            url: '/logout',
-            body: null,
-            callback: (status, response) => {
-              if (status === 200) {
-                nav.innerHTML = '';
-                createNavbar();
-                loginPage();
-              } else {
-                alert('error');
-              }
-            },
-          });
-        });
-      }
-      login.dataset.section = 'login';
-      signup.dataset.section = 'signup';
+      const navbar = new Navbar(responseBody.login, isAuthorized, nav);
+      navbar.render(createNavbar, loginPage, signupPage, menuPage);
     }});
 }
 
@@ -120,30 +70,20 @@ function menuPage() {
     application.appendChild(menuItem);
   });
   const signupLink = application.querySelector('[data-section="signup"]');
-  signupLink.addEventListener('click', ((evt) => {
-    evt.preventDefault();
-    signupPage();
-  }));
+  const signup = new evtListener(signupLink);
+  signup.render(signupPage);
   const filmLink = application.querySelector('[data-section="film"]');
-  filmLink.addEventListener('click', ((evt) => {
-    evt.preventDefault();
-    filmPage();
-  }));
+  const film = new evtListener(filmLink);
+  film.render(filmPage);
   const loginLink = application.querySelector('[data-section="login"]');
-  loginLink.addEventListener('click', ((evt) => {
-    evt.preventDefault();
-    loginPage();
-  }));
+  const login = new evtListener(loginLink)
+  login.render(loginPage);
   const profileLink = application.querySelector('[data-section="profile"]');
-  profileLink.addEventListener('click', ((evt) => {
-    evt.preventDefault();
-    profilePage();
-  }));
+  const profile = new evtListener(profileLink);
+  profile.render(profilePage);
   const profileChengeLink = application.querySelector('[data-section="profileChenge"]');
-  profileChengeLink.addEventListener('click', ((evt) => {
-    evt.preventDefault();
-    profileChengePage();
-  }));
+  const profileChange = new evtListener(profileChengeLink);
+  profileChange.render(profileChengePage);
 }
 
 function signupPage() {
@@ -520,20 +460,6 @@ function profilePage() {
       }
     }});
 }
-
-nav.addEventListener('click', (evt) => {
-  const { target } = evt;
-
-  if (target instanceof HTMLAnchorElement) {
-    evt.preventDefault();
-    config[target.dataset.section].open();
-  }
-
-  if (target instanceof HTMLButtonElement) {
-    evt.preventDefault();
-    config[target.dataset.section].open();
-  }
-});
 
 createNavbar();
 menuPage();
