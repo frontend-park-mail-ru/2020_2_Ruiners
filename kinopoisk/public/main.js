@@ -1,3 +1,6 @@
+import FilmPage from './components/FilmPage/FilmPage.js'
+import evtListener from './components/EvtListeners.js';
+
 const {ajaxGet, ajaxPost} = globalThis.AjaxModule;
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
@@ -35,57 +38,12 @@ const config = {
   },
 };
 
-function createLi(className, child) {
-  const li = document.createElement('li');
-  li.className = className;
-  li.appendChild(child);
-  return li;
-}
-
-function createA(href, text) {
-  const a = document.createElement('a');
-  a.href = href;
-  a.textContent = text;
-  return a;
-}
-
-function createSpan(classname, text) {
-  const span = document.createElement('span');
-  span.className = classname;
-  span.textContent = text;
-  return span;
-}
-
-function createInput(type, name, text) {
-  const input = document.createElement('input');
-  input.type = type;
-  input.name = name;
-  input.placeholder = text;
-  return input;
-}
-
-function createInputSubmit(value, className) {
-  const input = document.createElement('input');
-  input.type = 'submit';
-  input.className = className;
-  input.value = value;
-  return input;
-}
-
-function createDiv(cla, child) {
-  const div = document.createElement('div');
-  div.className = cla;
-
-  child.appendChild(div);
-  return div;
-}
-
 function createNavbar() {
   let responseBody;
   let isAuthorized = false;
   ajaxGet({ url: '/whois', body: null, callback: (status, responseText) => {
       responseBody = JSON.parse(responseText);
-      if (responseBody.login === 'null') {
+      if (status === 202) {
         isAuthorized = false;
       } else {
         isAuthorized = true;
@@ -141,16 +99,6 @@ function createNavbar() {
           });
         });
       }
-      // login.addEventListener('click', (event) => {
-      //     event.preventDefault();
-      //     application.innerHTML = '';
-      //     loginPage();
-      // });
-      // signup.addEventListener('click', (event) => {
-      //     event.preventDefault();
-      //     application.innerHTML = '';
-      //     signupPage();
-      // });
       login.dataset.section = 'login';
       signup.dataset.section = 'signup';
     }});
@@ -247,59 +195,8 @@ function signupPage() {
 }
 
 function filmPage() {
-  const body = document.getElementById('body');
-  body.className = 'film1';
-  application.innerHTML = '';
-  application.className = '';
-  application.className = '';
-  const main = document.createElement('div');
-  main.className = 'main';
-  application.appendChild(main);
-  const ul1 = document.createElement('ul');
-  main.appendChild(ul1);
-  const li1 = document.createElement('li');
-  ul1.appendChild(li1);
-  const h1 = document.createElement('h1');
-  h1.textContent = 'Начало';
-  li1.appendChild(h1);
-  const li2 = document.createElement('li');
-  ul1.appendChild(li2);
-  const rating = document.createElement('div');
-  rating.className = 'rating';
-  li2.appendChild(rating);
-  const h11 = document.createElement('h1');
-  rating.appendChild(h11);
-  const span = createSpan('colour-text1', '8,7');
-  const span1 = createSpan('colour-text2', '110k');
-  h11.appendChild(span);
-  h11.appendChild(span1);
-  const rate = document.createElement('button');
-  rate.textContent = 'Оценить';
-  rating.appendChild(rate);
-  const ul2 = document.createElement('ul');
-  main.appendChild(ul2);
-  const li3 = document.createElement('li');
-  ul2.appendChild(li3);
-  const frame = document.createElement('iframe');
-  frame.width = '560';
-  frame.height = '315';
-  frame.src = 'https://www.youtube.com/embed/85Zz1CCXyDI';
-  frame.frameborder = '1';
-  frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-  frame.allowFullscreen = true;
-  li3.appendChild(frame);
-  const film = document.createElement('div');
-  film.className = 'film';
-  ul2.appendChild(film);
-  const p = document.createElement('p');
-  p.textContent = 'О фильме';
-  film.appendChild(p);
-  const span2 = createSpan('colour-text3', 'Год: 2010');
-  const span3 = createSpan('colour-text3', 'Страна: США, Великобритания');
-  const span4 = createSpan('colour-text3', 'Режиссер: Кристофер Ноллан');
-  p.appendChild(span2);
-  p.appendChild(span3);
-  p.appendChild(span4);
+  const film = new FilmPage(application);
+  film.render();
 }
 
 function loginPage() {
