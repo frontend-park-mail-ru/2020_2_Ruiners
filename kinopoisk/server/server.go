@@ -29,6 +29,17 @@ var users = map[string]User{
 
 var ids = map[string]string{}
 
+func CreateSession(w http.ResponseWriter, login string) {
+	id := shortuuid.New()
+	cookie := http.Cookie{
+		Name:    "session_id",
+		Value:   id,
+		Expires: time.Now().Add(10 * time.Hour),
+	}
+	http.SetCookie(w, &cookie)
+	ids[id] = login
+}
+
 func main() {
 	http.HandleFunc("/signup", signupPage)
 	http.HandleFunc("/login", loginPage)
@@ -57,28 +68,16 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 
 func loginPage(w http.ResponseWriter, r *http.Request) {
 	l := Login{}
-	expiration := time.Now().Add(10 * time.Hour)
 	err := json.NewDecoder(r.Body).Decode(&l)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	if l.Password == users[l.Login].Password && l.Password != "" {
-		fmt.Println(l)
-		var id = shortuuid.New()
-		ids[id] = l.Login
-		cookie := http.Cookie{
-			Name:     "session_id",
-			Value:    id,
-			Expires:  expiration,
-			HttpOnly: true,
-		}
-
-		http.SetCookie(w, &cookie)
-		http.Redirect(w, r, "/", http.StatusOK)
+	if l.Password == users[l.Login].Password && l.Password != "" && l.Login != "" {
+		CreateSession(w, l.Login)
+		w.WriteHeader(http.StatusOK)
 	} else {
-		fmt.Println("hui")
-		http.Redirect(w, r, "/login", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
 	}
 }
 
@@ -91,25 +90,28 @@ func signupPage(w http.ResponseWriter, r *http.Request) {
 	}
 	if users[u.Login].Login != u.Login {
 		users[u.Login] = u
-		fmt.Println(users)
-		http.Redirect(w, r, "/", http.StatusOK)
+		//fmt.Println(users)
+		w.WriteHeader(http.StatusOK)
 	} else {
-		fmt.Println("hui")
-		http.Redirect(w, r, "/signup", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
 	}
 }
 
 func isMe(w http.ResponseWriter, r *http.Request) {
-	id, _ := r.Cookie("session_id")
+	id, err := r.Cookie("session_id")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 	login := ids[id.Value]
 	if login == "" {
-		fmt.Println("401")
-		http.Redirect(w, r, "/login", 401)
+		w.WriteHeader(http.StatusBadRequest)
 	} else {
 		user := users[login]
 		u := &user
 		result, _ := json.Marshal(u)
 		w.Write(result)
+		w.WriteHeader(http.StatusOK)
 	}
 }
 
@@ -119,7 +121,9 @@ func Whois(w http.ResponseWriter, r *http.Request) {
 		var u User
 		u = User{"null", "null", "null"}
 		result, _ := json.Marshal(&u)
+		w.WriteHeader(http.StatusAccepted)
 		w.Write(result)
+		return
 	} else {
 		var login string
 		if len(ids) == 0 {
@@ -133,11 +137,13 @@ func Whois(w http.ResponseWriter, r *http.Request) {
 			var u User
 			u = User{"null", "null", "null"}
 			result, _ := json.Marshal(&u)
+			w.WriteHeader(http.StatusOK)
 			w.Write(result)
 		} else {
 			user := users[login]
 			u := &user
 			result, _ := json.Marshal(u)
+			w.WriteHeader(http.StatusOK)
 			w.Write(result)
 		}
 	}
