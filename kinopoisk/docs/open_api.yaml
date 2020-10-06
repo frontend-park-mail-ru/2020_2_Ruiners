@@ -1,0 +1,145 @@
+openapi: 3.0.1
+info:
+  version: 0.0.0
+  title: "Kinopoisk"
+
+paths:
+  /signup:
+    post:
+      tags:
+        - signup
+      summary: signup user, crate new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSignup'
+      responses:
+        200:
+          description: succesfull signup
+        400:
+          description: >
+            User with this login already exists
+            error parse Json
+
+
+  /login:
+    post:
+      tags:
+        - login
+      summary: login user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        200:
+          description: login succesfull
+        204:
+          description: No content
+        400:
+          description: No user with this login or error parse Json
+
+  /:
+    get:
+      tags:
+        - menu
+      summary: open menu
+      responses:
+        200:
+          description: succes
+        500:
+          description: internal error
+
+  /whois:
+    get:
+      tags:
+        - whoIs
+      summary: return user
+      responses:
+        202:
+          description: not Auth
+        200:
+          description: Return user
+
+  /logout:
+    post:
+      tags:
+        - logout user
+      summary: logout user
+      responses:
+        200:
+          description: OK
+        400:
+          description: not auth, Error parse Json
+
+  /chengepassword:
+    post:
+      tags:
+        - Chenge password
+      summary: Changes password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/password'
+      responses:
+        400:
+          description: Error parse Json, Not auth right now, wrong old password
+        200:
+          description: succes
+
+  /chengelogin:
+    post:
+      tags:
+        - Chenge login
+      summary: Changes login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login'
+      responses:
+        400:
+          description: Error parse Json, Not auth right now
+        200:
+          description: succes
+
+
+
+components:
+  schemas:
+    UserSignup:
+      type: object
+      properties:
+        login:
+          type: string
+        emale:
+          type: string
+        password:
+          type: string
+
+    UserLogin:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+
+    login:
+      type: object
+      properties:
+        login:
+          type: string
+
+    password:
+      type: object
+      properties:
+        old:
+          type: string
+        new1:
+          type: string
+        new2:
+          type: string
