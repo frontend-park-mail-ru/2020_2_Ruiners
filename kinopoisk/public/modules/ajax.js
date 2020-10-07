@@ -1,6 +1,6 @@
 (function() {
     const noop = () => {};
-    const domain = 'http://localhost:8000';
+    const domain = 'http://95.163.208.72:8000';
     class AjaxModule {
         ajaxGet = (ajaxArgs) => {
             this.#ajax({method: 'GET', ...ajaxArgs});
@@ -14,6 +14,7 @@
             const response = await fetch(domain + ajaxArgs.url, {
                 method: 'GET',
                 credentials: 'include',
+                mode: 'cors',
             });
             const parsedJsonObject = await response.json();
             console.log(parsedJsonObject)
@@ -24,6 +25,7 @@
             const response = await fetch(domain + ajaxArgs.url, {
                 method: 'POST',
                 credentials: 'include',
+                mode: 'cors',
                 body: JSON.stringify(ajaxArgs.body),
                 headers: {
                     'Content-Type': 'application/json'
