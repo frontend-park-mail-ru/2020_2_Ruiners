@@ -1,7 +1,5 @@
 import navLink from './navLink.js';
 
-const { ajaxPostUsingFetch } = globalThis.AjaxModule;
-
 export default class SignupPage {
     #parent
 

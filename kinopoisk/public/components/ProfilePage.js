@@ -1,24 +1,5 @@
 import navLink from './navLink.js';
 
-const menuTop = {
-  rech: {
-    href: '/rech',
-    text: 'Рецензии',
-  },
-  mark: {
-    href: '/mark',
-    text: 'Оценки',
-  },
-  films: {
-    href: '/films',
-    text: 'Фильмы',
-  },
-  stars: {
-    href: '/stars',
-    text: 'Звёзды',
-  },
-};
-
 export default class ProfilePage {
     #parent
 

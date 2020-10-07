@@ -6,42 +6,7 @@ import LoginPage from './components/LoginPage.js';
 import ProfilePage from './components/ProfilePage.js';
 import ProfileChangePage from './components/ProfileChangePage.js';
 
-const { ajaxGetUsingFetch } = globalThis.AjaxModule;
-const application = document.getElementById('app');
-const nav = document.getElementById('navbar');
 
-const config = {
-  menu: {
-    href: '/menu',
-    text: 'Главная',
-    open: menuPage,
-  },
-  signup: {
-    href: '/signup',
-    text: 'Зарегистрироваться',
-    open: signupPage,
-  },
-  film: {
-    href: '/film',
-    text: 'Страница фильма',
-    open: filmPage,
-  },
-  login: {
-    href: '/login',
-    text: 'Войти',
-    open: loginPage,
-  },
-  profile: {
-    href: '/profile',
-    text: 'Профиль',
-    open: profilePage,
-  },
-  profileChenge: {
-    href: '/profileChenge',
-    text: 'Изменить профиль',
-    open: profileChengePage,
-  },
-};
 
 function createNavbar() {
   let responseBody;

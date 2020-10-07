@@ -1,7 +1,5 @@
 import evtListener from './navLink.js';
 
-const { ajaxGet } = globalThis.AjaxModule;
-
 export default class Navbar {
     #login;
 
@@ -14,6 +12,8 @@ export default class Navbar {
       this.#isAuth = isAuth;
       this.#parent = parent;
     }
+
+
 
     render(nav, loginf, signupf, menu) {
       console.log(this.#isAuth);
@@ -49,19 +49,16 @@ export default class Navbar {
         ul.appendChild(li34);
         const logoutEvnt = new evtListener(logout);
         logoutEvnt.render('click', () => {
-          ajaxGet({
-            url: '/logout',
-            body: null,
-            callback: (status, response) => {
-              if (status === 200) {
-                this.#parent.innerHTML = '';
-                nav();
-                loginf();
-              } else {
-                alert('error');
-              }
-            },
-          });
+          ajaxGetUsingFetch({ url: '/logout', body: null })
+              .then((res) => {
+                if (res.status === 200) {
+                  this.#parent.innerHTML = '';
+                  nav();
+                  loginf();
+                } else {
+                  alert('error');
+                }
+              });
         });
       }
       const loginEvnt = new evtListener(login);
