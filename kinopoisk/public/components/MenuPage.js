@@ -29,7 +29,6 @@ export default class MenuPage {
 
     links(data_sector, pages, page) {
         const link = this.#parent.querySelector(`[data-section=${data_sector}]`)
-        console.log(link);
         const evnt = new navLink(link);
         evnt.render('click', pages[`${page}`]);
         return link

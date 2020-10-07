@@ -17,7 +17,6 @@
                 mode: 'cors',
             });
             const parsedJsonObject = await response.json();
-            console.log(parsedJsonObject)
 
             return { status: response.status, json: parsedJsonObject}
         }
