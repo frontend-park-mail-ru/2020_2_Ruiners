@@ -28,7 +28,7 @@ export default class SignupPage {
       // form.appendChild(button);
       const headLogin = {
         head: true,
-        textContent: 'Регистрация',
+        textContent: 'Вход',
         style: 'color:#FFFFFF; margin-left: 10px',
       };
 

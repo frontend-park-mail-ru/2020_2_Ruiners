@@ -5,6 +5,17 @@ import SignupPage from './components/SignupPage.js';
 import LoginPage from './components/LoginPage.js';
 import ProfilePage from './components/ProfilePage.js';
 import ProfileChangePage from './components/ProfileChangePage.js';
+import MenuPage from "./components/MenuPage.js";
+
+const pages = {
+  'signup': signupPage,
+  'login': loginPage,
+  'navbar': createNavbar,
+  'profile': profilePage,
+  'profileChange': profileChengePage,
+  'film': filmPage,
+  'menu': menuPage,
+}
 
 function createNavbar() {
   let responseBody;
@@ -23,33 +34,8 @@ function createNavbar() {
 }
 
 function menuPage() {
-  application.innerHTML = '';
-  application.className = '';
-  const body = document.getElementById('body');
-  body.className = '';
-  Object.keys(config).forEach((menuKey) => {
-    const { href, text } = config[menuKey];
-    const menuItem = document.createElement('a');
-    menuItem.href = href;
-    menuItem.textContent = text;
-    menuItem.dataset.section = menuKey;
-    application.appendChild(menuItem);
-  });
-  const signupLink = application.querySelector('[data-section="signup"]');
-  const signup = new navLink(signupLink);
-  signup.render('click', signupPage);
-  const filmLink = application.querySelector('[data-section="film"]');
-  const film = new navLink(filmLink);
-  film.render('click', filmPage);
-  const loginLink = application.querySelector('[data-section="login"]');
-  const login = new navLink(loginLink);
-  login.render('click', loginPage);
-  const profileLink = application.querySelector('[data-section="profile"]');
-  const profile = new navLink(profileLink);
-  profile.render('click', profilePage);
-  const profileChengeLink = application.querySelector('[data-section="profileChenge"]');
-  const profileChange = new navLink(profileChengeLink);
-  profileChange.render('click', profileChengePage);
+  const menu = new MenuPage(application);
+  menu.render(pages)
 }
 
 function signupPage() {
