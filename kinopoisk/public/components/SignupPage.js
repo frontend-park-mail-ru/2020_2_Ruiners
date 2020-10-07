@@ -72,7 +72,7 @@ export default class SignupPage {
 
       formLink.render('submit', () => {
         if (!formrLogin[1].classList.contains('invalid')
-                || !formrLogin[3].classList.contains('invalid')) {
+                && !formrLogin[3].classList.contains('invalid')) {
           const login = formrLogin[1].value.trim();
           const password = formrLogin[3].value.trim();
           const email = formrLogin[2].value.trim();
