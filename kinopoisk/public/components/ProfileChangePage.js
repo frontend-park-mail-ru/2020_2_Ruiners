@@ -1,8 +1,5 @@
 import navLink from './navLink.js';
 
-const { ajaxPostUsingFetch } = globalThis.AjaxModule;
-const nav = document.getElementById('navbar');
-
 export default class ProfileChangePage {
     #parent
 
