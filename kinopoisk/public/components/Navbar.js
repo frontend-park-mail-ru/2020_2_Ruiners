@@ -1,6 +1,6 @@
 import evtListener from './navLink.js';
 
-const { ajaxGet, ajaxPost } = globalThis.AjaxModule;
+const { ajaxGet } = globalThis.AjaxModule;
 
 export default class Navbar {
     #login;
@@ -24,13 +24,11 @@ export default class Navbar {
       navbar.appendChild(ul);
       const kinopoisk = createA('/menu', 'Kinopoisk.ru');
       const kino = new evtListener(kinopoisk);
-      kino.render(menu);
+      kino.render('click', menu);
       const films = createA('/', 'Фильмы');
       const search = createA('/', 'Поиск');
-      const login = document.createElement('button');
-      const signup = document.createElement('button');
-      login.textContent = 'Войти';
-      signup.textContent = 'Зарегистрироваться';
+      const login = this.buttonNav('Войти')
+      const signup = this.buttonNav('Зарегистрироваться')
       const li1 = createLi('brand', kinopoisk);
       const li2 = createLi('menu-secondary', films);
       const li3 = createLi('menu-secondary', search);
@@ -43,16 +41,14 @@ export default class Navbar {
         ul.appendChild(li4);
         ul.appendChild(li5);
       } else {
-        const logout = document.createElement('button');
-        logout.textContent = 'Выйти';
+        const logout = this.buttonNav('Выйти')
         const li34 = createLi('menu-buttons', logout);
-        const profile = document.createElement('button');
-        profile.textContent = `${this.#login}`;
+        const profile = this.buttonNav(`${this.#login}`)
         const li33 = createLi('menu-buttons', profile);
         ul.appendChild(li33);
         ul.appendChild(li34);
         const logoutEvnt = new evtListener(logout);
-        logoutEvnt.render(() => {
+        logoutEvnt.render('click', () => {
           ajaxGet({
             url: '/logout',
             body: null,
@@ -69,8 +65,14 @@ export default class Navbar {
         });
       }
       const loginEvnt = new evtListener(login);
-      loginEvnt.render(loginf);
+      loginEvnt.render('click', loginf);
       const signupEvnt = new evtListener(signup);
-      signupEvnt.render(signupf);
+      signupEvnt.render('click', signupf);
+    }
+
+    buttonNav(text) {
+      const logout = document.createElement('button');
+      logout.textContent = text;
+      return logout;
     }
 }

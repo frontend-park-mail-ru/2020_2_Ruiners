@@ -42,3 +42,21 @@ function createLi(className, child) {
   li.appendChild(child);
   return li;
 }
+
+
+function valid(form, reg, input, text) {
+  const diver = createDiv('error', form);
+  input.onblur = function () {
+    if (!reg.test(this.value)) {
+      this.classList.add('invalid');
+      diver.innerHTML = text;
+    }
+  };
+
+  input.onfocus = function () {
+    if (this.classList.contains('invalid')) {
+      this.classList.remove('invalid');
+      diver.innerHTML = '';
+    }
+  };
+}

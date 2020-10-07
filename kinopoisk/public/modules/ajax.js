@@ -10,6 +10,29 @@
             this.#ajax({method: 'POST', ...ajaxArgs});
         }
 
+        ajaxGetUsingFetch = async (ajaxArgs) => {
+            const response = await fetch(domain + ajaxArgs.url, {
+                method: 'GET',
+                credentials: 'include',
+            });
+            const parsedJsonObject = await response.json();
+            console.log(parsedJsonObject)
+
+            return { status: response.status, json: parsedJsonObject}
+        }
+        ajaxPostUsingFetch = async (ajaxArgs) => {
+            const response = await fetch(domain + ajaxArgs.url, {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(ajaxArgs.body),
+                headers: {
+                    'Content-Type': 'application/json'
+// 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            });
+            return response.status
+        }
+
         #ajax({
                   method = 'GET',
                   url = '/',
