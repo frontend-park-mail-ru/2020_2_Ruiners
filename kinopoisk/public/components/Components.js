@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
+
 function createA(href, text) {
   const a = document.createElement('a');
   a.href = href;
@@ -28,11 +30,10 @@ function createInputSubmit(value, className) {
   return input;
 }
 
-function createDiv(cla, child) {
+function createDiv(className, parent) {
   const div = document.createElement('div');
-  div.className = cla;
-
-  child.appendChild(div);
+  div.className = className;
+  parent.appendChild(div);
   return div;
 }
 
@@ -42,7 +43,6 @@ function createLi(className, child) {
   li.appendChild(child);
   return li;
 }
-
 
 function valid(form, reg, input, text) {
   const diver = createDiv('error', form);

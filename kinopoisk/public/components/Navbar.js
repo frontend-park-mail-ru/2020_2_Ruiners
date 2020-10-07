@@ -27,8 +27,8 @@ export default class Navbar {
       kino.render('click', menu);
       const films = createA('/', 'Фильмы');
       const search = createA('/', 'Поиск');
-      const login = this.buttonNav('Войти')
-      const signup = this.buttonNav('Зарегистрироваться')
+      const login = this.buttonNav('Войти');
+      const signup = this.buttonNav('Зарегистрироваться');
       const li1 = createLi('brand', kinopoisk);
       const li2 = createLi('menu-secondary', films);
       const li3 = createLi('menu-secondary', search);
@@ -41,9 +41,9 @@ export default class Navbar {
         ul.appendChild(li4);
         ul.appendChild(li5);
       } else {
-        const logout = this.buttonNav('Выйти')
+        const logout = this.buttonNav('Выйти');
         const li34 = createLi('menu-buttons', logout);
-        const profile = this.buttonNav(`${this.#login}`)
+        const profile = this.buttonNav(`${this.#login}`);
         const li33 = createLi('menu-buttons', profile);
         ul.appendChild(li33);
         ul.appendChild(li34);

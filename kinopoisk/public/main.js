@@ -1,10 +1,10 @@
 import FilmPage from './components/FilmPage/FilmPage.js';
 import navLink from './components/navLink.js';
 import Navbar from './components/Navbar.js';
-import SignupPage from "./components/SignupPage.js";
-import LoginPage from "./components/LoginPage.js";
-import ProfilePage from "./components/ProfilePage.js";
-import ProfileChangePage from "./components/ProfileChangePage.js";
+import SignupPage from './components/SignupPage.js';
+import LoginPage from './components/LoginPage.js';
+import ProfilePage from './components/ProfilePage.js';
+import ProfileChangePage from './components/ProfileChangePage.js';
 
 const { ajaxGetUsingFetch } = globalThis.AjaxModule;
 const application = document.getElementById('app');
@@ -46,19 +46,18 @@ const config = {
 function createNavbar() {
   let responseBody;
   let isAuthorized = false;
-  ajaxGetUsingFetch({url: '/whois', body: null })
-      .then(res => {
-        responseBody = JSON.parse(JSON.stringify(res.json));
-        if (res.status === 202) {
-          isAuthorized = false;
-        } else {
-          isAuthorized = true;
-        }
-        const navbar = new Navbar(responseBody.login, isAuthorized, nav);
-        navbar.render(createNavbar, loginPage, signupPage, menuPage);
-      });
+  ajaxGetUsingFetch({ url: '/whois', body: null })
+    .then((res) => {
+      responseBody = JSON.parse(JSON.stringify(res.json));
+      if (res.status === 202) {
+        isAuthorized = false;
+      } else {
+        isAuthorized = true;
+      }
+      const navbar = new Navbar(responseBody.login, isAuthorized, nav);
+      navbar.render(createNavbar, loginPage, signupPage, menuPage);
+    });
 }
-
 
 function menuPage() {
   application.innerHTML = '';
@@ -108,8 +107,8 @@ function loginPage() {
 function profileChengePage() {
   application.innerHTML = '';
   application.className = '';
-  ajaxGetUsingFetch({url: '/me', body: null })
-      .then(res => {
+  ajaxGetUsingFetch({ url: '/me', body: null })
+    .then((res) => {
       if (res.status === 200) {
         const profileChange = new ProfileChangePage(application, JSON.stringify(res.json));
         profileChange.render(menuPage, profilePage, createNavbar);
@@ -117,22 +116,22 @@ function profileChengePage() {
         alert('АХТУНГ, нет авторизации');
         loginPage();
       }
-  });
+    });
 }
 
 function profilePage() {
   application.innerHTML = '';
   application.className = '';
-  ajaxGetUsingFetch({url: '/me', body: null })
-      .then(res => {
-        if (res.status === 200) {
-          const profile = new ProfilePage(application, JSON.stringify(res.json));
-          profile.render(profileChengePage);
-        } else {
-          alert('АХТУНГ, нет авторизации');
-          loginPage();
-        }
-      });
+  ajaxGetUsingFetch({ url: '/me', body: null })
+    .then((res) => {
+      if (res.status === 200) {
+        const profile = new ProfilePage(application, JSON.stringify(res.json));
+        profile.render(profileChengePage);
+      } else {
+        alert('АХТУНГ, нет авторизации');
+        loginPage();
+      }
+    });
 }
 
 createNavbar();
