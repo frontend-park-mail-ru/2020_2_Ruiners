@@ -6,8 +6,6 @@ import LoginPage from './components/LoginPage.js';
 import ProfilePage from './components/ProfilePage.js';
 import ProfileChangePage from './components/ProfileChangePage.js';
 
-
-
 function createNavbar() {
   let responseBody;
   let isAuthorized = false;

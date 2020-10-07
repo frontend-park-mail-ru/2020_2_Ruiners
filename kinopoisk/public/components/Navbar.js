@@ -13,8 +13,6 @@ export default class Navbar {
       this.#parent = parent;
     }
 
-
-
     render(nav, loginf, signupf, menu) {
       console.log(this.#isAuth);
       const navbar = document.createElement('nav');
@@ -50,15 +48,15 @@ export default class Navbar {
         const logoutEvnt = new evtListener(logout);
         logoutEvnt.render('click', () => {
           ajaxGetUsingFetch({ url: '/logout', body: null })
-              .then((res) => {
-                if (res.status === 200) {
-                  this.#parent.innerHTML = '';
-                  nav();
-                  loginf();
-                } else {
-                  alert('error');
-                }
-              });
+            .then((res) => {
+              if (res.status === 200) {
+                this.#parent.innerHTML = '';
+                nav();
+                loginf();
+              } else {
+                alert('error');
+              }
+            });
         });
       }
       const loginEvnt = new evtListener(login);
