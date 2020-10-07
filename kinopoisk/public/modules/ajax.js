@@ -35,33 +35,27 @@
             return response.status
         }
 
+
         #ajax({
                   method = 'GET',
                   url = '/',
                   body = null,
                   callback = noop
               } = {}) {
-            const xhr = new XMLHttpRequest();
-            xhr.open(method, domain + url, true);
-            xhr.crossOrigin = true
-            xhr.withCredentials = true;
 
-            xhr.addEventListener('readystatechange', function() {
-                if (xhr.readyState !== XMLHttpRequest.DONE) return;
-
-                callback(xhr.status, xhr.responseText);
-            });
-
+            const params = {
+                method: method,
+                credentials: 'include',
+                mode: 'cors',
+            };
             if (body) {
-                xhr.setRequestHeader('Content-type', 'application/json; charset=utf8');
-                xhr.crossOrigin = true
-                xhr.withCredentials = true;
-                console.log(JSON.stringify(body));
-                xhr.send(JSON.stringify(body));
-                return;
+                params.body = JSON.stringify(body);
+                params.headers = {
+                    'Content-Type': 'application/json'
+// 'Content-Type': 'application/x-www-form-urlencoded',
+                };
             }
-
-            xhr.send();
+            return fetch(url, params)
         }
     }
 
