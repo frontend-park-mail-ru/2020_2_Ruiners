@@ -17,28 +17,41 @@ export default class ProfileChangePage {
       const body = document.getElementById('body');
       body.className = 'page';
 
-      const form = document.createElement('form');
       this.#parent.className = 'wrapper__form chenge';
-      this.#parent.appendChild(form);
 
-      const header = document.createElement('h2');
-      header.textContent = 'Настройки пользователя';
-      header.style = 'color:#FFFFFF; margin-left: 10px';
-      form.appendChild(header);
       const responseBody = JSON.parse(this.#data);
-      const loginInput = createInput('login', 'login', `${responseBody.login}`);
-      loginInput.required = true;
 
-      form.appendChild(loginInput);
-      const submitLogin = createInputSubmit('Изменить логин', 'secondary');
-      form.appendChild(submitLogin);
+      const headLogin = {
+        head: true,
+        textContent: 'Настройки пользователя',
+        style: 'color:#FFFFFF; margin-left: 10px',
+      };
 
-      valid(form, /[A-Za-z0-9]{5,15}/, loginInput, 'Недопустимый логин');
+      const configInputLogin = [
+        {
+          type: 'login',
+          name: 'login',
+          text: `${responseBody.login}`,
+          required: true,
+          valid: true,
+          reg: /[A-Za-z0-9]{5,15}/,
+          errorVal: 'Недопустимый логин',
+        },
+      ];
+
+      const subLogin = {
+        text: 'Изменить пароль',
+        className: 'secondary',
+      };
+
+      const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
+      const form = formrLogin[0];
+      this.#parent.appendChild(form);
 
       const formLink = new navLink(form);
       formLink.render('submit', () => {
-        if (!loginInput.classList.contains('invalid')) {
-          const login = loginInput.value.trim();
+        if (!formrLogin[1].classList.contains('invalid')) {
+          const login = formrLogin[1].value.trim();
           ajaxPostUsingFetch({
             url: '/chengelogin',
             body: {
@@ -56,34 +69,56 @@ export default class ProfileChangePage {
             });
         }
       });
-      const formPass = document.createElement('form');
+
+      const head = {
+        head: false,
+      };
+
+      const configInput = [
+        {
+          type: 'password',
+          name: 'password',
+          text: 'Старый пароль',
+          required: true,
+          valid: false,
+        },
+        {
+          type: 'password',
+          name: 'password',
+          text: 'Новый пароль',
+          required: true,
+          valid: true,
+          reg: /.{8,16}/,
+          errorVal: 'Недопустимый пароль 1',
+        },
+        {
+          type: 'password',
+          name: 'password',
+          text: 'Повторите новый пароль',
+          required: true,
+          valid: true,
+          reg: /.{8,16}/,
+          errorVal: 'Недопустимый пароль 2',
+        },
+      ];
+
+      const sub = {
+        text: 'Изменить пароль',
+        className: 'secondary',
+      };
+
+      const formr = renderForm(head, configInput, sub);
+      const formPass = formr[0];
       this.#parent.appendChild(formPass);
 
-      const passwordInputOld = createInput('password', 'password', 'Старый пароль');
-      passwordInputOld.required = true;
-      formPass.appendChild(passwordInputOld);
-
-      const passwordInputNew1 = createInput('password', 'password', 'Новый пароль');
-      passwordInputNew1.required = true;
-      formPass.appendChild(passwordInputNew1);
-
-      const passwordInputNew2 = createInput('password', 'password', 'Повторите новый пароль');
-      passwordInputNew2.required = true;
-      formPass.appendChild(passwordInputNew2);
-
-      const submitpass = createInputSubmit('Изменить пароль', 'secondary');
-      formPass.appendChild(submitpass);
-
-      valid(formPass, /.{8,16}/, passwordInputNew1, 'Недопустимый пароль 1');
-      valid(formPass, /.{8,16}/, passwordInputNew2, 'Недопустимый пароль 2');
-
       const formPassLink = new navLink(formPass);
+
       formPassLink.render('submit', () => {
-        if (!passwordInputNew1.classList.contains('invalid')
-                || !passwordInputNew2.classList.contains('invalid')) {
-          const PasswordOld = passwordInputOld.value.trim();
-          const Password = passwordInputNew1.value.trim();
-          const pass = passwordInputNew2.value.trim();
+        if (!formr[2].classList.contains('invalid')
+                || !formr[3].classList.contains('invalid')) {
+          const PasswordOld = formr[1].value.trim();
+          const Password = formr[2].value.trim();
+          const pass = formr[3].value.trim();
           if (Password === pass) {
             ajaxPostUsingFetch({
               url: '/chengepass',

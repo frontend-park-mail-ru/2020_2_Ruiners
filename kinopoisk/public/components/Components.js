@@ -60,3 +60,34 @@ function valid(form, reg, input, text) {
     }
   };
 }
+
+function renderForm(head, configInput, sub) {
+  const form = document.createElement('form');
+  const formr = [];
+  formr.push(form);
+
+  if (head.head) {
+    const header = document.createElement('h2');
+    header.textContent = head.textContent;
+    header.style = head.style;
+    form.appendChild(header);
+  }
+
+  configInput.forEach((menuKey) => {
+    const input = createInput(menuKey.type, menuKey.name, menuKey.text);
+    input.required = menuKey.required;
+    form.appendChild(input);
+    formr.push(input);
+  });
+  const submitpass = createInputSubmit(sub.text, sub.className);
+  form.appendChild(submitpass);
+
+  let i = 1;
+  configInput.forEach((menuKey) => {
+    if (menuKey.valid) {
+      valid(form, menuKey.reg, formr[i], menuKey.errorVal);
+    }
+    ++i;
+  });
+  return formr;
+}

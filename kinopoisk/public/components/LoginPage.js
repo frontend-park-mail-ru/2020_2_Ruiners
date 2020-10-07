@@ -14,26 +14,57 @@ export default class SignupPage {
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
-      const form = document.createElement('form');
+      // const form = document.createElement('form');
       this.#parent.className = 'wrapper__form login';
+      // const header = document.createElement('h2');
+      // header.textContent = 'Войти';
+      // header.style = 'color:#FFFFFF; margin-left: 10px';
+      // form.appendChild(header);
+      // const loginInput = createInput('login', 'login', 'Логин или почта');
+      // const passwordInput = createInput('password', 'password', 'Пароль');
+      // form.appendChild(loginInput);
+      // form.appendChild(passwordInput);
+      // const button = document.createElement('button');
+      // button.type = 'submit';
+      // button.textContent = 'Войти';
+      // button.className = 'secondary';
+      // form.appendChild(button);
+      const headLogin = {
+        head: true,
+        textContent: 'Регистрация',
+        style: 'color:#FFFFFF; margin-left: 10px',
+      };
+
+      const configInputLogin = [
+        {
+          type: 'login',
+          name: 'login',
+          text: 'Логин',
+          required: true,
+          valid: false,
+        },
+        {
+          type: 'password',
+          name: 'password',
+          text: 'Пароль',
+          required: true,
+          valid: false,
+        },
+      ];
+
+      const subLogin = {
+        text: 'Войти',
+        className: 'secondary',
+      };
+
+      const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
+      const form = formrLogin[0];
       this.#parent.appendChild(form);
-      const header = document.createElement('h2');
-      header.textContent = 'Войти';
-      header.style = 'color:#FFFFFF; margin-left: 10px';
-      form.appendChild(header);
-      const loginInput = createInput('login', 'login', 'Логин или почта');
-      const passwordInput = createInput('password', 'password', 'Пароль');
-      form.appendChild(loginInput);
-      form.appendChild(passwordInput);
-      const button = document.createElement('button');
-      button.type = 'submit';
-      button.textContent = 'Войти';
-      button.className = 'secondary';
-      form.appendChild(button);
+
       const formLink = new navLink(form);
       formLink.render('submit', () => {
-        const login = loginInput.value.trim();
-        const password = passwordInput.value.trim();
+        const login = formrLogin[1].value.trim();
+        const password = formrLogin[2].value.trim();
         // console.log(`login =  ${login}`);
 
         ajaxPostUsingFetch({
