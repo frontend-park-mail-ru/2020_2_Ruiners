@@ -156,7 +156,7 @@ export default class ProfileChangePage {
         console.log(formrAvatar[1].files[0]);
         formData.append('file', formrAvatar[1].files[0]);
         console.log(formData.getAll('file'))
-        fetch('http://localhost:8000/changeAvatar', {
+        fetch('http://95.163.208.72:8000/changeAvatar', {
           method: 'POST',
           credentials: 'include',
           mode: 'cors',
