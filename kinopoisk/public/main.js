@@ -23,12 +23,13 @@ function createNavbar() {
   ajaxGetUsingFetch({ url: '/whois', body: null })
     .then((res) => {
       responseBody = JSON.parse(JSON.stringify(res.json));
+      console.log(responseBody);
       if (res.status === 202) {
         isAuthorized = false;
       } else {
         isAuthorized = true;
       }
-      const navbar = new Navbar(responseBody.login, isAuthorized, nav);
+      const navbar = new Navbar(responseBody.Login, isAuthorized, nav);
       navbar.render(createNavbar, loginPage, signupPage, menuPage);
     });
 }
@@ -40,7 +41,7 @@ function menuPage() {
 
 function signupPage() {
   const signup = new SignupPage(application);
-  signup.render(loginPage);
+  signup.render(loginPage, menuPage, createNavbar);
 }
 
 function filmPage() {
@@ -62,7 +63,6 @@ function profileChengePage() {
         const profileChange = new ProfileChangePage(application, JSON.stringify(res.json));
         profileChange.render(menuPage, profilePage, createNavbar);
       } else {
-        alert('АХТУНГ, нет авторизации');
         loginPage();
       }
     });
@@ -77,7 +77,6 @@ function profilePage() {
         const profile = new ProfilePage(application, JSON.stringify(res.json));
         profile.render(profileChengePage);
       } else {
-        alert('АХТУНГ, нет авторизации');
         loginPage();
       }
     });

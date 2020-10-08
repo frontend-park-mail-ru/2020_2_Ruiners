@@ -7,7 +7,7 @@ export default class SignupPage {
       this.#parent = parent;
     }
 
-    render(loginPage) {
+    render(loginPage, menuPage, createNavbar) {
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
@@ -86,7 +86,9 @@ export default class SignupPage {
           })
             .then((res) => {
               if (res === 200) {
-                loginPage();
+                nav.innerHTML = '';
+                createNavbar();
+                menuPage();
               } else {
                 alert('error');
               }

@@ -28,7 +28,7 @@ export default class ProfileChangePage {
         {
           type: 'login',
           name: 'login',
-          text: `${responseBody.login}`,
+          text: `${responseBody.Login}`,
           required: true,
           valid: true,
           reg: /[A-Za-z0-9]{5,15}/,

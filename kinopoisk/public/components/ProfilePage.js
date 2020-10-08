@@ -58,7 +58,7 @@ export default class ProfilePage {
       nick.className = 'nick_name';
 
       const responseBody = JSON.parse(this.#data);
-      nick.textContent = `${responseBody.login}`;
+      nick.textContent = `${responseBody.Login}`;
 
       divInfo.appendChild(nick);
 

@@ -4,10 +4,6 @@ const noop = () => {};
 const { ajaxGetUsingFetch, ajaxPostUsingFetch } = globalThis.AjaxModule;
 
 const config = {
-  menu: {
-    href: '/menu',
-    text: 'Главная',
-  },
   signup: {
     href: '/signup',
     text: 'Зарегистрироваться',
