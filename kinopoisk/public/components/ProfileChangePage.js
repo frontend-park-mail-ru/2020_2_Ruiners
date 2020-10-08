@@ -37,7 +37,7 @@ export default class ProfileChangePage {
       ];
 
       const subLogin = {
-        text: 'Изменить пароль',
+        text: 'Изменить логин',
         className: 'secondary',
       };
 
@@ -86,7 +86,7 @@ export default class ProfileChangePage {
           required: true,
           valid: true,
           reg: /.{8,16}/,
-          errorVal: 'Недопустимый пароль 1',
+          errorVal: 'Недопустимый первый пароль',
         },
         {
           type: 'password',
@@ -95,7 +95,7 @@ export default class ProfileChangePage {
           required: true,
           valid: true,
           reg: /.{8,16}/,
-          errorVal: 'Недопустимый пароль 2',
+          errorVal: 'Недопустимый повторенный пароль',
         },
       ];
 
@@ -135,12 +135,26 @@ export default class ProfileChangePage {
         }
       });
 
-      const formAvatar = document.createElement('form');
+      const configAvatar = [
+        {
+          type: 'file',
+          name: 'file',
+          text: 'фото',
+          required: true,
+          valid: false,
+        }]
+      const subAvatar = {
+        text: 'Изменить аватар',
+        className: 'secondary',
+      };
+      const formrAvatar = renderForm(head, configAvatar, subAvatar);
+      const formAvatar = formrAvatar[0];
       this.#parent.appendChild(formAvatar);
-
-      const imgAvatar = createInput('file', 'file', 'Фото');
-      formAvatar.appendChild(imgAvatar);
-
+      const formData = new FormData();
+      const formAvatarLink = new navLink(formAvatar);
+      formAvatarLink.render('submit', () => {
+        //formData.append('file', formrAvatar[0].files[0]);
+      });
       const buttonBack = document.createElement('button');
       buttonBack.href = '/';
       buttonBack.textContent = 'Назад';
