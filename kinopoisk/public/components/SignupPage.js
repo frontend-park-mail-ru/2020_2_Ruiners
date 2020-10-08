@@ -28,7 +28,7 @@ export default class SignupPage {
           required: true,
           valid: true,
           reg: /[A-Za-z0-9]{5,15}/,
-          errorVal: 'Недопустимый логин',
+          errorVal: 'Недопустимый логин(Должен быть от 5 до 15 символов)',
         },
         {
           type: 'email',
@@ -44,7 +44,7 @@ export default class SignupPage {
           required: true,
           valid: true,
           reg: /.{8,16}/,
-          errorVal: 'Недопустимый пароль',
+          errorVal: 'Недопустимый пароль(Должен быть от 8 до 16 символов)',
         },
       ];
 

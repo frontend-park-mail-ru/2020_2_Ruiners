@@ -32,7 +32,7 @@ export default class ProfileChangePage {
           required: true,
           valid: true,
           reg: /[A-Za-z0-9]{5,15}/,
-          errorVal: 'Недопустимый логин',
+          errorVal: 'Недопустимый логин(Должен быть от 5 до 15 символов)',
         },
       ];
 
@@ -86,7 +86,7 @@ export default class ProfileChangePage {
           required: true,
           valid: true,
           reg: /.{8,16}/,
-          errorVal: 'Недопустимый первый пароль',
+          errorVal: 'Недопустимый первый пароль(Должен быть от 8 до 16 символов)',
         },
         {
           type: 'password',
@@ -95,7 +95,7 @@ export default class ProfileChangePage {
           required: true,
           valid: true,
           reg: /.{8,16}/,
-          errorVal: 'Недопустимый повторенный пароль',
+          errorVal: 'Недопустимый повторенный пароль(Должен быть от 8 до 16 символов)',
         },
       ];
 
@@ -153,7 +153,15 @@ export default class ProfileChangePage {
       const formData = new FormData();
       const formAvatarLink = new navLink(formAvatar);
       formAvatarLink.render('submit', () => {
-        //formData.append('file', formrAvatar[0].files[0]);
+        console.log(formrAvatar[1].files[0]);
+        formData.append('file', formrAvatar[1].files[0]);
+        console.log(formData.getAll('file'))
+        fetch('http://localhost:8000/changeAvatar', {
+          method: 'POST',
+          credentials: 'include',
+          mode: 'cors',
+          body: formData
+        }).then(response => response.status).then(res => console.log(res));
       });
       const buttonBack = document.createElement('button');
       buttonBack.href = '/';
