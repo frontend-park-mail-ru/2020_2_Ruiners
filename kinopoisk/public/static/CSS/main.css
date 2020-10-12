@@ -19,10 +19,10 @@
 
 }
 
-@import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic|Playfair+Display+SC:400,700&subset=latin,cyrillic);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,80);
 .brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
     text-transform: uppercase;
     font-weight: 1000;
     margin-right: 100px;
@@ -31,7 +31,7 @@
 
 .brand a {
     text-decoration: none;
-    color: wheat;
+    color: white;
 }
 
 .brand a:hover {

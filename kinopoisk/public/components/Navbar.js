@@ -20,7 +20,9 @@ export default class Navbar {
       const ul = document.createElement('ul');
       ul.className = 'menu-main';
       navbar.appendChild(ul);
-      const kinopoisk = createA('/menu', 'Kinopoisk.ru');
+      //const kinopoisk = createA('/menu', 'KINO PARK');
+      const kinopoisk = document.createElement('a');
+      kinopoisk.innerHTML = `<a>KINO <img width="25", height="25" src="/static/images/icons8-кинопроектор-96.png"/> PARK</a>`
       const kino = new evtListener(kinopoisk);
       kino.render('click', menu);
       const films = createA('/', 'Фильмы');

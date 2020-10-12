@@ -56,7 +56,6 @@ function loginPage() {
 
 function profileChengePage() {
   application.innerHTML = '';
-  application.className = '';
   ajaxGetUsingFetch({ url: '/me', body: null })
     .then((res) => {
       if (res.status === 200) {
@@ -70,7 +69,6 @@ function profileChengePage() {
 
 function profilePage() {
   application.innerHTML = '';
-  application.className = '';
   ajaxGetUsingFetch({ url: '/me', body: null })
     .then((res) => {
       if (res.status === 200) {
