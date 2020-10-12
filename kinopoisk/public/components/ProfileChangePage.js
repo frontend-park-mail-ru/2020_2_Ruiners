@@ -95,7 +95,7 @@ export default class ProfileChangePage {
           required: true,
           valid: true,
           reg: /.{8,16}/,
-          errorVal: 'Недопустимый повторенный пароль(Должен быть от 8 до 16 символов)',
+          errorVal: '',
         },
       ];
 
@@ -109,7 +109,8 @@ export default class ProfileChangePage {
       this.#parent.appendChild(formPass);
 
       const formPassLink = new navLink(formPass);
-
+      const err = document.createElement('div');
+      err.className = 'error'
       formPassLink.render('submit', () => {
         if (!formr[2].classList.contains('invalid')
                 || !formr[3].classList.contains('invalid')) {
@@ -128,9 +129,13 @@ export default class ProfileChangePage {
                 if (res === 200) {
                   profilePage();
                 } else {
-                  alert('error');
+                  err.innerHTML = 'Неправильный старый пароль';
+                  formPass.appendChild(err);
                 }
               });
+          } else {
+            err.innerHTML = 'Пароли не совпадают';
+            formPass.appendChild(err);
           }
         }
       });

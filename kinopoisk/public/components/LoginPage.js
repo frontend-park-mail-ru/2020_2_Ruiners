@@ -59,6 +59,8 @@ export default class SignupPage {
       this.#parent.appendChild(form);
 
       const formLink = new navLink(form);
+      const err = document.createElement('div');
+      err.className = 'error'
       formLink.render('submit', () => {
         const login = formrLogin[1].value.trim();
         const password = formrLogin[2].value.trim();
@@ -79,11 +81,12 @@ export default class SignupPage {
             } else if (res === 301) {
               loginPage();
             } else {
-              alert('error');
+              err.innerHTML = 'Неправильный пароль или логин';
+              form.appendChild(err);
             }
           });
       });
-      const linkSignup = createA('/signup', 'Создать новый');
+      const linkSignup = createA('/signup', 'Создать новый аккаунт');
       linkSignup.style = 'color: #FFFFFF; margin-left: 10px';
       form.appendChild(linkSignup);
       const loginLink = new navLink(linkSignup);

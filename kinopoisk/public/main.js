@@ -35,8 +35,17 @@ function createNavbar() {
 }
 
 function menuPage() {
-  const menu = new MenuPage(application);
-  menu.render(pages)
+    let isAuth = false;
+    ajaxGetUsingFetch({ url: '/me', body: null })
+        .then((res) => {
+            if (res.status === 200) {
+                isAuth = true;
+            } else {
+                isAuth = false;
+            }
+            const menu = new MenuPage(application);
+            menu.render(pages, isAuth)
+        });
 }
 
 function signupPage() {
