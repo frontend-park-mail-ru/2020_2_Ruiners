@@ -63,13 +63,14 @@ export default class SignupPage {
       // button.className = 'secondary';
       // form.appendChild(button);
 
-      const linkLogin = createA('/login', 'Войти в имеющийся');
+      const linkLogin = createA('/login', 'Войти в имеющийся аккаунт');
       linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
       const loginLink = new navLink(linkLogin);
       loginLink.render('click', loginPage);
       form.appendChild(linkLogin);
       const formLink = new navLink(form);
-
+      const err = document.createElement('div');
+      err.className = 'error'
       formLink.render('submit', () => {
         if (!formrLogin[1].classList.contains('invalid')
                 && !formrLogin[3].classList.contains('invalid')) {
@@ -90,7 +91,8 @@ export default class SignupPage {
                 createNavbar();
                 menuPage();
               } else {
-                alert('error');
+                err.innerHTML = 'Пользователь с таким логином уже существует';
+                form.appendChild(err);
               }
             });
         }

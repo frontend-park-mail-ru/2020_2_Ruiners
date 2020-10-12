@@ -30,7 +30,7 @@ export default class ProfilePage {
       Object.keys(menuTop).forEach((menuKey) => {
         const { href, text } = menuTop[menuKey];
         const menuItem = document.createElement('li');
-        const menuItema = createA(href, text);
+        const menuItema = createA("/", text);
         menuItema.dataset.section = menuKey;
         menuItem.appendChild(menuItema);
         ul.appendChild(menuItem);
