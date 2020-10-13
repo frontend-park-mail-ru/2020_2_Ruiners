@@ -1,4 +1,5 @@
-import navLink from './navLink.js';
+import NavLink from './navLink.js';
+import { renderForm } from './Components.js';
 
 export default class ProfileChangePage {
     #parent
@@ -45,7 +46,7 @@ export default class ProfileChangePage {
       const form = formrLogin[0];
       this.#parent.appendChild(form);
 
-      const formLink = new navLink(form);
+      const formLink = new NavLink(form);
       formLink.render('submit', () => {
         if (!formrLogin[1].classList.contains('invalid')) {
           const login = formrLogin[1].value.trim();
@@ -108,9 +109,9 @@ export default class ProfileChangePage {
       const formPass = formr[0];
       this.#parent.appendChild(formPass);
 
-      const formPassLink = new navLink(formPass);
+      const formPassLink = new NavLink(formPass);
       const err = document.createElement('div');
-      err.className = 'error'
+      err.className = 'error';
       formPassLink.render('submit', () => {
         if (!formr[2].classList.contains('invalid')
                 || !formr[3].classList.contains('invalid')) {
@@ -147,7 +148,7 @@ export default class ProfileChangePage {
           text: 'фото',
           required: true,
           valid: false,
-        }]
+        }];
       const subAvatar = {
         text: 'Изменить аватар',
         className: 'secondary',
@@ -156,24 +157,24 @@ export default class ProfileChangePage {
       const formAvatar = formrAvatar[0];
       this.#parent.appendChild(formAvatar);
       const formData = new FormData();
-      const formAvatarLink = new navLink(formAvatar);
+      const formAvatarLink = new NavLink(formAvatar);
       formAvatarLink.render('submit', () => {
         console.log(formrAvatar[1].files[0]);
         formData.append('file', formrAvatar[1].files[0]);
-        console.log(formData.getAll('file'))
+        console.log(formData.getAll('file'));
         fetch('http://95.163.208.72:8000/changeAvatar', {
           method: 'POST',
           credentials: 'include',
           mode: 'cors',
-          body: formData
-        }).then(response => response.status).then(res => console.log(res));
+          body: formData,
+        }).then((response) => response.status).then((res) => console.log(res));
       });
       const buttonBack = document.createElement('button');
       buttonBack.href = '/';
       buttonBack.textContent = 'Назад';
       buttonBack.className = 'secondary';
       buttonBack.dataset.section = 'profile';
-      const buttonBackLink = new navLink(buttonBack);
+      const buttonBackLink = new NavLink(buttonBack);
       buttonBackLink.render('click', () => {
         profilePage();
       });

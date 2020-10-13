@@ -1,11 +1,24 @@
 # 2020_2_Ruiners
 Frontend репозиторий команды Ruiners!
 
-ссылка на деплой: http://95.163.208.72:3000/
+## Cсылка на деплой:
+http://95.163.208.72:3000/
 
-ссылка на бэк: https://github.com/go-park-mail-ru/2020_2_Ruiners
+## Cсылка на репозиторий бэкенда:
+https://github.com/go-park-mail-ru/2020_2_Ruiners
 
-Для запуска необходимо перейти в папку /server и написать команду "node index.js"
+## Запуск 
+Необходимо перейти в папку /server и написать команду "node index.js"
 
+## Состав
+
+- [Эрик Набиев](https://github.com/ErikDoter)
+- [Говядкин Михаил](https://github.com/govyadkin)
+- [Чекрыжов Аркадий](https://github.com/Arkadiyche)
+
+Ментор по фронтенду - [Ксения Казанцева
+](https://github.com/dreamofdark)
+
+Ментор по бэкенду - [Владимир Северов](https://github.com/hackallcode)
 
 ![kinopoisk/public/static/images/Ruiners.png](kinopoisk/public/static/images/Ruiners.png)

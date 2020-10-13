@@ -1,4 +1,5 @@
-import navLink from './navLink.js';
+import NavLink from './navLink.js';
+import { createA, renderForm } from './Components.js';
 
 export default class SignupPage {
     #parent
@@ -58,9 +59,9 @@ export default class SignupPage {
       const form = formrLogin[0];
       this.#parent.appendChild(form);
 
-      const formLink = new navLink(form);
+      const formLink = new NavLink(form);
       const err = document.createElement('div');
-      err.className = 'error'
+      err.className = 'error';
       formLink.render('submit', () => {
         const login = formrLogin[1].value.trim();
         const password = formrLogin[2].value.trim();
@@ -89,7 +90,7 @@ export default class SignupPage {
       const linkSignup = createA('/signup', 'Создать новый аккаунт');
       linkSignup.style = 'color: #FFFFFF; margin-left: 10px';
       form.appendChild(linkSignup);
-      const loginLink = new navLink(linkSignup);
+      const loginLink = new NavLink(linkSignup);
       loginLink.render('click', signupPage);
     }
 }

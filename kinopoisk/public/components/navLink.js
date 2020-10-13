@@ -1,4 +1,4 @@
-export default class navLink {
+export default class NavLink {
     #link;
 
     constructor(link) {

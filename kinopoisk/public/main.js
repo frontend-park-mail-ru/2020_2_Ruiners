@@ -1,21 +1,21 @@
 import FilmPage from './components/FilmPage/FilmPage.js';
-import navLink from './components/navLink.js';
+// import navLink from './components/navLink.js';
 import Navbar from './components/Navbar.js';
 import SignupPage from './components/SignupPage.js';
 import LoginPage from './components/LoginPage.js';
 import ProfilePage from './components/ProfilePage.js';
 import ProfileChangePage from './components/ProfileChangePage.js';
-import MenuPage from "./components/MenuPage.js";
+import MenuPage from './components/MenuPage.js';
 
 const pages = {
-  'signup': signupPage,
-  'login': loginPage,
-  'navbar': createNavbar,
-  'profile': profilePage,
-  'profileChange': profileChengePage,
-  'film': filmPage,
-  'menu': menuPage,
-}
+  signup: signupPage,
+  login: loginPage,
+  navbar: createNavbar,
+  profile: profilePage,
+  profileChange: profileChengePage,
+  film: filmPage,
+  menu: menuPage,
+};
 
 function createNavbar() {
   let responseBody;
@@ -35,17 +35,17 @@ function createNavbar() {
 }
 
 function menuPage() {
-    let isAuth = false;
-    ajaxGetUsingFetch({ url: '/me', body: null })
-        .then((res) => {
-            if (res.status === 200) {
-                isAuth = true;
-            } else {
-                isAuth = false;
-            }
-            const menu = new MenuPage(application);
-            menu.render(pages, isAuth)
-        });
+  let isAuth = false;
+  ajaxGetUsingFetch({ url: '/me', body: null })
+    .then((res) => {
+      if (res.status === 200) {
+        isAuth = true;
+      } else {
+        isAuth = false;
+      }
+      const menu = new MenuPage(application);
+      menu.render(pages, isAuth);
+    });
 }
 
 function signupPage() {

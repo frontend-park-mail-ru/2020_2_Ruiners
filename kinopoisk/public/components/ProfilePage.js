@@ -1,4 +1,5 @@
-import navLink from './navLink.js';
+import NavLink from './navLink.js';
+import { createA, createDiv } from './Components.js';
 
 export default class ProfilePage {
     #parent
@@ -30,7 +31,7 @@ export default class ProfilePage {
       Object.keys(menuTop).forEach((menuKey) => {
         const { href, text } = menuTop[menuKey];
         const menuItem = document.createElement('li');
-        const menuItema = createA("/", text);
+        const menuItema = createA('/', text);
         menuItema.dataset.section = menuKey;
         menuItem.appendChild(menuItema);
         ul.appendChild(menuItem);
@@ -47,7 +48,7 @@ export default class ProfilePage {
       button.className = 'secondary';
       button.textContent = 'Изменить данные';
       button.href = '/';
-      const buttonLink = new navLink(button);
+      const buttonLink = new NavLink(button);
       buttonLink.render('click', ProfileChange);
       divLeft.appendChild(button);
 

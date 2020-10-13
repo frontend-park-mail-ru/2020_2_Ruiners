@@ -1,4 +1,5 @@
-import evtListener from './navLink.js';
+import EvtListener from './navLink.js';
+import { createLi, createA } from './Components.js';
 
 export default class Navbar {
     #login;
@@ -20,10 +21,10 @@ export default class Navbar {
       const ul = document.createElement('ul');
       ul.className = 'menu-main';
       navbar.appendChild(ul);
-      //const kinopoisk = createA('/menu', 'KINO PARK');
+      // const kinopoisk = createA('/menu', 'KINO PARK');
       const kinopoisk = document.createElement('a');
-      kinopoisk.innerHTML = `<a>KINO <img width="25", height="25" src="/static/images/icons8-кинопроектор-96.png"/> PARK</a>`
-      const kino = new evtListener(kinopoisk);
+      kinopoisk.innerHTML = '<a>KINO <img width="25", height="25" src="/static/images/icons8-кинопроектор-96.png"/> PARK</a>';
+      const kino = new EvtListener(kinopoisk);
       kino.render('click', menu);
       const films = createA('/', 'Фильмы');
       const search = createA('/', 'Поиск');
@@ -47,7 +48,7 @@ export default class Navbar {
         const li33 = createLi('menu-buttons', profile);
         ul.appendChild(li33);
         ul.appendChild(li34);
-        const logoutEvnt = new evtListener(logout);
+        const logoutEvnt = new EvtListener(logout);
         logoutEvnt.render('click', () => {
           ajaxGetUsingFetch({ url: '/logout', body: null })
             .then((res) => {
@@ -61,9 +62,9 @@ export default class Navbar {
             });
         });
       }
-      const loginEvnt = new evtListener(login);
+      const loginEvnt = new EvtListener(login);
       loginEvnt.render('click', loginf);
-      const signupEvnt = new evtListener(signup);
+      const signupEvnt = new EvtListener(signup);
       signupEvnt.render('click', signupf);
     }
 
