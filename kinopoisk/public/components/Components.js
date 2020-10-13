@@ -1,20 +1,20 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 
-function createA(href, text) {
+export function createA(href, text) {
   const a = document.createElement('a');
   a.href = href;
   a.textContent = text;
   return a;
 }
 
-function createSpan(classname, text) {
+export function createSpan(classname, text) {
   const span = document.createElement('span');
   span.className = classname;
   span.textContent = text;
   return span;
 }
 
-function createInput(type, name, text) {
+export function createInput(type, name, text) {
   const input = document.createElement('input');
   input.type = type;
   input.name = name;
@@ -22,7 +22,7 @@ function createInput(type, name, text) {
   return input;
 }
 
-function createInputSubmit(value, className) {
+export function createInputSubmit(value, className) {
   const input = document.createElement('input');
   input.type = 'submit';
   input.className = className;
@@ -30,14 +30,14 @@ function createInputSubmit(value, className) {
   return input;
 }
 
-function createDiv(className, parent) {
+export function createDiv(className, parent) {
   const div = document.createElement('div');
   div.className = className;
   parent.appendChild(div);
   return div;
 }
 
-function createLi(className, child) {
+export function createLi(className, child) {
   const li = document.createElement('li');
   li.className = className;
   li.appendChild(child);
@@ -61,33 +61,37 @@ function valid(form, reg, input, text) {
   };
 }
 
-function renderForm(head, configInput, sub) {
+export function renderForm(headConf, configInput, sub) {
+  const { head, textContent, style } = headConf;
   const form = document.createElement('form');
   const formr = [];
   formr.push(form);
 
-  if (head.head) {
+  if (head) {
     const header = document.createElement('h2');
-    header.textContent = head.textContent;
-    header.style = head.style;
+    header.textContent = textContent;
+    header.style = style;
     form.appendChild(header);
   }
 
   configInput.forEach((menuKey) => {
-    const input = createInput(menuKey.type, menuKey.name, menuKey.text);
-    input.required = menuKey.required;
+    const { type, name, text, required } = menuKey;
+    const input = createInput(type, name, text);
+    input.required = required;
     form.appendChild(input);
     formr.push(input);
   });
-  const submitpass = createInputSubmit(sub.text, sub.className);
+  const { text, className} = sub
+  const submitpass = createInputSubmit(text, className);
   form.appendChild(submitpass);
 
   let i = 1;
   configInput.forEach((menuKey) => {
+    const { reg, errorVal } = menuKey;
     if (menuKey.valid) {
-      valid(form, menuKey.reg, formr[i], menuKey.errorVal);
+      valid(form, reg, formr[i], errorVal);
     }
-    ++i;
+    i += 1;
   });
   return formr;
 }

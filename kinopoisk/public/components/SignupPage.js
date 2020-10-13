@@ -1,4 +1,5 @@
-import navLink from './navLink.js';
+import NavLink from './navLink.js';
+import { createA, renderForm } from './Components.js';
 
 export default class SignupPage {
     #parent
@@ -65,12 +66,12 @@ export default class SignupPage {
 
       const linkLogin = createA('/login', 'Войти в имеющийся аккаунт');
       linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
-      const loginLink = new navLink(linkLogin);
+      const loginLink = new NavLink(linkLogin);
       loginLink.render('click', loginPage);
       form.appendChild(linkLogin);
-      const formLink = new navLink(form);
+      const formLink = new NavLink(form);
       const err = document.createElement('div');
-      err.className = 'error'
+      err.className = 'error';
       formLink.render('submit', () => {
         if (!formrLogin[1].classList.contains('invalid')
                 && !formrLogin[3].classList.contains('invalid')) {
