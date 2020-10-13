@@ -22,7 +22,12 @@ function createNavbar() {
   let isAuthorized = false;
   ajaxGetUsingFetch({ url: '/whois', body: null })
     .then((res) => {
-      responseBody = JSON.parse(JSON.stringify(res.json));
+        try {
+            responseBody = JSON.parse(JSON.stringify(res.json));
+        } catch (e) {
+            menuPage();
+            return;
+        }
       console.log(responseBody);
       if (res.status === 202) {
         isAuthorized = false;
@@ -64,11 +69,18 @@ function loginPage() {
 }
 
 function profileChengePage() {
+    let responseBody;
   application.innerHTML = '';
   ajaxGetUsingFetch({ url: '/me', body: null })
     .then((res) => {
+        try {
+            responseBody = JSON.stringify(res.json);
+        } catch (e) {
+            menuPage();
+            return;
+        }
       if (res.status === 200) {
-        const profileChange = new ProfileChangePage(application, JSON.stringify(res.json));
+        const profileChange = new ProfileChangePage(application, responseBody);
         profileChange.render(menuPage, profilePage, createNavbar);
       } else {
         loginPage();
@@ -77,11 +89,18 @@ function profileChengePage() {
 }
 
 function profilePage() {
+    let responseBody
   application.innerHTML = '';
   ajaxGetUsingFetch({ url: '/me', body: null })
     .then((res) => {
+        try {
+            responseBody = JSON.stringify(res.json);
+        } catch (e) {
+            menuPage();
+            return;
+        }
       if (res.status === 200) {
-        const profile = new ProfilePage(application, JSON.stringify(res.json));
+        const profile = new ProfilePage(application, responseBody);
         profile.render(profileChengePage);
       } else {
         loginPage();

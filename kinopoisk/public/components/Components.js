@@ -61,31 +61,35 @@ function valid(form, reg, input, text) {
   };
 }
 
-export function renderForm(head, configInput, sub) {
+export function renderForm(headConf, configInput, sub) {
+  const { head, textContent, style } = headConf;
   const form = document.createElement('form');
   const formr = [];
   formr.push(form);
 
-  if (head.head) {
+  if (head) {
     const header = document.createElement('h2');
-    header.textContent = head.textContent;
-    header.style = head.style;
+    header.textContent = textContent;
+    header.style = style;
     form.appendChild(header);
   }
 
   configInput.forEach((menuKey) => {
-    const input = createInput(menuKey.type, menuKey.name, menuKey.text);
-    input.required = menuKey.required;
+    const { type, name, text, required } = menuKey;
+    const input = createInput(type, name, text);
+    input.required = required;
     form.appendChild(input);
     formr.push(input);
   });
-  const submitpass = createInputSubmit(sub.text, sub.className);
+  const { text, className} = sub
+  const submitpass = createInputSubmit(text, className);
   form.appendChild(submitpass);
 
   let i = 1;
   configInput.forEach((menuKey) => {
+    const { reg, errorVal } = menuKey;
     if (menuKey.valid) {
-      valid(form, menuKey.reg, formr[i], menuKey.errorVal);
+      valid(form, reg, formr[i], errorVal);
     }
     i += 1;
   });
