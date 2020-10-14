@@ -1,0 +1,18 @@
+.profileNav {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    cursor: default;
+    color: white;
+}
+
+.menu-secondary a:hover {
+    text-decoration: none;
+    cursor: default;
+}
+
+.profileNav:hover {
+    text-decoration: none;
+    cursor: default;
+    font-size: 25px;
+    color: orange;
+}
