@@ -1,4 +1,4 @@
-import { createSpan } from '../Components.js';
+import { createSpan } from './Components.js';
 
 export default class FilmPage {
     #parent

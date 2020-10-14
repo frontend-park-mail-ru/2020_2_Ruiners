@@ -1,11 +1,11 @@
-import FilmPage from './components/FilmPage/FilmPage.js';
-// import navLink from './components/navLink.js';
-import Navbar from './components/Navbar.js';
-import SignupPage from './components/SignupPage.js';
-import LoginPage from './components/LoginPage.js';
-import ProfilePage from './components/ProfilePage.js';
-import ProfileChangePage from './components/ProfileChangePage.js';
-import MenuPage from './components/MenuPage.js';
+import FilmPage from './Views/FilmPage.js';
+import Navbar from "./Views/Navbar.js";
+import SignupPage from './Views/SignupPage.js';
+import LoginPage from './Views/LoginPage.js';
+import ProfilePage from './Views/ProfilePage.js';
+import ProfileChangePage from './Views/ProfileChangePage.js';
+import MenuPage from './Views/MenuPage.js';
+import Whois from "./Services/Whois.js";
 
 const pages = {
   signup: signupPage,
@@ -18,25 +18,16 @@ const pages = {
 };
 
 function createNavbar() {
-  let responseBody;
   let isAuthorized = false;
-  ajaxGetUsingFetch({ url: '/whois', body: null })
-    .then((res) => {
-        try {
-            responseBody = JSON.parse(JSON.stringify(res.json));
-        } catch (e) {
-            menuPage();
-            return;
-        }
-      console.log(responseBody);
+  Whois.getLogin(menuPage, res => {
       if (res.status === 202) {
-        isAuthorized = false;
+          isAuthorized = false;
       } else {
-        isAuthorized = true;
+          isAuthorized = true;
       }
-      const navbar = new Navbar(responseBody.Login, isAuthorized, nav);
+      const navbar = new Navbar(res.json.Login, isAuthorized, nav);
       navbar.render(createNavbar, loginPage, signupPage, menuPage);
-    });
+  });
 }
 
 function menuPage() {

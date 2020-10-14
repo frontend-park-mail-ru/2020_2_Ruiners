@@ -1,4 +1,4 @@
-import NavLink from './navLink.js';
+import NavLink from '../Services/navLink.js';
 import { createA, createDiv } from './Components.js';
 
 export default class ProfilePage {

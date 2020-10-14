@@ -1,0 +1,51 @@
+.brand {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 1000;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.brand a {
+    text-decoration: none;
+    color: white;
+}
+
+.brand a:hover {
+    cursor: default;
+    text-decoration: none;
+}
+
+.menu-secondary li {
+    display: inline-block;
+}
+
+.menu-secondary a {
+    text-decoration: none;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    letter-spacing: 2px;
+    margin-left: 50px;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.menu-secondary a:hover{color: orange;}
+
+.round {
+    border-radius: 100px; /* Радиус скругления */
+    border: 1px whitesmoke; /* Параметры рамки */
+    margin-bottom: -15px;
+    margin-right: 10px;
+}
+
+.profile {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    color: white;
+}
+
+.right {
+    margin-left: 550px;
+}

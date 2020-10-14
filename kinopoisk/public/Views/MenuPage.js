@@ -1,4 +1,4 @@
-import NavLink from './navLink.js';
+import NavLink from '../Services/navLink.js';
 
 export default class MenuPage {
     #parent
