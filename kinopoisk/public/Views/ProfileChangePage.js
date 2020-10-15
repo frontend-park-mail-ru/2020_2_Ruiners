@@ -15,7 +15,7 @@ export default class ProfileChangePage {
       const body = document.getElementById('body');
       body.className = 'page';
 
-      this.#parent.className = 'wrapper__form chenge';
+      this.#parent.className = 'wrapper__form chenge margin';
 
       const responseBody = JSON.parse(this.#data);
 
