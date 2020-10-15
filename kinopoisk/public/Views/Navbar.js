@@ -20,6 +20,7 @@ export default class Navbar {
     }
 
     render( nav, loginf, signupf, menu) {
+
         const NavigateObj = new Navigate(this.#parent);
         const Nav = NavigateObj.render();
 

@@ -232,27 +232,21 @@ form button:first-child {
     margin-right: 20px;
 }
 
-body, .page {
-    height: 100%;
-    width: 100%;
-    margin: 0;
+body {
+    margin: 0px;
 }
 
 .page {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
+    display: block;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     background-image: url(../images/login.jpg);
     background-repeat: no-repeat;
 }
 
-wrapper__form
-.page .wrapper__form {
-    margin: auto;
+.wrapper__form {
+    display: block;
+    margin-left: 43%;
 }
 
 input.secondary {
@@ -280,6 +274,7 @@ input.secondary {
 .chenge {
     display: flex;
     flex-direction: column;
+    width: 50%;
     /* width: 15%; */
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.7);
@@ -287,6 +282,10 @@ input.secondary {
     padding: 10px 20px 30px;
     opacity: 100%;
     margin: auto;
+}
+
+.margin {
+    margin-top: 10%;
 }
 
 .profile {
