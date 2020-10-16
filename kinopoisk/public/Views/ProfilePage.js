@@ -1,17 +1,20 @@
 import NavLink from '../Services/navLink.js';
 import { createA, createDiv } from './Components.js';
+import Navbar from "./Navbar.js";
 
-export default class ProfilePage {
+export default class ProfilePage extends Navbar{
     #parent
 
     #data
 
     constructor(parent, data) {
+      super(nav);
       this.#parent = parent;
       this.#data = data;
     }
 
     render(ProfileChange) {
+      super.render();
       const body = document.getElementById('body');
       body.className = 'page';
       const divshadow = createDiv('shadow profile', this.#parent);

@@ -1,13 +1,16 @@
 import NavLink from '../Services/navLink.js';
+import Navbar from "./Navbar.js";
 
-export default class MenuPage {
+export default class MenuPage extends Navbar{
     #parent
 
     constructor(parent) {
+      super(nav)
       this.#parent = parent;
     }
 
     render(pages, isAuth) {
+      super.render();
       this.#parent.innerHTML = '';
       this.#parent.className = '';
       const body = document.getElementById('body');

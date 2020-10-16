@@ -47,5 +47,12 @@
 }
 
 .right {
-    margin-left: 550px;
+   position: absolute;
+    right: 0;
+    top: 20px
+}
+
+.left {
+    position: static;
+    right: 0;
 }

@@ -1,34 +1,18 @@
 import FilmPage from './Views/FilmPage.js';
-import Navbar from "./Views/Navbar.js";
 import SignupPage from './Views/SignupPage.js';
 import LoginPage from './Views/LoginPage.js';
 import ProfilePage from './Views/ProfilePage.js';
 import ProfileChangePage from './Views/ProfileChangePage.js';
 import MenuPage from './Views/MenuPage.js';
-import Whois from "./Services/Whois.js";
 
 const pages = {
   signup: signupPage,
   login: loginPage,
-  navbar: createNavbar,
   profile: profilePage,
   profileChange: profileChengePage,
   film: filmPage,
   menu: menuPage,
 };
-
-function createNavbar() {
-  let isAuthorized = false;
-  Whois.getLogin(menuPage, res => {
-      if (res.status === 202) {
-          isAuthorized = false;
-      } else {
-          isAuthorized = true;
-      }
-      const navbar = new Navbar(res.json.Login, isAuthorized, nav);
-      navbar.render(createNavbar, loginPage, signupPage, menuPage);
-  });
-}
 
 function menuPage() {
   let isAuth = false;
@@ -46,7 +30,7 @@ function menuPage() {
 
 function signupPage() {
   const signup = new SignupPage(application);
-  signup.render(loginPage, menuPage, createNavbar);
+  signup.render(loginPage, menuPage);
 }
 
 function filmPage() {
@@ -56,7 +40,7 @@ function filmPage() {
 
 function loginPage() {
   const login = new LoginPage(application);
-  login.render(loginPage, createNavbar, menuPage, signupPage);
+  login.render(loginPage, menuPage, signupPage);
 }
 
 function profileChengePage() {
@@ -72,7 +56,7 @@ function profileChengePage() {
         }
       if (res.status === 200) {
         const profileChange = new ProfileChangePage(application, responseBody);
-        profileChange.render(menuPage, profilePage, createNavbar);
+        profileChange.render(menuPage, profilePage);
       } else {
         loginPage();
       }
@@ -99,5 +83,6 @@ function profilePage() {
     });
 }
 
-createNavbar();
 menuPage();
+
+export { menuPage, loginPage, signupPage }
