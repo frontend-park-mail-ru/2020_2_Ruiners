@@ -1,14 +1,18 @@
 import NavLink from '../Services/navLink.js';
 import { createA, renderForm } from './Components.js';
+import Navbar from "./Navbar.js";
+import {signupPage} from "../main.js";
 
-export default class SignupPage {
+export default class SignupPage extends Navbar{
     #parent
 
     constructor(parent) {
+      super(nav);
       this.#parent = parent;
     }
 
-    render(loginPage, menuPage, createNavbar) {
+    render(loginPage, menuPage) {
+      super.render();
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
@@ -89,7 +93,6 @@ export default class SignupPage {
             .then((res) => {
               if (res === 200) {
                 nav.innerHTML = '';
-                createNavbar();
                 menuPage();
               } else {
                 err.innerHTML = 'Пользователь с таким логином уже существует';

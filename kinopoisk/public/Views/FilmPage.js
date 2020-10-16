@@ -1,13 +1,16 @@
 import { createSpan } from './Components.js';
+import Navbar from "./Navbar.js";
 
-export default class FilmPage {
+export default class FilmPage extends Navbar{
     #parent
 
     constructor(parent) {
+      super(nav);
       this.#parent = parent;
     }
 
     render() {
+      super.render();
       const body = document.getElementById('body');
       body.className = 'film1';
       this.#parent.innerHTML = '';
