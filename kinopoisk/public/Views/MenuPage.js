@@ -1,7 +1,7 @@
 import NavLink from '../Services/navLink.js';
-import Navbar from "./Navbar.js";
+import Base from "./Base.js";
 
-export default class MenuPage extends Navbar{
+export default class MenuPage extends Base{
     #parent
 
     constructor(parent) {

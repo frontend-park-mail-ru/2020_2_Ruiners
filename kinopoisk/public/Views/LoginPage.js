@@ -1,8 +1,8 @@
 import NavLink from '../Services/navLink.js';
 import { createA, renderForm } from './Components.js';
-import Navbar from "./Navbar.js";
+import Base from "./Base.js";
 
-export default class SignupPage extends Navbar{
+export default class SignupPage extends Base{
     #parent
 
     constructor(parent) {
@@ -11,7 +11,6 @@ export default class SignupPage extends Navbar{
     }
 
     render(loginPage, menuPage, signupPage) {
-      super.render();
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
@@ -80,6 +79,7 @@ export default class SignupPage extends Navbar{
           .then((res) => {
             if (res === 200) {
               nav.innerHTML = '';
+              super.render();
               menuPage();
             } else if (res === 301) {
               loginPage();

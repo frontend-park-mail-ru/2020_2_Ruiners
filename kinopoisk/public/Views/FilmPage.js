@@ -1,7 +1,7 @@
 import { createSpan } from './Components.js';
-import Navbar from "./Navbar.js";
+import Base from "./Base.js";
 
-export default class FilmPage extends Navbar{
+export default class FilmPage extends Base{
     #parent
 
     constructor(parent) {
@@ -10,7 +10,6 @@ export default class FilmPage extends Navbar{
     }
 
     render() {
-      super.render();
       const body = document.getElementById('body');
       body.className = 'film1';
       this.#parent.innerHTML = '';

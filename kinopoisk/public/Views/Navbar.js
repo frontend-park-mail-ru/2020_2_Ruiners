@@ -4,8 +4,8 @@ import Li from "../components/Li/Li.js";
 import A from "../components/A/A.js"
 import Navigate from "../components/Nav/Nav.js";
 import Button from "../components/Button/Button.js";
-import Whois from "../Services/Whois.js";
 import { menuPage, loginPage, signupPage } from "../main.js"
+import Base from "./Base.js";
 
 export default class Navbar {
     #parent;
@@ -14,15 +14,8 @@ export default class Navbar {
         this.#parent = parent;
     }
 
-    render() {
-        nav.innerHTML = '';
-        let isAuthorized = false;
-        Whois.getLogin(menuPage, res => {
-            if (res.status === 202) {
-                isAuthorized = false;
-            } else {
-                isAuthorized = true;
-            }
+    render(isAuthorized, res) {
+            nav.innerHTML = '';
             const NavigateObj = new Navigate(this.#parent);
             const Nav = NavigateObj.render();
 
@@ -72,6 +65,7 @@ export default class Navbar {
                 logoutEvnt.render('click', () => {
                     Logout.logout(res => {
                         if (res.status === 200) {
+                            this.render( false, 0);
                             loginPage();
                         } else {
                             alert('error');
@@ -98,6 +92,5 @@ export default class Navbar {
                 const signupEvnt = new NavLink(buttonSignup);
                 signupEvnt.render('click', signupPage);
             }
-        });
     }
 }
