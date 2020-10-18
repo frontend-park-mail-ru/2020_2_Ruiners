@@ -1,8 +1,8 @@
 import NavLink from '../Services/navLink.js';
 import { renderForm } from './Components.js';
-import Navbar from "./Navbar.js";
+import Base from "./Base.js";
 
-export default class ProfileChangePage extends Navbar{
+export default class ProfileChangePage extends Base{
     #parent
 
     #data
@@ -14,7 +14,6 @@ export default class ProfileChangePage extends Navbar{
     }
 
     render(menuPage, profilePage) {
-      super.render();
       const body = document.getElementById('body');
       body.className = 'page';
 
@@ -62,6 +61,7 @@ export default class ProfileChangePage extends Navbar{
             .then((res) => {
               if (res === 200) {
                 nav.innerHTML = '';
+                super.render();
                 profilePage();
               } else {
                 alert('error');
