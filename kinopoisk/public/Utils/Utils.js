@@ -2,7 +2,7 @@ const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
 const noop = () => {};
 const { ajaxGetUsingFetch, ajaxPostUsingFetch } = globalThis.AjaxModule;
-
+let windowClicks = 0;
 const config = {
   signup: {
     href: '/signup',

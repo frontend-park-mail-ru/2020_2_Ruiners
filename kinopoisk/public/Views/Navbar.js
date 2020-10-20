@@ -1,11 +1,13 @@
 import NavLink from "../Services/navLink.js";
 import Logout from "../Services/Logout.js";
-import Li from "../components/Li/Li.js";
-import A from "../components/A/A.js"
+import List from "../components/List/List.js";
+import Link from "../components/Link/Link.js";
 import Navigate from "../components/Nav/Nav.js";
 import Button from "../components/Button/Button.js";
-import { menuPage, loginPage, signupPage } from "../main.js"
+import { menuPage, loginPage, signupPage, profilePage } from "../main.js"
 import Base from "./Base.js";
+import Window from "../components/window/Window.js";
+import navLink from "../Services/navLink.js";
 
 export default class Navbar {
     #parent;
@@ -22,7 +24,10 @@ export default class Navbar {
             const ul = document.createElement('ul');
             Nav.appendChild(ul);
 
-            let BrandObj = new Li(ul, 'brand');
+            let BrandObj = new List({
+                parent: ul,
+                classname: 'brand'
+            });
             let Brand = BrandObj.render();
             const href = document.createElement('a');
             href.innerHTML = `KINO <img width="25", height="25" src="../static/images/icons8-кинопроектор-96.png"/> PARK`;
@@ -33,36 +38,68 @@ export default class Navbar {
                 menuPage();
             });
 
-            let FilmsObj = new Li(ul, 'menu-secondary');
+            let FilmsObj = new List({
+                parent: ul,
+                classname: 'menu-secondary'
+            });
             let Films = FilmsObj.render();
 
-            let FilmsAObj = new A(Films, '');
+            let FilmsAObj = new Link({
+                parent: Films,
+                classname: ''
+            });
             let FilmsA = FilmsAObj.render();
             FilmsAObj.placeContent('Фильмы');
 
-            let SerialsObj = new Li(ul, 'menu-secondary');
+            let SerialsObj = new List({
+                parent: ul,
+                classname: 'menu-secondary'
+            });
             let Serials = SerialsObj.render();
 
-            let SerialsAObj = new A(Serials, '');
+            let SerialsAObj = new Link({
+                parent: Serials,
+                classname: ''
+            });
             let SerialsA = SerialsAObj.render();
             SerialsAObj.placeContent('Сериалы');
 
             if (isAuthorized) {
-                let profileObj = new Li(ul, 'right');
+                let profileObj = new List({
+                    parent:ul,
+                    classname: 'right'
+                });
                 let profile = profileObj.render();
 
-                let profileAObj = new A(profile, 'profileNav');
+                let profileAObj = new Link({
+                    parent: profile,
+                    className: 'profileNav'
+                });
                 let profileA = profileAObj.render();
-                profileAObj.placeContent(`<img width="50" height="50" src="../static/images/user-no-big.gif" alt="" class="round"> ${res.json.Login}`);
-
-                let logoutObj = new Li(profile, '');
+                profileAObj.placeContent(`<img width="50" height="50" src="../static/images/user-no-big.gif" alt="" class="round">`);
+                const profileLink = new navLink(profileA);
+                const window = new Window({parent: profileA});
+                profileLink.render('click', () => {
+                    windowClicks++;
+                    if (windowClicks % 2 == 1) {
+                        window.render(() => {
+                        });
+                    } else {
+                        window.close();
+                    }
+                });
+                let logoutObj = new List({
+                    parent: profile,
+                    classname: ''
+                });
                 let logout = logoutObj.render();
 
-                let buttonObj = new Button(logout, 'buttons');
-                let button = buttonObj.render();
-                buttonObj.placeContent('Выйти')
-                const logoutEvnt = new NavLink(button);
-                logoutEvnt.render('click', () => {
+                let buttonLogoutObj = new Button({
+                    parent: logout,
+                    classname: 'buttons',
+                    text: 'Выйти'
+                });
+                buttonLogoutObj.render( evt => {
                     Logout.logout(res => {
                         if (res.status === 200) {
                             this.render( false, 0);
@@ -71,26 +108,36 @@ export default class Navbar {
                             alert('error');
                         }
                     });
-                });
+                })
             } else {
-                let loginObj = new Li(ul, 'right');
+                let loginObj = new List({
+                    parent: ul,
+                    classname: 'right'
+                });
                 let login = loginObj.render();
 
-                let buttonLoginObj = new Button(login, 'buttons');
-                let buttonLogin = buttonLoginObj.render();
-                buttonLoginObj.placeContent('Войти');
+                let buttonLoginObj = new Button({
+                    parent: login,
+                    classname: 'buttons',
+                    text: 'Войти'});
+                buttonLoginObj.render((evt) => {
+                    loginPage();
+                });
 
-                let signupObj = new Li(login, '');
+
+                let signupObj = new List({
+                    parent: login,
+                    classname: ''
+                });
                 let signup = signupObj.render();
 
-                let buttonSignupObj = new Button(signup, 'buttons');
-                let buttonSignup = buttonSignupObj.render();
-                buttonSignupObj.placeContent('Зарегистрироваться');
-
-                const loginEvnt = new NavLink(buttonLogin);
-                loginEvnt.render('click', loginPage);
-                const signupEvnt = new NavLink(buttonSignup);
-                signupEvnt.render('click', signupPage);
+                let buttonSignupObj = new Button({
+                    parent: signup,
+                    classname: 'buttons',
+                    text: 'Зарегистрироваться'});
+                buttonSignupObj.render((evt) => {
+                    signupPage();
+                });
             }
     }
 }

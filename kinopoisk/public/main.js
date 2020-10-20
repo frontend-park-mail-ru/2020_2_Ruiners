@@ -85,4 +85,4 @@ function profilePage() {
 
 menuPage();
 
-export { menuPage, loginPage, signupPage }
+export { menuPage, loginPage, signupPage, profilePage, profileChengePage }

@@ -1,9 +1,10 @@
-export default class Li {
+export default class List {
     #li;
     #parent;
     #classname;
 
-    constructor(parent, classname) {
+    constructor(context) {
+        const { parent, classname } = context;
         this.#li = document.createElement('li');
         this.#parent = parent;
         this.#classname = classname;

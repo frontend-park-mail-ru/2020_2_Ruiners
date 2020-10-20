@@ -1,9 +1,10 @@
-export default class A {
+export default class Link {
     #a
     #classname;
     #parent;
 
-    constructor(parent, classname) {
+    constructor(context) {
+        const { parent, classname } = context;
         this.#a = document.createElement('a')
         this.#parent = parent;
         this.#classname = classname;
