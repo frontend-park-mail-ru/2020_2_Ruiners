@@ -1,22 +1,28 @@
 export default class Button {
-    #button
-    #parent;
+    button;
     #classname;
+    #text;
+    #parent;
+    template;
 
-    constructor(parent, classname) {
-        this.#button = document.createElement('button');
-        this.#parent = parent;
+    constructor(context = {}) {
+        const { classname, text, parent } = context;
+        this.button = document.createElement('div');
         this.#classname = classname;
+        this.#text = text;
+        this.#parent = parent;
+        this.template = Handlebars.templates['Button'];
     }
 
-    render() {
-        this.#parent.appendChild(this.#button);
-        this.#button.className = this.#classname;
-        return this.#button;
-    }
-
-    placeContent(inner) {
-        this.#button.innerHTML = inner;
-        return this.#button;
+    render(callback) {
+        this.#parent.appendChild(this.button);
+        this.button.innerHTML = this.template({
+            classname: this.#classname,
+            text: this.#text
+        });
+        this.button.addEventListener('click', evt => {
+            evt.preventDefault();
+            callback(evt);
+        });
     }
 }

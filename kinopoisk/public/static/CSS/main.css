@@ -1,7 +1,8 @@
-@import "../../components/A/A.css";
+@import "../../components/Link/Link.css";
 @import "../../components/Nav/Nav.css";
-@import "../../components/Li/Li.css";
+@import "../../components/List/List.css";
 @import "../../components/Button/Button.css";
+@import "../../components/window/Window.css";
 body.film1 {
     background-image: url("../images/test.jpg");
     height: 100vh;

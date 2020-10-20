@@ -9,10 +9,3 @@
     text-decoration: none;
     cursor: default;
 }
-
-.profileNav:hover {
-    text-decoration: none;
-    cursor: default;
-    font-size: 25px;
-    color: orange;
-}
