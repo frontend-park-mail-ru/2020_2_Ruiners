@@ -2,6 +2,7 @@ import NavLink from '../Services/navLink.js';
 import { createA, renderForm } from './Components.js';
 import Base from "./Base.js";
 import {signupPage} from "../main.js";
+import sessionService from '../Services/sessionService.js';
 
 export default class SignupPage extends Base{
     #parent
@@ -61,12 +62,6 @@ export default class SignupPage extends Base{
       const form = formrLogin[0];
       this.#parent.appendChild(form);
 
-      // const button = document.createElement('button');
-      // button.href = '/';
-      // button.textContent = 'Регистрация';
-      // button.className = 'secondary';
-      // form.appendChild(button);
-
       const linkLogin = createA('/login', 'Войти в имеющийся аккаунт');
       linkLogin.className = 'linkSignupLogin';
       const loginLink = new NavLink(linkLogin);
@@ -81,24 +76,17 @@ export default class SignupPage extends Base{
           const login = formrLogin[1].value.trim();
           const password = formrLogin[3].value.trim();
           const email = formrLogin[2].value.trim();
-          ajaxPostUsingFetch({
-            url: '/signup',
-            body: {
-              email,
-              login,
-              password,
-            },
-          })
-            .then((res) => {
-              if (res === 200) {
-                nav.innerHTML = '';
-                menuPage();
-              } else {
-                err.innerHTML = 'Пользователь с таким логином уже существует';
-                form.appendChild(err);
-              }
-            });
-        }
+          sessionService.signup(login, email, password).then((signupres) => {
+            console.log(signupres.ok);
+            if (signupres.ok) {
+              nav.innerHTML = '';
+              menuPage();
+            } else {
+              err.innerHTML = signupres.errmsg;
+              form.appendChild(err);
+            }
+          });
+        }c
       });
     }
 }
