@@ -1,4 +1,4 @@
-const domain = 'http://95.163.208.72:8000';
+const domain = 'http://95.163.208.72:3000';
 
 export class AjaxModule {
         static ajaxGet = (ajaxArgs) => {

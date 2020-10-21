@@ -4,6 +4,7 @@ import LoginPage from './Views/LoginPage.js';
 import ProfilePage from './Views/ProfilePage.js';
 import ProfileChangePage from './Views/ProfileChangePage.js';
 import MenuPage from './Views/MenuPage.js';
+import sessionService from '../Services/sessionService.js';
 
 const pages = {
   signup: signupPage,
@@ -16,9 +17,9 @@ const pages = {
 
 function menuPage() {
   let isAuth = false;
-  ajaxGetUsingFetch({ url: '/me', body: null })
+  sessionService.me()
     .then((res) => {
-      if (res.status === 200) {
+      if (res.ok) {
         isAuth = true;
       } else {
         isAuth = false;
@@ -46,15 +47,15 @@ function loginPage() {
 function profileChengePage() {
     let responseBody;
   application.innerHTML = '';
-  ajaxGetUsingFetch({ url: '/me', body: null })
+  sessionService.me()
     .then((res) => {
         try {
-            responseBody = JSON.stringify(res.json);
+            responseBody = JSON.stringify(res.get);
         } catch (e) {
             menuPage();
             return;
         }
-      if (res.status === 200) {
+      if (res.ok) {
         const profileChange = new ProfileChangePage(application, responseBody);
         profileChange.render(menuPage, profilePage);
       } else {
@@ -66,15 +67,15 @@ function profileChengePage() {
 function profilePage() {
     let responseBody
   application.innerHTML = '';
-  ajaxGetUsingFetch({ url: '/me', body: null })
+  sessionService.me()
     .then((res) => {
         try {
-            responseBody = JSON.stringify(res.json);
+            responseBody = JSON.stringify(res.get);
         } catch (e) {
             menuPage();
             return;
         }
-      if (res.status === 200) {
+      if (res.ok) {
         const profile = new ProfilePage(application, responseBody);
         profile.render(profileChengePage);
       } else {
