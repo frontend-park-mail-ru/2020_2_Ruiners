@@ -68,7 +68,7 @@ export default class SignupPage extends Base{
       // form.appendChild(button);
 
       const linkLogin = createA('/login', 'Войти в имеющийся аккаунт');
-      linkLogin.style = 'color: #FFFFFF; margin-left: 10px';
+      linkLogin.className = 'linkSignupLogin';
       const loginLink = new NavLink(linkLogin);
       loginLink.render('click', loginPage);
       form.appendChild(linkLogin);

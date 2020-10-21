@@ -47,7 +47,7 @@ export default class ProfilePage extends Base{
       divAvatar.appendChild(img);
 
       const button = document.createElement('button');
-      button.className = 'secondary';
+      button.className = 'buttons buttons__marginForFilmCard';
       button.textContent = 'Изменить данные';
       button.href = '/';
       const buttonLink = new NavLink(button);

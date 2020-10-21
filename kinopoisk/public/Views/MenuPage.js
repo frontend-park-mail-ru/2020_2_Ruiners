@@ -23,12 +23,14 @@ export default class MenuPage extends Base{
             menuItem.href = href;
             menuItem.textContent = text;
             menuItem.dataset.section = menuKey;
+            menuItem.className = 'linkSignupLogin linkSignupLogin__black';
             this.#parent.appendChild(menuItem);
           }
         } else {
           menuItem.href = href;
           menuItem.textContent = text;
           menuItem.dataset.section = menuKey;
+          menuItem.className = 'linkSignupLogin linkSignupLogin__black';
           this.#parent.appendChild(menuItem);
         }
       });

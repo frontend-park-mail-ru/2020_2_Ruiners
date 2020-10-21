@@ -174,7 +174,7 @@ export default class ProfileChangePage extends Base{
       const buttonBack = document.createElement('button');
       buttonBack.href = '/';
       buttonBack.textContent = 'Назад';
-      buttonBack.className = 'secondary';
+      buttonBack.className = 'buttons buttons__marginForFilmCard';
       buttonBack.dataset.section = 'profile';
       const buttonBackLink = new NavLink(buttonBack);
       buttonBackLink.render('click', () => {
