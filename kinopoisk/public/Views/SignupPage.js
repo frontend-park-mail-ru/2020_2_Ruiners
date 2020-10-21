@@ -86,7 +86,7 @@ export default class SignupPage extends Base{
               form.appendChild(err);
             }
           });
-        }c
+        }
       });
     }
 }
