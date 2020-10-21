@@ -8,17 +8,18 @@ import { menuPage, loginPage, signupPage, profilePage } from "../main.js"
 import Base from "./Base.js";
 import Window from "../components/window/Window.js";
 import navLink from "../Services/navLink.js";
+import SessionService from "../Services/sessionService.js";
 
 export default class Navbar {
     #parent;
 
     constructor(parent) {
-        this.#parent = parent;
+      this.#parent = parent;
     }
 
     render(isAuthorized, res) {
             nav.innerHTML = '';
-            const NavigateObj = new Navigate(this.#parent);
+           const NavigateObj = new Navigate(this.#parent);
             const Nav = NavigateObj.render();
 
             const ul = document.createElement('ul');
@@ -100,15 +101,15 @@ export default class Navbar {
                     text: 'Выйти'
                 });
                 buttonLogoutObj.render( evt => {
-                    Logout.logout(res => {
-                        if (res.status === 200) {
+                    SessionService.logout().then( res => {
+                        if (res.ok) {
                             this.render( false, 0);
                             loginPage();
                         } else {
-                            alert('error');
+                            console.log(res.errmsg);
                         }
                     });
-                })
+                });
             } else {
                 let loginObj = new List({
                     parent: ul,

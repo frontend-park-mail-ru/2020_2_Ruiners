@@ -13,6 +13,11 @@ export default class SessionService {
     return res.status;
   }
 
+  static async fetchLogout() {
+    const res = await AjaxModule.ajaxGet({ url: '/logout' });
+    return res.status;
+  }
+
   static async login(login, password) {
     if (login === '') {
       return { ok: false, errmsg: 'Пустой логин' };
@@ -40,6 +45,14 @@ export default class SessionService {
     const res = await this.fetchSignup(login, email, password);
     if (res !== 200) {
       return { ok: false, errmsg: 'Пользователь с таким логином уже существует'};
+    }
+    return { ok: true, errmsg: undefined };
+  }
+
+  static async logout() {
+    const res = await this.fetchLogout();
+    if ( res !== 200 ) {
+      return { ok: false, errmsg: 'bad request'};
     }
     return { ok: true, errmsg: undefined };
   }
