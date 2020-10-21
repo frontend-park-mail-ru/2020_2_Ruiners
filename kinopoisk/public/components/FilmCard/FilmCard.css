@@ -1,0 +1,90 @@
+.poster {
+    padding: 10px 15px 14px;
+    font-family: "Arial", "Helvetica";
+    position: relative;
+    min-width: 300px;
+    max-width: 1200px;
+    min-height: 300px;
+    max-height: 1200px;
+    margin-top: 10%;
+    margin-left: 20%;
+    display: flex;
+    flex-direction: column;
+    height: 32%;
+    width: 64%;
+    box-shadow: 1px 2px 10px 0 black;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.header {
+    font-size: 25px;
+    line-height: 20px;
+    margin-bottom: 17px;
+}
+
+.header-link {
+    color: white;
+    text-decoration-line: none;
+}
+
+.header-link:hover {
+    color: orange;
+}
+
+.poster-body {
+    position: relative;
+}
+
+.left-block {
+    position: relative;
+    float: left;
+}
+
+.poster-body iframe {
+    display: block;
+}
+
+.right-block {
+    position:relative;
+    left: 15px;
+    right: 0;
+}
+
+.desc {
+    font-style: italic;
+    font-size: 15px;
+    line-height: 20px;
+    color: white;
+}
+
+.info {
+    margin: 7px 0;
+    line-height: 40px;
+}
+.roles {
+    line-height: 20px;
+}
+
+.link {
+    color: whitesmoke;
+    text-decoration-line: none;
+}
+
+.link:hover {
+    color: orange;
+}
+
+.rating {
+    margin-left: 10px;
+    font-size: 30px;
+    color: yellowgreen;
+}
+.votes {
+    margin-left: 15px;
+    color: gray;
+}
+
+.poster a{
+    display: revert;
+}

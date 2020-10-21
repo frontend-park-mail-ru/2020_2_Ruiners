@@ -16,4 +16,14 @@
 
 .buttons:active {
     background-color: #009379;
+    outline: none;
+}
+.buttons:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.buttons__marginForFilmCard{
+    margin-top: 20px;
+    margin-left: 10px;
 }
