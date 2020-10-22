@@ -67,3 +67,48 @@ templates['Button'] = template({"compiler":[8,">= 4.3.0"],"main":function(contai
                 + "\n        <a>⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐</a>\n    </div>\n</div>";
         },"useData":true});
 })();
+
+(function() {
+    var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+    templates['FilmPoster'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+            var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+                if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+                    return parent[propertyName];
+                }
+                return undefined
+            };
+
+            return "<div class=\"lenta__object\">\n    <a href=\"#\" class=\"href\"><img width=\"270\" height=\"420\" src=\"static/images/nachalo.jpg\" alt=\"\" class=\"object__image\">\n        <div class=\"object__hidden\"><span>"
+                + alias4(((helper = (helper = lookupProperty(helpers,"genre") || (depth0 != null ? lookupProperty(depth0,"genre") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"genre","hash":{},"data":data,"loc":{"start":{"line":3,"column":42},"end":{"line":3,"column":53}}}) : helper)))
+                + ", "
+                + alias4(((helper = (helper = lookupProperty(helpers,"year") || (depth0 != null ? lookupProperty(depth0,"year") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"year","hash":{},"data":data,"loc":{"start":{"line":3,"column":55},"end":{"line":3,"column":65}}}) : helper)))
+                + " год</span></div>\n    </a>\n    <div class=\"image__text\"> "
+                + alias4(((helper = (helper = lookupProperty(helpers,"title") || (depth0 != null ? lookupProperty(depth0,"title") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":5,"column":30},"end":{"line":5,"column":41}}}) : helper)))
+                + " </div>\n</div>";
+        },"useData":true});
+})();
+
+
+(function() {
+    var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+    templates['FilmLenta'] = template({"1":function(container,depth0,helpers,partials,data) {
+            var stack1;
+
+            return "        "
+                + ((stack1 = container.lambda(depth0, depth0)) != null ? stack1 : "")
+                + "\n";
+        },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+            var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
+                if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+                    return parent[propertyName];
+                }
+                return undefined
+            };
+
+            return "<h1 class=\"main__header\">"
+                + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"genre") || (depth0 != null ? lookupProperty(depth0,"genre") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"genre","hash":{},"data":data,"loc":{"start":{"line":1,"column":25},"end":{"line":1,"column":36}}}) : helper)))
+                + "</h1>\n<div class=\"header__lenta\">\n"
+                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"posters") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":3,"column":4},"end":{"line":5,"column":13}}})) != null ? stack1 : "")
+                + "</div>";
+        },"useData":true});
+})();

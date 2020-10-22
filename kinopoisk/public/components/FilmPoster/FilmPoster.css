@@ -1,0 +1,54 @@
+.lenta__object {
+    display: inline-flex;
+    height: 430px;
+    width: 300px;
+    margin-left: 52px;
+}
+
+.object__image {
+    position: relative;
+    padding: 5px;
+    border-radius: 30px;
+}
+
+.image__text {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    margin-top: 444px;
+    margin-left: 20px;
+}
+
+.lenta__object a:hover{
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    visibility: visible;
+}
+
+.object__image:hover + .object__hidden{
+    visibility: visible;
+}
+
+
+.object__hidden {
+    position: absolute;
+    background: rgba(135, 135, 135, 0.5);
+    min-width: 270px;
+    min-height: 130px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-top: -137px;
+    margin-left: 7px;
+    font-family: 'Playfair Display', serif;
+    color: black;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.object__hidden span {
+    position: absolute;
+    margin-left: 20%;
+    margin-top: 20%;
+}

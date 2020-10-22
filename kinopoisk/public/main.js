@@ -3,7 +3,7 @@ import SignupPage from './Views/SignupPage.js';
 import LoginPage from './Views/LoginPage.js';
 import ProfilePage from './Views/ProfilePage.js';
 import ProfileChangePage from './Views/ProfileChangePage.js';
-import MenuPage from './Views/MenuPage.js';
+import MenuPage from './Views/MenuPage.js0';
 
 const pages = {
   signup: signupPage,

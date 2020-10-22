@@ -1,0 +1,17 @@
+.main__black {
+    background: #292929
+}
+
+.main__header {
+    margin-top: 100px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+}
+
+.header__lenta {
+    position: relative;
+    width: 100%;
+    margin-top: 5px;
+    height: 490px;
+}

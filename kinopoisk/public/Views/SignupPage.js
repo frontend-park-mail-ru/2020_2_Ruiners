@@ -80,6 +80,7 @@ export default class SignupPage extends Base{
             console.log(signupres.ok);
             if (signupres.ok) {
               nav.innerHTML = '';
+              super.render();
               menuPage();
             } else {
               err.innerHTML = signupres.errmsg;
