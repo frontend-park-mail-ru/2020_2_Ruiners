@@ -18,42 +18,69 @@ export default class SessionService {
     return res.status;
   }
 
+  static async fetchMe() {
+    const res = await AjaxModule.ajaxGet({ url: '/me' });
+    const parsedJsonObject = await res.json();
+    return {status: res.status, json: parsedJsonObject};
+  }
+
   static async login(login, password) {
+    const data = { ok: false, errmsg: undefined };
     if (login === '') {
-      return { ok: false, errmsg: 'Пустой логин' };
+      data.errmsg = 'Пустой логин';
     }
     if (password === '') {
-      return { ok: false, errmsg: 'Пустой пароль' };
+      data.errmsg = 'Пустой пароль';
     }
     const res = await this.fetchLogin(login, password);
     if (res !== 200) {
-      return { ok: false, errmsg: 'bad request' };
+      data.errmsg = 'bad request';
+    } else {
+      data.ok = true;
     }
-    return { ok: true, errmsg: undefined };
+    return data;
   }
 
   static async signup(login, email, password) {
+    const data = { ok: false, errmsg: undefined };
     if (login === '') {
-      return { ok: false, errmsg: 'Пустой логин' };
+      data.errmsg = 'Пустой логин';
     }
     if (email === '') {
-      return { ok: false, errmsg: 'Пустой пароль' };
+      data.errmsg = 'Пустой email';
     }
     if (password === '') {
-      return { ok: false, errmsg: 'Пустой пароль' };
+      data.errmsg = 'Пустой пароль';
     }
     const res = await this.fetchSignup(login, email, password);
     if (res !== 200) {
-      return { ok: false, errmsg: 'Пользователь с таким логином уже существует'};
+      data.errmsg = 'Пользователь с таким логином уже существует';
+    } else {
+      data.ok = true;
     }
-    return { ok: true, errmsg: undefined };
+    return data;
   }
 
   static async logout() {
+    const data = { ok: false, errmsg: undefined };
     const res = await this.fetchLogout();
-    if ( res !== 200 ) {
-      return { ok: false, errmsg: 'bad request'};
+    if (res !== 200) {
+      data.errmsg = 'bad request';
+    } else {
+      data.ok = true;
     }
-    return { ok: true, errmsg: undefined };
+    return data;
+  }
+
+  static async me() {
+    const data = { ok: false, errmsg: undefined, get: undefined };
+    const res = await this.fetchMe();
+    if (res.status !== 200) {
+      data.errmsg = 'bad request';
+    } else {
+      data.ok = true;
+      data.get = res.json;
+    }
+    return data;
   }
 }

@@ -1,6 +1,6 @@
-import Whois from "../Services/Whois.js";
 import { menuPage } from "../main.js";
 import Navbar from "./Navbar.js";
+import sessionService from '../Services/sessionService.js';
 
 export default class Base {
     #parent;
@@ -16,8 +16,10 @@ export default class Base {
     createNavbar() {
         nav.innerHTML = '';
         let isAuthorized = false;
-        Whois.getLogin(menuPage, res => {
-            if (res.status === 202) {
+        sessionService.me()
+        .then(res => {
+            console.log(res);
+            if (!res.ok) {
                 isAuthorized = false;
             } else {
                 isAuthorized = true;
