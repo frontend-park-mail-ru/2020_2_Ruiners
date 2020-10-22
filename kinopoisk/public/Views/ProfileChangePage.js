@@ -1,6 +1,8 @@
 import NavLink from '../Services/navLink.js';
 import { renderForm } from './Components.js';
 import Base from "./Base.js";
+import userService from "../Services/userService.js";
+import {loginPage} from "../main.js";
 
 export default class ProfileChangePage extends Base{
     #parent
@@ -52,19 +54,14 @@ export default class ProfileChangePage extends Base{
       formLink.render('submit', () => {
         if (!formrLogin[1].classList.contains('invalid')) {
           const login = formrLogin[1].value.trim();
-          ajaxPostUsingFetch({
-            url: '/chengelogin',
-            body: {
-              login,
-            },
-          })
+          userService.ChangeLogin(login)
             .then((res) => {
-              if (res === 200) {
+              if (res.ok) {
                 nav.innerHTML = '';
                 super.render();
                 profilePage();
               } else {
-                alert('error');
+                alert(res.errmsg);
               }
             });
         }
@@ -121,19 +118,12 @@ export default class ProfileChangePage extends Base{
           const Password = formr[2].value.trim();
           const pass = formr[3].value.trim();
           if (Password === pass) {
-            ajaxPostUsingFetch({
-              url: '/chengepass',
-              body: {
-                PasswordOld,
-                Password,
-              },
-            })
+            userService.ChangePassword(PasswordOld, Password)
               .then((res) => {
-                if (res === 200) {
+                if (res.ok) {
                   profilePage();
                 } else {
-                  err.innerHTML = 'Неправильный старый пароль';
-                  formPass.appendChild(err);
+                  formPass.appendChild(res.errmsg);
                 }
               });
           } else {
