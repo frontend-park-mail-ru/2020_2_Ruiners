@@ -8,7 +8,6 @@
 @import "../../components/FilmPoster/FilmPoster.css";
 
 
-
 body.film1 {
     background-image: url("../images/test.jpg");
     height: 100vh;
