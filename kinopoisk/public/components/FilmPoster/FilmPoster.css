@@ -1,5 +1,7 @@
 .lenta__object {
     display: inline-flex;
+    overflow-x: auto;
+    overflow-y: hidden;
     height: 430px;
     width: 300px;
     margin-left: 52px;
