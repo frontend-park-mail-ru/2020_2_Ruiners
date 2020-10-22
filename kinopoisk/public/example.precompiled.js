@@ -78,7 +78,11 @@ templates['Button'] = template({"compiler":[8,">= 4.3.0"],"main":function(contai
                 return undefined
             };
 
-            return "<div class=\"lenta__object\">\n    <a href=\"#\" class=\"href\"><img width=\"270\" height=\"420\" src=\"static/images/nachalo.jpg\" alt=\"\" class=\"object__image\">\n        <div class=\"object__hidden\"><span>"
+            return "<div class=\"lenta__object\">\n    <a href=\"#\" class=\"href\" id=\""
+                + alias4(((helper = (helper = lookupProperty(helpers,"title") || (depth0 != null ? lookupProperty(depth0,"title") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":2,"column":33},"end":{"line":2,"column":44}}}) : helper)))
+                + "\"><img width=\"270\" height=\"420\" src=\""
+                + alias4(((helper = (helper = lookupProperty(helpers,"image") || (depth0 != null ? lookupProperty(depth0,"image") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"image","hash":{},"data":data,"loc":{"start":{"line":2,"column":81},"end":{"line":2,"column":92}}}) : helper)))
+                + "\" alt=\"\" class=\"object__image\">\n        <div class=\"object__hidden\"><span>"
                 + alias4(((helper = (helper = lookupProperty(helpers,"genre") || (depth0 != null ? lookupProperty(depth0,"genre") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"genre","hash":{},"data":data,"loc":{"start":{"line":3,"column":42},"end":{"line":3,"column":53}}}) : helper)))
                 + ", "
                 + alias4(((helper = (helper = lookupProperty(helpers,"year") || (depth0 != null ? lookupProperty(depth0,"year") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"year","hash":{},"data":data,"loc":{"start":{"line":3,"column":55},"end":{"line":3,"column":65}}}) : helper)))

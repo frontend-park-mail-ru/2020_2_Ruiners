@@ -86,4 +86,4 @@ function profilePage() {
 
 menuPage();
 
-export { menuPage, loginPage, signupPage, profilePage, profileChengePage }
+export { menuPage, loginPage, signupPage, profilePage, profileChengePage, filmPage }

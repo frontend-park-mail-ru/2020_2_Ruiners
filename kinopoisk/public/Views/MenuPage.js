@@ -19,15 +19,15 @@ export default class MenuPage extends Base{
       const lentas = [
           {
             genre: 'Триллеры',
-            parent: body
+            parent: this.#parent
           },
           {
             genre: 'Комедии',
-            parent: body
+            parent: this.#parent
           },
           {
             genre: 'Ужастики',
-            parent: body
+            parent: this.#parent
           }
       ]
       for (let i = 0; i < 3; i++) {

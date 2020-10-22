@@ -24,4 +24,9 @@ export default class FilmPoster {
             image: this.#image
         });
     }
+
+    getId() {
+        const href = document.getElementById(this.#title);
+        return href;
+    }
 }
