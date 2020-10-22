@@ -1,4 +1,3 @@
-import { createSpan } from './Components.js';
 import Base from "./Base.js";
 import FilmCard from "../components/FilmCard/FilmCard.js";
 

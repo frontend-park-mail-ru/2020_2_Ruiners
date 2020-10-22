@@ -16,7 +16,10 @@
     margin-top: 10px;
     display: block;
     text-decoration: none;
+}
 
+.linkSignupLogin:hover {
+    cursor: default;
 }
 
 .linkSignupLogin__black {
