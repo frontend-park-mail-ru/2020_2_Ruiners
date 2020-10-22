@@ -1,18 +1,6 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 
-export function createA(href, text) {
-  const a = document.createElement('a');
-  a.href = href;
-  a.textContent = text;
-  return a;
-}
-
-export function createSpan(classname, text) {
-  const span = document.createElement('span');
-  span.className = classname;
-  span.textContent = text;
-  return span;
-}
+import Button from "../components/Button/Button.js";
 
 export function createInput(type, name, text) {
   const input = document.createElement('input');
@@ -22,26 +10,11 @@ export function createInput(type, name, text) {
   return input;
 }
 
-export function createInputSubmit(value, className) {
-  const input = document.createElement('input');
-  input.type = 'submit';
-  input.className = className;
-  input.value = value;
-  return input;
-}
-
 export function createDiv(className, parent) {
   const div = document.createElement('div');
   div.className = className;
   parent.appendChild(div);
   return div;
-}
-
-export function createLi(className, child) {
-  const li = document.createElement('li');
-  li.className = className;
-  li.appendChild(child);
-  return li;
 }
 
 function valid(form, reg, input, text) {
@@ -82,8 +55,13 @@ export function renderForm(headConf, configInput, sub) {
     formr.push(input);
   });
   const { text, className} = sub
-  const submitpass = createInputSubmit(text, className);
-  form.appendChild(submitpass);
+  const submitpass = new Button({
+      parent: form,
+      text: text,
+      classname: 'buttons buttons__margin',
+      type: 'submit'
+  });
+  submitpass.renderSubmit();
 
   let i = 1;
   configInput.forEach((menuKey) => {

@@ -4,14 +4,16 @@ export default class Button {
     #text;
     #parent;
     template;
+    #type;
 
     constructor(context = {}) {
-        const { classname, text, parent } = context;
+        const { classname, text, parent, type } = context;
         this.button = document.createElement('div');
         this.#classname = classname;
         this.#text = text;
         this.#parent = parent;
         this.template = Handlebars.templates['Button'];
+        this.#type = type;
     }
 
     render(callback) {
@@ -24,5 +26,13 @@ export default class Button {
             evt.preventDefault();
             callback(evt);
         });
+    }
+
+    renderSubmit() {
+        this.button = document.createElement('button');
+        this.button.className = this.#classname;
+        this.button.textContent = this.#text;
+        this.button.type = this.#type;
+        this.#parent.appendChild(this.button);
     }
 }

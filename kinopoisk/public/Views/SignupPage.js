@@ -1,8 +1,9 @@
 import NavLink from '../Services/navLink.js';
-import { createA, renderForm } from './Components.js';
+import { renderForm } from './Components.js';
 import Base from "./Base.js";
 import {signupPage} from "../main.js";
 import sessionService from '../Services/sessionService.js';
+import Link from "../components/Link/Link.js";
 
 export default class SignupPage extends Base{
     #parent
@@ -62,11 +63,14 @@ export default class SignupPage extends Base{
       const form = formrLogin[0];
       this.#parent.appendChild(form);
 
-      const linkLogin = createA('/login', 'Войти в имеющийся аккаунт');
-      linkLogin.className = 'linkSignupLogin';
-      const loginLink = new NavLink(linkLogin);
+      const linkLogin = new Link({
+          parent: form,
+          classname: 'linkSignupLogin'
+      });
+      linkLogin.render();
+      linkLogin.placeContent('Войти в имеющийся аккаунт');
+      const loginLink = new NavLink(linkLogin.a);
       loginLink.render('click', loginPage);
-      form.appendChild(linkLogin);
       const formLink = new NavLink(form);
       const err = document.createElement('div');
       err.className = 'error';

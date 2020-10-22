@@ -1,7 +1,8 @@
 import NavLink from '../Services/navLink.js';
-import { createA, renderForm } from './Components.js';
+import { renderForm } from './Components.js';
 import Base from "./Base.js";
 import sessionService from '../Services/sessionService.js';
+import Link from "../components/Link/Link.js";
 
 export default class SignupPage extends Base{
     #parent
@@ -68,10 +69,13 @@ export default class SignupPage extends Base{
           }
         });
       });
-      const linkSignup = createA('/signup', 'Создать новый аккаунт');
-      linkSignup.className = 'linkSignupLogin';
-      form.appendChild(linkSignup);
-      const loginLink = new NavLink(linkSignup);
+      const linkSignup = new Link({
+          parent: form,
+          classname: 'linkSignupLogin'
+      })
+      linkSignup.render();
+      linkSignup.placeContent('Создать новый аккаунт');
+      const loginLink = new NavLink(linkSignup.a);
       loginLink.render('click', signupPage);
     }
 }
