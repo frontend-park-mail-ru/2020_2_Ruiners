@@ -5,15 +5,7 @@ import ProfilePage from './Views/ProfilePage.js';
 import ProfileChangePage from './Views/ProfileChangePage.js';
 import MenuPage from './Views/MenuPage.js';
 import sessionService from '../Services/sessionService.js';
-
-const pages = {
-  signup: signupPage,
-  login: loginPage,
-  profile: profilePage,
-  profileChange: profileChengePage,
-  film: filmPage,
-  menu: menuPage,
-};
+import Bus from "./Services/EventBus.js";
 
 function menuPage() {
   let isAuth = false;
@@ -25,13 +17,13 @@ function menuPage() {
         isAuth = false;
       }
       const menu = new MenuPage(application);
-      menu.render(pages, isAuth);
+      menu.render();
     });
 }
 
 function signupPage() {
   const signup = new SignupPage(application);
-  signup.render(loginPage, menuPage);
+  signup.render();
 }
 
 function filmPage() {
@@ -41,7 +33,7 @@ function filmPage() {
 
 function loginPage() {
   const login = new LoginPage(application);
-  login.render(loginPage, menuPage, signupPage);
+  login.render();
 }
 
 function profileChengePage() {
@@ -57,7 +49,7 @@ function profileChengePage() {
         }
       if (res.ok) {
         const profileChange = new ProfileChangePage(application, responseBody);
-        profileChange.render(menuPage, profilePage);
+        profileChange.render();
       } else {
         loginPage();
       }
@@ -77,13 +69,82 @@ function profilePage() {
         }
       if (res.ok) {
         const profile = new ProfilePage(application, responseBody);
-        profile.render(profileChengePage);
+        profile.render();
       } else {
         loginPage();
       }
     });
 }
 
+Bus.on('profile', (href) => {
+    href.render('click', () => {
+        profilePage();
+    });
+});
+
+Bus.on('profileChange', (href) => {
+    href.render('click', () => {
+        profileChengePage();
+    });
+});
+
+Bus.on('film', (href) => {
+    href.render('click', () => {
+        filmPage();
+    });
+});
+
+Bus.on('navbarLogin', (button) => {
+    button.render(() => {
+        loginPage();
+    });
+});
+
+Bus.on('navbarSignup', (button) => {
+    button.render(() => {
+        signupPage();
+    });
+});
+
+Bus.on('logout', (res) => {
+    if (res.ok) {
+        menuPage();
+    } else {
+        console.log(res.errmsg);
+    }
+});
+
+Bus.on('navbarClick', (mainLink) => {
+    mainLink.render('click', () => {
+        menuPage();
+    });
+});
+
+Bus.on('signupClick', (loginLink) =>  {
+    loginLink.render('click', signupPage);
+});
+
+Bus.on('loginClick', (loginLink) =>  {
+    loginLink.render('click', loginPage);
+});
+
+Bus.on('loginSignup', (data) => {
+    const { loginres, err, form } = data;
+    if (loginres.ok) {
+        nav.innerHTML = '';
+        menuPage();
+    } else {
+        err.innerHTML = loginres.errmsg;
+        form.appendChild(err);
+    }
+});
+
+Bus.on('loginPasswordChange', (res) => {
+    profilePage();
+});
+Bus.on('Change', (res) => {
+    profileChengePage();
+});
+
 menuPage();
 
-export { menuPage, loginPage, signupPage, profilePage, profileChengePage, filmPage }

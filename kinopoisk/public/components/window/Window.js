@@ -1,6 +1,5 @@
 import Button from "../Button/Button.js";
-import {profilePage, profileChengePage } from "../../main.js";
-
+import Bus from "../../Services/EventBus.js";
 export default class Window {
     window;
     #classname;
@@ -30,10 +29,10 @@ export default class Window {
             text: 'Настройки'
         });
         buttonProfile.render(() => {
-            profilePage();
+            Bus.emit('loginPasswordChange', (buttonProfile));
         });
         buttonSetting.render( () => {
-            profileChengePage();
+            Bus.emit('Change', buttonSetting);
         });
     }
     close() {

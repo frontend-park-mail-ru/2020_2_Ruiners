@@ -1,6 +1,6 @@
 import FilmPoster from "../FilmPoster/FilmPoster.js";
 import navLink from "../../Services/navLink.js";
-import { filmPage } from "../../main.js";
+import Bus from "../../Services/EventBus.js";
 
 export default class FilmLenta {
     lenta;
@@ -67,17 +67,17 @@ export default class FilmLenta {
         if (this.#genre === 'Триллеры') {
             const href = document.getElementById(this.#films[0].title);
             const hrefLink = new navLink(href);
-            hrefLink.render('click', filmPage);
+            Bus.emit('film', hrefLink);
         }
         if (this.#genre === 'Комедии') {
             const href = document.getElementById(this.#films[1].title);
             const hrefLink = new navLink(href);
-            hrefLink.render('click', filmPage);
+            Bus.emit('film', hrefLink);
         }
         if (this.#genre === 'Ужастики') {
             const href = document.getElementById(this.#films[2].title);
             const hrefLink = new navLink(href);
-            hrefLink.render('click', filmPage);
+            Bus.emit('film', hrefLink);
         }
     }
 }

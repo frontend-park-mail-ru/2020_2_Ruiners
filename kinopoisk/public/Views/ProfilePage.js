@@ -2,6 +2,7 @@ import NavLink from '../Services/navLink.js';
 import { createDiv } from './Components.js';
 import Base from "./Base.js";
 import Link from "../components/Link/Link.js";
+import Bus from "../Services/EventBus.js";
 
 export default class ProfilePage extends Base{
     #parent
@@ -14,7 +15,7 @@ export default class ProfilePage extends Base{
       this.#data = data;
     }
 
-    render(ProfileChange) {
+    render() {
       const body = document.getElementById('body');
       body.className = 'page';
       const divshadow = createDiv('shadow profile', this.#parent);
@@ -56,7 +57,7 @@ export default class ProfilePage extends Base{
       button.textContent = 'Изменить данные';
       button.href = '/';
       const buttonLink = new NavLink(button);
-      buttonLink.render('click', ProfileChange);
+      Bus.emit('profileChange', buttonLink);
       divLeft.appendChild(button);
 
       const divRight = createDiv('profileInfoWrapRight', divshadow);

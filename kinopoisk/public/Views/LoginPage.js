@@ -3,8 +3,9 @@ import { renderForm } from './Components.js';
 import Base from "./Base.js";
 import sessionService from '../Services/sessionService.js';
 import Link from "../components/Link/Link.js";
+import Bus from "../Services/EventBus.js";
 
-export default class SignupPage extends Base{
+export default class LoginPage extends Base{
     #parent
 
     constructor(parent) {
@@ -12,7 +13,7 @@ export default class SignupPage extends Base{
       this.#parent = parent;
     }
 
-    render(loginPage, menuPage, signupPage) {
+    render() {
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
@@ -58,15 +59,11 @@ export default class SignupPage extends Base{
         // console.log(`login =  ${login}`);
 
         sessionService.login(login, password).then((loginres) => {
-          console.log(loginres.ok);
-          if (loginres.ok) {
-            nav.innerHTML = '';
-            super.render();
-            menuPage();
-          } else {
-            err.innerHTML = loginres.errmsg;
-            form.appendChild(err);
-          }
+          Bus.emit('loginSignup', {
+            loginres: loginres,
+            err: err,
+            form: form
+          });
         });
       });
       const linkSignup = new Link({
@@ -76,6 +73,6 @@ export default class SignupPage extends Base{
       linkSignup.render();
       linkSignup.placeContent('Создать новый аккаунт');
       const loginLink = new NavLink(linkSignup.a);
-      loginLink.render('click', signupPage);
+      Bus.emit('signupClick', loginLink);
     }
 }

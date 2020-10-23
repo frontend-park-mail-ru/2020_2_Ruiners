@@ -1,9 +1,9 @@
 import NavLink from '../Services/navLink.js';
 import { renderForm } from './Components.js';
 import Base from "./Base.js";
-import {signupPage} from "../main.js";
 import sessionService from '../Services/sessionService.js';
 import Link from "../components/Link/Link.js";
+import Bus from "../Services/EventBus.js";
 
 export default class SignupPage extends Base{
     #parent
@@ -13,7 +13,7 @@ export default class SignupPage extends Base{
       this.#parent = parent;
     }
 
-    render(loginPage, menuPage) {
+    render() {
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
@@ -70,7 +70,7 @@ export default class SignupPage extends Base{
       linkLogin.render();
       linkLogin.placeContent('Войти в имеющийся аккаунт');
       const loginLink = new NavLink(linkLogin.a);
-      loginLink.render('click', loginPage);
+      Bus.emit('loginClick', loginLink);
       const formLink = new NavLink(form);
       const err = document.createElement('div');
       err.className = 'error';
@@ -81,15 +81,11 @@ export default class SignupPage extends Base{
           const password = formrLogin[3].value.trim();
           const email = formrLogin[2].value.trim();
           sessionService.signup(login, email, password).then((signupres) => {
-            console.log(signupres.ok);
-            if (signupres.ok) {
-              nav.innerHTML = '';
-              super.render();
-              menuPage();
-            } else {
-              err.innerHTML = signupres.errmsg;
-              form.appendChild(err);
-            }
+            Bus.emit('loginSignup', {
+              loginres: signupres,
+              err: err,
+              form: form
+            });
           });
         }
       });
