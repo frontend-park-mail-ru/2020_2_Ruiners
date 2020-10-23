@@ -1,10 +1,18 @@
 import Button from "../Button/Button.js";
-import { createDiv, createInput } from "../../Views/Components.js";
+import { createDiv } from "../../Views/Components.js";
 
 export default class Form {
     #headConf;
     #configInput;
     #sub;
+
+    #createInput(type, name, text) {
+      const input = document.createElement('input');
+      input.type = type;
+      input.name = name;
+      input.placeholder = text;
+      return input;
+    }
 
     #valid(form, reg, input, text) {
         const diver = createDiv('error', form);
@@ -44,7 +52,7 @@ export default class Form {
       
         this.#configInput.forEach((menuKey) => {
           const { type, name, text, required } = menuKey;
-          const input = createInput(type, name, text);
+          const input = this.#createInput(type, name, text);
           input.required = required;
           form.appendChild(input);
           formr.push(input);
