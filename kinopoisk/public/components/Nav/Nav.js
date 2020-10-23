@@ -2,7 +2,7 @@ export default class Navigate {
     #parent;
 
     constructor(parent) {
-        this.#parent = parent;
+      this.#parent = parent;
     }
 
     render() {

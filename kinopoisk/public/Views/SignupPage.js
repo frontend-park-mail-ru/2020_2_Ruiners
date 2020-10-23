@@ -1,11 +1,11 @@
 import NavLink from '../Services/navLink.js';
-import { renderForm } from './Components.js';
-import Base from "./Base.js";
-import {signupPage} from "../main.js";
+import Base from './Base.js';
+import { signupPage } from '../main.js';
 import sessionService from '../Services/sessionService.js';
-import Link from "../components/Link/Link.js";
+import Link from '../components/Link/Link.js';
+import Form from '../components/Form/Form.js';
 
-export default class SignupPage extends Base{
+export default class SignupPage extends Base {
     #parent
 
     constructor(parent) {
@@ -59,13 +59,16 @@ export default class SignupPage extends Base{
         className: 'secondary',
       };
 
-      const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
+      const formLog = new Form(headLogin, configInputLogin, subLogin);
+      const formrLogin = formLog.render();
+
+      // const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
       const form = formrLogin[0];
       this.#parent.appendChild(form);
 
       const linkLogin = new Link({
-          parent: form,
-          classname: 'linkSignupLogin'
+        parent: form,
+        classname: 'linkSignupLogin',
       });
       linkLogin.render();
       linkLogin.placeContent('Войти в имеющийся аккаунт');

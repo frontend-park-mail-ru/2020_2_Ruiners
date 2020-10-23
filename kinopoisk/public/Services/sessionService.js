@@ -3,13 +3,13 @@ import { AjaxModule } from '../modules/ajax1.js';
 export default class SessionService {
   static async fetchLogin(login, password) {
     const res = await AjaxModule.ajaxPost({ url: '/login', body: { login, password } });
-    //console.log(res);
+    // console.log(res);
     return res.status;
   }
 
   static async fetchSignup(login, email, password) {
     const res = await AjaxModule.ajaxPost({ url: '/signup', body: { login, email, password } });
-    //console.log(res);
+    // console.log(res);
     return res.status;
   }
 
@@ -21,7 +21,7 @@ export default class SessionService {
   static async fetchMe() {
     const res = await AjaxModule.ajaxGet({ url: '/me' });
     const parsedJsonObject = await res.json();
-    return {status: res.status, json: parsedJsonObject};
+    return { status: res.status, json: parsedJsonObject };
   }
 
   static async login(login, password) {

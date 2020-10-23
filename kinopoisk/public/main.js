@@ -45,16 +45,16 @@ function loginPage() {
 }
 
 function profileChengePage() {
-    let responseBody;
+  let responseBody;
   application.innerHTML = '';
   sessionService.me()
     .then((res) => {
-        try {
-            responseBody = JSON.stringify(res.get);
-        } catch (e) {
-            menuPage();
-            return;
-        }
+      try {
+        responseBody = JSON.stringify(res.get);
+      } catch (e) {
+        menuPage();
+        return;
+      }
       if (res.ok) {
         const profileChange = new ProfileChangePage(application, responseBody);
         profileChange.render(menuPage, profilePage);
@@ -65,16 +65,16 @@ function profileChengePage() {
 }
 
 function profilePage() {
-    let responseBody
+  let responseBody;
   application.innerHTML = '';
   sessionService.me()
     .then((res) => {
-        try {
-            responseBody = JSON.stringify(res.get);
-        } catch (e) {
-            menuPage();
-            return;
-        }
+      try {
+        responseBody = JSON.stringify(res.get);
+      } catch (e) {
+        menuPage();
+        return;
+      }
       if (res.ok) {
         const profile = new ProfilePage(application, responseBody);
         profile.render(profileChengePage);
@@ -86,4 +86,6 @@ function profilePage() {
 
 menuPage();
 
-export { menuPage, loginPage, signupPage, profilePage, profileChengePage, filmPage }
+export {
+  menuPage, loginPage, signupPage, profilePage, profileChengePage, filmPage,
+};
