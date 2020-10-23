@@ -1,7 +1,8 @@
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
 const noop = () => {};
-let windowClicks = 0;
+// let windowClicks = 0;
+
 const config = {
   signup: {
     href: '/signup',

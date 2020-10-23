@@ -1,7 +1,7 @@
-import Base from "./Base.js";
-import FilmCard from "../components/FilmCard/FilmCard.js";
+import Base from './Base.js';
+import FilmCard from '../components/FilmCard/FilmCard.js';
 
-export default class FilmPage extends Base{
+export default class FilmPage extends Base {
     #parent
 
     constructor(parent) {
@@ -14,8 +14,8 @@ export default class FilmPage extends Base{
       body.className = 'film1';
       this.#parent.innerHTML = '';
       this.#parent.className = '';
-      const film = new FilmCard( {
-          parent: this.#parent
+      const film = new FilmCard({
+        parent: this.#parent,
       });
       film.render();
     }

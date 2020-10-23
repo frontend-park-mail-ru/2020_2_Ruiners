@@ -1,0 +1,42 @@
+input {
+    height: 32px;
+    font-size: 15px;
+    padding: 0 10px;
+
+    border-radius: 100px;
+    border: none;
+    outline: 0;
+    background-color: #DCDCDC;
+
+    box-shadow: 0 0 0 2px #696969,
+    0 0 0 4px #000000;
+
+    margin: 4px;
+    margin-top: 20px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    border: 1px dotted #63476f;
+    box-shadow: 0 0 0 1000px #edf8f6 inset,
+    0 0 0 4px #edf8f6;
+}
+
+form main {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+form main > * {
+    margin-bottom: 20px;
+}
+
+form main > *:last-child {
+    margin-bottom: 0;
+}
+
+
+form button:first-child {
+    margin-right: 20px;
+}
