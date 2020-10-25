@@ -1,4 +1,5 @@
 import NavLink from '../Services/navLink.js';
+import Form from "../components/Form/Form.js";
 import Base from './Base.js';
 import sessionService from '../Services/sessionService.js';
 import Link from "../components/Link/Link.js";

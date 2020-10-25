@@ -1,12 +1,4 @@
-
-export function createInput(type, name, text) {
-  const input = document.createElement('input');
-  input.type = type;
-  input.name = name;
-  input.placeholder = text;
-  return input;
-}
-
+/* eslint no-param-reassign: ["error", { "props": false }] */
 export function createDiv(className, parent) {
   const div = document.createElement('div');
   div.className = className;

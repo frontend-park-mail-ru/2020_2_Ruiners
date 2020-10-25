@@ -3,13 +3,10 @@ import List from '../components/List/List.js';
 import Link from '../components/Link/Link.js';
 import Navigate from '../components/Nav/Nav.js';
 import Button from '../components/Button/Button.js';
-import {
-  menuPage, loginPage, signupPage, profilePage,
-} from '../main.js';
-import Base from './Base.js';
 import Window from '../components/window/Window.js';
 import navLink from '../Services/navLink.js';
 import SessionService from '../Services/sessionService.js';
+import Bus from "../Services/EventBus.js";
 
 export default class Navbar {
   #parent;
@@ -36,9 +33,7 @@ export default class Navbar {
     Brand.appendChild(href);
 
     const mainLink = new NavLink(href);
-    mainLink.render('click', () => {
-      menuPage();
-    });
+    Bus.emit('navbarClick', mainLink);
 
     const FilmsObj = new List({
       parent: ul,
@@ -104,12 +99,7 @@ export default class Navbar {
       });
       buttonLogoutObj.render((evt) => {
         SessionService.logout().then((res) => {
-          if (res.ok) {
-            this.render(false, 0);
-            loginPage();
-          } else {
-            console.log(res.errmsg);
-          }
+          Bus.emit('logout', res);
         });
       });
     } else {
@@ -124,9 +114,7 @@ export default class Navbar {
         classname: 'buttons',
         text: 'Войти',
       });
-      buttonLoginObj.render((evt) => {
-        loginPage();
-      });
+      Bus.emit('navbarLogin', buttonLoginObj);
 
       const signupObj = new List({
         parent: login,
@@ -139,9 +127,7 @@ export default class Navbar {
         classname: 'buttons',
         text: 'Зарегистрироваться',
       });
-      buttonSignupObj.render((evt) => {
-        signupPage();
-      });
+      Bus.emit('navbarSignup', buttonSignupObj);
     }
   }
 }
