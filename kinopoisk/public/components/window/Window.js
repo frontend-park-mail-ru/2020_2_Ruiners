@@ -1,17 +1,22 @@
 import Button from "../Button/Button.js";
 import Bus from "../../Services/EventBus.js";
+
 export default class Window {
     window;
+
     #classname;
+
     #text;
+
     #parent;
+
     template;
 
     constructor(context = {}) {
-        const { parent } = context;
-        this.#parent = parent;
-        this.window = document.createElement('div');
-        this.template = Handlebars.templates['Window'];
+      const { parent } = context;
+      this.#parent = parent;
+      this.window = document.createElement('div');
+      this.template = Handlebars.templates.Window;
     }
 
     render(callback) {
@@ -35,7 +40,8 @@ export default class Window {
             Bus.emit('Change', buttonSetting);
         });
     }
+
     close() {
-        this.window.innerHTML = '';
+      this.window.innerHTML = '';
     }
 }

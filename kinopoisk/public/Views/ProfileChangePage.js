@@ -1,11 +1,10 @@
 import NavLink from '../Services/navLink.js';
-import { renderForm } from './Components.js';
-import Base from "./Base.js";
-import userService from "../Services/userService.js";
 import Bus from "../Services/EventBus.js";
+import Form from '../components/Form/Form.js';
+import Base from './Base.js';
+import userService from '../Services/userService.js';
 
-
-export default class ProfileChangePage extends Base{
+export default class ProfileChangePage extends Base {
     #parent
 
     #data
@@ -47,7 +46,9 @@ export default class ProfileChangePage extends Base{
         className: 'secondary',
       };
 
-      const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
+      const formrend = new Form(headLogin, configInputLogin, subLogin);
+      const formrLogin = formrend.render();
+      // const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
       const form = formrLogin[0];
       this.#parent.appendChild(form);
 
@@ -105,7 +106,9 @@ export default class ProfileChangePage extends Base{
         className: 'secondary',
       };
 
-      const formr = renderForm(head, configInput, sub);
+      const formrendpath = new Form(head, configInput, sub);
+      const formr = formrendpath.render();
+      // const formr = renderForm(head, configInput, sub);
       const formPass = formr[0];
       this.#parent.appendChild(formPass);
 
@@ -142,11 +145,14 @@ export default class ProfileChangePage extends Base{
           required: true,
           valid: false,
         }];
+
       const subAvatar = {
         text: 'Изменить аватар',
         className: 'secondary',
       };
-      const formrAvatar = renderForm(head, configAvatar, subAvatar);
+      const formrendAvatar = new Form(head, configAvatar, subAvatar);
+      const formrAvatar = formrendAvatar.render();
+      // const formrAvatar = renderForm(head, configAvatar, subAvatar);
       const formAvatar = formrAvatar[0];
       this.#parent.appendChild(formAvatar);
       const formData = new FormData();

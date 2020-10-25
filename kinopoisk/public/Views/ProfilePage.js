@@ -1,10 +1,10 @@
 import NavLink from '../Services/navLink.js';
 import { createDiv } from './Components.js';
-import Base from "./Base.js";
-import Link from "../components/Link/Link.js";
 import Bus from "../Services/EventBus.js";
+import Base from './Base.js';
+import Link from '../components/Link/Link.js';
 
-export default class ProfilePage extends Base{
+export default class ProfilePage extends Base {
     #parent
 
     #data
@@ -36,8 +36,8 @@ export default class ProfilePage extends Base{
         const { href, text } = menuTop[menuKey];
         const menuItem = document.createElement('li');
         const menuItema = new Link({
-            parent: menuItem,
-            classname: ''
+          parent: menuItem,
+          classname: '',
         });
         menuItema.a.dataset.section = menuKey;
         menuItema.render();
