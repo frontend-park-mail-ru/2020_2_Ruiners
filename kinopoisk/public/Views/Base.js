@@ -1,4 +1,3 @@
-import { menuPage } from '../main.js';
 import Navbar from './Navbar.js';
 import sessionService from '../Services/sessionService.js';
 

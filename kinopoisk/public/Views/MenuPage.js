@@ -10,7 +10,7 @@ export default class MenuPage extends Base {
       this.#parent = parent;
     }
 
-    render(pages, isAuth) {
+    render() {
       super.render();
       this.#parent.innerHTML = '';
       this.#parent.className = '';

@@ -1,8 +1,8 @@
 import NavLink from '../Services/navLink.js';
+import Bus from "../Services/EventBus.js";
 import Form from '../components/Form/Form.js';
 import Base from './Base.js';
 import userService from '../Services/userService.js';
-import { loginPage } from '../main.js';
 
 export default class ProfileChangePage extends Base {
     #parent
@@ -15,7 +15,7 @@ export default class ProfileChangePage extends Base {
       this.#data = data;
     }
 
-    render(menuPage, profilePage) {
+    render() {
       const body = document.getElementById('body');
       body.className = 'page';
 
@@ -61,7 +61,7 @@ export default class ProfileChangePage extends Base {
               if (res.ok) {
                 nav.innerHTML = '';
                 super.render();
-                profilePage();
+                Bus.emit('loginPasswordChange', res);
               } else {
                 alert(res.errmsg);
               }
@@ -125,7 +125,7 @@ export default class ProfileChangePage extends Base {
             userService.ChangePassword(PasswordOld, Password)
               .then((res) => {
                 if (res.ok) {
-                  profilePage();
+                  Bus.emit('loginPasswordChange', res);
                 } else {
                   formPass.appendChild(res.errmsg);
                 }
@@ -174,9 +174,7 @@ export default class ProfileChangePage extends Base {
       buttonBack.className = 'buttons buttons__marginForFilmCard';
       buttonBack.dataset.section = 'profile';
       const buttonBackLink = new NavLink(buttonBack);
-      buttonBackLink.render('click', () => {
-        profilePage();
-      });
+      Bus.emit('profile', buttonBackLink);
       this.#parent.appendChild(buttonBack);
     }
 }

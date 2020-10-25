@@ -1,5 +1,5 @@
-import Button from '../Button/Button.js';
-import { profilePage, profileChengePage } from '../../main.js';
+import Button from "../Button/Button.js";
+import Bus from "../../Services/EventBus.js";
 
 export default class Window {
     window;
@@ -20,25 +20,25 @@ export default class Window {
     }
 
     render(callback) {
-      this.#parent.appendChild(this.window);
-      this.window.innerHTML = this.template();
-      const okno = document.getElementById('okno');
-      const buttonProfile = new Button({
-        parent: okno,
-        classname: 'buttons',
-        text: 'Профиль',
-      });
-      const buttonSetting = new Button({
-        parent: okno,
-        classname: 'buttons',
-        text: 'Настройки',
-      });
-      buttonProfile.render(() => {
-        profilePage();
-      });
-      buttonSetting.render(() => {
-        profileChengePage();
-      });
+        this.#parent.appendChild(this.window);
+        this.window.innerHTML = this.template();
+        const okno = document.getElementById('okno');
+        const buttonProfile = new Button({
+            parent: okno,
+            classname: 'buttons',
+            text: 'Профиль'
+        });
+        const buttonSetting = new Button( {
+            parent: okno,
+            classname: 'buttons',
+            text: 'Настройки'
+        });
+        buttonProfile.render(() => {
+            Bus.emit('loginPasswordChange', (buttonProfile));
+        });
+        buttonSetting.render( () => {
+            Bus.emit('Change', buttonSetting);
+        });
     }
 
     close() {
