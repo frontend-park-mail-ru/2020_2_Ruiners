@@ -99,6 +99,7 @@ export default class Navbar {
       });
       buttonLogoutObj.render((evt) => {
         SessionService.logout().then((res) => {
+          this.render(false, 0)
           Bus.emit('logout', res);
         });
       });

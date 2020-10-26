@@ -3,6 +3,7 @@ import Bus from "../Services/EventBus.js";
 import Form from '../components/Form/Form.js';
 import Base from './Base.js';
 import userService from '../Services/userService.js';
+import Button from "../components/Button/Button.js";
 
 export default class ProfileChangePage extends Base {
     #parent
@@ -16,6 +17,7 @@ export default class ProfileChangePage extends Base {
     }
 
     render() {
+      super.render(false);
       const body = document.getElementById('body');
       body.className = 'page';
 
@@ -168,13 +170,11 @@ export default class ProfileChangePage extends Base {
           body: formData,
         }).then((response) => response.status).then((res) => console.log(res));
       });
-      const buttonBack = document.createElement('button');
-      buttonBack.href = '/';
-      buttonBack.textContent = 'Назад';
-      buttonBack.className = 'buttons buttons__marginForFilmCard';
-      buttonBack.dataset.section = 'profile';
-      const buttonBackLink = new NavLink(buttonBack);
-      Bus.emit('profile', buttonBackLink);
-      this.#parent.appendChild(buttonBack);
+      const buttonBack = new Button({
+          parent: this.#parent,
+          classname: 'buttons buttons__marginForFilmCard',
+          text: 'Назад'
+      })
+      Bus.emit('Back', buttonBack);
     }
 }

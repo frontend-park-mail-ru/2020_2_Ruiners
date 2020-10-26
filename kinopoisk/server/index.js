@@ -1,14 +1,13 @@
-const { XMLHttpRequest } = require('xmlhttprequest');
-const childProc = require('child_process');
-const express = require('express');
 const path = require('path');
+const express = require('express');
 
 const app = express();
-const body = require('body-parser');
+const port = process.env.PORT || 3000;
 
-app.use(body.json());
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
-const port = process.env.PORT || 3000;
+app.all('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'));
+});
 
 app.listen(port);

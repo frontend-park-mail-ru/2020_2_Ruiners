@@ -5,17 +5,21 @@ export default class Link {
 
     #parent;
 
+    #pathname
+
     constructor(context) {
-      const { parent, classname } = context;
+      const { parent, classname, pathname } = context;
       this.a = document.createElement('a');
       this.#parent = parent;
       this.#classname = classname;
+      this.#pathname = pathname;
     }
 
     render() {
-      this.#parent.appendChild(this.a);
-      this.a.className = this.#classname;
-      return this.a;
+        this.a.className = this.#classname;
+        this.a.href = this.#pathname;
+        this.#parent.appendChild(this.a);
+        return this.a;
     }
 
     placeContent(inner) {
