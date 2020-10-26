@@ -11,7 +11,7 @@ export default class MenuPage extends Base {
     }
 
     render() {
-      super.render();
+      super.render(false);
       this.#parent.innerHTML = '';
       this.#parent.className = '';
       const body = document.getElementById('body');

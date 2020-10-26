@@ -14,11 +14,12 @@ export default class SignupPage extends Base {
     }
 
     render() {
+      super.render(false);
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
 
-      this.#parent.className = 'wrapper__form register';
+      this.#parent.className = 'wrapper__form__regLog register';
 
       const headLogin = {
         head: true,
@@ -69,11 +70,12 @@ export default class SignupPage extends Base {
       const linkLogin = new Link({
         parent: form,
         classname: 'linkSignupLogin',
+        pathname: '/login'
       });
       linkLogin.render();
       linkLogin.placeContent('Войти в имеющийся аккаунт');
-      const loginLink = new NavLink(linkLogin.a);
-      Bus.emit('loginClick', loginLink);
+      //const loginLink = new NavLink(linkLogin.a);
+      //Bus.emit('loginClick', loginLink);
       const formLink = new NavLink(form);
       const err = document.createElement('div');
       err.className = 'error';
@@ -84,6 +86,7 @@ export default class SignupPage extends Base {
           const password = formrLogin[3].value.trim();
           const email = formrLogin[2].value.trim();
           sessionService.signup(login, email, password).then((signupres) => {
+            super.render(true);
             Bus.emit('loginSignup', {
               loginres: signupres,
               err: err,

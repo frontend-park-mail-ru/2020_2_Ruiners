@@ -1,114 +1,40 @@
-import FilmPage from './Views/FilmPage.js';
-import SignupPage from './Views/SignupPage.js';
-import LoginPage from './Views/LoginPage.js';
-import ProfilePage from './Views/ProfilePage.js';
-import ProfileChangePage from './Views/ProfileChangePage.js';
-import MenuPage from './Views/MenuPage.js';
-import sessionService from '../Services/sessionService.js';
+import Controller from "./Controllers/Controllers.js";
 import Bus from "./Services/EventBus.js";
-
-function menuPage() {
-  let isAuth = false;
-  sessionService.me()
-    .then((res) => {
-      if (res.ok) {
-        isAuth = true;
-      } else {
-        isAuth = false;
-      }
-      const menu = new MenuPage(application);
-      menu.render();
-    });
-}
-
-function signupPage() {
-  const signup = new SignupPage(application);
-  signup.render();
-}
-
-function filmPage() {
-  const film = new FilmPage(application);
-  film.render();
-}
-
-function loginPage() {
-  const login = new LoginPage(application);
-  login.render();
-}
-
-function profileChengePage() {
-  let responseBody;
-  application.innerHTML = '';
-  sessionService.me()
-    .then((res) => {
-      try {
-        responseBody = JSON.stringify(res.get);
-      } catch (e) {
-        menuPage();
-        return;
-      }
-      if (res.ok) {
-        const profileChange = new ProfileChangePage(application, responseBody);
-        profileChange.render();
-      } else {
-        loginPage();
-      }
-    });
-}
-
-function profilePage() {
-  let responseBody;
-  application.innerHTML = '';
-  sessionService.me()
-    .then((res) => {
-      try {
-        responseBody = JSON.stringify(res.get);
-      } catch (e) {
-        menuPage();
-        return;
-      }
-      if (res.ok) {
-        const profile = new ProfilePage(application, responseBody);
-        profile.render();
-      } else {
-        loginPage();
-      }
-    });
-}
+import Router from "./Services/Router.js";
 
 Bus.on('profile', (href) => {
     href.render('click', () => {
-        profilePage();
+        router.open('/profile');
     });
 });
 
 Bus.on('profileChange', (href) => {
     href.render('click', () => {
-        profileChengePage();
+        router.open('/profileChange');
     });
 });
 
 Bus.on('film', (href) => {
     href.render('click', () => {
-        filmPage();
+        router.open('/film');
     });
 });
 
 Bus.on('navbarLogin', (button) => {
     button.render(() => {
-        loginPage();
+        router.open('/login');
     });
 });
 
 Bus.on('navbarSignup', (button) => {
     button.render(() => {
-        signupPage();
+        router.open('/signup');
     });
 });
 
 Bus.on('logout', (res) => {
     if (res.ok) {
-        menuPage();
+        router.open('/');
     } else {
         console.log(res.errmsg);
     }
@@ -116,23 +42,15 @@ Bus.on('logout', (res) => {
 
 Bus.on('navbarClick', (mainLink) => {
     mainLink.render('click', () => {
-        menuPage();
+        router.open('/');
     });
-});
-
-Bus.on('signupClick', (loginLink) =>  {
-    loginLink.render('click', signupPage);
-});
-
-Bus.on('loginClick', (loginLink) =>  {
-    loginLink.render('click', loginPage);
 });
 
 Bus.on('loginSignup', (data) => {
     const { loginres, err, form } = data;
     if (loginres.ok) {
         nav.innerHTML = '';
-        menuPage();
+        router.open('/');
     } else {
         err.innerHTML = loginres.errmsg;
         form.appendChild(err);
@@ -140,11 +58,31 @@ Bus.on('loginSignup', (data) => {
 });
 
 Bus.on('loginPasswordChange', (res) => {
-    profilePage();
+    router.open('/profile');
 });
 Bus.on('Change', (res) => {
-    profileChengePage();
+    router.open('/profileChange');
 });
 
-menuPage();
+Bus.on('Back', button => {
+    button.render(() => {
+        window.history.back();
+    })
+});
+
+const body = document.getElementById('body');
+const router = new Router(body);
+
+router
+    .register('/', Controller.menuPage)
+    .register('/login', Controller.loginPage)
+    .register('/film', Controller.filmPage)
+    .register('/signup', Controller.signupPage)
+    .register('/profile', Controller.profilePage)
+    .register('/profileChange', Controller.profileChengePage);
+
+
+router.start();
+
+
 

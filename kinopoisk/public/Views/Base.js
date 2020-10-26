@@ -8,8 +8,10 @@ export default class Base {
       this.#parent = parent;
     }
 
-    render() {
-      this.createNavbar();
+    render(flag) {
+        if(flag || nav.innerText == '') {
+            this.createNavbar();
+        }
     }
 
     createNavbar() {

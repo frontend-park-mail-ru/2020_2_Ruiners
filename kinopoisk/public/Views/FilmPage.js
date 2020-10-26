@@ -10,6 +10,7 @@ export default class FilmPage extends Base {
     }
 
     render() {
+        super.render(false);
       const body = document.getElementById('body');
       body.className = 'film1';
       this.#parent.innerHTML = '';

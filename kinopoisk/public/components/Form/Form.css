@@ -40,3 +40,47 @@ form main > *:last-child {
 form button:first-child {
     margin-right: 20px;
 }
+
+.login {
+    display: flex;
+    flex-direction: column;
+    height: 32%;
+    width: 15%;
+    border-radius: 20px;
+    margin-top: 200px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 1px 2px 10px 0 black;
+    padding: 0 20px 0;
+    opacity: 100%;
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    height: 35%;
+    width: 15%;
+    border-radius: 20px;
+    margin-top: 200px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 1px 2px 10px 0 black;
+    padding: 0 20px 0;
+    opacity: 100%;
+}
+
+.chenge {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    /* width: 15%; */
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 1px 2px 10px 0 black;
+    padding: 10px 20px 30px;
+    opacity: 100%;
+    margin: auto;
+}
+
+.wrapper__form__regLog {
+    display: block;
+    margin-left: 43%;
+}

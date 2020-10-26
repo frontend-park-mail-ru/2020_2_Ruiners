@@ -16,6 +16,7 @@ export default class ProfilePage extends Base {
     }
 
     render() {
+      super.render(false);
       const body = document.getElementById('body');
       body.className = 'page';
       const divshadow = createDiv('shadow profile', this.#parent);

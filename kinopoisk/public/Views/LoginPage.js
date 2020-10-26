@@ -14,10 +14,11 @@ export default class LoginPage extends Base{
     }
 
     render() {
+      super.render(false);
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
-      this.#parent.className = 'wrapper__form login';
+      this.#parent.className = 'wrapper__form__regLog login';
       const headLogin = {
         head: true,
         textContent: 'Вход',
@@ -62,6 +63,7 @@ export default class LoginPage extends Base{
         // console.log(`login =  ${login}`);
 
         sessionService.login(login, password).then((loginres) => {
+          super.render(true);
           Bus.emit('loginSignup', {
             loginres: loginres,
             err: err,
@@ -72,6 +74,7 @@ export default class LoginPage extends Base{
       const linkSignup = new Link({
         parent: form,
         classname: 'linkSignupLogin',
+        pathname: '/signup'
       });
       linkSignup.render();
       linkSignup.placeContent('Создать новый аккаунт');
