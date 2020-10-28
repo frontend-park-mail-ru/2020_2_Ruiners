@@ -5,14 +5,17 @@ export default class FilmCard {
 
     #parent;
 
+    #body;
+
     template;
 
     voteButton;
 
     constructor(context = {}) {
-      const { parent } = context;
+      const { parent, body } = context;
       this.card = document.createElement('div');
       this.#parent = parent;
+      this.#body = body;
       this.voteButton = new Button({
         classname: 'buttons buttons__marginForFilmCard',
         parent: null,
@@ -23,16 +26,11 @@ export default class FilmCard {
     render() {
       this.#parent.appendChild(this.card);
       this.card.innerHTML = this.template({
-        title: 'Начало',
-        description: 'Шпионаж фантастического уровня. С помощью сверхтехнологии '
-                + 'герой Ди Каприо и его команда проникают в чужие сны',
-        youtube: 'https://www.youtube.com/embed/85Zz1CCXyDI',
+        title: this.#body.title,
+        description: this.#body.Description,
+        youtube: this.#body.YoutubeLink,
         genres: [
-          'Фантастика',
-          'Триллер',
-          'Боевик',
-          'Детектив',
-          'Драма',
+          this.#body.MainGenre,
         ],
         actors: [
           'Леонардо ДиКаприо',
@@ -42,8 +40,7 @@ export default class FilmCard {
           'Кэн Ватанабэ',
         ],
         countries: [
-          'США',
-          'Великобритания',
+          this.#body.country
         ],
         rate: 0,
         votes: 0,

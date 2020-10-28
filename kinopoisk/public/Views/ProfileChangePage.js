@@ -126,10 +126,12 @@ export default class ProfileChangePage extends Base {
           if (Password === pass) {
             userService.ChangePassword(PasswordOld, Password)
               .then((res) => {
+                console.log(res.ok);
                 if (res.ok) {
                   Bus.emit('loginPasswordChange', res);
                 } else {
-                  formPass.appendChild(res.errmsg);
+                  err.textContent = res.errmsg;
+                  formPass.appendChild(err);
                 }
               });
           } else {

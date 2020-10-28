@@ -37,7 +37,7 @@ export default class UserService {
     }
     const res = await this.fetchChangePassword(oldPass, newPass);
     if (res !== 200) {
-      data.errmsg = 'bad request';
+      data.errmsg = 'Неправильный старый пароль';
     } else {
       data.ok = true;
     }
