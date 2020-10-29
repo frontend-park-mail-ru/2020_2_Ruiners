@@ -5,20 +5,12 @@ import ProfilePage from '../Views/ProfilePage.js';
 import ProfileChangePage from '../Views/ProfileChangePage.js';
 import MenuPage from '../Views/MenuPage.js';
 import sessionService from '../Services/sessionService.js';
+import filmService from "../Services/filmService.js";
 
 export default class Controller {
     static menuPage() {
-        let isAuth = false;
-        sessionService.me()
-            .then((res) => {
-                if (res.ok) {
-                    isAuth = true;
-                } else {
-                    isAuth = false;
-                }
-                const menu = new MenuPage(application);
-                menu.render();
-            });
+        const menu = new MenuPage(application);
+        menu.render();
     }
 
     static signupPage() {
@@ -26,9 +18,24 @@ export default class Controller {
         signup.render();
     }
 
-    static filmPage() {
-        const film = new FilmPage(application);
-        film.render();
+    static filmPage(params) {
+        const { id } = params;
+        let responseBody
+        filmService.getById(id)
+            .then((res) => {
+                try {
+                    responseBody = JSON.stringify(res.get);
+                } catch (e) {
+                    this.menuPage();
+                    return;
+                }
+                if (res.ok) {
+                    const film = new FilmPage({ parent: application, body: responseBody});
+                    film.render();
+                } else {
+                    this.menuPage();
+                }
+            });
     }
 
     static loginPage() {

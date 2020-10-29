@@ -2,6 +2,16 @@ import Controller from "./Controllers/Controllers.js";
 import Bus from "./Services/EventBus.js";
 import Router from "./Services/Router.js";
 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js', {scope: '/'})
+        .then((registration) => {
+            console.log('sw registration on scope:', registration.scope);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
+
 Bus.on('profile', (href) => {
     href.render('click', () => {
         router.open('/profile');
@@ -16,7 +26,9 @@ Bus.on('profileChange', (href) => {
 
 Bus.on('film', (href) => {
     href.render('click', () => {
-        router.open('/film');
+        router.open('/film', {
+            id: 1,
+        });
     });
 });
 
