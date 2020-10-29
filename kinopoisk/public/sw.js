@@ -3,6 +3,7 @@ const CACHE_NAME = 'kinopark_sw-v1';
 const cacheUrls = [
     '/',
     './main.js',
+    './Services/filmService.js',
     './Utils/Utils.js',
    ' ./components/Profile/Profile.css',
     './components/Nav/Nav.js',
@@ -73,9 +74,9 @@ this.addEventListener('install', (event) => {
 });
 
     this.addEventListener('fetch', (event) => {
-        if( navigator.onLine) {
-            return fetch(event.request);
-        }
+         if( navigator.onLine) {
+             return fetch(event.request);
+         }
         event.respondWith(
             caches
                 .match(event.request)

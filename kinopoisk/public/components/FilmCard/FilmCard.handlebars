@@ -5,9 +5,12 @@
         </a>
     </div>
     <div class="poster-body">
-        <a href="#" class="left-block">
-            <iframe width="560" height="315" src="{{ youtube }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </a>
+        <div class="left-block">
+                <iframe width="560" height="315" src="{{ youtube }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div> <span class="rating">Рейтинг: {{ rate }}</span><span class="votes">{{ votes }} голосов</span></div>
+            {{{ Button }}}
+            <a>⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐</a>
+        </div>
         <div class="right-block">
             <div class="desc">
                 {{ description }}
@@ -30,8 +33,5 @@
                 {{/each}}
             </div>
         </div>
-        <div> <span class="rating">Рейтинг: {{ rate }}</span><span class="votes">{{ votes }} голосов</span></div>
-        {{{ Button }}}
-        <a>⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐</a>
     </div>
 </div>

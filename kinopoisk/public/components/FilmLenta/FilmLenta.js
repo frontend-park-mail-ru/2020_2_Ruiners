@@ -23,18 +23,21 @@ export default class FilmLenta {
       this.template = Handlebars.templates.FilmLenta;
       this.#films = [ // Получение из базы данных
         {
+          id: 1,
           title: 'Начало',
           genre: 'Триллер',
           year: 2010,
           image: 'static/images/nachalo.jpg',
         },
         {
+          id: 2,
           title: 'Мачо и ботан',
           genre: 'Комедия',
           year: 2012,
           image: 'static/images/Macho.jpg',
         },
         {
+          id: 3,
           title: 'Человек-невидимка',
           genre: 'Ужастик',
           year: 2020,
@@ -69,20 +72,5 @@ export default class FilmLenta {
             genre: this.#genre,
             posters: this.#posters
         })
-        if (this.#genre === 'Триллеры') {
-            const href = document.getElementById(this.#films[0].title);
-            const hrefLink = new navLink(href);
-            Bus.emit('film', hrefLink);
-        }
-        if (this.#genre === 'Комедии') {
-            const href = document.getElementById(this.#films[1].title);
-            const hrefLink = new navLink(href);
-            Bus.emit('film', hrefLink);
-        }
-        if (this.#genre === 'Ужастики') {
-            const href = document.getElementById(this.#films[2].title);
-            const hrefLink = new navLink(href);
-            Bus.emit('film', hrefLink);
-        }
     }
 }

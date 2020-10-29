@@ -9,6 +9,8 @@ export default class Base {
     }
 
     render(flag) {
+        const body = document.getElementById('body');
+        body.style.backgroundImage = 'none';
         if(flag || nav.innerText == '') {
             this.createNavbar();
         }

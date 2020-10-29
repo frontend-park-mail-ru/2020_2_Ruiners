@@ -18,6 +18,7 @@ export default class LoginPage extends Base{
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
+      body.style.backgroundImage = `url('../static/images/login.jpg')`;
       this.#parent.className = 'wrapper__form__regLog login';
       const headLogin = {
         head: true,
@@ -79,6 +80,5 @@ export default class LoginPage extends Base{
       linkSignup.render();
       linkSignup.placeContent('Создать новый аккаунт');
       const loginLink = new NavLink(linkSignup.a);
-      Bus.emit('signupClick', loginLink);
     }
 }

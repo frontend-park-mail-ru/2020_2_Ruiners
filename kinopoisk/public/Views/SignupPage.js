@@ -18,7 +18,7 @@ export default class SignupPage extends Base {
       this.#parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
-
+      body.style.backgroundImage = `url('../static/images/login.jpg')`;
       this.#parent.className = 'wrapper__form__regLog register';
 
       const headLogin = {
@@ -74,8 +74,6 @@ export default class SignupPage extends Base {
       });
       linkLogin.render();
       linkLogin.placeContent('Войти в имеющийся аккаунт');
-      //const loginLink = new NavLink(linkLogin.a);
-      //Bus.emit('loginClick', loginLink);
       const formLink = new NavLink(form);
       const err = document.createElement('div');
       err.className = 'error';

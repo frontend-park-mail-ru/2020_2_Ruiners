@@ -20,7 +20,7 @@ export default class ProfileChangePage extends Base {
       super.render(false);
       const body = document.getElementById('body');
       body.className = 'page';
-
+      body.style.backgroundImage = `url('../static/images/login.jpg')`;
       this.#parent.className = 'wrapper__form chenge margin';
 
       const responseBody = JSON.parse(this.#data);
