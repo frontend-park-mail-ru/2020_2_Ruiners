@@ -1,6 +1,7 @@
 import NavLink from '../Services/navLink.js';
 import Base from './Base.js';
 import FilmLenta from '../components/FilmLenta/FilmLenta.js';
+import filmService from "../Services/filmService.js";
 
 export default class MenuPage extends Base {
     #parent
@@ -23,21 +24,38 @@ export default class MenuPage extends Base {
       }
       const lentas = [
         {
-          genre: 'Триллеры',
+          rusGenre:'Фантастика',
+          genre: 'fantasy',
           parent: this.#parent,
         },
         {
-          genre: 'Комедии',
-          parent: this.#parent,
-        },
-        {
-          genre: 'Ужастики',
+          rusGenre: 'Комедии',
+          genre: 'comedy',
           parent: this.#parent,
         },
       ];
-      for (let i = 0; i < 3; i++) {
-        const lenta = new FilmLenta(lentas[i]);
-        lenta.render();
+      for (let i = 0; i < lentas.length; i++) {
+        let responseBody;
+        filmService.getByGenre(lentas[i].genre)
+            .then((res) => {
+              try {
+                responseBody = JSON.parse(JSON.stringify(res.get));
+              } catch (e) {
+                this.menuPage();
+                return;
+              }
+              if (res.ok) {
+                const lenta = new FilmLenta({
+                  genre: lentas[i].rusGenre,
+                  body: responseBody,
+                  parent: application
+                });
+                lenta.render();
+              } else {
+                this.menuPage();
+              }
+            });
+
       }
     }
 }
