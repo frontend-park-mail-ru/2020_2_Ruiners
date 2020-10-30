@@ -1,30 +1,24 @@
-(function () {
-  const { template } = Handlebars;
-  const templates = Handlebars.templates = Handlebars.templates || {};
-  templates.Button = template({
-    compiler: [8, '>= 4.3.0'],
-    main(container, depth0, helpers, partials, data) {
-      let helper; const alias1 = depth0 != null ? depth0 : (container.nullContext || {}); const alias2 = container.hooks.helperMissing; const alias3 = 'function'; const alias4 = container.escapeExpression; const
-        lookupProperty = container.lookupProperty || function (parent, propertyName) {
-          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-            return parent[propertyName];
-          }
-          return undefined;
-        };
+(function() {
+    var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+    templates['Button'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+            var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+                if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+                    return parent[propertyName];
+                }
+                return undefined
+            };
 
-      return `<button class="${
-        alias4(((helper = (helper = lookupProperty(helpers, 'classname') || (depth0 != null ? lookupProperty(depth0, 'classname') : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-          name: 'classname', hash: {}, data, loc: { start: { line: 1, column: 15 }, end: { line: 1, column: 30 } },
-        }) : helper)))
-      }">${
-        alias4(((helper = (helper = lookupProperty(helpers, 'text') || (depth0 != null ? lookupProperty(depth0, 'text') : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-          name: 'text', hash: {}, data, loc: { start: { line: 1, column: 32 }, end: { line: 1, column: 42 } },
-        }) : helper)))
-      }</button>`;
-    },
-    useData: true,
-  });
-}());
+            return "<button id=\""
+                + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":1,"column":12},"end":{"line":1,"column":18}}}) : helper)))
+                + "\" class=\""
+                + alias4(((helper = (helper = lookupProperty(helpers,"classname") || (depth0 != null ? lookupProperty(depth0,"classname") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"classname","hash":{},"data":data,"loc":{"start":{"line":1,"column":27},"end":{"line":1,"column":42}}}) : helper)))
+                + "\" type=\""
+                + alias4(((helper = (helper = lookupProperty(helpers,"type") || (depth0 != null ? lookupProperty(depth0,"type") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data,"loc":{"start":{"line":1,"column":50},"end":{"line":1,"column":58}}}) : helper)))
+                + "\">"
+                + alias4(((helper = (helper = lookupProperty(helpers,"text") || (depth0 != null ? lookupProperty(depth0,"text") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data,"loc":{"start":{"line":1,"column":60},"end":{"line":1,"column":70}}}) : helper)))
+                + "</button>";
+        },"useData":true});
+})();
 
 (function () {
   const { template } = Handlebars;
@@ -41,14 +35,26 @@
 (function() {
     var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
     templates['FilmCard'] = template({"1":function(container,depth0,helpers,partials,data) {
+            var alias1=container.lambda, alias2=container.escapeExpression;
+
+            return "                    <input type=\"radio\" id=\"star-"
+                + alias2(alias1(depth0, depth0))
+                + "\" name=\"rating\" value=\""
+                + alias2(alias1(depth0, depth0))
+                + "\">\n                    <label for=\"star-"
+                + alias2(alias1(depth0, depth0))
+                + "\" title=\"Оценка «"
+                + alias2(alias1(depth0, depth0))
+                + "»\"></label>\n";
+        },"3":function(container,depth0,helpers,partials,data) {
             return "                        <a href=\"#\" class=\"link\"> "
                 + container.escapeExpression(container.lambda(depth0, depth0))
                 + " </a>\n";
-        },"3":function(container,depth0,helpers,partials,data) {
+        },"5":function(container,depth0,helpers,partials,data) {
             return "                        <a href=\"#\" class=\"link\">"
                 + container.escapeExpression(container.lambda(depth0, depth0))
                 + " </a>\n";
-        },"5":function(container,depth0,helpers,partials,data) {
+        },"7":function(container,depth0,helpers,partials,data) {
             return "                    "
                 + container.escapeExpression(container.lambda(depth0, depth0))
                 + ",\n";
@@ -68,16 +74,18 @@
                 + alias4(((helper = (helper = lookupProperty(helpers,"rate") || (depth0 != null ? lookupProperty(depth0,"rate") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"rate","hash":{},"data":data,"loc":{"start":{"line":10,"column":48},"end":{"line":10,"column":58}}}) : helper)))
                 + "</span><span class=\"votes\">"
                 + alias4(((helper = (helper = lookupProperty(helpers,"votes") || (depth0 != null ? lookupProperty(depth0,"votes") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"votes","hash":{},"data":data,"loc":{"start":{"line":10,"column":85},"end":{"line":10,"column":96}}}) : helper)))
-                + " голосов</span></div>\n            "
-                + ((stack1 = ((helper = (helper = lookupProperty(helpers,"Button") || (depth0 != null ? lookupProperty(depth0,"Button") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Button","hash":{},"data":data,"loc":{"start":{"line":11,"column":12},"end":{"line":11,"column":26}}}) : helper))) != null ? stack1 : "")
-                + "\n            <a>⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐</a>\n        </div>\n        <div class=\"right-block\">\n            <div class=\"desc\">\n                "
-                + alias4(((helper = (helper = lookupProperty(helpers,"description") || (depth0 != null ? lookupProperty(depth0,"description") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data,"loc":{"start":{"line":16,"column":16},"end":{"line":16,"column":33}}}) : helper)))
+                + " голосов</span></div>\n            <div class=\"rating-area\">\n"
+                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"stars") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":12,"column":16},"end":{"line":15,"column":25}}})) != null ? stack1 : "")
+                + "            </div>\n            "
+                + ((stack1 = ((helper = (helper = lookupProperty(helpers,"Button") || (depth0 != null ? lookupProperty(depth0,"Button") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Button","hash":{},"data":data,"loc":{"start":{"line":17,"column":12},"end":{"line":17,"column":26}}}) : helper))) != null ? stack1 : "")
+                + "\n        </div>\n        <div class=\"right-block\">\n            <div class=\"desc\">\n                "
+                + alias4(((helper = (helper = lookupProperty(helpers,"description") || (depth0 != null ? lookupProperty(depth0,"description") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data,"loc":{"start":{"line":21,"column":16},"end":{"line":21,"column":33}}}) : helper)))
                 + "\n            </div>\n            <div class=\"desc info\">\n                <div>\n                    <b>Жанр:</b>\n"
-                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"genres") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":21,"column":20},"end":{"line":23,"column":29}}})) != null ? stack1 : "")
+                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"genres") : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":26,"column":20},"end":{"line":28,"column":29}}})) != null ? stack1 : "")
                 + "                </div>\n                <div class=\"roles\">\n                    <b>В ролях:</b>\n"
-                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"actors") : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":27,"column":20},"end":{"line":29,"column":29}}})) != null ? stack1 : "")
+                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"actors") : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":32,"column":20},"end":{"line":34,"column":29}}})) != null ? stack1 : "")
                 + "                </div>\n"
-                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"countries") : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":31,"column":16},"end":{"line":33,"column":25}}})) != null ? stack1 : "")
+                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"countries") : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":36,"column":16},"end":{"line":38,"column":25}}})) != null ? stack1 : "")
                 + "            </div>\n        </div>\n    </div>\n</div>";
         },"useData":true});
 })();
@@ -142,3 +150,11 @@
     useData: true,
   });
 }());
+
+
+(function() {
+    var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+    templates['Footer'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+            return "<footer id=\"footer\" class=\"custom__footer\">\n    <div class=\"footer__text\">By Ruiners: Kinopark 2020 </div>\n</footer>";
+        },"useData":true});
+})();
