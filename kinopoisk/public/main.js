@@ -54,7 +54,6 @@ Bus.on('logout', (res) => {
 
 Bus.on('navbarClick', (mainLink) => {
     mainLink.render('click', () => {
-        router.open('/');
     });
 });
 

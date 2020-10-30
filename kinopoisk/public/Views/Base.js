@@ -1,5 +1,6 @@
 import Navbar from './Navbar.js';
 import sessionService from '../Services/sessionService.js';
+import Footer from "../components/Footer/Footer.js";
 
 export default class Base {
     #parent;
@@ -14,6 +15,7 @@ export default class Base {
         if(flag || nav.innerText == '') {
             this.createNavbar();
         }
+        //this.createFooter();
     }
 
     createNavbar() {
@@ -36,5 +38,10 @@ export default class Base {
           const navbar = new Navbar(nav);
           navbar.render(isAuthorized, {});
       }
+    }
+
+    createFooter() {
+        const footer = new Footer();
+        footer.render();
     }
 }

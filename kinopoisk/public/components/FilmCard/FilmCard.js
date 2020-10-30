@@ -44,10 +44,22 @@ export default class FilmCard {
         ],
         rate: 0,
         votes: 0,
+        stars: [ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
         Button: this.voteButton.template({
           classname: 'buttons buttons__marginForFilmCard',
           text: 'Оценить',
+          id: 'vote',
+          type: 'submit',
         }),
       });
+      const button = document.getElementById('vote');
+      button.addEventListener('click', (event) => {
+          for(let i = 1; i <= 10; i++) {
+              let star = document.getElementById(`star-${i}`)
+              if (star.checked) {
+                  console.log('film/', this.#body.id, '/', star.value);
+              }
+          }
+      })
     }
 }

@@ -15,11 +15,11 @@ export default class FilmPoster {
 
     constructor(context = {}) {
       const {
-        title, genre, year, image, id
+        title, MainGenre, year, SmallImg, id
       } = context;
       this.#title = title;
-      this.#genre = genre;
-      this.#image = image;
+      this.#genre = MainGenre;
+      this.#image = SmallImg;
       this.#year = year;
       this.#id = id;
       this.poster = document.createElement('div');
@@ -30,9 +30,9 @@ export default class FilmPoster {
       return this.template({
         id: this.#id,
         title: this.#title,
-        genre: this.#genre,
+        MainGenre: this.#genre,
         year: this.#year,
-        image: this.#image,
+        SmallImg: this.#image,
       });
     }
 }
