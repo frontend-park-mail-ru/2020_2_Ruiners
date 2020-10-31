@@ -75,19 +75,20 @@ this.addEventListener('install', (event) => {
 
     this.addEventListener('fetch', (event) => {
          if( navigator.onLine) {
-             return fetch(event.request);
+           //return fetch(event.request);
+         } else {
+           event.respondWith(
+             caches
+               .match(event.request)
+               .then((cachedResponse) => {
+                 if (cachedResponse) {
+                   return cachedResponse;
+                 }
+                 return fetch(event.request);
+               })
+               .catch((err) => {
+                 console.error('smth went wrong with caches.match: ', err);
+               })
+           );
          }
-        event.respondWith(
-            caches
-                .match(event.request)
-                .then((cachedResponse) => {
-                    if (cachedResponse) {
-                        return cachedResponse;
-                    }
-                    return fetch(event.request);
-                })
-                .catch((err) => {
-                    console.error('smth went wrong with caches.match: ', err);
-                })
-        );
     });
