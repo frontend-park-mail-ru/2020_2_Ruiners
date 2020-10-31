@@ -1,4 +1,5 @@
 import Button from '../Button/Button.js';
+import RateAndReviewService from '../../Services/rateAndReviewService.js';
 
 export default class FilmCard {
     card;
@@ -42,8 +43,8 @@ export default class FilmCard {
         countries: [
           this.#body.country
         ],
-        rate: 0,
-        votes: 0,
+        rate: this.#body.Rating,
+        votes: this.#body.SumVotes,
         stars: [ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
         Button: this.voteButton.template({
           classname: 'buttons buttons__marginForFilmCard',
@@ -57,7 +58,10 @@ export default class FilmCard {
           for(let i = 1; i <= 10; i++) {
               let star = document.getElementById(`star-${i}`)
               if (star.checked) {
-                  console.log('film/', this.#body.id, '/', star.value);
+                  RateAndReviewService.Rate(this.#body.id, i)
+                    .then((res) => {
+                      console.log(res)
+                    })
               }
           }
       })
