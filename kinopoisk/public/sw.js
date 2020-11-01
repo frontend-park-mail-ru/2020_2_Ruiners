@@ -5,6 +5,7 @@ const cacheUrls = [
     './main.js',
     './Services/filmService.js',
     './Utils/Utils.js',
+    './components/Footer/Footer.js',
    ' ./components/Profile/Profile.css',
     './components/Nav/Nav.js',
     './components/Nav/Nav.css',

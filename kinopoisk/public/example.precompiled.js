@@ -158,3 +158,37 @@
             return "<footer id=\"footer\" class=\"custom__footer\">\n    <div class=\"footer__text\">By Ruiners: Kinopark 2020 </div>\n</footer>";
         },"useData":true});
 })();
+
+(function() {
+    var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+    templates['Comments'] = template({"1":function(container,depth0,helpers,partials,data) {
+            var alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+                if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+                    return parent[propertyName];
+                }
+                return undefined
+            };
+
+            return "    <div class=\"myComment__underground\">\n        <a class=\"profile__comment\" href=\"\">\n            <span class=\"login__comment\">"
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"login") : depth0), depth0))
+                + "</span>\n            <img class=\"profile__round\" width=\"50\" height=\"50\" src=\""
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"image") : depth0), depth0))
+                + "\" alt=\"\">\n        </a>\n        <div class=\"comment__content\">\n            "
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"content") : depth0), depth0))
+                + "\n        </div>\n        <hr class=\"myLine\">\n        <span class=\"comment__rate\">Оценка: "
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"rate") : depth0), depth0))
+                + "/10</span>\n    </div>\n";
+        },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+            var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
+                if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+                    return parent[propertyName];
+                }
+                return undefined
+            };
+
+            return "<h1 class=\"myComment__header\">Ваш отзыв</h1>\n<div class=\"myComment__underground\">\n    <form>\n        <textarea name=\"message\" rows=\"1\" class=\"question\" id=\"msg\" required=\"\" autocomplete=\"off\" id=\"comment\"></textarea>\n        <label class=\"comment\" for=\"msg\"><span class=\"comment\">Напишите отзыв..</span></label>\n    </form>\n    "
+                + ((stack1 = ((helper = (helper = lookupProperty(helpers,"Button") || (depth0 != null ? lookupProperty(depth0,"Button") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"Button","hash":{},"data":data,"loc":{"start":{"line":7,"column":4},"end":{"line":7,"column":18}}}) : helper))) != null ? stack1 : "")
+                + "\n</div>\n<h1 class=\"myComment__header\">Все отзывы</h1>\n"
+                + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"comments") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":10,"column":0},"end":{"line":22,"column":9}}})) != null ? stack1 : "");
+        },"useData":true});
+})();

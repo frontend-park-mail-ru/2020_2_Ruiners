@@ -18,7 +18,7 @@ export default class FilmCard {
       this.#parent = parent;
       this.#body = body;
       this.voteButton = new Button({
-        classname: 'buttons buttons__marginForFilmCard',
+        classname: 'buttons buttons__forComments',
         parent: null,
       });
       this.template = Handlebars.templates.FilmCard;

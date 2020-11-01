@@ -84,7 +84,6 @@ export default class SignupPage extends Base {
           const password = formrLogin[3].value.trim();
           const email = formrLogin[2].value.trim();
           sessionService.signup(login, email, password).then((signupres) => {
-            super.render(true);
             Bus.emit('loginSignup', {
               loginres: signupres,
               err: err,

@@ -20,7 +20,7 @@ export default class UserService {
     }
     const res = await this.fetchChangeLogin(login);
     if (res !== 200) {
-      data.errmsg = 'bad request';
+      data.errmsg = 'Пользователь с таким логином уже сущетсвует';
     } else {
       data.ok = true;
     }

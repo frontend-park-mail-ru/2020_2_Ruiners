@@ -65,7 +65,10 @@ export default class ProfileChangePage extends Base {
                 super.render();
                 Bus.emit('loginPasswordChange', res);
               } else {
-                alert(res.errmsg);
+                const err = document.createElement('div');
+                err.className = 'error';
+                err.textContent = res.errmsg;
+                form.appendChild(err);
               }
             });
         }
