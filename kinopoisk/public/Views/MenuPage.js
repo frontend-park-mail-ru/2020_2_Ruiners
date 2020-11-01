@@ -1,4 +1,3 @@
-import NavLink from '../Services/navLink.js';
 import Base from './Base.js';
 import FilmLenta from '../components/FilmLenta/FilmLenta.js';
 import filmService from "../Services/filmService.js";

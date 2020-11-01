@@ -58,7 +58,7 @@ Bus.on('navbarClick', (mainLink) => {
 });
 
 Bus.on('loginSignup', (data) => {
-    const { loginres, err, form } = data;
+    const { loginres, err, form, render } = data;
     if (loginres.ok) {
         nav.innerHTML = '';
         router.open('/');

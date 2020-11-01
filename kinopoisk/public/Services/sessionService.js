@@ -34,7 +34,7 @@ export default class SessionService {
     }
     const res = await this.fetchLogin(login, password);
     if (res !== 200) {
-      data.errmsg = 'bad request';
+      data.errmsg = 'Неправильное имя пользователя или пароль';
     } else {
       data.ok = true;
     }

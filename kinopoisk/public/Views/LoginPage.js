@@ -61,14 +61,12 @@ export default class LoginPage extends Base{
       formLink.render('submit', () => {
         const login = formrLogin[1].value.trim();
         const password = formrLogin[2].value.trim();
-        // console.log(`login =  ${login}`);
 
         sessionService.login(login, password).then((loginres) => {
-          super.render(true);
           Bus.emit('loginSignup', {
             loginres: loginres,
             err: err,
-            form: form
+            form: form,
           });
         });
       });
