@@ -1,0 +1,22 @@
+<h1 class="myComment__header">Ваш отзыв</h1>
+<div class="myComment__underground">
+    <form>
+        <textarea name="message" rows="1" class="question" id="msg" required="" autocomplete="off" id="comment"></textarea>
+        <label class="comment" for="msg"><span class="comment">Напишите отзыв..</span></label>
+    </form>
+    {{{ Button }}}
+</div>
+<h1 class="myComment__header">Все отзывы</h1>
+{{#each comments}}
+    <div class="myComment__underground">
+        <a class="profile__comment" href="">
+            <span class="login__comment">{{ this.login }}</span>
+            <img class="profile__round" width="50" height="50" src="{{ this.image }}" alt="">
+        </a>
+        <div class="comment__content">
+            {{ this.content }}
+        </div>
+        <hr class="myLine">
+        <span class="comment__rate">Оценка: {{ this.rate }}/10</span>
+    </div>
+{{/each}}

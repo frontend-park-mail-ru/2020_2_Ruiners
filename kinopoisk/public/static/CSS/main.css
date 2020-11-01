@@ -9,6 +9,7 @@
 @import "../../components/FilmPoster/FilmPoster.css";
 @import "../../components/Profile/Profile.css";
 @import "../../components/Footer/Footer.css";
+@import "../../components/Comments/Comments.css";
 
 
 body.film1 {
@@ -16,6 +17,7 @@ body.film1 {
     margin: 0;
     background-repeat: no-repeat;
     background-color: #2e2e2e;
+    background-size: 100% 100%;
 }
 
 input:focus,
