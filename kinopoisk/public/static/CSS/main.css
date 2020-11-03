@@ -30,6 +30,16 @@ body {
     color: red;
 }
 
+.success {
+    color: green;
+}
+
+.succes__marginForFilmCard {
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 20%;
+}
+
 body {
     margin: 0px;
 }

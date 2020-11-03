@@ -20,22 +20,33 @@ export default class Controller {
 
     static filmPage(params) {
         const { id } = params;
-        let responseBody
-        filmService.getById(id)
+        let responseBody;
+        let isAuthorized = false
+        sessionService.me()
             .then((res) => {
-                try {
-                    responseBody = JSON.stringify(res.get);
-                } catch (e) {
-                    this.menuPage();
-                    return;
-                }
-                if (res.ok) {
-                    const film = new FilmPage({ parent: application, body: responseBody});
-                    film.render();
+                console.log(res);
+                if (!res.ok) {
+                    isAuthorized = false;
                 } else {
-                    this.menuPage();
+                    isAuthorized = true;
                 }
+                filmService.getById(id)
+                    .then((res) => {
+                        try {
+                            responseBody = JSON.stringify(res.get);
+                        } catch (e) {
+                            this.menuPage();
+                            return;
+                        }
+                        if (res.ok) {
+                            const film = new FilmPage({ parent: application, body: responseBody, isAuthorized: isAuthorized});
+                            film.render();
+                        } else {
+                            this.menuPage();
+                        }
+                    });
             });
+
     }
 
     static loginPage() {

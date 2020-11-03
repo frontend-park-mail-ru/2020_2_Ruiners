@@ -8,13 +8,15 @@
         <div class="left-block">
                 <iframe width="560" height="315" src="{{ youtube }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div> <span class="rating">Рейтинг: {{ rate }}</span><span class="votes">{{ votes }} голосов</span></div>
-            <div class="rating-area">
-                {{#each stars}}
-                    <input type="radio" id="star-{{this}}" name="rating" value="{{this}}">
-                    <label for="star-{{this}}" title="Оценка «{{this}}»"></label>
-                {{/each}}
-            </div>
-            {{{ Button }}}
+            {{#if isAuth}}
+                <div class="rating-area">
+                    {{#each stars}}
+                        <input type="radio" id="star-{{this}}" name="rating" value="{{this}}">
+                        <label for="star-{{this}}" title="Оценка «{{this}}»"></label>
+                    {{/each}}
+                </div>
+                {{{ Button }}}
+            {{/if}}
         </div>
         <div class="right-block">
             <div class="desc">

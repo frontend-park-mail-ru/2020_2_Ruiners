@@ -13,6 +13,18 @@ export default class FilmService {
         return {status: res.status, json: parsedJsonObject};
     }
 
+    static async fetchPostReview(filmId, body) {
+        const res = await AjaxModule.ajaxPost({ url: '/review/add', body: { filmId, body } });
+        // console.log(res);
+        return res.status;
+    }
+
+    static async fetchGetByReviews(filmId) {
+        const res = await AjaxModule.ajaxGet({url: '/review/' + filmId});
+        const parsedJsonObject = await res.json();
+        return {status: res.status, json: parsedJsonObject};
+    }
+
     static async getById(id) {
         const data = { ok: false, errmsg: undefined, get: undefined };
         const res = await this.fetchGetById(id);
@@ -37,4 +49,29 @@ export default class FilmService {
         return data;
     }
 
+    static async PostReview(filmId, body) {
+        const data = { ok: false, errmsg: undefined };
+        if (body === '') {
+            data.errmsg = 'Пустое поле';
+        }
+        const res = await this.fetchPostReview(filmId, body);
+        if (res !== 200) {
+            data.errmsg = 'хз';
+        } else {
+            data.ok = true;
+        }
+        return data;
+    }
+
+    static async getByReviews(filmId) {
+        const data = { ok: false, errmsg: undefined, get: undefined };
+        const res = await this.fetchGetByReviews(filmId);
+        if (res.status !== 200) {
+            data.errmsg = 'Пусто';
+        } else {
+            data.ok = true;
+            data.get = res.json;
+        }
+        return data;
+    }
 }
