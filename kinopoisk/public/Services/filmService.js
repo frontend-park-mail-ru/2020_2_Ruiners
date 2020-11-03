@@ -20,7 +20,7 @@ export default class FilmService {
     }
 
     static async fetchGetByReviews(filmId) {
-        const res = await AjaxModule.ajaxGet({url: '/film/' + filmId});
+        const res = await AjaxModule.ajaxGet({url: '/review/' + filmId});
         const parsedJsonObject = await res.json();
         return {status: res.status, json: parsedJsonObject};
     }
