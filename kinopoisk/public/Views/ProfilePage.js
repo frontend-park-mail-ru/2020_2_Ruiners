@@ -3,6 +3,7 @@ import { createDiv } from './Components.js';
 import Bus from "../Services/EventBus.js";
 import Base from './Base.js';
 import Link from '../components/Link/Link.js';
+import SessionService from "../Services/sessionService.js";
 
 export default class ProfilePage extends Base {
     #parent
@@ -16,6 +17,7 @@ export default class ProfilePage extends Base {
     }
 
     render() {
+      const responseBody = JSON.parse(this.#data);
       super.render(false);
       const body = document.getElementById('body');
       body.className = 'page';
@@ -51,11 +53,17 @@ export default class ProfilePage extends Base {
       const divAvatar = createDiv('avatarUserBoxP', divLeft);
 
       const img = document.createElement('img');
-      img.src = '/static/images/user-no-big.gif';
-      divAvatar.appendChild(img);
+      SessionService.getAvatar(responseBody.id).then(image => {
+        const outside = URL.createObjectURL(image.get);
+        img.src = outside;
+        img.height = 300;
+        img.width = 300;
+        img.className = 'avatar__image';
+        divAvatar.appendChild(img);
+      })
 
       const button = document.createElement('button');
-      button.className = 'buttons buttons__marginForFilmCard';
+      button.className = 'buttons buttons__marginForSettings';
       button.textContent = 'Изменить данные';
       button.href = '/';
       const buttonLink = new NavLink(button);
@@ -66,21 +74,11 @@ export default class ProfilePage extends Base {
       const divInfo = createDiv('infoUser', divRight);
 
       const nick = document.createElement('h1');
-      nick.className = 'nick_name';
+      nick.className = 'profile__nickname';
 
-      const responseBody = JSON.parse(this.#data);
       nick.textContent = `${responseBody.Login}`;
 
       divInfo.appendChild(nick);
 
-      const divInfoAuth = createDiv('infoUserAuth', divRight);
-
-      const span1 = document.createElement('span');
-      span1.textContent = 'Регистрация: 11 марта 2020';
-      divInfoAuth.appendChild(span1);
-
-      const span2 = document.createElement('span');
-      span2.textContent = 'Рейтинг комментариев:';
-      divInfoAuth.appendChild(span2);
     }
 }

@@ -6,6 +6,8 @@ import ProfileChangePage from '../Views/ProfileChangePage.js';
 import MenuPage from '../Views/MenuPage.js';
 import sessionService from '../Services/sessionService.js';
 import filmService from "../Services/filmService.js";
+import PersonPage from "../Views/PersonPage.js";
+import GenrePage from "../Views/GenrePage.js";
 
 export default class Controller {
     static menuPage() {
@@ -92,5 +94,17 @@ export default class Controller {
                     this.loginPage();
                 }
             });
+    }
+
+    static personPage(params) {
+        const { id } = params;
+        const person = new PersonPage({ parent: application, id: id });
+        person.render();
+    }
+
+    static genrePage(params) {
+        const { id } = params;
+        const page = new GenrePage({ parent: application, genre: id })
+        page.render();
     }
 }

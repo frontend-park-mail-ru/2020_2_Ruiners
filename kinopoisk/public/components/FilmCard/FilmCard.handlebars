@@ -26,13 +26,13 @@
                 <div>
                     <b>Жанр:</b>
                     {{#each genres}}
-                        <a href="#" class="link"> {{ this }} </a>
+                        <a href="genre/{{this.genre}}" class="link"> {{ this.rusGenre }} </a>
                     {{/each}}
                 </div>
                 <div class="roles">
                     <b>В ролях:</b>
                     {{#each actors}}
-                        <a href="#" class="link">{{ this }} </a>
+                        <a href="person/{{ this.Id }}" class="link">{{ this.Name }} </a>
                     {{/each}}
                 </div>
                 {{#each countries}}

@@ -13,6 +13,11 @@ export default class UserService {
     return res.status;
   }
 
+  static async fetchChangeAvatar(avatar) {
+    const res = await AjaxModule.ajaxPost({ url: '/changeAvatar', body:  avatar  });
+    return res.status;
+  }
+
   static async ChangeLogin(login) {
     const data = { ok: false, errmsg: undefined };
     if (login === '') {
@@ -38,6 +43,17 @@ export default class UserService {
     const res = await this.fetchChangePassword(oldPass, newPass);
     if (res !== 200) {
       data.errmsg = 'Неправильный старый пароль';
+    } else {
+      data.ok = true;
+    }
+    return data;
+  }
+
+  static async ChangeAvatar(avatar) {
+    const data = { ok: false, errmsg: undefined };
+    const res = await this.fetchChangeAvatar(avatar);
+    if (res !== 200) {
+      data.errmsg = 'Ошибка';
     } else {
       data.ok = true;
     }

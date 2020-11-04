@@ -46,4 +46,8 @@ export default class Comments {
             }),
         });
     }
+
+    hide() {
+        this.comments.innerHTML = '';
+    }
 }

@@ -81,6 +81,10 @@ Bus.on('Back', button => {
     })
 });
 
+Bus.on('main', () => {
+    router.open('main');
+})
+
 const body = document.getElementById('body');
 const router = new Router(body);
 
@@ -90,7 +94,9 @@ router
     .register('/film', Controller.filmPage)
     .register('/signup', Controller.signupPage)
     .register('/profile', Controller.profilePage)
-    .register('/profileChange', Controller.profileChengePage);
+    .register('/profileChange', Controller.profileChengePage)
+    .register('/person', Controller.personPage)
+    .register('/genre', Controller.genrePage);
 
 
 router.start();

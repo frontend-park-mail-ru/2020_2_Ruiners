@@ -60,12 +60,30 @@
                 + alias2(alias1(depth0, depth0))
                 + "»\"></label>\n";
         },"4":function(container,depth0,helpers,partials,data) {
-            return "                        <a href=\"#\" class=\"link\"> "
-                + container.escapeExpression(container.lambda(depth0, depth0))
+            var alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+                if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+                    return parent[propertyName];
+                }
+                return undefined
+            };
+
+            return "                        <a href=\"genre/"
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"genre") : depth0), depth0))
+                + "\" class=\"link\"> "
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"rusGenre") : depth0), depth0))
                 + " </a>\n";
         },"6":function(container,depth0,helpers,partials,data) {
-            return "                        <a href=\"#\" class=\"link\">"
-                + container.escapeExpression(container.lambda(depth0, depth0))
+            var alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+                if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+                    return parent[propertyName];
+                }
+                return undefined
+            };
+
+            return "                        <a href=\"person/"
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"Id") : depth0), depth0))
+                + "\" class=\"link\">"
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"Name") : depth0), depth0))
                 + " </a>\n";
         },"8":function(container,depth0,helpers,partials,data) {
             return "                    "
@@ -205,7 +223,9 @@
 
             return "        <div class=\"myComment__underground\">\n            <a class=\"profile__comment\" href=\"\">\n                <span class=\"login__comment\">"
                 + alias2(alias1((depth0 != null ? lookupProperty(depth0,"UserLogin") : depth0), depth0))
-                + "</span>\n                <img class=\"profile__round\" width=\"50\" height=\"50\" src=\"https://dota-blog.ru/wp-content/uploads/2020/01/480220190515091129.jpg\" alt=\"\">\n            </a>\n            <div class=\"comment__content\">\n                "
+                + "</span>\n                <img class=\"profile__round\" width=\"50\" height=\"50\" src=\""
+                + alias2(alias1((depth0 != null ? lookupProperty(depth0,"Image") : depth0), depth0))
+                + "\" alt=\"\">\n            </a>\n            <div class=\"comment__content\">\n                "
                 + alias2(alias1((depth0 != null ? lookupProperty(depth0,"TextBody") : depth0), depth0))
                 + "\n            </div>\n            <hr class=\"myLine\">\n            <span class=\"comment__rate\">Оценка: "
                 + alias2(alias1((depth0 != null ? lookupProperty(depth0,"Rate") : depth0), depth0))
@@ -220,5 +240,30 @@
 
             return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"isAuth") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":1,"column":0},"end":{"line":10,"column":7}}})) != null ? stack1 : "")
                 + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"noComments") : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.program(5, data, 0),"data":data,"loc":{"start":{"line":11,"column":0},"end":{"line":28,"column":7}}})) != null ? stack1 : "");
+        },"useData":true});
+})();
+
+
+
+
+(function() {
+    var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+    templates['PersonCard'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+            var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+                if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+                    return parent[propertyName];
+                }
+                return undefined
+            };
+
+            return "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <link rel=\"stylesheet\" href=\"../../Actor.css\">\n    <title>Title</title>\n</head>\n<body>\n<div class=\"actor__main\">\n    <div>\n        <img width=\"250\", height=\"300\" src=\""
+                + alias4(((helper = (helper = lookupProperty(helpers,"Image") || (depth0 != null ? lookupProperty(depth0,"Image") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Image","hash":{},"data":data,"loc":{"start":{"line":11,"column":44},"end":{"line":11,"column":53}}}) : helper)))
+                + "\" class=\"person__image\">\n    </div>\n    <div class=\"person__info\">\n        <div class=\"person__name\">\n            "
+                + alias4(((helper = (helper = lookupProperty(helpers,"Name") || (depth0 != null ? lookupProperty(depth0,"Name") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Name","hash":{},"data":data,"loc":{"start":{"line":15,"column":12},"end":{"line":15,"column":20}}}) : helper)))
+                + "\n        </div>\n        <div class=\"person__date\">\n            <span class=\"person__headers\">Дата рождения:</span>"
+                + alias4(((helper = (helper = lookupProperty(helpers,"BornDate") || (depth0 != null ? lookupProperty(depth0,"BornDate") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"BornDate","hash":{},"data":data,"loc":{"start":{"line":18,"column":63},"end":{"line":18,"column":75}}}) : helper)))
+                + "\n        </div>\n        <div class=\"person__date\">\n            <span class=\"person__headers\">Место рождения:</span>"
+                + alias4(((helper = (helper = lookupProperty(helpers,"BornPlace") || (depth0 != null ? lookupProperty(depth0,"BornPlace") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"BornPlace","hash":{},"data":data,"loc":{"start":{"line":21,"column":64},"end":{"line":21,"column":77}}}) : helper)))
+                + "\n        </div>\n    </div>\n</div>\n</body>\n</html>";
         },"useData":true});
 })();

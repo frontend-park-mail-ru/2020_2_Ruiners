@@ -10,21 +10,29 @@ export default class FilmCard {
 
     #isAuthorized;
 
+    #mapRussian;
+
+    #actors;
+
     template;
 
     voteButton;
 
     constructor(context = {}) {
-      const { parent, body, isAuthorized } = context;
+      const { parent, body, isAuthorized, actors } = context;
       this.card = document.createElement('div');
       this.#parent = parent;
       this.#body = body;
       this.#isAuthorized = isAuthorized;
+      this.#actors = actors;
       this.voteButton = new Button({
         classname: 'buttons buttons__forComments',
         parent: null,
       });
       this.template = Handlebars.templates.FilmCard;
+      this.#mapRussian = [];
+      this.#mapRussian['Фантастика'] = 'fantasy';
+      this.#mapRussian['Комедия'] = 'comedy';
     }
 
     render() {
@@ -35,15 +43,12 @@ export default class FilmCard {
         description: this.#body.Description,
         youtube: this.#body.YoutubeLink,
         genres: [
-          this.#body.MainGenre,
+            {
+                rusGenre: this.#body.MainGenre,
+                genre: this.#mapRussian[this.#body.MainGenre]
+            }
         ],
-        actors: [
-          'Леонардо ДиКаприо',
-          'Джозеф Гордон-Левитт',
-          'Эллен Пейдж',
-          'Том Харди',
-          'Кэн Ватанабэ',
-        ],
+        actors: this.#actors,
         countries: [
           this.#body.country
         ],

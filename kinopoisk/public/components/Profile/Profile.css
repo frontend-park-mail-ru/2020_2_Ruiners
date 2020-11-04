@@ -33,14 +33,14 @@
 .profileInfoWrapLeft {
     margin: 0;
     padding: 0 0 30px 0;
-    width: 180px;
+    width: 300px;
     float: left;
 }
 
 .profileInfoWrapRight {
-    float: left;
+    float: right;
     max-width: 650px;
-    margin: 10px;
+    margin-right: 100px;
     /* display: flex; */
 }
 
@@ -50,16 +50,24 @@
 }
 
 .avatarUserBoxP {
-    border: 5px solid #ffffff;
-    box-shadow: 0 1px 2px #999999;
-    width: 120px;
+    border-radius: 100px;
+    width: 300px;
     overflow: hidden;
     margin-bottom: 10px;
     margin-left: 25px;
+}
+
+.avatar__image {
+    border-radius: 100px;
+    box-shadow: 0 1px 2px #999999;
 }
 
 .infoUserAuth {
     font-family: Arial, Helvetica, sans-serif;
     color: #c94747;
     margin-top: 100px;
+}
+
+.profile__nickname {
+    margin-right: 100px;
 }
