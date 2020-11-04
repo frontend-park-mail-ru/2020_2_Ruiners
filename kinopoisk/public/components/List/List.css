@@ -13,7 +13,7 @@
 }
 
 .brand a:hover {
-    cursor: default;
+    cursor: pointer;
     text-decoration: none;
 }
 

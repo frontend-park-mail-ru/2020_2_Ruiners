@@ -1,4 +1,4 @@
-const domain = 'http://95.163.208.72:8000';
+const domain = 'http://localhost:8000';
 
 export class AjaxModule {
         static ajaxGet = (ajaxArgs) => {
@@ -21,10 +21,14 @@ export class AjaxModule {
                 mode: 'cors',
             };
             if (body) {
-                params.body = JSON.stringify(body);
-                params.headers = {
-                    'Content-Type': 'application/json'
-                };
+                if (body instanceof FormData) {
+                    params.body = body;
+                } else {
+                    params.body = JSON.stringify(body);
+                    params.headers = {
+                        'Content-Type': 'application/json'
+                    };
+                }
             }
             return fetch(domain + url, params)
         }

@@ -32,7 +32,6 @@ export default class Router {
     }
 
     start () {
-        console.log("start");
         this.root.addEventListener('click', function (event) {
             if (!(event.target instanceof HTMLAnchorElement) && !(event.target instanceof HTMLImageElement)) {
                 return;
@@ -45,7 +44,8 @@ export default class Router {
             } else {
                 link = target
             }
-            if (link.pathname == '/' + undefined || link.pathname == undefined) {
+            console.log('soska =', link.pathname);
+            if (link.pathname.indexOf('undefined') !== -1) {
                 return ;
             }
             let pathObject = this.split(link.pathname);
@@ -66,11 +66,18 @@ export default class Router {
     split(currentPath) {
         let path;
         let param = '';
-        let i;
-        console.log(currentPath);
+        let i, k, count = 0;
+        for(k = 0; k < currentPath.length; k++) {
+            if(currentPath[k] == '/') {
+                count++;
+            }
+        }
+        if(count > 2) {
+            for(k = 1; currentPath[k] != '/' ; k++) {}
+            currentPath = currentPath.substring(k);
+        }
         for(i = 1; currentPath[i] !== '/' && i < currentPath.length; i++) {}
         path = currentPath.substring(0, i);
-        console.log( path );
         if( i === currentPath.length) {
             return {
                 path: path,

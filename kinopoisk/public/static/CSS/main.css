@@ -10,6 +10,7 @@
 @import "../../components/Profile/Profile.css";
 @import "../../components/Footer/Footer.css";
 @import "../../components/Comments/Comments.css";
+@import "../../components/PersonCard/PersonCard.css";
 
 
 body.film1 {

@@ -7,6 +7,7 @@ import Window from '../components/window/Window.js';
 import navLink from '../Services/navLink.js';
 import SessionService from '../Services/sessionService.js';
 import Bus from "../Services/EventBus.js";
+import sessionService from "../Services/sessionService.js";
 
 export default class Navbar {
   #parent;
@@ -73,7 +74,10 @@ export default class Navbar {
         className: 'profileNav',
       });
       const profileA = profileAObj.render();
-      profileAObj.placeContent('<img width="50" height="50" src="../static/images/user-no-big.gif" alt="" class="round">');
+      SessionService.getAvatar(res.get.id).then(image => {
+        const outside = URL.createObjectURL(image.get);
+        profileAObj.placeContent(`<img width="50" height="50" src="${outside}" alt="" class="round">`);
+      });
       const profileLink = new navLink(profileA);
       const window = new Window({ parent: profileA });
       let windowClicks = 0;

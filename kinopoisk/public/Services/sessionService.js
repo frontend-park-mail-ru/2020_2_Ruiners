@@ -24,6 +24,12 @@ export default class SessionService {
     return { status: res.status, json: parsedJsonObject };
   }
 
+  static async fetchAvatar(id) {
+    const res = await AjaxModule.ajaxGet({url: '/user/avatar/' + id})
+    const blob = await res.blob();
+    return { status: res.status, blob: blob };
+  }
+
   static async login(login, password) {
     const data = { ok: false, errmsg: undefined };
     if (login === '') {
@@ -80,6 +86,34 @@ export default class SessionService {
     } else {
       data.ok = true;
       data.get = res.json;
+    }
+    return data;
+  }
+
+  static async getAvatars(ids) {
+    const data = {ok: false, errmsg: undefined, get: []};
+    let res;
+    for (let i = 0; i < ids.length; i++) {
+      res = await this.fetchAvatar(ids[i]);
+      if (res.status !== 200) {
+        data.errmsg = 'bad request';
+        data.ok = false;
+      } else {
+        data.ok = true;
+        data.get.push(res.blob);
+      }
+    }
+    return data;
+  }
+
+  static async getAvatar(id) {
+    const data = {ok: false, errmsg: undefined, get: undefined};
+    const res = await this.fetchAvatar(id);
+    if (res.status !== 200) {
+      data.errmsg = 'bad request';
+    } else {
+      data.ok = true;
+      data.get = res.blob;
     }
     return data;
   }

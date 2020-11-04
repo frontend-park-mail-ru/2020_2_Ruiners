@@ -1,6 +1,4 @@
 import FilmPoster from "../FilmPoster/FilmPoster.js";
-import navLink from "../../Services/navLink.js";
-import Bus from "../../Services/EventBus.js";
 
 export default class FilmLenta {
     lenta;

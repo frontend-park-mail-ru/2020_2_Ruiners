@@ -4,61 +4,62 @@ import Form from '../components/Form/Form.js';
 import Base from './Base.js';
 import userService from '../Services/userService.js';
 import Button from "../components/Button/Button.js";
+import UserService from "../Services/userService.js";
 
 export default class ProfileChangePage extends Base {
-    #parent
+  #parent
 
-    #data
+  #data
 
-    constructor(parent, data) {
-      super(nav);
-      this.#parent = parent;
-      this.#data = data;
-    }
+  constructor(parent, data) {
+    super(nav);
+    this.#parent = parent;
+    this.#data = data;
+  }
 
-    render() {
-      super.render(false);
-      const body = document.getElementById('body');
-      body.className = 'page';
-      body.style.backgroundImage = `url('../static/images/login.jpg')`;
-      this.#parent.className = 'wrapper__form chenge margin';
+  render() {
+    super.render(false);
+    const body = document.getElementById('body');
+    body.className = 'page';
+    body.style.backgroundImage = `url('../static/images/login.jpg')`;
+    this.#parent.className = 'wrapper__form chenge margin';
 
-      const responseBody = JSON.parse(this.#data);
+    const responseBody = JSON.parse(this.#data);
 
-      const headLogin = {
-        head: true,
-        textContent: 'Настройки пользователя',
-        style: 'color:#FFFFFF; margin-left: 10px',
-      };
+    const headLogin = {
+      head: true,
+      textContent: 'Настройки пользователя',
+      style: 'color:#FFFFFF; margin-left: 10px',
+    };
 
-      const configInputLogin = [
-        {
-          type: 'login',
-          name: 'login',
-          text: `${responseBody.Login}`,
-          required: true,
-          valid: true,
-          reg: /[A-Za-z0-9]{5,15}/,
-          errorVal: 'Недопустимый логин(Должен быть от 5 до 15 символов)',
-        },
-      ];
+    const configInputLogin = [
+      {
+        type: 'login',
+        name: 'login',
+        text: `${responseBody.Login}`,
+        required: true,
+        valid: true,
+        reg: /[A-Za-z0-9]{5,15}/,
+        errorVal: 'Недопустимый логин(Должен быть от 5 до 15 символов)',
+      },
+    ];
 
-      const subLogin = {
-        text: 'Изменить логин',
-        className: 'secondary',
-      };
+    const subLogin = {
+      text: 'Изменить логин',
+      className: 'secondary',
+    };
 
-      const formrend = new Form(headLogin, configInputLogin, subLogin);
-      const formrLogin = formrend.render();
-      // const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
-      const form = formrLogin[0];
-      this.#parent.appendChild(form);
+    const formrend = new Form(headLogin, configInputLogin, subLogin);
+    const formrLogin = formrend.render();
+    // const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
+    const form = formrLogin[0];
+    this.#parent.appendChild(form);
 
-      const formLink = new NavLink(form);
-      formLink.render('submit', () => {
-        if (!formrLogin[1].classList.contains('invalid')) {
-          const login = formrLogin[1].value.trim();
-          userService.ChangeLogin(login)
+    const formLink = new NavLink(form);
+    formLink.render('submit', () => {
+      if (!formrLogin[1].classList.contains('invalid')) {
+        const login = formrLogin[1].value.trim();
+        userService.ChangeLogin(login)
             .then((res) => {
               if (res.ok) {
                 nav.innerHTML = '';
@@ -71,63 +72,63 @@ export default class ProfileChangePage extends Base {
                 form.appendChild(err);
               }
             });
-        }
-      });
+      }
+    });
 
-      const head = {
-        head: false,
-      };
+    const head = {
+      head: false,
+    };
 
-      const configInput = [
-        {
-          type: 'password',
-          name: 'password',
-          text: 'Старый пароль',
-          required: true,
-          valid: false,
-        },
-        {
-          type: 'password',
-          name: 'password',
-          text: 'Новый пароль',
-          required: true,
-          valid: true,
-          reg: /.{8,16}/,
-          errorVal: 'Недопустимый первый пароль(Должен быть от 8 до 16 символов)',
-        },
-        {
-          type: 'password',
-          name: 'password',
-          text: 'Повторите новый пароль',
-          required: true,
-          valid: true,
-          reg: /.{8,16}/,
-          errorVal: '',
-        },
-      ];
+    const configInput = [
+      {
+        type: 'password',
+        name: 'password',
+        text: 'Старый пароль',
+        required: true,
+        valid: false,
+      },
+      {
+        type: 'password',
+        name: 'password',
+        text: 'Новый пароль',
+        required: true,
+        valid: true,
+        reg: /.{8,16}/,
+        errorVal: 'Недопустимый первый пароль(Должен быть от 8 до 16 символов)',
+      },
+      {
+        type: 'password',
+        name: 'password',
+        text: 'Повторите новый пароль',
+        required: true,
+        valid: true,
+        reg: /.{8,16}/,
+        errorVal: '',
+      },
+    ];
 
-      const sub = {
-        text: 'Изменить пароль',
-        className: 'secondary',
-      };
+    const sub = {
+      text: 'Изменить пароль',
+      className: 'secondary',
+    };
 
-      const formrendpath = new Form(head, configInput, sub);
-      const formr = formrendpath.render();
-      // const formr = renderForm(head, configInput, sub);
-      const formPass = formr[0];
-      this.#parent.appendChild(formPass);
+    const formrendpath = new Form(head, configInput, sub);
+    const formr = formrendpath.render();
+    // const formr = renderForm(head, configInput, sub);
+    const formPass = formr[0];
+    this.#parent.appendChild(formPass);
 
-      const formPassLink = new NavLink(formPass);
-      const err = document.createElement('div');
-      err.className = 'error';
-      formPassLink.render('submit', () => {
-        if (!formr[2].classList.contains('invalid')
-                || !formr[3].classList.contains('invalid')) {
-          const PasswordOld = formr[1].value.trim();
-          const Password = formr[2].value.trim();
-          const pass = formr[3].value.trim();
-          if (Password === pass) {
-            userService.ChangePassword(PasswordOld, Password)
+    const formPassLink = new NavLink(formPass);
+    const err = document.createElement('div');
+    err.className = 'error';
+    formPassLink.render('submit', () => {
+      if (!formr[2].classList.contains('invalid')
+          || !formr[3].classList.contains('invalid')) {
+        const PasswordOld = formr[1].value.trim();
+        const Password = formr[2].value.trim();
+        const pass = formr[3].value.trim();
+        if (Password === pass) {
+          userService.ChangePassword(PasswordOld, Password)
               .then((res) => {
                 console.log(res.ok);
                 if (res.ok) {
@@ -137,49 +138,50 @@ export default class ProfileChangePage extends Base {
                   formPass.appendChild(err);
                 }
               });
-          } else {
-            err.innerHTML = 'Пароли не совпадают';
-            formPass.appendChild(err);
-          }
+        } else {
+          err.innerHTML = 'Пароли не совпадают';
+          formPass.appendChild(err);
         }
-      });
+      }
+    });
 
-      const configAvatar = [
-        {
-          type: 'file',
-          name: 'file',
-          text: 'фото',
-          required: true,
-          valid: false,
-        }];
+    const configAvatar = [
+      {
+        type: 'file',
+        name: 'file',
+        text: 'фото',
+        required: true,
+        valid: false,
+      }];
 
-      const subAvatar = {
-        text: 'Изменить аватар',
-        className: 'secondary',
-      };
-      const formrendAvatar = new Form(head, configAvatar, subAvatar);
-      const formrAvatar = formrendAvatar.render();
-      // const formrAvatar = renderForm(head, configAvatar, subAvatar);
-      const formAvatar = formrAvatar[0];
-      this.#parent.appendChild(formAvatar);
-      const formData = new FormData();
-      const formAvatarLink = new NavLink(formAvatar);
-      formAvatarLink.render('submit', () => {
-        console.log(formrAvatar[1].files[0]);
-        formData.append('file', formrAvatar[1].files[0]);
-        console.log(formData.getAll('file'));
-        fetch('http://95.163.208.72:8000/changeAvatar', {
-          method: 'POST',
-          credentials: 'include',
-          mode: 'cors',
-          body: formData,
-        }).then((response) => response.status).then((res) => console.log(res));
+    const subAvatar = {
+      text: 'Изменить аватар',
+      className: 'secondary',
+    };
+    const formrendAvatar = new Form(head, configAvatar, subAvatar);
+    const formrAvatar = formrendAvatar.render();
+    // const formrAvatar = renderForm(head, configAvatar, subAvatar);
+    const formAvatar = formrAvatar[0];
+    this.#parent.appendChild(formAvatar);
+    const formData = new FormData();
+    const formAvatarLink = new NavLink(formAvatar);
+    formAvatarLink.render('submit', () => {
+      formData.append('file', formrAvatar[1].files[0]);
+        UserService.ChangeAvatar(formData).then(res => {
+          if(res.ok) {
+            super.render(true);
+            Bus.emit('main');
+          } else {
+            err.textContent = res.errmsg;
+            formAvatar.appendChild(err);
+          }
+        });
       });
-      const buttonBack = new Button({
-          parent: this.#parent,
-          classname: 'buttons buttons__marginForFilmCard',
-          text: 'Назад'
-      })
-      Bus.emit('Back', buttonBack);
-    }
+    const buttonBack = new Button({
+      parent: this.#parent,
+      classname: 'buttons buttons__marginForFilmCard',
+      text: 'Назад'
+    })
+    Bus.emit('Back', buttonBack);
+  }
 }
