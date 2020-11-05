@@ -27,6 +27,7 @@ export default class Router {
                 '',
                 allPath
             );
+            console.log(window.history);
         }
         route({id: id});
     }
@@ -44,7 +45,6 @@ export default class Router {
             } else {
                 link = target
             }
-            console.log('soska =', link.pathname);
             if (link.pathname.indexOf('undefined') !== -1) {
                 return ;
             }
@@ -52,7 +52,7 @@ export default class Router {
             this.open(pathObject.path, { id: pathObject.param });
         }.bind(this));
 
-        window.addEventListener('popstate', function () {
+        window.addEventListener('popstate', function (event) {
             const currentPath = window.location.pathname;
             let pathObject = this.split(currentPath);
             this.open(pathObject.path, { id: pathObject.param });
