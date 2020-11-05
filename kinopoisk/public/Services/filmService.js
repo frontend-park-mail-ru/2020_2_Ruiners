@@ -13,6 +13,12 @@ export default class FilmService {
         return {status: res.status, json: parsedJsonObject};
     }
 
+    static async fetchGetByPerson(id) {
+        const res = await AjaxModule.ajaxGet({url: '/person_film/' +id});
+        const parsedJsonObject = await res.json();
+        return {status: res.status, json: parsedJsonObject};
+    }
+
     static async fetchPostReview(filmId, body) {
         const res = await AjaxModule.ajaxPost({ url: '/review/add', body: { filmId, body } });
         // console.log(res);
@@ -48,6 +54,19 @@ export default class FilmService {
         }
         return data;
     }
+
+    static async getByPerson(id) {
+        const data = { ok: false, errmsg: undefined, get: undefined };
+        const res = await this.fetchGetByPerson(id);
+        if (res.status !== 200) {
+            data.errmsg = 'Пусто';
+        } else {
+            data.ok = true;
+            data.get = res.json;
+        }
+        return data;
+    }
+
 
     static async PostReview(filmId, body) {
         const data = { ok: false, errmsg: undefined };

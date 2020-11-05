@@ -37,7 +37,7 @@ export default class PersonPage extends Base{
                     this.menuPage();
                 }
             });
-        filmService.getByGenre('fantasy')
+        filmService.getByPerson(this.#id)
             .then((res) => {
                 let responseBody;
                 try {
@@ -47,6 +47,7 @@ export default class PersonPage extends Base{
                     return;
                 }
                 if (res.ok) {
+                  console.log(responseBody)
                     const lenta = new FilmLenta({
                         genre: 'Фильмы с участием этого актера',
                         body: responseBody,
