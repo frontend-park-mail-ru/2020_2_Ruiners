@@ -7,7 +7,6 @@ import Window from '../components/window/Window.js';
 import navLink from '../Services/navLink.js';
 import SessionService from '../Services/sessionService.js';
 import Bus from "../Services/EventBus.js";
-import sessionService from "../Services/sessionService.js";
 
 export default class Navbar {
   #parent;
@@ -44,23 +43,12 @@ export default class Navbar {
 
     const FilmsAObj = new Link({
       parent: Films,
+      pathname: '/',
       classname: '',
     });
     const FilmsA = FilmsAObj.render();
     FilmsAObj.placeContent('Фильмы');
 
-    const SerialsObj = new List({
-      parent: ul,
-      classname: 'menu-secondary',
-    });
-    const Serials = SerialsObj.render();
-
-    const SerialsAObj = new Link({
-      parent: Serials,
-      classname: '',
-    });
-    const SerialsA = SerialsAObj.render();
-    SerialsAObj.placeContent('Сериалы');
 
     if (isAuthorized) {
       const profileObj = new List({

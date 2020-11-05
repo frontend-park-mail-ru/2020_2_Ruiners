@@ -43,7 +43,7 @@ export default class PersonPage extends Base{
                 try {
                     responseBody = JSON.parse(JSON.stringify(res.get));
                 } catch (e) {
-                    this.menuPage();
+                    Bus.emit('main');
                     return;
                 }
                 if (res.ok) {

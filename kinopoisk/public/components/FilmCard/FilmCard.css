@@ -48,6 +48,7 @@
 .right-block {
     position: relative;
     left: 50px;
+    width: 500px;
     right: 0;
 }
 
@@ -96,7 +97,7 @@
     position: absolute;
     display: inline;
     overflow: hidden;
-    width: 530px;
+    width: 450px;
 }
 .rating-area:not(:checked) > input {
     display: none;
