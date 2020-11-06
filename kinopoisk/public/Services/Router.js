@@ -18,16 +18,16 @@ export default class Router {
             this.open('/');
             return;
         }
-        if(id != undefined) {
+        if(id != undefined && id != '') {
             allPath = allPath + '/' + id;
         }
-        if (window.location.pathname !== path) {
+        console.log("sss", allPath);
+        if (window.location.pathname !== allPath) {
             window.history.pushState(
                 null,
                 '',
                 allPath
             );
-            console.log(window.history);
         }
         route({id: id});
     }
@@ -52,11 +52,11 @@ export default class Router {
             this.open(pathObject.path, { id: pathObject.param });
         }.bind(this));
 
-        window.addEventListener('popstate', function (event) {
+        window.addEventListener('popstate', event => {
             const currentPath = window.location.pathname;
             let pathObject = this.split(currentPath);
             this.open(pathObject.path, { id: pathObject.param });
-        }.bind(this));
+        });
         let currentPath = window.location.pathname;
         console.log(currentPath);
         let pathObject = this.split(currentPath);
