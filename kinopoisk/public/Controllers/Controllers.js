@@ -8,6 +8,7 @@ import sessionService from '../Services/sessionService.js';
 import filmService from "../Services/filmService.js";
 import PersonPage from "../Views/PersonPage.js";
 import GenrePage from "../Views/GenrePage.js";
+import Bus from "../Services/EventBus.js";
 
 export default class Controller {
     static menuPage() {
@@ -16,8 +17,15 @@ export default class Controller {
     }
 
     static signupPage() {
-        const signup = new SignupPage(application);
-        signup.render();
+        sessionService.me()
+            .then((res) => {
+                if (res.ok) {
+                    Bus.emit('main')
+                } else {
+                    const signup = new SignupPage(application);
+                    signup.render();
+                }
+            });
     }
 
     static filmPage(params) {
@@ -52,8 +60,16 @@ export default class Controller {
     }
 
     static loginPage() {
-        const login = new LoginPage(application);
-        login.render();
+        sessionService.me()
+            .then((res) => {
+                if (res.ok) {
+                    Bus.emit('main')
+                } else {
+                    const login = new LoginPage(application);
+                    login.render();
+                }
+            });
+
     }
 
     static profileChengePage() {

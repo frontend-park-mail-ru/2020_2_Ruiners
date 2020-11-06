@@ -3,7 +3,6 @@ import { createDiv } from './Components.js';
 import Bus from "../Services/EventBus.js";
 import Base from './Base.js';
 import Link from '../components/Link/Link.js';
-import SessionService from "../Services/sessionService.js";
 
 export default class ProfilePage extends Base {
     #parent
@@ -53,14 +52,11 @@ export default class ProfilePage extends Base {
       const divAvatar = createDiv('avatarUserBoxP', divLeft);
 
       const img = document.createElement('img');
-      SessionService.getAvatar(responseBody.id).then(image => {
-        const outside = URL.createObjectURL(image.get);
-        img.src = outside;
+        img.src = `${domain}/user/avatar/${responseBody.id + '?' + Math.random()}`;
         img.height = 300;
         img.width = 300;
         img.className = 'avatar__image';
         divAvatar.appendChild(img);
-      })
 
       const button = document.createElement('button');
       button.className = 'buttons buttons__marginForSettings';

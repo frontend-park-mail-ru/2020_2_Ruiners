@@ -62,10 +62,8 @@ export default class Navbar {
         className: 'profileNav',
       });
       const profileA = profileAObj.render();
-      SessionService.getAvatar(res.get.id).then(image => {
-        const outside = URL.createObjectURL(image.get);
-        profileAObj.placeContent(`<img width="50" height="50" src="${outside}" alt="" class="round">`);
-      });
+      const src = domain + '/user/avatar/' + res.get.id + '?' + Math.random();
+      profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="round">`);
       const profileLink = new navLink(profileA);
       const window = new Window({ parent: profileA });
       let windowClicks = 0;

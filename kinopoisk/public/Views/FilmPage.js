@@ -2,7 +2,6 @@ import Base from './Base.js';
 import FilmCard from '../components/FilmCard/FilmCard.js';
 import Comments from "../components/Comments/Comments.js";
 import filmService from "../Services/filmService.js";
-import sessionService from "../Services/sessionService.js";
 import Bus from "../Services/EventBus.js";
 import personService from "../Services/personService.js";
 
@@ -44,23 +43,15 @@ export default class FilmPage extends Base {
               });
               film.render();
           }
-
-      })
-      filmService.getByReviews(responseBody.id).then( res => {
-          let comments;
-          try {
-              comments = JSON.parse(JSON.stringify(res.get));
-          } catch (e) {
-              Bus.emit('main');
-          }
-          let ids = []
-          for(let i = 0; i < comments.length; i++) {
-              ids.push(comments[i].UserId);
-          }
-          sessionService.getAvatars(ids).then(images => {
-              for(let i = 0; i < images.get.length; i++) {
-                  const outside = URL.createObjectURL(images.get[i])
-                  comments[i].Image = outside
+          filmService.getByReviews(responseBody.id).then( res => {
+              let comments;
+              try {
+                  comments = JSON.parse(JSON.stringify(res.get));
+              } catch (e) {
+                  Bus.emit('main');
+              }
+              for(let i = 0; i < comments.length; i++) {
+                  comments[i].Image = `${domain}/user/avatar/${comments[i].UserId + '?' + Math.random()}`
               }
               const commentsObj = new Comments({
                   isAuthorized: this.#isAuthorized,
