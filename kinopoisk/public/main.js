@@ -2,6 +2,11 @@ import Controller from "./Controllers/Controllers.js";
 import Bus from "./Services/EventBus.js";
 import Router from "./Services/Router.js";
 
+const application = document.getElementById('app');
+const nav = document.getElementById('navbar');
+window.application = application;
+window.nav = nav;
+
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js', {scope: '/'})
         .then((registration) => {

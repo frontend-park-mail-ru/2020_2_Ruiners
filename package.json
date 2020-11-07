@@ -1,11 +1,22 @@
 {
   "name": "2020_2_ruiners",
   "version": "1.0.0",
-  "description": "Frontend репозиторий команды Ruiners! Привет! ![kinopoisk/public/static/images/Ruiners.png](kinopoisk/public/static/images/Ruiners.png)",
+  "description": "Frontend репозиторий команды Ruiners!",
   "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lodash": "^4.17.20",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "babel-loader": "^8.1.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint . --fix"
+    "build": "webpack",
+    "start": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -16,16 +27,5 @@
   "bugs": {
     "url": "https://github.com/frontend-park-mail-ru/2020_2_Ruiners/issues"
   },
-  "homepage": "https://github.com/frontend-park-mail-ru/2020_2_Ruiners#readme",
-  "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.10.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-import": "^2.22.1"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "xmlhttprequest": "^1.8.0"
-  }
+  "homepage": "https://github.com/frontend-park-mail-ru/2020_2_Ruiners#readme"
 }

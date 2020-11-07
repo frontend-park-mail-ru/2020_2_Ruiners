@@ -1,20 +1,17 @@
 import NavLink from '../Services/navLink.js';
 import Bus from "../Services/EventBus.js";
-import Form from '../components/Form/Form.js';
+import Form from '../Components/Form/Form.js';
 import Base from './Base.js';
 import userService from '../Services/userService.js';
-import Button from "../components/Button/Button.js";
+import Button from "../Components/Button/Button.js";
 import UserService from "../Services/userService.js";
 
 export default class ProfileChangePage extends Base {
-  #parent
-
-  #data
 
   constructor(parent, data) {
     super(nav);
-    this.#parent = parent;
-    this.#data = data;
+    this.parent = parent;
+    this.data = data;
   }
 
   render() {
@@ -22,9 +19,9 @@ export default class ProfileChangePage extends Base {
     const body = document.getElementById('body');
     body.className = 'page';
     body.style.backgroundImage = `url('../static/images/login.jpg')`;
-    this.#parent.className = 'wrapper__form chenge margin';
+    this.parent.className = 'wrapper__form chenge margin';
 
-    const responseBody = JSON.parse(this.#data);
+    const responseBody = JSON.parse(this.data);
 
     const headLogin = {
       head: true,
@@ -53,7 +50,7 @@ export default class ProfileChangePage extends Base {
     const formrLogin = formrend.render();
     // const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
     const form = formrLogin[0];
-    this.#parent.appendChild(form);
+    this.parent.appendChild(form);
 
     const formLink = new NavLink(form);
     formLink.render('submit', () => {
@@ -116,7 +113,7 @@ export default class ProfileChangePage extends Base {
     const formr = formrendpath.render();
     // const formr = renderForm(head, configInput, sub);
     const formPass = formr[0];
-    this.#parent.appendChild(formPass);
+    this.parent.appendChild(formPass);
 
     const formPassLink = new NavLink(formPass);
     const err = document.createElement('div');
@@ -162,7 +159,7 @@ export default class ProfileChangePage extends Base {
     const formrAvatar = formrendAvatar.render();
     // const formrAvatar = renderForm(head, configAvatar, subAvatar);
     const formAvatar = formrAvatar[0];
-    this.#parent.appendChild(formAvatar);
+    this.parent.appendChild(formAvatar);
     const formData = new FormData();
     const formAvatarLink = new NavLink(formAvatar);
     formAvatarLink.render('submit', () => {
@@ -178,7 +175,7 @@ export default class ProfileChangePage extends Base {
         });
       });
     const buttonBack = new Button({
-      parent: this.#parent,
+      parent: this.parent,
       classname: 'buttons buttons__marginForFilmCard',
       text: 'Назад'
     })

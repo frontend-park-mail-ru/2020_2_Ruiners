@@ -1,27 +1,19 @@
 import Button from "../Button/Button.js";
 import Bus from "../../Services/EventBus.js";
+import '../../example.precompiled.js'
 
 export default class Window {
-    window;
-
-    #classname;
-
-    #text;
-
-    #parent;
-
-    template;
 
     constructor(context = {}) {
       const { parent } = context;
-      this.#parent = parent;
-      this.window = document.createElement('div');
+      this.parent = parent;
+      this.windowEl = document.createElement('div');
       this.template = Handlebars.templates.Window;
     }
 
     render(callback) {
-        this.#parent.appendChild(this.window);
-        this.window.innerHTML = this.template();
+        this.parent.appendChild(this.windowEl);
+        this.windowEl.innerHTML = this.template();
         const okno = document.getElementById('okno');
         const buttonProfile = new Button({
             parent: okno,
@@ -42,6 +34,6 @@ export default class Window {
     }
 
     close() {
-      this.window.innerHTML = '';
+      this.windowEl.innerHTML = '';
     }
 }

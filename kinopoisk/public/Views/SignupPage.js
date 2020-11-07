@@ -2,24 +2,23 @@ import NavLink from '../Services/navLink.js';
 import Bus from "../Services/EventBus.js";
 import Base from './Base.js';
 import sessionService from '../Services/sessionService.js';
-import Link from '../components/Link/Link.js';
-import Form from '../components/Form/Form.js';
+import Link from '../Components/Link/Link.js';
+import Form from '../Components/Form/Form.js';
 
 export default class SignupPage extends Base {
-    #parent
 
     constructor(parent) {
       super(nav);
-      this.#parent = parent;
+      this.parent = parent;
     }
 
     render() {
       super.render(false);
-      this.#parent.innerHTML = '';
+      this.parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
       body.style.backgroundImage = `url('../static/images/login.jpg')`;
-      this.#parent.className = 'wrapper__form__regLog register';
+      this.parent.className = 'wrapper__form__regLog register';
 
       const headLogin = {
         head: true,
@@ -65,7 +64,7 @@ export default class SignupPage extends Base {
 
       // const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
       const form = formrLogin[0];
-      this.#parent.appendChild(form);
+      this.parent.appendChild(form);
 
       const linkLogin = new Link({
         parent: form,

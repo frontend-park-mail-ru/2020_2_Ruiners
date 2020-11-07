@@ -1,33 +1,28 @@
 import Base from "./Base.js";
 import filmService from "../Services/filmService.js";
-import FilmLenta from "../components/FilmLenta/FilmLenta.js";
+import FilmLenta from "../Components/FilmLenta/FilmLenta.js";
 import Bus from "../Services/EventBus.js";
 
 
 export default class LoginPage extends Base{
-    #parent;
-
-    #genre;
-
-    #map;
 
     constructor(context) {
         const { parent, genre } = context;
         super(nav);
-        this.#parent = parent;
-        this.#genre = genre;
-        this.#map = [];
-        this.#map['fantasy'] = 'Фантастика';
-        this.#map['comedy'] = 'Комедии';
+        this.parent = parent;
+        this.genre = genre;
+        this.map = [];
+        this.map['fantasy'] = 'Фантастика';
+        this.map['comedy'] = 'Комедии';
     }
 
     render() {
         super.render(false);
-        this.#parent.innerHTML = '';
+        this.parent.innerHTML = '';
         const body = document.getElementById('body');
         body.className = 'page';
         let responseBody;
-        filmService.getByGenre(this.#genre)
+        filmService.getByGenre(this.genre)
             .then((res) => {
                 try {
                     responseBody = JSON.parse(JSON.stringify(res.get));
@@ -37,9 +32,9 @@ export default class LoginPage extends Base{
                 }
                 if (res.ok) {
                     const lenta = new FilmLenta({
-                        genre: this.getRussian(this.#genre),
+                        genre: this.getRussian(this.genre),
                         body: responseBody,
-                        parent: this.#parent
+                        parent: this.parent
                     });
                     lenta.render();
                 } else {
@@ -49,7 +44,7 @@ export default class LoginPage extends Base{
     }
 
     getRussian(genre) {
-        return this.#map[genre];
+        return this.map[genre];
     }
 
 }

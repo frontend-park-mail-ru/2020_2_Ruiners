@@ -1,15 +1,15 @@
-const domain = 'http://95.163.208.72:8000'; //95.163.208.72
+const domain = 'http://localhost:8000'; //95.163.208.72
 window.domain = domain;
 export class AjaxModule {
-        static ajaxGet = (ajaxArgs) => {
-            return this.#ajax({method: 'GET', ...ajaxArgs});
+        static ajaxGet(ajaxArgs){
+            return this.ajax({method: 'GET', ...ajaxArgs});
         }
 
-        static ajaxPost = (ajaxArgs) => {
-            return this.#ajax({method: 'POST', ...ajaxArgs});
+        static ajaxPost(ajaxArgs){
+            return this.ajax({method: 'POST', ...ajaxArgs});
         }
 
-        static #ajax({
+        static ajax({
                   method = 'GET',
                   url = '/',
                   body = null,
