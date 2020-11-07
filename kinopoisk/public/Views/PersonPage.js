@@ -1,28 +1,26 @@
 import Base from './Base.js';
-import PersonCard from "../components/PersonCard/PersonCard.js";
+import PersonCard from "../Components/PersonCard/PersonCard.js";
 import filmService from "../Services/filmService.js";
-import FilmLenta from "../components/FilmLenta/FilmLenta.js";
+import FilmLenta from "../Components/FilmLenta/FilmLenta.js";
 import PersonService from "../Services/personService.js";
 import Bus from "../Services/EventBus.js";
 
 export default class PersonPage extends Base{
-    #parent;
-    #id;
 
     constructor(context) {
         super(nav);
         const { parent, id } = context;
-        this.#parent = parent;
-        this.#id = id;
+        this.parent = parent;
+        this.id = id;
     }
 
     render() {
         super.render(false);
         const app = document.getElementById('body')
         app.className = 'film1';
-        this.#parent.innerHTML = '';
+        this.parent.innerHTML = '';
         let responseBody;
-        PersonService.getById(this.#id)
+        PersonService.getById(this.id)
             .then((res) => {
                 try {
                     responseBody = JSON.parse(JSON.stringify(res.get));
@@ -31,13 +29,13 @@ export default class PersonPage extends Base{
                     return;
                 }
                 if (res.ok) {
-                    const person = new PersonCard({ parent: this.#parent, body: responseBody });
+                    const person = new PersonCard({ parent: this.parent, body: responseBody });
                     person.render();
                 } else {
                     this.menuPage();
                 }
             });
-        filmService.getByPerson(this.#id)
+        filmService.getByPerson(this.id)
             .then((res) => {
                 let responseBody;
                 try {

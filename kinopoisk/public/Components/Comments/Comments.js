@@ -1,25 +1,14 @@
 import Button from '../Button/Button.js';
-import filmService from "../../Services/filmService.js";
+import '../../example.precompiled.js'
 
 export default class Comments {
-    comments;
-
-    #parent;
-
-    #body;
-
-    #isAuthorized;
-
-    template;
-
-    msgButton;
 
     constructor(context = {}) {
         const { parent, body, isAuthorized } = context;
         this.comments = document.createElement('div');
-        this.#parent = parent;
-        this.#body = body;
-        this.#isAuthorized = isAuthorized;
+        this.parent = parent;
+        this.body = body;
+        this.isAuthorized = isAuthorized;
         this.msgButton = new Button({
             classname: 'buttons buttons__marginForFilmCard',
             id: 'msg_button',
@@ -29,15 +18,15 @@ export default class Comments {
     }
 
     render() {
-        this.#parent.appendChild(this.comments);
+        this.parent.appendChild(this.comments);
         let noComments = true;
-        if(this.#body.length !== 0) {
+        if(this.body.length !== 0) {
             noComments = false;
         }
         this.comments.innerHTML = this.template({
             noComments: noComments,
-            isAuth: this.#isAuthorized,
-            comments: this.#body,
+            isAuth: this.isAuthorized,
+            comments: this.body,
             Button: this.msgButton.template({
                 classname: 'buttons buttons__forComments',
                 text: 'Отправить',

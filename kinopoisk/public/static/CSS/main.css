@@ -1,16 +1,16 @@
-@import "../../components/Link/Link.css";
-@import "../../components/Nav/Nav.css";
-@import "../../components/List/List.css";
-@import "../../components/Form/Form.css";
-@import "../../components/Button/Button.css";
-@import "../../components/window/Window.css";
-@import "../../components/FilmCard/FilmCard.css";
-@import "../../components/FilmLenta/FilmLenta.css";
-@import "../../components/FilmPoster/FilmPoster.css";
-@import "../../components/Profile/Profile.css";
-@import "../../components/Footer/Footer.css";
-@import "../../components/Comments/Comments.css";
-@import "../../components/PersonCard/PersonCard.css";
+@import "../../Components/Link/Link.css";
+@import "../../Components/Nav/Nav.css";
+@import "../../Components/List/List.css";
+@import "../../Components/Form/Form.css";
+@import "../../Components/Button/Button.css";
+@import "../../Components/window/Window.css";
+@import "../../Components/FilmCard/FilmCard.css";
+@import "../../Components/FilmLenta/FilmLenta.css";
+@import "../../Components/FilmPoster/FilmPoster.css";
+@import "../../Components/Profile/Profile.css";
+@import "../../Components/Footer/Footer.css";
+@import "../../Components/Comments/Comments.css";
+@import "../../Components/PersonCard/PersonCard.css";
 
 
 body.film1 {

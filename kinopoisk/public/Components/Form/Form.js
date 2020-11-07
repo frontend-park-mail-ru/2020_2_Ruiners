@@ -2,11 +2,8 @@ import Button from "../Button/Button.js";
 import { createDiv } from "../../Views/Components.js";
 
 export default class Form {
-    #headConf;
-    #configInput;
-    #sub;
 
-    #createInput(type, name, text) {
+    createInput(type, name, text) {
       const input = document.createElement('input');
       input.type = type;
       input.name = name;
@@ -14,7 +11,7 @@ export default class Form {
       return input;
     }
 
-    #valid(form, reg, input, text) {
+    valid(form, reg, input, text) {
         const diver = createDiv('error', form);
         input.onblur = function () {
           if (!reg.test(this.value)) {
@@ -32,13 +29,13 @@ export default class Form {
       }
 
     constructor(headConf, configInput, sub) {
-        this.#headConf = headConf;
-        this.#configInput = configInput;
-        this.#sub = sub;
+        this.headConf = headConf;
+        this.configInput = configInput;
+        this.sub = sub;
     }
 
     render() {
-        const { head, textContent, style } = this.#headConf;
+        const { head, textContent, style } = this.headConf;
         const form = document.createElement('form');
         const formr = [];
         formr.push(form);
@@ -50,14 +47,14 @@ export default class Form {
           form.appendChild(header);
         }
       
-        this.#configInput.forEach((menuKey) => {
+        this.configInput.forEach((menuKey) => {
           const { type, name, text, required } = menuKey;
-          const input = this.#createInput(type, name, text);
+          const input = this.createInput(type, name, text);
           input.required = required;
           form.appendChild(input);
           formr.push(input);
         });
-        const { text, className} = this.#sub
+        const { text, className} = this.sub
         const submitpass = new Button({
             parent: form,
             text: text,
@@ -67,10 +64,10 @@ export default class Form {
         submitpass.renderSubmit();
       
         let i = 1;
-        this.#configInput.forEach((menuKey) => {
+        this.configInput.forEach((menuKey) => {
           const { reg, errorVal } = menuKey;
           if (menuKey.valid) {
-            this.#valid(form, reg, formr[i], errorVal);
+            this.valid(form, reg, formr[i], errorVal);
           }
           i += 1;
         });

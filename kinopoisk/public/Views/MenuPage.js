@@ -1,19 +1,18 @@
 import Base from './Base.js';
-import FilmLenta from '../components/FilmLenta/FilmLenta.js';
+import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
 import filmService from "../Services/filmService.js";
 
 export default class MenuPage extends Base {
-    #parent
 
     constructor(parent) {
       super(nav);
-      this.#parent = parent;
+      this.parent = parent;
     }
 
     render() {
       super.render(false);
-      this.#parent.innerHTML = '';
-      this.#parent.className = '';
+      this.parent.innerHTML = '';
+      this.parent.className = '';
       const body = document.getElementById('body');
       body.className = 'main__black';
       if(!navigator.onLine) {
@@ -25,12 +24,12 @@ export default class MenuPage extends Base {
         {
           rusGenre:'Фантастика',
           genre: 'fantasy',
-          parent: this.#parent,
+          parent: this.parent,
         },
         {
           rusGenre: 'Комедии',
           genre: 'comedy',
-          parent: this.#parent,
+          parent: this.parent,
         },
       ];
       for (let i = 0; i < lentas.length; i++) {

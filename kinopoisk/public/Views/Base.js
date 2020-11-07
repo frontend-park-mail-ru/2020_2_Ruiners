@@ -1,12 +1,11 @@
 import Navbar from './Navbar.js';
 import sessionService from '../Services/sessionService.js';
-import Footer from "../components/Footer/Footer.js";
+import Footer from "../Components/Footer/Footer.js";
 
 export default class Base {
-    #parent;
 
     constructor(parent) {
-      this.#parent = parent;
+      this.parent = parent;
     }
 
     render(flag) {

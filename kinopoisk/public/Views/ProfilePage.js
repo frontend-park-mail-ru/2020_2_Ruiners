@@ -2,26 +2,42 @@ import NavLink from '../Services/navLink.js';
 import { createDiv } from './Components.js';
 import Bus from "../Services/EventBus.js";
 import Base from './Base.js';
-import Link from '../components/Link/Link.js';
+import Link from '../Components/Link/Link.js';
+
+const menuTop = {
+  rech: {
+    href: '/rech',
+    text: 'Рецензии',
+  },
+  mark: {
+    href: '/mark',
+    text: 'Оценки',
+  },
+  films: {
+    href: '/films',
+    text: 'Фильмы',
+  },
+  stars: {
+    href: '/stars',
+    text: 'Звёзды',
+  },
+};
 
 export default class ProfilePage extends Base {
-    #parent
-
-    #data
 
     constructor(parent, data) {
       super(nav);
-      this.#parent = parent;
-      this.#data = data;
+      this.parent = parent;
+      this.data = data;
     }
 
     render() {
-      const responseBody = JSON.parse(this.#data);
+      const responseBody = JSON.parse(this.data);
       super.render(false);
       const body = document.getElementById('body');
       body.className = 'page';
       body.style.backgroundImage = `url('../static/images/login.jpg')`;
-      const divshadow = createDiv('shadow profile', this.#parent);
+      const divshadow = createDiv('shadow profile', this.parent);
 
       const ul = document.createElement('ul');
       ul.className = 'top-menu';

@@ -1,23 +1,22 @@
 import NavLink from '../Services/navLink.js';
-import List from '../components/List/List.js';
-import Link from '../components/Link/Link.js';
-import Navigate from '../components/Nav/Nav.js';
-import Button from '../components/Button/Button.js';
-import Window from '../components/window/Window.js';
+import List from '../Components/List/List.js';
+import Link from '../Components/Link/Link.js';
+import Navigate from '../Components/Nav/Nav.js';
+import Button from '../Components/Button/Button.js';
+import Window from '../Components/window/Window.js';
 import navLink from '../Services/navLink.js';
 import SessionService from '../Services/sessionService.js';
 import Bus from "../Services/EventBus.js";
 
 export default class Navbar {
-  #parent;
 
   constructor(parent) {
-    this.#parent = parent;
+    this.parent = parent;
   }
 
   render(isAuthorized, res) {
     nav.innerHTML = '';
-    const NavigateObj = new Navigate(this.#parent);
+    const NavigateObj = new Navigate(this.parent);
     const Nav = NavigateObj.render();
 
     const ul = document.createElement('ul');
