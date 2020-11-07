@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './kinopoisk/public/main.js',
@@ -12,7 +13,14 @@ module.exports = {
                 test: /\.js/,
                 loader: 'babel-loader',
                 exclude: /(node_modules|bower_components)/
+            },
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             }
         ]
-    }
+    },
+    plugins: [
+         new MiniCssExtractPlugin({filename: 'bundle.css'})
+    ]
 };

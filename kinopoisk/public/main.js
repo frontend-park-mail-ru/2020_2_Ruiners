@@ -1,6 +1,7 @@
 import Controller from "./Controllers/Controllers.js";
 import Bus from "./Services/EventBus.js";
 import Router from "./Services/Router.js";
+import './static/CSS/main.css'
 
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
