@@ -190,7 +190,7 @@ textarea.question:invalid ~ input[type="submit"] {
     color: white;
 }
 .login__comment:hover {
-    color: orange;
+    cursor: default;
 }
 
 .comment__content {

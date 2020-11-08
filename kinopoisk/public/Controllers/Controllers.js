@@ -11,6 +11,10 @@ import GenrePage from "../Views/GenrePage.js";
 import Bus from "../Services/EventBus.js";
 
 export default class Controller {
+    static offlinePage() {
+
+    }
+
     static menuPage() {
         const menu = new MenuPage(application);
         menu.render();

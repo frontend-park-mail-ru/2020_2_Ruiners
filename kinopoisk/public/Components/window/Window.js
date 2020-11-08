@@ -1,6 +1,6 @@
 import Button from "../Button/Button.js";
 import Bus from "../../Services/EventBus.js";
-import '../../example.precompiled.js'
+import windowT from './Window.handlebars'
 
 export default class Window {
 
@@ -8,7 +8,7 @@ export default class Window {
       const { parent } = context;
       this.parent = parent;
       this.windowEl = document.createElement('div');
-      this.template = Handlebars.templates.Window;
+      this.template = windowT;
     }
 
     render(callback) {

@@ -30,7 +30,7 @@
 }
 
 .header-link:hover {
-    color: orange;
+    cursor: default;
 }
 
 .poster-body {

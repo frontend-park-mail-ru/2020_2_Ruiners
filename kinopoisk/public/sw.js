@@ -59,7 +59,8 @@ const cacheUrls = [
     './static/images/test.jpg',
     './static/images/nachalo.jpg',
     './modules/ajax1.js',
-    'https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js'
+    'https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js',
+    '/Services/rateAndReviewService.js'
 ];
 
 this.addEventListener('install', (event) => {

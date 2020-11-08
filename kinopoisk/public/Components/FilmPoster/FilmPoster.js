@@ -1,4 +1,4 @@
-import '../../example.precompiled.js'
+import filmPosterT from './FilmPoster.handlebars'
 
 export default class FilmPoster {
 
@@ -12,7 +12,7 @@ export default class FilmPoster {
       this.year = year;
       this.id = id;
       this.poster = document.createElement('div');
-      this.template = Handlebars.templates.FilmPoster;
+      this.template = filmPosterT;
     }
 
     render() {
