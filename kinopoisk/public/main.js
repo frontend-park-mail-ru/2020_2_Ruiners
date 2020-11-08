@@ -4,6 +4,7 @@ import Router from "./Services/Router.js";
 import './static/CSS/main.css'
 import  './static/images/icons8-кинопроектор-96.png'
 import './static/images/login.jpg'
+import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
@@ -11,11 +12,18 @@ window.application = application;
 window.nav = nav;
 
 if ('serviceWorker' in navigator) {
-    // Use the window load event to keep the page load performant
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js').then();
-    });
+        runtime.register();
 }
+
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register('sw.js', {scope: '/'})
+//         .then((registration) => {
+//             console.log('sw registration on scope:', registration.scope);
+//         })
+//         .catch((err) => {
+//             console.error(err);
+//         });
+// }
 
 Bus.on('profile', (href) => {
     href.render('click', () => {

@@ -48,8 +48,11 @@ export default class Form {
         }
       
         this.configInput.forEach((menuKey) => {
-          const { type, name, text, required } = menuKey;
+          const { type, name, text, required, accept } = menuKey;
           const input = this.createInput(type, name, text);
+          if (type === 'file') {
+              input.accept = accept;
+          }
           input.required = required;
           form.appendChild(input);
           formr.push(input);
