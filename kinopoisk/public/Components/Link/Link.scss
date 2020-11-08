@@ -1,8 +1,10 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
 .profileNav {
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     cursor: default;
-    color: white;
+    color: $link;
 }
 
 .menu-secondary a:hover {
@@ -11,7 +13,7 @@
 }
 
 .linkSignupLogin {
-    color: #FFFFFF;
+    color: $link;
     margin-left: 10px;
     margin-top: 10px;
     display: block;
@@ -27,5 +29,5 @@
 }
 
 .linkSignupLogin:hover {
-    color: orange;
+    color: $color-main;
 }

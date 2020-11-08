@@ -1,5 +1,7 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
 .brand {
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-main;
     font-size: 24px;
     text-transform: uppercase;
     font-weight: 1000;
@@ -9,7 +11,7 @@
 
 .brand a {
     text-decoration: none;
-    color: white;
+    color: $link;
 }
 
 .brand a:hover {
@@ -28,7 +30,7 @@
     margin-left: 50px;
     font-size: 20px;
     text-transform: uppercase;
-    color: white;
+    color: $link;
 }
 
 .menu-secondary a:hover{color: orange;}
@@ -41,9 +43,9 @@
 }
 
 .profile {
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-main;
     text-decoration: none;
-    color: white;
+    color: $link;
 }
 
 .right {

@@ -12,8 +12,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.handlebars$/,
@@ -42,7 +42,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin({filename: 'bundle.css'}),
         new HtmlWebpackPlugin({inject: true, template: './kinopoisk/public/index.html'}),
         new ServiceWorkerWebpackPlugin({
             entry: path.join(__dirname, 'kinopoisk/public/sw.js'),

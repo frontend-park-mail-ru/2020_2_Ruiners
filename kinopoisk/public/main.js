@@ -1,9 +1,9 @@
 import Controller from "./Controllers/Controllers.js";
 import Bus from "./Services/EventBus.js";
 import Router from "./Services/Router.js";
-import './static/CSS/main.css'
-import  './static/images/icons8-кинопроектор-96.png'
-import './static/images/login.jpg'
+import './static/CSS/main.scss';
+import  './static/images/icons8-кинопроектор-96.png';
+import './static/images/login.jpg';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 const application = document.getElementById('app');
@@ -12,17 +12,18 @@ window.application = application;
 window.nav = nav;
 
 if ('serviceWorker' in navigator) {
-        runtime.register();
+        // runtime.register();
+    navigator.serviceWorker.register('sw.js', {scope: '/'});
 }
 
-// if ('serviceWorker' in navigator) {
-//     navigator.serviceWorker.register('sw.js', {scope: '/'})
-//         .then((registration) => {
-//             console.log('sw registration on scope:', registration.scope);
+//  if ('serviceWorker' in navigator) {
+//      navigator.serviceWorker.register('sw.js', {scope: '/'})
+//          .then((registration) => {
+//              console.log('sw registration on scope:', registration.scope);
 //         })
 //         .catch((err) => {
 //             console.error(err);
-//         });
+//        });
 // }
 
 Bus.on('profile', (href) => {
