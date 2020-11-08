@@ -1,3 +1,4 @@
+@import "kinopoisk/public/static/CSS/fonts";
 .actor__main {
     display: flex;
     margin-left: 5%;
@@ -22,7 +23,7 @@
 
 .person__name {
     color: white;
-    font-family: "Arial", "Helvetica";
+    font-family: $font-info;
     margin-top: 40px;
     font-size: 22px;
     font-weight: bold;
@@ -32,7 +33,7 @@
     margin-top: 30px;
     color: white;
     font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-main;
 }
 
 .person__headers {

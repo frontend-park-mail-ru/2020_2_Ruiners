@@ -1,3 +1,5 @@
+@import "kinopoisk/public/static/CSS/colors";
+
 nav {
     width: 100%;
     display: flex;
@@ -15,5 +17,5 @@ nav ul li {
     display: inline-flex;
     padding: 0 3em;
     line-height: 3em;
-    color: white;
+    color: $link;
 }

@@ -1,9 +1,9 @@
 const CACHE_NAME = 'kinopark_sw-v1';
 const {assets} = global.serviceWorkerOption;
-assets.push('/');
 for(let i = 0; i < assets.length; i++) {
     assets[i] = '.' + assets[i];
 }
+assets.push('/');
 
 self.addEventListener('install', (event) => {
     console.log(assets);
