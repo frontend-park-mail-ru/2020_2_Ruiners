@@ -1,7 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 module.exports = {
     entry: './kinopoisk/public/main.js',
@@ -11,13 +11,6 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.js/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                }
-            },
             {
                 test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
@@ -39,11 +32,20 @@ module.exports = {
                     }
                 }]
             },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                }
+            },
         ]
     },
     plugins: [
-         new MiniCssExtractPlugin({filename: 'bundle.css'}),
-         new HtmlWebpackPlugin({inject: true, template: './kinopoisk/public/index.html'}),
-        new WorkboxPlugin.GenerateSW()
-    ]
+        new MiniCssExtractPlugin({filename: 'bundle.css'}),
+        new HtmlWebpackPlugin({inject: true, template: './kinopoisk/public/index.html'}),
+        new ServiceWorkerWebpackPlugin({
+            entry: path.join(__dirname, 'kinopoisk/public/sw.js'),
+        }),
+    ],
 };

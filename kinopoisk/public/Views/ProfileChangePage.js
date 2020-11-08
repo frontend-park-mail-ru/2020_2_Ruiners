@@ -149,6 +149,7 @@ export default class ProfileChangePage extends Base {
         text: 'фото',
         required: true,
         valid: false,
+        accept: 'image/*',
       }];
 
     const subAvatar = {
