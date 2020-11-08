@@ -1,5 +1,5 @@
 import Button from '../Button/Button.js';
-import '../../example.precompiled.js'
+import commentT from './Comments.handlebars'
 
 export default class Comments {
 
@@ -14,7 +14,7 @@ export default class Comments {
             id: 'msg_button',
             parent: null,
         });
-        this.template = Handlebars.templates.Comments;
+        this.template = commentT;
     }
 
     render() {

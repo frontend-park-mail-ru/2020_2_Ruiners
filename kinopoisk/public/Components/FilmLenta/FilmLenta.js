@@ -1,6 +1,5 @@
 import FilmPoster from "../FilmPoster/FilmPoster.js";
-import '../../example.precompiled.js'
-
+import  filmLentaT from './FilmLenta.handlebars'
 export default class FilmLenta {
 
     constructor(context = {}) {
@@ -9,7 +8,7 @@ export default class FilmLenta {
       this.parent = parent;
       this.body = body;
       this.lenta = document.createElement('div');
-      this.template = Handlebars.templates.FilmLenta;
+      this.template = filmLentaT;
       const posters = [];
       for( let i = 0; i < this.body.length; i++) {
           const poster = new FilmPoster(this.body[i]);

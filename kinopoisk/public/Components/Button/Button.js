@@ -1,4 +1,4 @@
-import '../../example.precompiled.js'
+import buttonT from './Button.handlebars'
 
 export default class Button {
 
@@ -10,7 +10,7 @@ export default class Button {
       this.classname = classname;
       this.text = text;
       this.parent = parent;
-      this.template = Handlebars.templates.Button;
+      this.template = buttonT;
       this.type = type;
       this.id = id;
     }

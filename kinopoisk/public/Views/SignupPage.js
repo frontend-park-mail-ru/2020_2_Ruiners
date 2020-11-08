@@ -17,7 +17,7 @@ export default class SignupPage extends Base {
       this.parent.innerHTML = '';
       const body = document.getElementById('body');
       body.className = 'page';
-      body.style.backgroundImage = `url('../static/images/login.jpg')`;
+      body.style.backgroundImage = `url('images/login.jpg')`;
       this.parent.className = 'wrapper__form__regLog register';
 
       const headLogin = {

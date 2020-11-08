@@ -1,9 +1,9 @@
-import '../../example.precompiled.js'
+import footerT from './Footer.handlebars'
 
 export default class Footer {
     constructor() {
         this.footer = document.createElement('div');
-        this.template = Handlebars.templates.Footer;
+        this.template = footerT;
     }
 
     render() {

@@ -1,4 +1,4 @@
-import '../../example.precompiled.js'
+import personCardT from './PersonCard.handlebars'
 
 export default class PersonCard {
 
@@ -9,7 +9,7 @@ export default class PersonCard {
         this.card = document.createElement('div');
         this.parent = parent;
         this.body = body;
-        this.template = Handlebars.templates.PersonCard;
+        this.template = personCardT;
     }
 
     render() {

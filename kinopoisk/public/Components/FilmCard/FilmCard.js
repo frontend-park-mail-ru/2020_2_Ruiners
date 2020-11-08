@@ -1,7 +1,6 @@
 import Button from '../Button/Button.js';
 import RateAndReviewService from '../../Services/rateAndReviewService.js';
-import '../../example.precompiled.js'
-
+import filmcardT from './FilmCard.handlebars'
 export default class FilmCard {
 
     constructor(context = {}) {
@@ -15,7 +14,7 @@ export default class FilmCard {
         classname: 'buttons buttons__forComments',
         parent: null,
       });
-      this.template = Handlebars.templates.FilmCard;
+      this.template = filmcardT;
       this.mapRussian = [];
       this.mapRussian['Фантастика'] = 'fantasy';
       this.mapRussian['Комедия'] = 'comedy';

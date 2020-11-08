@@ -2,6 +2,8 @@ import Controller from "./Controllers/Controllers.js";
 import Bus from "./Services/EventBus.js";
 import Router from "./Services/Router.js";
 import './static/CSS/main.css'
+import  './static/images/icons8-кинопроектор-96.png'
+import './static/images/login.jpg'
 
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
@@ -9,13 +11,10 @@ window.application = application;
 window.nav = nav;
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js', {scope: '/'})
-        .then((registration) => {
-            console.log('sw registration on scope:', registration.scope);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+    // Use the window load event to keep the page load performant
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').then();
+    });
 }
 
 Bus.on('profile', (href) => {
@@ -94,15 +93,19 @@ Bus.on('main', () => {
 const body = document.getElementById('body');
 const router = new Router(body);
 
-router
-    .register('/', Controller.menuPage)
-    .register('/login', Controller.loginPage)
-    .register('/film', Controller.filmPage)
-    .register('/signup', Controller.signupPage)
-    .register('/profile', Controller.profilePage)
-    .register('/profileChange', Controller.profileChengePage)
-    .register('/person', Controller.personPage)
-    .register('/genre', Controller.genrePage);
+if(navigator.onLine) {
+    router
+        .register('/', Controller.menuPage)
+        .register('/login', Controller.loginPage)
+        .register('/film', Controller.filmPage)
+        .register('/signup', Controller.signupPage)
+        .register('/profile', Controller.profilePage)
+        .register('/profileChange', Controller.profileChengePage)
+        .register('/person', Controller.personPage)
+        .register('/genre', Controller.genrePage);
+} else {
+    router.register('/', Controller.offlinePage)
+}
 
 
 router.start();

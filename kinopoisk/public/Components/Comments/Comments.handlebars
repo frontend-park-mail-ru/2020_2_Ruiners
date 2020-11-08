@@ -14,10 +14,10 @@
     <h1 class="myComment__header">Все отзывы</h1>
     {{#each comments}}
         <div class="myComment__underground">
-            <a class="profile__comment" href="">
+            <div class="profile__comment">
                 <span class="login__comment">{{ this.UserLogin }}</span>
                 <img class="profile__round" width="50" height="50" src="{{ this.Image }}" alt="">
-            </a>
+            </div>
             <div class="comment__content">
                 {{ this.TextBody }}
             </div>
