@@ -23,10 +23,12 @@ export default class Button {
         text: this.text,
         id: this.id
       });
-      this.button.addEventListener('click', (evt) => {
-        evt.preventDefault();
-        callback(evt);
-      });
+      if (callback) {
+        this.button.addEventListener('click', (evt) => {
+          evt.preventDefault();
+          callback(evt);
+        });
+      }
     }
 
     renderSubmit() {
