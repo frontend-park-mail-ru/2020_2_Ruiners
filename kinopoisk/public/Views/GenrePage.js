@@ -1,11 +1,10 @@
 import Base from "./Base.js";
 import filmService from "../Services/filmService.js";
 import FilmLenta from "../Components/FilmLenta/FilmLenta.js";
-import Bus from "../Services/EventBus.js";
+import Bus from "../modules/EventBus.js";
 
 
 export default class LoginPage extends Base{
-
     constructor(context) {
         const { parent, genre } = context;
         super(nav);
@@ -25,9 +24,9 @@ export default class LoginPage extends Base{
         filmService.getByGenre(this.genre)
             .then((res) => {
                 try {
-                    responseBody = JSON.parse(JSON.stringify(res.get));
+                    responseBody = res.get;
                 } catch (e) {
-                    Bus.emit('main');
+                    Bus.emit('redirecMain');
                     return;
                 }
                 if (res.ok) {

@@ -21,7 +21,6 @@ export default class Router {
         if(id != undefined && id != '') {
             allPath = allPath + '/' + id;
         }
-        console.log("sss", allPath);
         if (window.location.pathname !== allPath) {
             window.history.pushState(
                 null,
@@ -33,7 +32,7 @@ export default class Router {
     }
 
     start () {
-        this.root.addEventListener('click', function (event) {
+        this.root.addEventListener('click', (event) => {
             if (!(event.target instanceof HTMLAnchorElement) && !(event.target instanceof HTMLImageElement)) {
                 return;
             }
@@ -50,7 +49,7 @@ export default class Router {
             }
             let pathObject = this.split(link.pathname);
             this.open(pathObject.path, { id: pathObject.param });
-        }.bind(this));
+        });
 
         window.addEventListener('popstate', event => {
             const currentPath = window.location.pathname;
@@ -58,7 +57,6 @@ export default class Router {
             this.open(pathObject.path, { id: pathObject.param });
         });
         let currentPath = window.location.pathname;
-        console.log(currentPath);
         let pathObject = this.split(currentPath);
         this.open(pathObject.path, { id: pathObject.param });
     }

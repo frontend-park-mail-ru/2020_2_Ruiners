@@ -1,5 +1,4 @@
 export default class List {
-
     constructor(context) {
       const { parent, classname } = context;
       this.li = document.createElement('li');

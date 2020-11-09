@@ -1,7 +1,6 @@
 import buttonT from './Button.handlebars'
 
 export default class Button {
-
     constructor(context = {}) {
       const {
         classname, text, parent, type, id
@@ -15,7 +14,8 @@ export default class Button {
       this.id = id;
     }
 
-    render(callback) {
+    render(context = {}) {
+      const { callback } = context;
       this.parent.appendChild(this.button);
       this.button.innerHTML = this.template({
         classname: this.classname,

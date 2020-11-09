@@ -8,7 +8,11 @@ http://95.163.208.72:3000/
 https://github.com/go-park-mail-ru/2020_2_Ruiners
 
 ## Запуск 
-Необходимо перейти в папку /server и написать команду "node index.js"
+npm run build
+
+npm run start
+
+Готово)
 
 ## Состав
 

@@ -3,7 +3,6 @@ import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
 import filmService from "../Services/filmService.js";
 
 export default class MenuPage extends Base {
-
     constructor(parent) {
       super(nav);
       this.parent = parent;
@@ -37,7 +36,7 @@ export default class MenuPage extends Base {
         filmService.getByGenre(lentas[i].genre)
             .then((res) => {
               try {
-                responseBody = JSON.parse(JSON.stringify(res.get));
+                responseBody = res.get;
               } catch (e) {
                 this.menuPage();
                 return;

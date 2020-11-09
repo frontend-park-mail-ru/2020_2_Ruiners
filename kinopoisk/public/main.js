@@ -1,10 +1,11 @@
 import Controller from "./Controllers/Controllers.js";
-import Bus from "./Services/EventBus.js";
-import Router from "./Services/Router.js";
+import Bus from "./modules/EventBus.js";
+import Router from "./modules/Router.js";
 import './static/CSS/main.scss';
 import  './static/images/icons8-кинопроектор-96.png';
 import './static/images/login.jpg';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+import RateAndReviewService from "./Services/rateAndReviewService.js";
 
 const application = document.getElementById('app');
 const nav = document.getElementById('navbar');
@@ -15,16 +16,6 @@ if ('serviceWorker' in navigator) {
         // runtime.register();
     navigator.serviceWorker.register('sw.js', {scope: '/'});
 }
-
-//  if ('serviceWorker' in navigator) {
-//      navigator.serviceWorker.register('sw.js', {scope: '/'})
-//          .then((registration) => {
-//              console.log('sw registration on scope:', registration.scope);
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//        });
-// }
 
 Bus.on('profile', (href) => {
     href.render('click', () => {
@@ -47,15 +38,15 @@ Bus.on('film', (href) => {
 });
 
 Bus.on('navbarLogin', (button) => {
-    button.render(() => {
+    button.render({ callback: () => {
         router.open('/login');
-    });
+    }});
 });
 
 Bus.on('navbarSignup', (button) => {
-    button.render(() => {
+    button.render({ callback: () => {
         router.open('/signup');
-    });
+    }});
 });
 
 Bus.on('logout', (res) => {
@@ -82,7 +73,18 @@ Bus.on('loginSignup', (data) => {
     }
 });
 
-Bus.on('loginPasswordChange', (res) => {
+Bus.on('Rate', (context) => {
+    const { id, index, err, card } = context;
+    RateAndReviewService.Rate(id, index)
+        .then((res) => {
+            if (res.ok) {
+                err.textContent = 'Вы успешно проголосовали!';
+                card.appendChild(err);
+            }
+        })
+})
+
+Bus.on('loginPasswordChange', (button) => {
     router.open('/profile');
 });
 Bus.on('Change', (res) => {
@@ -90,13 +92,14 @@ Bus.on('Change', (res) => {
 });
 
 Bus.on('Back', button => {
-    button.render(() => {
+    button.render({callback: () => {
         window.history.back();
-    })
+    }})
 });
 
-Bus.on('main', () => {
-    router.open('main');
+
+Bus.on('redirectMain', () => {
+    router.open('/');
 })
 
 const body = document.getElementById('body');

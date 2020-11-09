@@ -1,5 +1,4 @@
 export default class Navigate {
-
     constructor(parent) {
       this.parent = parent;
     }

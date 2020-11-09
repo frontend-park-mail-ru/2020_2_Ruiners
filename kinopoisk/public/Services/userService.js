@@ -1,4 +1,4 @@
-import { AjaxModule } from '../modules/ajax1.js';
+import { AjaxModule } from '../modules/ajax.js';
 
 export default class UserService {
   static async fetchChangeLogin(login) {
@@ -7,7 +7,6 @@ export default class UserService {
   }
 
   static async fetchChangePassword(PasswordOld, Password) {
-    console.log({ PasswordOld, Password });
     const res = await AjaxModule.ajaxPost({ url: '/chengepass', body: { PasswordOld, Password } });
     // console.log(res);
     return res.status;

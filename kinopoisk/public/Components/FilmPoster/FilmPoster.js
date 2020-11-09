@@ -1,7 +1,6 @@
 import filmPosterT from './FilmPoster.handlebars'
 
 export default class FilmPoster {
-
     constructor(context = {}) {
       const {
         title, MainGenre, year, SmallImg, id

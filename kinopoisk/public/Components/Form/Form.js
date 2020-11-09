@@ -2,7 +2,6 @@ import Button from "../Button/Button.js";
 import { createDiv } from "../../Views/Components.js";
 
 export default class Form {
-
     createInput(type, name, text) {
       const input = document.createElement('input');
       input.type = type;
@@ -61,7 +60,7 @@ export default class Form {
         const submitpass = new Button({
             parent: form,
             text: text,
-            classname: 'buttons buttons__margin',
+            classname: 'button buttons__margin',
             type: 'submit'
         });
         submitpass.renderSubmit();

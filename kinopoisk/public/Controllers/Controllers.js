@@ -8,7 +8,7 @@ import sessionService from '../Services/sessionService.js';
 import filmService from "../Services/filmService.js";
 import PersonPage from "../Views/PersonPage.js";
 import GenrePage from "../Views/GenrePage.js";
-import Bus from "../Services/EventBus.js";
+import Bus from "../modules/EventBus.js";
 
 export default class Controller {
     static offlinePage() {
