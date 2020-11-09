@@ -2,7 +2,7 @@ import Controller from "./Controllers/Controllers.js";
 import Bus from "./modules/EventBus.js";
 import Router from "./modules/Router.js";
 import './static/CSS/main.scss';
-import  './static/images/icons8-кинопроектор-96.png';
+import './static/images/icons8-кинопроектор-96.png';
 import './static/images/login.jpg';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import RateAndReviewService from "./Services/rateAndReviewService.js";
@@ -13,8 +13,7 @@ window.application = application;
 window.nav = nav;
 
 if ('serviceWorker' in navigator) {
-        // runtime.register();
-    navigator.serviceWorker.register('sw.js', {scope: '/'});
+    runtime.register();
 }
 
 Bus.on('profile', (href) => {
@@ -38,15 +37,19 @@ Bus.on('film', (href) => {
 });
 
 Bus.on('navbarLogin', (button) => {
-    button.render({ callback: () => {
-        router.open('/login');
-    }});
+    button.render({
+        callback: () => {
+            router.open('/login');
+        }
+    });
 });
 
 Bus.on('navbarSignup', (button) => {
-    button.render({ callback: () => {
-        router.open('/signup');
-    }});
+    button.render({
+        callback: () => {
+            router.open('/signup');
+        }
+    });
 });
 
 Bus.on('logout', (res) => {
@@ -63,7 +66,7 @@ Bus.on('navbarClick', (mainLink) => {
 });
 
 Bus.on('loginSignup', (data) => {
-    const { loginres, err, form, render } = data;
+    const {loginres, err, form, render} = data;
     if (loginres.ok) {
         nav.innerHTML = '';
         router.open('/');
@@ -74,7 +77,7 @@ Bus.on('loginSignup', (data) => {
 });
 
 Bus.on('Rate', (context) => {
-    const { id, index, err, card } = context;
+    const {id, index, err, card} = context;
     RateAndReviewService.Rate(id, index)
         .then((res) => {
             if (res.ok) {
@@ -92,9 +95,11 @@ Bus.on('Change', (res) => {
 });
 
 Bus.on('Back', button => {
-    button.render({callback: () => {
-        window.history.back();
-    }})
+    button.render({
+        callback: () => {
+            window.history.back();
+        }
+    })
 });
 
 
@@ -105,19 +110,15 @@ Bus.on('redirectMain', () => {
 const body = document.getElementById('body');
 const router = new Router(body);
 
-if(navigator.onLine) {
-    router
-        .register('/', Controller.menuPage)
-        .register('/login', Controller.loginPage)
-        .register('/film', Controller.filmPage)
-        .register('/signup', Controller.signupPage)
-        .register('/profile', Controller.profilePage)
-        .register('/profileChange', Controller.profileChengePage)
-        .register('/person', Controller.personPage)
-        .register('/genre', Controller.genrePage);
-} else {
-    router.register('/', Controller.offlinePage)
-}
+router
+    .register('/', Controller.menuPage)
+    .register('/login', Controller.loginPage)
+    .register('/film', Controller.filmPage)
+    .register('/signup', Controller.signupPage)
+    .register('/profile', Controller.profilePage)
+    .register('/profileChange', Controller.profileChengePage)
+    .register('/person', Controller.personPage)
+    .register('/genre', Controller.genrePage);
 
 
 router.start();
