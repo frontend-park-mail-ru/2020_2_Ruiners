@@ -3,7 +3,6 @@ import sessionService from '../Services/sessionService.js';
 import Footer from "../Components/Footer/Footer.js";
 
 export default class Base {
-
     constructor(parent) {
       this.parent = parent;
     }
@@ -20,11 +19,9 @@ export default class Base {
     createNavbar() {
       nav.innerHTML = '';
       let isAuthorized = false;
-      console.log("online =", navigator.onLine);
       if(navigator.onLine) {
           sessionService.me()
               .then((res) => {
-                  console.log(res);
                   if (!res.ok) {
                       isAuthorized = false;
                   } else {

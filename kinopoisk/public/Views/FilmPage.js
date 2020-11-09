@@ -2,7 +2,7 @@ import Base from './Base.js';
 import FilmCard from '../Components/FilmCard/FilmCard.js';
 import Comments from "../Components/Comments/Comments.js";
 import filmService from "../Services/filmService.js";
-import Bus from "../Services/EventBus.js";
+import Bus from "../modules/EventBus.js";
 import personService from "../Services/personService.js";
 
 export default class FilmPage extends Base {
@@ -12,13 +12,12 @@ export default class FilmPage extends Base {
       this.parent = parent;
       this.body = body
       this.isAuthorized = isAuthorized;
-      console.log("isAuth = ", this.isAuthorized);
     }
 
     render() {
       super.render(false);
       const body = document.getElementById('body');
-      body.className = 'film1';
+      body.className = 'main__background';
       let responseBody = JSON.parse(this.body);
       body.style.backgroundImage =`linear-gradient(to top, #2e2e2e 0%, rgba(0,0,0,0.1) 40%), url(${responseBody.BigImg})`
       this.parent.innerHTML = '';
@@ -27,9 +26,9 @@ export default class FilmPage extends Base {
           let actors;
           if(res.ok) {
               try {
-                  actors = JSON.parse(JSON.stringify(res.get));
+                  actors = res.get;
               } catch (e) {
-                  Bus.emit('main');
+                  Bus.emit('redirectMain');
               }
               const film = new FilmCard({
                   isAuthorized: this.isAuthorized,
@@ -42,7 +41,7 @@ export default class FilmPage extends Base {
           filmService.getByReviews(responseBody.id).then( res => {
               let comments;
               try {
-                  comments = JSON.parse(JSON.stringify(res.get));
+                  comments = res.get;
               } catch (e) {
                   Bus.emit('main');
               }

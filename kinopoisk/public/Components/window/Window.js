@@ -1,5 +1,5 @@
 import Button from "../Button/Button.js";
-import Bus from "../../Services/EventBus.js";
+import Bus from "../../modules/EventBus.js";
 import windowT from './Window.handlebars'
 
 export default class Window {
@@ -17,20 +17,20 @@ export default class Window {
         const okno = document.getElementById('okno');
         const buttonProfile = new Button({
             parent: okno,
-            classname: 'buttons',
+            classname: '',
             text: 'Профиль'
         });
         const buttonSetting = new Button( {
             parent: okno,
-            classname: 'buttons',
+            classname: '',
             text: 'Настройки'
         });
-        buttonProfile.render(() => {
+        buttonProfile.render({ callback: () => {
             Bus.emit('loginPasswordChange', (buttonProfile));
-        });
-        buttonSetting.render( () => {
+        }});
+        buttonSetting.render({ callback: () => {
             Bus.emit('Change', buttonSetting);
-        });
+        }});
     }
 
     close() {

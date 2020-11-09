@@ -1,15 +1,14 @@
-import NavLink from '../Services/navLink.js';
+import NavLink from '../modules/navLink.js';
 import List from '../Components/List/List.js';
 import Link from '../Components/Link/Link.js';
 import Navigate from '../Components/Nav/Nav.js';
 import Button from '../Components/Button/Button.js';
 import Window from '../Components/window/Window.js';
-import navLink from '../Services/navLink.js';
+import navLink from '../modules/navLink.js';
 import SessionService from '../Services/sessionService.js';
-import Bus from "../Services/EventBus.js";
+import Bus from "../modules/EventBus.js";
 
 export default class Navbar {
-
   constructor(parent) {
     this.parent = parent;
   }
@@ -65,10 +64,10 @@ export default class Navbar {
       profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="round">`);
       const profileLink = new navLink(profileA);
       const window = new Window({ parent: profileA });
-      let windowClicks = 0;
+      let isOpen = false;
       profileLink.render('click', () => {
-        windowClicks += 1;
-        if (windowClicks % 2 == 1) {
+        isOpen = !isOpen;
+        if (isOpen) {
           window.render(() => {
           });
         } else {
@@ -83,15 +82,15 @@ export default class Navbar {
 
       const buttonLogoutObj = new Button({
         parent: logout,
-        classname: 'buttons',
+        classname: '',
         text: 'Выйти',
       });
-      buttonLogoutObj.render((evt) => {
+      buttonLogoutObj.render({callback: (evt) => {
         SessionService.logout().then((res) => {
           this.render(false, 0)
           Bus.emit('logout', res);
         });
-      });
+      }});
     } else {
       const loginObj = new List({
         parent: ul,
@@ -101,7 +100,7 @@ export default class Navbar {
 
       const buttonLoginObj = new Button({
         parent: login,
-        classname: 'buttons',
+        classname: '',
         text: 'Войти',
       });
       Bus.emit('navbarLogin', buttonLoginObj);
@@ -114,7 +113,7 @@ export default class Navbar {
 
       const buttonSignupObj = new Button({
         parent: signup,
-        classname: 'buttons',
+        classname: '',
         text: 'Зарегистрироваться',
       });
       Bus.emit('navbarSignup', buttonSignupObj);

@@ -1,12 +1,11 @@
-import NavLink from '../Services/navLink.js';
-import Bus from "../Services/EventBus.js";
+import NavLink from '../modules/navLink.js';
+import Bus from "../modules/EventBus.js";
 import Base from './Base.js';
 import sessionService from '../Services/sessionService.js';
 import Link from '../Components/Link/Link.js';
 import Form from '../Components/Form/Form.js';
 
 export default class SignupPage extends Base {
-
     constructor(parent) {
       super(nav);
       this.parent = parent;

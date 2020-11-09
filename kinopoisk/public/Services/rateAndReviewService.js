@@ -1,4 +1,4 @@
-import { AjaxModule } from '../modules/ajax1.js';
+import { AjaxModule } from '../modules/ajax.js';
 
 export default class RateAndReviewService {
   static async fetchRate(filmId, rating) {

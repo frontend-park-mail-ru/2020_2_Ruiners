@@ -2,7 +2,6 @@ import Button from '../Button/Button.js';
 import commentT from './Comments.handlebars'
 
 export default class Comments {
-
     constructor(context = {}) {
         const { parent, body, isAuthorized } = context;
         this.comments = document.createElement('div');
@@ -10,7 +9,7 @@ export default class Comments {
         this.body = body;
         this.isAuthorized = isAuthorized;
         this.msgButton = new Button({
-            classname: 'buttons buttons__marginForFilmCard',
+            classname: 'buttons__marginForFilmCard',
             id: 'msg_button',
             parent: null,
         });
@@ -28,7 +27,7 @@ export default class Comments {
             isAuth: this.isAuthorized,
             comments: this.body,
             Button: this.msgButton.template({
-                classname: 'buttons buttons__forComments',
+                classname: 'buttons__forComments',
                 text: 'Отправить',
                 id: 'msg_button',
                 type: 'submit',

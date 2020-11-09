@@ -1,6 +1,6 @@
-import NavLink from '../Services/navLink.js';
+import NavLink from '../modules/navLink.js';
 import { createDiv } from './Components.js';
-import Bus from "../Services/EventBus.js";
+import Bus from "../modules/EventBus.js";
 import Base from './Base.js';
 import Link from '../Components/Link/Link.js';
 
@@ -24,7 +24,6 @@ const menuTop = {
 };
 
 export default class ProfilePage extends Base {
-
     constructor(parent, data) {
       super(nav);
       this.parent = parent;
@@ -37,6 +36,7 @@ export default class ProfilePage extends Base {
       const body = document.getElementById('body');
       body.className = 'page';
       body.style.backgroundImage = `url('images/login.jpg')`;
+      this.parent.className = '';
       const divshadow = createDiv('shadow profile', this.parent);
 
       const ul = document.createElement('ul');
@@ -48,21 +48,21 @@ export default class ProfilePage extends Base {
 
       menuItema0.textContent = 'Профиль';
 
-      menuItem0.appendChild(menuItema0);
-      ul.appendChild(menuItem0);
-
-      Object.keys(menuTop).forEach((menuKey) => {
-        const { href, text } = menuTop[menuKey];
-        const menuItem = document.createElement('li');
-        const menuItema = new Link({
-          parent: menuItem,
-          classname: '',
-        });
-        menuItema.a.dataset.section = menuKey;
-        menuItema.render();
-        menuItema.placeContent(text);
-        ul.appendChild(menuItem);
-      });
+      // menuItem0.appendChild(menuItema0);
+      // ul.appendChild(menuItem0);
+      //
+      // Object.keys(menuTop).forEach((menuKey) => {
+      //   const { href, text } = menuTop[menuKey];
+      //   const menuItem = document.createElement('li');
+      //   const menuItema = new Link({
+      //     parent: menuItem,
+      //     classname: '',
+      //   });
+      //   menuItema.a.dataset.section = menuKey;
+      //   menuItema.render();
+      //   menuItema.placeContent(text);
+      //   ul.appendChild(menuItem);
+      // });
 
       const divLeft = createDiv('profileInfoWrapLeft', divshadow);
       const divAvatar = createDiv('avatarUserBoxP', divLeft);
@@ -75,7 +75,7 @@ export default class ProfilePage extends Base {
         divAvatar.appendChild(img);
 
       const button = document.createElement('button');
-      button.className = 'buttons buttons__marginForSettings';
+      button.className = 'button buttons__marginForSettings';
       button.textContent = 'Изменить данные';
       button.href = '/';
       const buttonLink = new NavLink(button);

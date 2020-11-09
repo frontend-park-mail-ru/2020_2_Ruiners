@@ -1,7 +1,6 @@
 import personCardT from './PersonCard.handlebars'
 
 export default class PersonCard {
-
     constructor(context = {}) {
         const {
             body, parent

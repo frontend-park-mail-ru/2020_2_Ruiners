@@ -9,10 +9,12 @@ class Bus {
     }
 
     off (event, callback) {   // отписываемся от события
-        this.listeners[ event ] = this.listeners[ event ]
-            .filter(function (listener) {
-                return listener !== callback;
-            });
+        if(this.listeners[event]) {
+            this.listeners[event] = this.listeners[event]
+                .filter(function (listener) {
+                    return listener !== callback;
+                });
+        }
     }
 
     emit (event, data) {      // публикуем (диспатчим, эмитим) событие

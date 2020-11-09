@@ -1,7 +1,6 @@
 import FilmPoster from "../FilmPoster/FilmPoster.js";
 import  filmLentaT from './FilmLenta.handlebars'
 export default class FilmLenta {
-
     constructor(context = {}) {
       const { genre, parent, body } = context;
       this.genre = genre;

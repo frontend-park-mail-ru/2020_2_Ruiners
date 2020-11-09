@@ -1,6 +1,6 @@
 {{#if isAuth}}
-    <h1 class="myComment__header">Ваш отзыв</h1>
-    <div class="myComment__underground">
+    <h1 class="comments__header">Ваш отзыв</h1>
+    <div class="comments__underground">
         <form>
             <textarea name="message" rows="1" class="question" required="" autocomplete="off" id="msg"></textarea>
             <label class="comment" for="msg"><span class="comment">Напишите отзыв..</span></label>
@@ -9,19 +9,19 @@
     </div>
 {{/if}}
 {{#if noComments}}
-    <h1 class="myComment__header">Нет отзывов</h1>
+    <h1 class="comments__header">Нет отзывов</h1>
 {{else}}
-    <h1 class="myComment__header">Все отзывы</h1>
+    <h1 class="comments__header">Все отзывы</h1>
     {{#each comments}}
-        <div class="myComment__underground">
-            <div class="profile__comment">
-                <span class="login__comment">{{ this.UserLogin }}</span>
-                <img class="profile__round" width="50" height="50" src="{{ this.Image }}" alt="">
+        <div class="comments__underground">
+            <div class="comment__profile">
+                <span class="comment__login">{{ this.UserLogin }}</span>
+                <img class="comment__profile__round" width="50" height="50" src="{{ this.Image }}" alt="">
             </div>
             <div class="comment__content">
                 {{ this.TextBody }}
             </div>
-            <hr class="myLine">
+            <hr class="comment__line">
             <span class="comment__rate">Оценка: {{ this.Rate }}/10</span>
         </div>
     {{/each}}

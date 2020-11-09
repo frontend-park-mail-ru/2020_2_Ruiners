@@ -1,8 +1,9 @@
 import Button from '../Button/Button.js';
 import RateAndReviewService from '../../Services/rateAndReviewService.js';
 import filmcardT from './FilmCard.handlebars'
-export default class FilmCard {
+import Bus from "../../modules/EventBus.js";
 
+export default class FilmCard {
     constructor(context = {}) {
       const { parent, body, isAuthorized, actors } = context;
       this.card = document.createElement('div');
@@ -11,7 +12,7 @@ export default class FilmCard {
       this.isAuthorized = isAuthorized;
       this.actors = actors;
       this.voteButton = new Button({
-        classname: 'buttons buttons__forComments',
+        classname: 'buttons__forComments',
         parent: null,
       });
       this.template = filmcardT;
@@ -41,7 +42,7 @@ export default class FilmCard {
         votes: this.body.SumVotes,
         stars: [ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
         Button: this.voteButton.template({
-          classname: 'buttons buttons__marginForFilmCard',
+          classname: 'buttons__marginForFilmCard',
           text: 'Оценить',
           id: 'vote',
           type: 'submit',
@@ -50,18 +51,17 @@ export default class FilmCard {
       const button = document.getElementById('vote');
       const err = document.createElement('div');
       err.className = 'success succes__marginForFilmCard';
-      if(this.isAuthorized) {
+       if(this.isAuthorized) {
           button.addEventListener('click', (event) => {
               for (let i = 1; i <= 10; i++) {
                   let star = document.getElementById(`star-${i}`)
                   if (star.checked) {
-                      RateAndReviewService.Rate(this.body.id, i)
-                          .then((res) => {
-                              if (res.ok) {
-                                  err.textContent = 'Вы успешно проголосовали!';
-                                  this.card.appendChild(err);
-                              }
-                          })
+                        Bus.emit('Rate', {
+                            id: this.body.id,
+                            index: i,
+                            err: err,
+                            card: this.card
+                        })
                   }
               }
           })

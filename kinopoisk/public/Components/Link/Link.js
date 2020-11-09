@@ -1,5 +1,4 @@
 export default class Link {
-
     constructor(context) {
       const { parent, classname, pathname } = context;
       this.a = document.createElement('a');

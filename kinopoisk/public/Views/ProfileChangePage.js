@@ -1,5 +1,5 @@
-import NavLink from '../Services/navLink.js';
-import Bus from "../Services/EventBus.js";
+import NavLink from '../modules/navLink.js';
+import Bus from "../modules/EventBus.js";
 import Form from '../Components/Form/Form.js';
 import Base from './Base.js';
 import userService from '../Services/userService.js';
@@ -7,7 +7,6 @@ import Button from "../Components/Button/Button.js";
 import UserService from "../Services/userService.js";
 
 export default class ProfileChangePage extends Base {
-
   constructor(parent, data) {
     super(nav);
     this.parent = parent;
@@ -127,7 +126,6 @@ export default class ProfileChangePage extends Base {
         if (Password === pass) {
           userService.ChangePassword(PasswordOld, Password)
               .then((res) => {
-                console.log(res.ok);
                 if (res.ok) {
                   Bus.emit('loginPasswordChange', res);
                 } else {
@@ -168,7 +166,7 @@ export default class ProfileChangePage extends Base {
         UserService.ChangeAvatar(formData).then(res => {
           if(res.ok) {
             super.render(true);
-            Bus.emit('main');
+            Bus.emit('redirectMain');
           } else {
             err.textContent = res.errmsg;
             formAvatar.appendChild(err);
@@ -177,7 +175,7 @@ export default class ProfileChangePage extends Base {
       });
     const buttonBack = new Button({
       parent: this.parent,
-      classname: 'buttons buttons__marginForFilmCard',
+      classname: 'buttons__marginForFilmCard',
       text: 'Назад'
     })
     Bus.emit('Back', buttonBack);
