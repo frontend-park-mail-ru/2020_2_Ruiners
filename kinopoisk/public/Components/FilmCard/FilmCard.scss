@@ -1,0 +1,139 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+.poster {
+    padding: 10px 15px 14px;
+    font-family: "Arial", "Helvetica";
+    position: relative;
+    min-width: 1000px;
+    max-width: 1600px;
+    min-height: 500px;
+    max-height: 1600px;
+    margin-top: 5%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    height: 32%;
+    width: 80%;
+    box-shadow: 1px 2px 10px 0 black;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.header {
+    font-size: 25px;
+    line-height: 20px;
+    margin-bottom: 50px;
+    margin-left: 30px;
+}
+
+.header-link {
+    color: $link;
+    text-decoration-line: none;
+}
+
+.header-link:hover {
+    cursor: default;
+}
+
+.poster-body {
+    position: relative;
+    display: inline-flex;
+}
+
+.left-block {
+    width: 560px;
+    display: revert;
+    position: relative;
+    float: left;
+}
+
+.right-block {
+    position: relative;
+    left: 50px;
+    width: 500px;
+    right: 0;
+}
+
+.desc {
+    font-style: italic;
+    font-size: 18px;
+    line-height: 30px;
+    color: $link;
+}
+
+.info {
+    margin: 7px 0;
+    line-height: 40px;
+}
+.roles {
+    line-height: 20px;
+}
+
+.link {
+    color: $link;
+    text-decoration-line: none;
+}
+
+.link:hover {
+    color: $color-main;
+}
+
+.rating {
+    margin-left: 30px;
+    font-size: 30px;
+    color: #9acd32;
+}
+.votes {
+    margin-left: 15px;
+    color: gray;
+}
+
+.poster a{
+    display: revert;
+}
+
+.rating-area {
+    padding: 0;
+    margin-top: 15px;
+    margin-left: 100px;
+    position: absolute;
+    display: inline;
+    overflow: hidden;
+    width: 450px;
+}
+.rating-area:not(:checked) > input {
+    display: none;
+}
+.rating-area:not(:checked) > label {
+    float: right;
+    width: 42px;
+    padding: 0;
+    cursor: pointer;
+    font-size: 32px;
+    line-height: 32px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+}
+.rating-area:not(:checked) > label:before {
+    content: '★';
+}
+.rating-area > input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px #c60;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+    color: burlywood;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label{
+    color: burlywood;
+    text-shadow: 1px 1px goldenrod;
+}
+
+.rate-area > label:active {
+    position: relative;
+}

@@ -1,0 +1,60 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+.brand {
+    font-family: $font-main;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 1000;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.brand a {
+    text-decoration: none;
+    color: $link;
+}
+
+.brand a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.menu-secondary li {
+    display: inline-block;
+}
+
+.menu-secondary a {
+    text-decoration: none;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    letter-spacing: 2px;
+    margin-left: 50px;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: $link;
+}
+
+.menu-secondary a:hover{color: orange;}
+
+.round {
+    border-radius: 100px; /* Радиус скругления */
+    border: 1px whitesmoke; /* Параметры рамки */
+    margin-bottom: -15px;
+    margin-right: 10px;
+}
+
+.profile {
+    font-family: $font-main;
+    text-decoration: none;
+    color: $link;
+}
+
+.right {
+   position: absolute;
+    right: 0;
+    top: 20px
+}
+
+.left {
+    position: static;
+    right: 0;
+}

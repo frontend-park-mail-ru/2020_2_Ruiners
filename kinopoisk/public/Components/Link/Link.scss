@@ -1,0 +1,33 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+.profileNav {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    cursor: default;
+    color: $link;
+}
+
+.menu-secondary a:hover {
+    text-decoration: none;
+    cursor: default;
+}
+
+.linkSignupLogin {
+    color: $link;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.linkSignupLogin:hover {
+    cursor: default;
+}
+
+.linkSignupLogin__black {
+    color: black;
+}
+
+.linkSignupLogin:hover {
+    color: $color-main;
+}

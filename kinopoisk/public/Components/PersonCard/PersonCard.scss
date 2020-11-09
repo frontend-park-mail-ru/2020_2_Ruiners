@@ -1,0 +1,42 @@
+@import "kinopoisk/public/static/CSS/fonts";
+.actor__main {
+    display: flex;
+    margin-left: 5%;
+    margin-top: 5%;
+    border-radius: 20px;
+    min-width: 200px;
+    max-width: 700px;
+    min-height: 400px;
+    justify-content: space-around;
+}
+
+.person__info {
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.person__image {
+    border-radius: 20px;
+    margin-top: 40px;
+}
+
+.person__name {
+    color: white;
+    font-family: $font-info;
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.person__info__more {
+    margin-top: 30px;
+    color: white;
+    font-size: 16px;
+    font-family: $font-main;
+}
+
+.person__headers {
+    margin-right: 20px;
+    color: dimgrey;
+}

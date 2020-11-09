@@ -1,45 +1,18 @@
-(function() {
-
-    const domain = 'http://95.163.208.72:8000';
-    class AjaxModule {
-        ajaxGet = (ajaxArgs) => {
-            this.#ajax({method: 'GET', ...ajaxArgs});
+const domain = 'http://localhost:8000'; //95.163.208.72
+window.domain = domain;
+export class AjaxModule {
+        static ajaxGet(ajaxArgs){
+            return this.ajax({method: 'GET', ...ajaxArgs});
         }
 
-        ajaxPost = (ajaxArgs) => {
-            this.#ajax({method: 'POST', ...ajaxArgs});
+        static ajaxPost(ajaxArgs){
+            return this.ajax({method: 'POST', ...ajaxArgs});
         }
 
-        ajaxGetUsingFetch = async (ajaxArgs) => {
-            const response = await fetch(domain + ajaxArgs.url, {
-                method: 'GET',
-                credentials: 'include',
-                mode: 'cors',
-            });
-            const parsedJsonObject = await response.json();
-
-            return { status: response.status, json: parsedJsonObject}
-        }
-        ajaxPostUsingFetch = async (ajaxArgs) => {
-            const response = await fetch(domain + ajaxArgs.url, {
-                method: 'POST',
-                credentials: 'include',
-                mode: 'cors',
-                body: JSON.stringify(ajaxArgs.body),
-                headers: {
-                    'Content-Type': 'application/json'
-// 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-            });
-            return response.status
-        }
-
-
-        #ajax({
+        static ajax({
                   method = 'GET',
                   url = '/',
                   body = null,
-                  callback = noop
               } = {}) {
 
             const params = {
@@ -48,15 +21,15 @@
                 mode: 'cors',
             };
             if (body) {
-                params.body = JSON.stringify(body);
-                params.headers = {
-                    'Content-Type': 'application/json'
-// 'Content-Type': 'application/x-www-form-urlencoded',
-                };
+                if (body instanceof FormData) {
+                    params.body = body;
+                } else {
+                    params.body = JSON.stringify(body);
+                    params.headers = {
+                        'Content-Type': 'application/json'
+                    };
+                }
             }
-            return fetch(url, params)
+            return fetch(domain + url, params)
         }
     }
-
-    globalThis.AjaxModule = new AjaxModule();
-})()

@@ -1,0 +1,60 @@
+@import "../../Components/Link/Link";
+@import "../../Components/Nav/Nav";
+@import "../../Components/List/List";
+@import "../../Components/Form/Form";
+@import "../../Components/Button/Button";
+@import "../../Components/window/Window";
+@import "../../Components/FilmCard/FilmCard";
+@import "../../Components/FilmLenta/FilmLenta";
+@import "../../Components/FilmPoster/FilmPoster";
+@import "../../Components/Profile/Profile";
+@import "../../Components/Footer/Footer";
+@import "../../Components/Comments/Comments";
+@import "../../Components/PersonCard/PersonCard";
+@import "colors";
+@import "fonts";
+
+
+body.main__background {
+    height: 100vh;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-color: $color-gray-main;
+    background-size: 100% 100%;
+}
+
+input:focus,
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.error {
+    color: $color-error;
+}
+
+.success {
+    color: $color-succes;
+}
+
+.succes__marginForFilmCard {
+    position: absolute;
+    margin-left: 60%;
+    margin-top: -12%;
+}
+
+body {
+    margin: 0px;
+}
+
+.page {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-color: $color-gray-main;
+}
+
+.margin {
+    margin-top: 10%;
+}

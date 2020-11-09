@@ -1,0 +1,21 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+.main__black {
+    background: #292929
+}
+
+.main__header {
+    margin-top: 50px;
+    margin-left: 40px;
+    color: white;
+    font-family: $font-main;
+    font-size: 22px;
+}
+
+.header__lenta {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-top: 5px;
+    height: 490px;
+}
