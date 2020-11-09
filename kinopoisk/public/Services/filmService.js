@@ -58,7 +58,7 @@ export default class FilmService {
         const data = { ok: false, errmsg: undefined, get: undefined };
         const res = await this.fetchGetByPerson(id);
         if (res.status !== 200) {
-            data.errmsg = 'Нетфильмов с таким актером';
+            data.errmsg = 'Нет фильмов с таким актером';
         } else {
             data.ok = true;
             data.get = res.json;
@@ -85,7 +85,7 @@ export default class FilmService {
         const data = { ok: false, errmsg: undefined, get: undefined };
         const res = await this.fetchGetByReviews(filmId);
         if (res.status !== 200) {
-            data.errmsg = 'Пусто';
+            data.errmsg = 'Нет комментариев у фильма';
         } else {
             data.ok = true;
             data.get = res.json;
