@@ -1,11 +1,11 @@
 export default class Navigate {
-    constructor(parent) {
-      this.parent = parent;
-    }
+  constructor(parent) {
+    this.parent = parent;
+  }
 
-    render() {
-      const nav = document.createElement('nav');
-      this.parent.appendChild(nav);
-      return nav;
-    }
+  render() {
+    const nav = document.createElement('nav');
+    this.parent.appendChild(nav);
+    return nav;
+  }
 }

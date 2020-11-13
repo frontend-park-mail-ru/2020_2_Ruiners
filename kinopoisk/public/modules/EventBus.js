@@ -1,28 +1,25 @@
 class Bus {
-    constructor () {
-        this.listeners = {};
-    }
+  constructor() {
+    this.listeners = {};
+  }
 
-    on (event, callback) {    // подписываемся на событие
-        this.listeners[ event ] = this.listeners[ event ] || [];
-        this.listeners[ event ].push(callback);
-    }
+  on(event, callback) { // подписываемся на событие
+    this.listeners[event] = this.listeners[event] || [];
+    this.listeners[event].push(callback);
+  }
 
-    off (event, callback) {   // отписываемся от события
-        if(this.listeners[event]) {
-            this.listeners[event] = this.listeners[event]
-                .filter(function (listener) {
-                    return listener !== callback;
-                });
-        }
+  off(event, callback) { // отписываемся от события
+    if (this.listeners[event]) {
+      this.listeners[event] = this.listeners[event]
+        .filter((listener) => listener !== callback);
     }
+  }
 
-    emit (event, data) {      // публикуем (диспатчим, эмитим) событие
-        this.listeners[ event ].forEach(function (listener) {
-            listener(data);
-        });
-    }
-
+  emit(event, data) { // публикуем (диспатчим, эмитим) событие
+    this.listeners[event].forEach((listener) => {
+      listener(data);
+    });
+  }
 }
 
-export default new Bus;
+export default new Bus();

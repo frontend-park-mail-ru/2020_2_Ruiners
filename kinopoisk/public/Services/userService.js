@@ -13,7 +13,7 @@ export default class UserService {
   }
 
   static async fetchChangeAvatar(avatar) {
-    const res = await AjaxModule.ajaxPost({ url: '/changeAvatar', body:  avatar  });
+    const res = await AjaxModule.ajaxPost({ url: '/changeAvatar', body: avatar });
     return res.status;
   }
 

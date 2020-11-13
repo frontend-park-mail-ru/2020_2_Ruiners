@@ -1,10 +1,10 @@
 import NavLink from '../modules/navLink.js';
-import Bus from "../modules/EventBus.js";
+import Bus from '../modules/EventBus.js';
 import Form from '../Components/Form/Form.js';
 import Base from './Base.js';
 import userService from '../Services/userService.js';
-import Button from "../Components/Button/Button.js";
-import UserService from "../Services/userService.js";
+import Button from '../Components/Button/Button.js';
+import UserService from '../Services/userService.js';
 
 export default class ProfileChangePage extends Base {
   constructor(parent, data) {
@@ -17,7 +17,7 @@ export default class ProfileChangePage extends Base {
     super.render(false);
     const body = document.getElementById('body');
     body.className = 'page';
-    body.style.backgroundImage = `url('images/login.jpg')`;
+    body.style.backgroundImage = 'url(\'images/login.jpg\')';
     this.parent.className = 'wrapper__form chenge margin';
 
     const responseBody = JSON.parse(this.data);
@@ -56,18 +56,18 @@ export default class ProfileChangePage extends Base {
       if (!formrLogin[1].classList.contains('invalid')) {
         const login = formrLogin[1].value.trim();
         userService.ChangeLogin(login)
-            .then((res) => {
-              if (res.ok) {
-                nav.innerHTML = '';
-                super.render();
-                Bus.emit('loginPasswordChange', res);
-              } else {
-                const err = document.createElement('div');
-                err.className = 'error';
-                err.textContent = res.errmsg;
-                form.appendChild(err);
-              }
-            });
+          .then((res) => {
+            if (res.ok) {
+              nav.innerHTML = '';
+              super.render();
+              Bus.emit('loginPasswordChange', res);
+            } else {
+              const err = document.createElement('div');
+              err.className = 'error';
+              err.textContent = res.errmsg;
+              form.appendChild(err);
+            }
+          });
       }
     });
 
@@ -125,14 +125,14 @@ export default class ProfileChangePage extends Base {
         const pass = formr[3].value.trim();
         if (Password === pass) {
           userService.ChangePassword(PasswordOld, Password)
-              .then((res) => {
-                if (res.ok) {
-                  Bus.emit('loginPasswordChange', res);
-                } else {
-                  err.textContent = res.errmsg;
-                  formPass.appendChild(err);
-                }
-              });
+            .then((res) => {
+              if (res.ok) {
+                Bus.emit('loginPasswordChange', res);
+              } else {
+                err.textContent = res.errmsg;
+                formPass.appendChild(err);
+              }
+            });
         } else {
           err.innerHTML = 'Пароли не совпадают';
           formPass.appendChild(err);
@@ -163,21 +163,21 @@ export default class ProfileChangePage extends Base {
     const formAvatarLink = new NavLink(formAvatar);
     formAvatarLink.render('submit', () => {
       formData.append('file', formrAvatar[1].files[0]);
-        UserService.ChangeAvatar(formData).then(res => {
-          if(res.ok) {
-            super.render(true);
-            Bus.emit('redirectMain');
-          } else {
-            err.textContent = res.errmsg;
-            formAvatar.appendChild(err);
-          }
-        });
+      UserService.ChangeAvatar(formData).then((res) => {
+        if (res.ok) {
+          super.render(true);
+          Bus.emit('redirectMain');
+        } else {
+          err.textContent = res.errmsg;
+          formAvatar.appendChild(err);
+        }
       });
+    });
     const buttonBack = new Button({
       parent: this.parent,
       classname: 'buttons__marginForFilmCard',
-      text: 'Назад'
-    })
+      text: 'Назад',
+    });
     Bus.emit('Back', buttonBack);
   }
 }
