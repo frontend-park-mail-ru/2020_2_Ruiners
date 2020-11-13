@@ -19,7 +19,7 @@ export default class FilmPage extends Base {
     const body = document.getElementById('body');
     body.className = 'main__background';
     const responseBody = JSON.parse(this.body);
-    body.style.backgroundImage = `linear-gradient(to top, #2e2e2e 0%, rgba(0,0,0,0.1) 40%), url(${responseBody.BigImg})`;
+    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(${responseBody.BigImg})`;
     this.parent.innerHTML = '';
     this.parent.className = '';
     personService.getByFilmId(responseBody.id, 'actor').then((res) => {
