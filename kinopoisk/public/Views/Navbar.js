@@ -6,7 +6,7 @@ import Button from '../Components/Button/Button.js';
 import Window from '../Components/window/Window.js';
 import navLink from '../modules/navLink.js';
 import SessionService from '../Services/sessionService.js';
-import Bus from "../modules/EventBus.js";
+import Bus from '../modules/EventBus.js';
 
 export default class Navbar {
   constructor(parent) {
@@ -47,7 +47,6 @@ export default class Navbar {
     const FilmsA = FilmsAObj.render();
     FilmsAObj.placeContent('Фильмы');
 
-
     if (isAuthorized) {
       const profileObj = new List({
         parent: ul,
@@ -60,7 +59,7 @@ export default class Navbar {
         className: 'profileNav',
       });
       const profileA = profileAObj.render();
-      const src = domain + '/user/avatar/' + res.get.id + '?' + Math.random();
+      const src = `${domain}/user/avatar/${res.get.id}?${Math.random()}`;
       profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="round">`);
       const profileLink = new navLink(profileA);
       const window = new Window({ parent: profileA });
@@ -85,12 +84,14 @@ export default class Navbar {
         classname: '',
         text: 'Выйти',
       });
-      buttonLogoutObj.render({callback: (evt) => {
-        SessionService.logout().then((res) => {
-          this.render(false, 0)
-          Bus.emit('logout', res);
-        });
-      }});
+      buttonLogoutObj.render({
+        callback: (evt) => {
+          SessionService.logout().then((res) => {
+            this.render(false, 0);
+            Bus.emit('logout', res);
+          });
+        },
+      });
     } else {
       const loginObj = new List({
         parent: ul,

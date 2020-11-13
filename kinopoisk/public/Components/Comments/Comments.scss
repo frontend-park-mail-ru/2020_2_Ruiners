@@ -1,11 +1,39 @@
 @import "kinopoisk/public/static/CSS/fonts";
 @import "kinopoisk/public/static/CSS/colors";
+@import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
+
+.comments_place {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.comment_allComments {
+    display: flex;
+    flex-direction: column;
+    height: 640px;
+    overflow-y: auto;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.comments__underground2 {
+    display: block;
+    position: relative;
+    width: 550px;
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    color: $font-main;
+    mix-blend-mode: normal;
+    box-shadow: 10px 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .comments__underground {
     display: block;
     position: relative;
-    width: 40%;
-    height: 20%;
-    margin-left: 40px;
+    width: 550px;
     margin-top: 40px;
     padding: 20px;
     border-radius: 10px;
@@ -16,11 +44,10 @@
 }
 
 .comments__header {
-    font-family: $font-main;
+    font-family: 'Comfortaa', cursive;
     font-weight: lighter;
     color: $link;
-    margin-left: 20px;
-    margin-top: 40px;
+    margin-top: 80px;
 }
 
 span.comment,
@@ -167,6 +194,7 @@ textarea.question:invalid ~ input[type="submit"] {
     border: none; /* Убираем границу для браузера Firefox */
     background-color: $color-main;
     height: 3px;
+    margin-top: 10px;
     color: $color-main;
 }
 
@@ -194,10 +222,9 @@ textarea.question:invalid ~ input[type="submit"] {
     font-size: 18px;
     font-family: $font-info;
     font-weight: bold;
-    margin-top: -3%;
+    padding-bottom: 20px;
     margin-left: 10%;
     width: auto;
-    height: 10%;
-    overflow-x: auto;
+    overflow: hidden;
     color: $link;
 }

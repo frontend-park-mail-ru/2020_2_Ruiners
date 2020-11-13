@@ -1,18 +1,17 @@
 import Base from './Base.js';
-import PersonCard from "../Components/PersonCard/PersonCard.js";
-import filmService from "../Services/filmService.js";
-import FilmLenta from "../Components/FilmLenta/FilmLenta.js";
-import PersonService from "../Services/personService.js";
-import Bus from "../modules/EventBus.js";
+import PersonCard from '../Components/PersonCard/PersonCard.js';
+import filmService from '../Services/filmService.js';
+import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
+import PersonService from '../Services/personService.js';
+import Bus from '../modules/EventBus.js';
 
-export default class PersonPage extends Base{
-    constructor(context) {
-        super(nav);
-        const { parent, id } = context;
-        this.parent = parent;
-        this.id = id;
-    }
-
+export default class PersonPage extends Base {
+  constructor(context) {
+    super(nav);
+    const { parent, id } = context;
+    this.parent = parent;
+    this.id = id;
+  }
     render() {
         super.render(false);
         const app = document.getElementById('body')
@@ -52,6 +51,9 @@ export default class PersonPage extends Base{
                         } else {
                             this.menuPage();
                         }
+                        const box = document.createElement('div');
+                        box.className = 'invisible_box';
+                        this.parent.appendChild(box);
                     });
             });
 

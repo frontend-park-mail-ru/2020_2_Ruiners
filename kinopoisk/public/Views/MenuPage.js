@@ -1,13 +1,12 @@
 import Base from './Base.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
-import filmService from "../Services/filmService.js";
+import filmService from '../Services/filmService.js';
 
 export default class MenuPage extends Base {
-    constructor(parent) {
-      super(nav);
-      this.parent = parent;
-    }
-
+  constructor(parent) {
+    super(nav);
+    this.parent = parent;
+  }
     render() {
       super.render(false);
       this.parent.innerHTML = '';
@@ -31,6 +30,7 @@ export default class MenuPage extends Base {
           parent: this.parent,
         },
       ];
+      let j = 0;
       for (let i = 0; i < lentas.length; i++) {
         let responseBody;
         filmService.getByGenre(lentas[i].genre)
@@ -51,8 +51,17 @@ export default class MenuPage extends Base {
               } else {
                 this.menuPage();
               }
+              if (j === lentas.length - 1) {
+                  this.createBox();
+              }
+              j++;
             });
-
-      }
     }
+  }
+
+  createBox() {
+      const box = document.createElement('div');
+      box.className = 'invisible_box';
+      this.parent.appendChild(box);
+  }
 }
