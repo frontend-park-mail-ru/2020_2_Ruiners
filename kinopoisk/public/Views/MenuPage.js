@@ -51,6 +51,11 @@ export default class MenuPage extends Base {
               } else {
                 this.menuPage();
               }
+              if (i == lentas.length -1) {
+                  const box = document.createElement('div');
+                  box.className = 'invisible_box';
+                  this.parent.appendChild(box);
+              }
             });
 
       }

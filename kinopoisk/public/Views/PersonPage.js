@@ -52,6 +52,9 @@ export default class PersonPage extends Base{
                         } else {
                             this.menuPage();
                         }
+                        const box = document.createElement('div');
+                        box.className = 'invisible_box';
+                        this.parent.appendChild(box);
                     });
             });
 
