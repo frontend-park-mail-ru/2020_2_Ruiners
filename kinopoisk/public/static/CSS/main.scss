@@ -14,7 +14,6 @@
 @import "colors";
 @import "fonts";
 
-
 body.main__background {
     height: 100vh;
     margin: 0;
@@ -47,12 +46,17 @@ body {
     margin: 0px;
 }
 
+
 .page {
     display: block;
     flex-direction: column;
     align-items: center;
     background-repeat: no-repeat;
     background-color: $color-gray-main;
+}
+
+#app {
+    margin-left: 100px;
 }
 
 .margin {
