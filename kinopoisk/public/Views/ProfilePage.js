@@ -2,26 +2,7 @@ import NavLink from '../modules/navLink.js';
 import { createDiv } from './Components.js';
 import Bus from '../modules/EventBus.js';
 import Base from './Base.js';
-import Link from '../Components/Link/Link.js';
-
-const menuTop = {
-  rech: {
-    href: '/rech',
-    text: 'Рецензии',
-  },
-  mark: {
-    href: '/mark',
-    text: 'Оценки',
-  },
-  films: {
-    href: '/films',
-    text: 'Фильмы',
-  },
-  stars: {
-    href: '/stars',
-    text: 'Звёзды',
-  },
-};
+import { domain, nav } from "../config.js";
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -47,22 +28,6 @@ export default class ProfilePage extends Base {
     const menuItema0 = document.createElement('span');
 
     menuItema0.textContent = 'Профиль';
-
-    // menuItem0.appendChild(menuItema0);
-    // ul.appendChild(menuItem0);
-    //
-    // Object.keys(menuTop).forEach((menuKey) => {
-    //   const { href, text } = menuTop[menuKey];
-    //   const menuItem = document.createElement('li');
-    //   const menuItema = new Link({
-    //     parent: menuItem,
-    //     classname: '',
-    //   });
-    //   menuItema.a.dataset.section = menuKey;
-    //   menuItema.render();
-    //   menuItema.placeContent(text);
-    //   ul.appendChild(menuItem);
-    // });
 
     const divLeft = createDiv('profileInfoWrapLeft', divshadow);
     const divAvatar = createDiv('avatarUserBoxP', divLeft);

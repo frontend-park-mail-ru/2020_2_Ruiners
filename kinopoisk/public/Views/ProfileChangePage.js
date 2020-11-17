@@ -5,6 +5,7 @@ import Base from './Base.js';
 import userService from '../Services/userService.js';
 import Button from '../Components/Button/Button.js';
 import UserService from '../Services/userService.js';
+import { nav } from "../config.js";
 
 export default class ProfileChangePage extends Base {
   constructor(parent, data) {

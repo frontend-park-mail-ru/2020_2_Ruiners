@@ -4,6 +4,7 @@ import Base from './Base.js';
 import sessionService from '../Services/sessionService.js';
 import Link from '../Components/Link/Link.js';
 import Form from '../Components/Form/Form.js';
+import {nav} from "../config.js";
 
 export default class SignupPage extends Base {
   constructor(parent) {

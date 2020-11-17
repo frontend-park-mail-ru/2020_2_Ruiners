@@ -2,6 +2,7 @@ import Base from './Base.js';
 import filmService from '../Services/filmService.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
 import Bus from '../modules/EventBus.js';
+import { nav } from "../config.js";
 
 export default class LoginPage extends Base {
   constructor(context) {

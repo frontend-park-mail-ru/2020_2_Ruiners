@@ -4,6 +4,7 @@ import Comments from '../Components/Comments/Comments.js';
 import filmService from '../Services/filmService.js';
 import Bus from '../modules/EventBus.js';
 import personService from '../Services/personService.js';
+import { nav, domain } from "../config.js";
 
 export default class FilmPage extends Base {
   constructor(context = {}) {

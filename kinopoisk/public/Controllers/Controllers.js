@@ -9,10 +9,13 @@ import filmService from '../Services/filmService.js';
 import PersonPage from '../Views/PersonPage.js';
 import GenrePage from '../Views/GenrePage.js';
 import Bus from '../modules/EventBus.js';
+import {application} from "../config.js";
+import OfflinePage from "../Views/OfflinePage/OfflinePage.js";
 
 export default class Controller {
   static offlinePage() {
-
+    const page = new OfflinePage(application);
+    page.render();
   }
 
   static menuPage() {

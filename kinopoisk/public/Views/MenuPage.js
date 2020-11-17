@@ -1,6 +1,7 @@
 import Base from './Base.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
 import filmService from '../Services/filmService.js';
+import { nav, application } from "../config.js";
 
 export default class MenuPage extends Base {
   constructor(parent) {

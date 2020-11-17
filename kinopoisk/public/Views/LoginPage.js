@@ -4,6 +4,7 @@ import Base from './Base.js';
 import sessionService from '../Services/sessionService.js';
 import Link from '../Components/Link/Link.js';
 import Bus from '../modules/EventBus.js';
+import { nav } from "../config.js";
 
 export default class LoginPage extends Base {
   constructor(parent) {

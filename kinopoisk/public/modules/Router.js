@@ -65,26 +65,11 @@ export default class Router {
   split(currentPath) {
     let path;
     let param = '';
-    let i; let k; let
-      count = 0;
-    for (k = 0; k < currentPath.length; k++) {
-      if (currentPath[k] === '/') {
-        count++;
-      }
-    }
-    if (count > 2) {
-      for (k = 1; currentPath[k] !== '/'; k++) {}
-      currentPath = currentPath.substring(k);
-    }
-    for (i = 1; currentPath[i] !== '/' && i < currentPath.length; i++) {}
-    path = currentPath.substring(0, i);
-    if (i === currentPath.length) {
-      return {
-        path,
-        param,
-      };
-    }
-    param = currentPath.substring(i + 1);
+    let array = currentPath.split('/');
+    path = array[1];
+    path = '/' + path;
+    param = array[array.length - 1];
+    console.log(path, param);
     return {
       path,
       param,
