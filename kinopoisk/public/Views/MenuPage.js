@@ -14,11 +14,6 @@ export default class MenuPage extends Base {
       this.parent.className = '';
       const body = document.getElementById('body');
       body.className = 'main__black';
-      if(!navigator.onLine) {
-        const info = document.createElement('div');
-        info.textContent = 'Нет подключения к интернету, но не беда! Можете посмотреть на лучшие фильмы на данный момент!';
-        nav.insertAdjacentHTML('afterend', 'Нет подключения к интернету, но не беда! Можете посмотреть на лучшие фильмы на данный момент!');
-      }
       const lentas = [
         {
           rusGenre:'Фантастика',

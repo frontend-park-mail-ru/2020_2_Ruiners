@@ -21,12 +21,11 @@ export default class ProfileChangePage extends Base {
     const settingsBox = document.createElement('div');
     settingsBox.className = 'wrapper__form chenge margin';
     this.parent.appendChild(settingsBox);
-
     const responseBody = JSON.parse(this.data);
 
     const headLogin = {
       head: true,
-      textContent: 'Настройки пользователя',
+      textContent: 'Изменить логин',
       style: 'color:#FFFFFF; margin-left: 10px',
     };
 
@@ -52,26 +51,10 @@ export default class ProfileChangePage extends Base {
     // const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
     const form = formrLogin[0];
     settingsBox.appendChild(form);
-
-    const formLink = new NavLink(form);
-    formLink.render('submit', () => {
-      if (!formrLogin[1].classList.contains('invalid')) {
-        const login = formrLogin[1].value.trim();
-        userService.ChangeLogin(login)
-          .then((res) => {
-            if (res.ok) {
-              nav.innerHTML = '';
-              super.render();
-              Bus.emit('loginPasswordChange', res);
-            } else {
-              const err = document.createElement('div');
-              err.className = 'error';
-              err.textContent = res.errmsg;
-              form.appendChild(err);
-            }
-          });
-      }
-    });
+    const Password = document.createElement('h2');
+    Password.className = 'settings_header'
+    Password.textContent = 'Изменить Пароль';
+    settingsBox.appendChild(Password);
 
     const head = {
       head: false,
@@ -112,35 +95,14 @@ export default class ProfileChangePage extends Base {
 
     const formrendpath = new Form(head, configInput, sub);
     const formr = formrendpath.render();
-    // const formr = renderForm(head, configInput, sub);
     const formPass = formr[0];
     settingsBox.appendChild(formPass);
-
-    const formPassLink = new NavLink(formPass);
+    const Avatar = document.createElement('h2');
+    Avatar.className = 'settings_header';
+    Avatar.textContent = 'Изменить аватарку';
+    settingsBox.appendChild(Avatar);
     const err = document.createElement('div');
     err.className = 'error';
-    formPassLink.render('submit', () => {
-      if (!formr[2].classList.contains('invalid')
-          || !formr[3].classList.contains('invalid')) {
-        const PasswordOld = formr[1].value.trim();
-        const Password = formr[2].value.trim();
-        const pass = formr[3].value.trim();
-        if (Password === pass) {
-          userService.ChangePassword(PasswordOld, Password)
-            .then((res) => {
-              if (res.ok) {
-                Bus.emit('loginPasswordChange', res);
-              } else {
-                err.textContent = res.errmsg;
-                formPass.appendChild(err);
-              }
-            });
-        } else {
-          err.innerHTML = 'Пароли не совпадают';
-          formPass.appendChild(err);
-        }
-      }
-    });
 
     const configAvatar = [
       {
@@ -162,24 +124,21 @@ export default class ProfileChangePage extends Base {
     const formAvatar = formrAvatar[0];
     settingsBox.appendChild(formAvatar);
     const formData = new FormData();
-    const formAvatarLink = new NavLink(formAvatar);
-    formAvatarLink.render('submit', () => {
-      formData.append('file', formrAvatar[1].files[0]);
-      UserService.ChangeAvatar(formData).then((res) => {
-        if (res.ok) {
-          super.render(true);
-          Bus.emit('redirectMain');
-        } else {
-          err.textContent = res.errmsg;
-          formAvatar.appendChild(err);
-        }
-      });
-    });
-    const buttonBack = new Button({
+    const buttonSave = new Button({
       parent: settingsBox,
       classname: 'buttons__marginForFilmCard',
-      text: 'Назад',
+      text: 'Сохранить',
     });
-    Bus.emit('Back', buttonBack);
+    Bus.emit('Save', ({
+      buttonSave: buttonSave,
+      form: form,
+      formPass: formPass,
+      formData: formData,
+      formAvatar: formAvatar,
+      formrLogin: formrLogin,
+      formr: formr,
+      formrAvatar: formrAvatar,
+      base: super.render,
+    }));
   }
 }

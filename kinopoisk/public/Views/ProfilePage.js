@@ -11,9 +11,15 @@ export default class ProfilePage extends Base {
     this.data = data;
   }
 
-  render() {
+  render(context) {
+    const { id } = context
     const responseBody = JSON.parse(this.data);
-    super.render(false);
+    console.log(id);
+    if(id === 1) {
+      super.render(true);
+    } else {
+      super.render(false);
+    }
     const body = document.getElementById('body');
     body.className = 'page';
     body.style.backgroundImage = 'url(\'images/login.jpg\')';

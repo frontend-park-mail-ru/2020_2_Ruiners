@@ -5,6 +5,7 @@ import sessionService from '../Services/sessionService.js';
 import Link from '../Components/Link/Link.js';
 import Bus from '../modules/EventBus.js';
 import { nav } from "../config.js";
+import Button from "../Components/Button/Button";
 
 export default class LoginPage extends Base {
   constructor(parent) {
@@ -54,21 +55,18 @@ export default class LoginPage extends Base {
     // const formrLogin = renderForm(headLogin, configInputLogin, subLogin);
     const form = formrLogin[0];
     loginBox.appendChild(form);
-
-    const formLink = new NavLink(form);
     const err = document.createElement('div');
     err.className = 'error';
-    formLink.render('submit', () => {
-      const login = formrLogin[1].value.trim();
-      const password = formrLogin[2].value.trim();
-
-      sessionService.login(login, password).then((loginres) => {
-        Bus.emit('loginSignup', {
-          loginres,
-          err,
-          form,
-        });
-      });
+    const buttonLogin = new Button({
+      parent: form,
+      classname: 'buttons__marginForFilmCard',
+      text: 'Войти',
+    });
+    Bus.emit('Login', {
+      button: buttonLogin,
+      formrLogin: formrLogin,
+      err: err,
+      form: form,
     });
     const linkSignup = new Link({
       parent: form,
@@ -77,6 +75,5 @@ export default class LoginPage extends Base {
     });
     linkSignup.render();
     linkSignup.placeContent('Создать новый аккаунт');
-    const loginLink = new NavLink(linkSignup.a);
   }
 }

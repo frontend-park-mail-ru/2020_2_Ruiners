@@ -64,7 +64,7 @@ Bus.on('navbarClick', (mainLink) => {
 
 Bus.on('loginSignup', (data) => {
   const {
-    loginres, err, form, render,
+    loginres, err, form
   } = data;
   if (loginres.ok) {
     nav.innerHTML = '';
@@ -91,6 +91,11 @@ Bus.on('Rate', (context) => {
 Bus.on('loginPasswordChange', (button) => {
   router.open('/profile');
 });
+
+Bus.on('ProfilePage', () => {
+  router.open('/profile', { id: 1 });
+})
+
 Bus.on('Change', (res) => {
   router.open('/profileChange');
 });

@@ -8,9 +8,10 @@ import sessionService from '../Services/sessionService.js';
 import filmService from '../Services/filmService.js';
 import PersonPage from '../Views/PersonPage.js';
 import GenrePage from '../Views/GenrePage.js';
-import Bus from '../modules/EventBus.js';
-import {application} from "../config.js";
+import {application, nav} from "../config.js";
 import OfflinePage from "../Views/OfflinePage/OfflinePage.js";
+import Bus from "../modules/EventBus.js";
+import userService from "../Services/userService.js";
 
 export default class Controller {
   static offlinePage() {
@@ -24,6 +25,25 @@ export default class Controller {
   }
 
   static signupPage() {
+      Bus.on('Signup', (context) => {
+          const { button, formrLogin, err, form } = context;
+          button.render({callback : () => {
+                  if (!formrLogin[1].classList.contains('invalid')
+                      && !formrLogin[3].classList.contains('invalid')) {
+                      const login = formrLogin[1].value.trim();
+                      const password = formrLogin[3].value.trim();
+                      const email = formrLogin[2].value.trim();
+                      sessionService.signup(login, email, password).then((signupres) => {
+                          Bus.emit('loginSignup', {
+                              loginres: signupres,
+                              err,
+                              form,
+                          });
+                      });
+                  }
+              }})
+
+      })
     sessionService.me()
       .then((res) => {
         if (res.ok) {
@@ -66,6 +86,20 @@ export default class Controller {
   }
 
   static loginPage() {
+      Bus.on('Login', (context) => {
+          const {button, formrLogin, err, form} = context;
+          button.render({ callback: () => {
+                  const login = formrLogin[1].value.trim();
+                  const password = formrLogin[2].value.trim();
+                  sessionService.login(login, password).then((loginres) => {
+                      Bus.emit('loginSignup', {
+                          loginres,
+                          err,
+                          form,
+                      });
+                  });
+          }})
+      })
     sessionService.me()
       .then((res) => {
         if (res.ok) {
@@ -80,6 +114,40 @@ export default class Controller {
   static profileChengePage() {
     let responseBody;
     application.innerHTML = '';
+    Bus.on('Save', (context) => {
+        const { buttonSave, form, formPass, formData, formAvatar, formrLogin, formr, formrAvatar, base } = context;
+        const err = document.createElement('div');
+        buttonSave.render( { callback: () => {
+                let login, PasswordOld, Password, pass;
+                if (!formrLogin[1].classList.contains('invalid')) {
+                    login = formrLogin[1].value.trim();
+                }
+                    if (!formr[2].classList.contains('invalid')
+                        || !formr[3].classList.contains('invalid')) {
+                        PasswordOld = formr[1].value.trim();
+                        Password = formr[2].value.trim();
+                        pass = formr[3].value.trim();
+                    }
+                            if (Password === pass) {
+                                formData.append('file', formrAvatar[1].files[0]);
+                                userService.Change(login, PasswordOld, Password, formData).then( (res) => {
+                                    if(res.ok) {
+                                        Bus.emit('ProfilePage');
+                                    } else {
+                                        console.log(res.errmsg);
+                                        err.innerHTML = res.errmsg;
+                                        err.className = 'error';
+                                        formAvatar.appendChild(err);
+                                    }
+                                })
+                            } else {
+                                err.innerHTML = 'Пароли не совпадают';
+                                err.className = 'error';
+                                formPass.appendChild(err);
+                            }
+
+        }})
+    })
     sessionService.me()
       .then((res) => {
         try {
@@ -97,7 +165,7 @@ export default class Controller {
       });
   }
 
-  static profilePage() {
+  static profilePage(params) {
     let responseBody;
     application.innerHTML = '';
     sessionService.me()
@@ -110,7 +178,7 @@ export default class Controller {
         }
         if (res.ok) {
           const profile = new ProfilePage(application, responseBody);
-          profile.render();
+          profile.render(params);
         } else {
           this.loginPage();
         }

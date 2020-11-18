@@ -64,12 +64,12 @@ export default class Router {
 
   split(currentPath) {
     let path;
-    let param = '';
     let array = currentPath.split('/');
     path = array[1];
-    path = '/' + path;
-    param = array[array.length - 1];
-    console.log(path, param);
+    let param = array[2];
+    if(path) {
+      path = '/' + path;
+    }
     return {
       path,
       param,

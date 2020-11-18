@@ -4,7 +4,7 @@ import filmService from '../Services/filmService.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
 import PersonService from '../Services/personService.js';
 import Bus from '../modules/EventBus.js';
-import { nav } from "../config.js";
+import { nav, application } from "../config.js";
 
 export default class PersonPage extends Base {
   constructor(context) {

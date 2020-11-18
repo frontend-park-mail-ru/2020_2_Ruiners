@@ -9,6 +9,7 @@ export default class OfflinePage {
     }
 
     render() {
+        this.parent.innerHTML = '';
         const body = document.getElementById('body');
         body.className = 'offline_background';
         this.parent.appendChild(this.page);
