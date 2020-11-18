@@ -1,7 +1,6 @@
 import Base from './Base.js';
 import FilmCard from '../Components/FilmCard/FilmCard.js';
 import Comments from '../Components/Comments/Comments.js';
-import filmService from '../Services/filmService.js';
 import Bus from '../modules/EventBus.js';
 import personService from '../Services/personService.js';
 import { nav, domain } from "../config.js";
@@ -39,40 +38,30 @@ export default class FilmPage extends Base {
         });
         film.render();
       }
-      filmService.getByReviews(responseBody.id).then((res) => {
-        let comments;
-        try {
-          comments = res.get;
-        } catch (e) {
-          Bus.emit('main');
-        }
-        for (let i = 0; i < comments.length; i++) {
-          comments[i].Image = `${domain}/user/avatar/${`${comments[i].UserId}?${Math.random()}`}`;
-        }
-        const commentsObj = new Comments({
-          isAuthorized: this.isAuthorized,
-          parent: this.parent,
-          body: comments,
-        });
-        commentsObj.render();
-        if (this.isAuthorized) {
-          const buttonComment = document.getElementById('msg_button');
-          buttonComment.addEventListener('click', (event) => {
-            const form = document.getElementById('msg');
-            if (form.value === '') {
-              const divError = buttonComment.parentElement;
-              const err = document.createElement('div');
-              err.textContent = 'Пустой отзыв';
-              err.className = 'error';
-              divError.appendChild(err);
-            } else {
-              filmService.PostReview(responseBody.id, form.value).then((res) => {
-                this.render();
-              });
-            }
+      Bus.emit('GetComments', ({
+        responseBody: responseBody,
+        call: (comments) => {
+          for (let i = 0; i < comments.length; i++) {
+            comments[i].Image = `${domain}/user/avatar/${`${comments[i].UserId}?${Math.random()}`}`;
+          }
+          const commentsObj = new Comments({
+            isAuthorized: this.isAuthorized,
+            parent: this.parent,
+            body: comments,
           });
+          commentsObj.render();
+          if (this.isAuthorized) {
+            const buttonComment = document.getElementById('msg_button');
+            buttonComment.addEventListener('click', (event) => {
+              Bus.emit('PlaceComment', {
+                responseBody: responseBody,
+                render: this.render.bind(this),
+                buttonComment: buttonComment,
+              })
+            });
+          }
         }
-      });
+      }))
     });
   }
 }

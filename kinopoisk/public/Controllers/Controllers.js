@@ -20,6 +20,19 @@ export default class Controller {
   }
 
   static menuPage() {
+    Bus.on('MenuFilms', (data) => {
+        const { lentas,  call } = data;
+        let j = 0;
+        for (let i = 0; i < lentas.length; i++) {
+            let responseBody;
+            filmService.getByGenre(lentas[i].genre)
+                .then((res) => {
+                    responseBody = res.get;
+                    call(responseBody, res, j, i);
+                    j++;
+                })
+        }
+    })
     const menu = new MenuPage(application);
     menu.render();
   }
@@ -59,6 +72,28 @@ export default class Controller {
     const { id } = params;
     let responseBody;
     let isAuthorized = false;
+    Bus.on('PlaceComment', (context) => {
+        const { responseBody, render, buttonComment } = context;
+        const form = document.getElementById('msg');
+        if (form.value === '') {
+            const divError = buttonComment.parentElement;
+            const err = document.createElement('div');
+            err.textContent = 'Пустой отзыв';
+            err.className = 'error';
+            divError.appendChild(err);
+        } else {
+            filmService.PostReview(responseBody.id, form.value).then((res) => {
+                render();
+            });
+        }
+    });
+    Bus.on('GetComments', (context) => {
+        const { call, responseBody } = context;
+        filmService.getByReviews(responseBody.id).then((res) => {
+            let comments = res.get;
+            call(comments);
+        });
+    })
     sessionService.me()
       .then((res) => {
         console.log(res);
