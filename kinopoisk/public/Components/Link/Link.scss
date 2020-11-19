@@ -4,16 +4,16 @@
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     cursor: default;
-    color: $link;
+    color: $color-text;
 }
 
 .menu-secondary a:hover {
     text-decoration: none;
-    cursor: default;
+    cursor: pointer;
 }
 
 .linkSignupLogin {
-    color: $link;
+    color: $color-text;
     margin-left: 10px;
     margin-top: 10px;
     display: block;
@@ -29,5 +29,5 @@
 }
 
 .linkSignupLogin:hover {
-    color: $color-main;
+    color: $color-secondary;
 }

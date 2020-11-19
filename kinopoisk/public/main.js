@@ -4,13 +4,10 @@ import Router from './modules/Router.js';
 import './static/CSS/main.scss';
 import './static/images/icons8-кинопроектор-96.png';
 import './static/images/login.jpg';
+import './static/images/offline.png'
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import RateAndReviewService from './Services/rateAndReviewService.js';
-
-const application = document.getElementById('app');
-const nav = document.getElementById('navbar');
-window.application = application;
-window.nav = nav;
+import { nav } from "./config.js";
 
 if ('serviceWorker' in navigator) {
   runtime.register();
@@ -67,7 +64,7 @@ Bus.on('navbarClick', (mainLink) => {
 
 Bus.on('loginSignup', (data) => {
   const {
-    loginres, err, form, render,
+    loginres, err, form
   } = data;
   if (loginres.ok) {
     nav.innerHTML = '';
@@ -94,6 +91,11 @@ Bus.on('Rate', (context) => {
 Bus.on('loginPasswordChange', (button) => {
   router.open('/profile');
 });
+
+Bus.on('ProfilePage', () => {
+  router.open('/profile', { id: 1 });
+})
+
 Bus.on('Change', (res) => {
   router.open('/profileChange');
 });
@@ -113,14 +115,18 @@ Bus.on('redirectMain', () => {
 const body = document.getElementById('body');
 const router = new Router(body);
 
-router
-  .register('/', Controller.menuPage)
-  .register('/login', Controller.loginPage)
-  .register('/film', Controller.filmPage)
-  .register('/signup', Controller.signupPage)
-  .register('/profile', Controller.profilePage)
-  .register('/profileChange', Controller.profileChengePage)
-  .register('/person', Controller.personPage)
-  .register('/genre', Controller.genrePage);
+if (navigator.onLine) {
+  router
+      .register('/', Controller.menuPage)
+      .register('/login', Controller.loginPage)
+      .register('/film', Controller.filmPage)
+      .register('/signup', Controller.signupPage)
+      .register('/profile', Controller.profilePage)
+      .register('/profileChange', Controller.profileChengePage)
+      .register('/person', Controller.personPage)
+      .register('/genre', Controller.genrePage);
+} else {
+  router.register('/', Controller.offlinePage)
+}
 
 router.start();

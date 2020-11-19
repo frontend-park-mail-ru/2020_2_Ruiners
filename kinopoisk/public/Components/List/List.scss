@@ -11,7 +11,7 @@
 
 .brand a {
     text-decoration: none;
-    color: $link;
+    color: $color-text;
 }
 
 .brand a:hover {
@@ -30,7 +30,7 @@
     margin-left: 50px;
     font-size: 20px;
     text-transform: uppercase;
-    color: $link;
+    color: $color-text;
 }
 
 .menu-secondary a:hover{color: orange;}
@@ -45,7 +45,7 @@
 .profile {
     font-family: $font-main;
     text-decoration: none;
-    color: $link;
+    color: $color-text;
 }
 
 .right {

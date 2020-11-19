@@ -1,6 +1,5 @@
-const domain = 'http://95.163.208.72:8000'; //95.163.208.72
+import { domain } from '../config.js'
 
-window.domain = domain;
 export class AjaxModule {
   static ajaxGet(ajaxArgs) {
     return this.ajax({ method: 'GET', ...ajaxArgs });

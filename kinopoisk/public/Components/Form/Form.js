@@ -58,14 +58,6 @@ export default class Form {
       form.appendChild(input);
       formr.push(input);
     });
-    const { text, className } = this.sub;
-    const submitpass = new Button({
-      parent: form,
-      text,
-      classname: 'button buttons__forRegLog',
-      type: 'submit',
-    });
-    submitpass.renderSubmit();
 
     let i = 1;
     this.configInput.forEach((menuKey) => {

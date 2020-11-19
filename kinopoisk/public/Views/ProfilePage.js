@@ -2,26 +2,7 @@ import NavLink from '../modules/navLink.js';
 import { createDiv } from './Components.js';
 import Bus from '../modules/EventBus.js';
 import Base from './Base.js';
-import Link from '../Components/Link/Link.js';
-
-const menuTop = {
-  rech: {
-    href: '/rech',
-    text: 'Рецензии',
-  },
-  mark: {
-    href: '/mark',
-    text: 'Оценки',
-  },
-  films: {
-    href: '/films',
-    text: 'Фильмы',
-  },
-  stars: {
-    href: '/stars',
-    text: 'Звёзды',
-  },
-};
+import { domain, nav } from "../config.js";
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -30,12 +11,18 @@ export default class ProfilePage extends Base {
     this.data = data;
   }
 
-  render() {
+  render(context) {
+    const { id } = context
     const responseBody = JSON.parse(this.data);
-    super.render(false);
+    console.log(id);
+    if(id === 1) {
+      super.render(true);
+    } else {
+      super.render(false);
+    }
     const body = document.getElementById('body');
-    body.className = 'page';
-    body.style.backgroundImage = 'url(\'images/login.jpg\')';
+    body.className = 'main__background';
+    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(\'images/login.jpg\')`;
     this.parent.className = '';
     const divshadow = createDiv('shadow profile', this.parent);
 
@@ -47,22 +34,6 @@ export default class ProfilePage extends Base {
     const menuItema0 = document.createElement('span');
 
     menuItema0.textContent = 'Профиль';
-
-    // menuItem0.appendChild(menuItema0);
-    // ul.appendChild(menuItem0);
-    //
-    // Object.keys(menuTop).forEach((menuKey) => {
-    //   const { href, text } = menuTop[menuKey];
-    //   const menuItem = document.createElement('li');
-    //   const menuItema = new Link({
-    //     parent: menuItem,
-    //     classname: '',
-    //   });
-    //   menuItema.a.dataset.section = menuKey;
-    //   menuItema.render();
-    //   menuItema.placeContent(text);
-    //   ul.appendChild(menuItem);
-    // });
 
     const divLeft = createDiv('profileInfoWrapLeft', divshadow);
     const divAvatar = createDiv('avatarUserBoxP', divLeft);

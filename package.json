@@ -89,7 +89,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "node index.js",
+    "start": "webpack --watch & node index.js",
     "lint": "npx eslint . --fix"
   },
   "repository": {
