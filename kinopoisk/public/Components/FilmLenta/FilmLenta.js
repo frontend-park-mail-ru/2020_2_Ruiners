@@ -24,4 +24,8 @@ export default class FilmLenta {
       posters: this.posters,
     });
   }
+
+  hide() {
+    this.lenta.innerHTML = '';
+  }
 }
