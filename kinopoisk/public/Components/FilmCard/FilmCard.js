@@ -1,5 +1,4 @@
 import Button from '../Button/Button.js';
-import RateAndReviewService from '../../Services/rateAndReviewService.js';
 import filmcardT from './FilmCard.handlebars';
 import Bus from '../../modules/EventBus.js';
 
@@ -42,6 +41,8 @@ export default class FilmCard {
       ],
       rate: this.body.Rating,
       votes: this.body.SumVotes,
+      MyRateBool: this.body.MyRateBool,
+      MyRate: this.body.MyRate,
       stars: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
       Button: this.voteButton.template({
         classname: 'buttons__marginForFilmCard',
