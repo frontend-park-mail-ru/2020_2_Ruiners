@@ -2,6 +2,7 @@ import Bus from "../modules/EventBus.js";
 import personService from "../Services/personService.js";
 import filmService from "../Services/filmService.js";
 import sessionService from "../Services/sessionService.js";
+import playlistService from "../Services/playlistService.js";
 import FilmPage from "../Views/FilmPage.js";
 import {application} from "../config.js";
 
@@ -41,6 +42,21 @@ export default function Film(params) {
             call(comments);
         });
     })
+    Bus.on('addPlaylist', context => {
+        const { filmId, playlistId, error, success } = context;
+        playlistService.PostAdd(filmId, playlistId).then(res => {
+            if (res.ok) {
+                success.textContent = 'Вы успешно добавили фильм в плэйлист';
+                success.className = 'success_add';
+                error.innerHTML = '';
+            } else {
+                error.textContent = 'Вы уже добавили этот фильм в плэйлист';
+                error.className = 'error_add';
+                success.innerHTML = '';
+            }
+        });
+    })
+
     sessionService.me()
         .then((res) => {
             console.log(res);
@@ -58,8 +74,14 @@ export default function Film(params) {
                         return;
                     }
                     if (res.ok) {
-                        const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
-                        film.render();
+                        let playlists;
+                        playlistService.getPlaylists().then(res => {
+                            if (res.ok) {
+                                playlists = res.get;
+                                const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
+                                film.render(playlists);
+                            }
+                        })
                     } else {
                         this.menuPage();
                     }

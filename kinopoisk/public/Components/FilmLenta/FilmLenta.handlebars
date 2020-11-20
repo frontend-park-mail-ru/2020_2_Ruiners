@@ -3,4 +3,12 @@
     {{#each posters}}
         {{{ this }}}
     {{/each}}
+    {{#if playlist}}
+        <div class="lenta__object">
+            <a href="/" class="href"><img width="270" height="420" src="images/adding.png" alt="" class="object__image">
+                <div class="object__hidden"><span>Добавить фильм</span></div>
+            </a>
+        </div>
+    {{/if}}
 </div>
+

@@ -3,7 +3,8 @@ import filmLentaT from './FilmLenta.handlebars';
 
 export default class FilmLenta {
   constructor(context = {}) {
-    const { genre, parent, body } = context;
+    const { genre, parent, body, playlist } = context;
+    this.playlist = playlist;
     this.genre = genre;
     this.parent = parent;
     this.body = body;
@@ -20,6 +21,7 @@ export default class FilmLenta {
   render() {
     this.parent.appendChild(this.lenta);
     this.lenta.innerHTML = this.template({
+      playlist: this.playlist,
       genre: this.genre,
       posters: this.posters,
     });

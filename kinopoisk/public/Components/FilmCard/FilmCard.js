@@ -5,14 +5,19 @@ import Bus from '../../modules/EventBus.js';
 export default class FilmCard {
   constructor(context = {}) {
     const {
-      parent, body, isAuthorized, actors,
+      parent, body, isAuthorized, actors, playlists,
     } = context;
     this.card = document.createElement('div');
     this.parent = parent;
     this.body = body;
     this.isAuthorized = isAuthorized;
     this.actors = actors;
+    this.playlists = playlists;
     this.voteButton = new Button({
+      classname: 'buttons__forComments',
+      parent: null,
+    });
+    this.playlistButton = new Button({
       classname: 'buttons__forComments',
       parent: null,
     });
@@ -24,8 +29,14 @@ export default class FilmCard {
 
   render() {
     this.parent.appendChild(this.card);
+    let playlistBool = false;
+    if(this.playlists.length > 0) {
+      playlistBool = true;
+    }
     this.card.innerHTML = this.template({
       isAuth: this.isAuthorized,
+      playlistBool: playlistBool,
+      playlists: this.playlists,
       title: this.body.title,
       description: this.body.Description,
       youtube: this.body.YoutubeLink,
@@ -48,6 +59,12 @@ export default class FilmCard {
         classname: 'buttons__marginForFilmCard',
         text: 'Оценить',
         id: 'vote',
+        type: 'submit',
+      }),
+      ButtonPlaylist: this.playlistButton.template({
+        classname: 'buttons__marginForFilmCard',
+        text: 'Добавить',
+        id: 'add',
         type: 'submit',
       }),
     });

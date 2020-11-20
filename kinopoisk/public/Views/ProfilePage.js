@@ -2,7 +2,7 @@ import Base from './Base.js';
 import {application, domain, nav} from "../config.js";
 import Button from "../Components/Button/Button";
 import Profile from "../Components/Profile/Profile.js";
-import Bus from "../modules/EventBus";
+import Bus from "../modules/EventBus.js";
 import FilmLenta from "../Components/FilmLenta/FilmLenta";
 
 export default class ProfilePage extends Base {
@@ -45,22 +45,54 @@ export default class ProfilePage extends Base {
     settings.addEventListener('click', () => {
       Bus.emit('Change');
     });
-    const lenta = new FilmLenta({
-      genre: 'Посмотреть позже',
-      body: playlists,
-      parent: application
+
+    const headerCreate = document.createElement('span');
+    headerCreate.textContent = 'Создать плейлист';
+    headerCreate.className = 'headers_main';
+    this.parent.appendChild(headerCreate)
+    const createPlaylist = document.createElement('input');
+    createPlaylist.placeholder = 'Напишите название';
+    createPlaylist.className = 'input_main';
+    this.parent.appendChild(createPlaylist);
+    const buttonCreate = new Button({
+      classname: '',
+      text: 'Создать',
+      parent: this.parent,
     });
+    buttonCreate.render({
+      callback: () => {
+        if(createPlaylist.value !== '') {
+          Bus.emit('CreatePlaylist', createPlaylist.value);
+        }
+      }
+    })
+
+    let lentas = []
+    playlists.forEach(element => {
+        lentas.push(new FilmLenta({
+            playlist: true,
+            genre: element.Title,
+            body: element.Films,
+            parent: application
+        }));
+    })
     let play = document.getElementById('play');
     let subscribe = document.getElementById('subscribe');
     let history = document.getElementById('history');
     let historyWatch = document.getElementById('history_watch')
-    lenta.render();
+    lentas.forEach(element => {
+        element.render();
+    })
     let box = this.createBox();
     play.addEventListener('click', (evt) => {
       evt.preventDefault();
       this.setClass(play, subscribe, history, historyWatch);
-      lenta.hide();
-      lenta.render();
+      lentas.forEach(element => {
+          element.hide();
+      });
+        lentas.forEach(element => {
+            element.render();
+        });
       box.remove();
       box = this.createBox();
       window.scroll(0, 700)
@@ -68,7 +100,9 @@ export default class ProfilePage extends Base {
     subscribe.addEventListener('click', (evt) => {
       evt.preventDefault();
       this.setClass(subscribe, play, historyWatch, history);
-      lenta.hide();
+        lentas.forEach(element => {
+            element.hide();
+        });
       box.remove();
       box = this.createBox();
       window.scroll(0, 700)
@@ -76,7 +110,9 @@ export default class ProfilePage extends Base {
     history.addEventListener('click', (evt) => {
       evt.preventDefault();
       this.setClass(history, play, subscribe, historyWatch);
-      lenta.hide();
+        lentas.forEach(element => {
+            element.hide();
+        });
       box.remove();
       box = this.createBox();
       window.scroll(0, 700)
@@ -84,7 +120,9 @@ export default class ProfilePage extends Base {
     historyWatch.addEventListener('click', (evt) => {
       evt.preventDefault();
       this.setClass(historyWatch, play, subscribe, history);
-      lenta.hide();
+        lentas.forEach(element => {
+            element.hide();
+        });
       box.remove();
       box = this.createBox();
       window.scroll(0, 700)

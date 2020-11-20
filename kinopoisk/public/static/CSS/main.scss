@@ -36,6 +36,16 @@ body {
     color: $color-succes;
 }
 
+.success_add {
+    color: $color-succes;
+    display: block;
+}
+
+.error_add {
+    color: $color-error;
+    display: block;
+}
+
 .succes__marginForFilmCard {
     position: absolute;
     margin-left: 60%;
@@ -65,4 +75,17 @@ body {
 
 .invisible_box {
     min-height: 100px;
+}
+
+.headers_main {
+    color: $color-text;
+    display: block;
+    font-family: $font-info;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.input_main {
+    display: block;
+    margin-bottom: 20px;
 }

@@ -13,13 +13,13 @@ export default class PlaylistService {
         return { status: res.status, json: parsedJsonObject };
     }
 
-    static async fetchPostCreate(body) {
-        const res = await AjaxModule.ajaxPost({ url: '/playlist/create', body: { body } });
+    static async fetchPostCreate(title) {
+        const res = await AjaxModule.ajaxPost({ url: '/playlist/create', body: { title } });
         return res.status;
     }
 
-    static async fetchPostAdd(filmId, playlistId) {
-        const res = await AjaxModule.ajaxPost({ url: '/playlist/add', body: { filmId, playlistId } });
+    static async fetchPostAdd(film_id, playlist_id) {
+        const res = await AjaxModule.ajaxPost({ url: '/playlist/add', body: { film_id, playlist_id } });
         return res.status;
     }
 
@@ -28,8 +28,8 @@ export default class PlaylistService {
         return res.status;
     }
 
-    static async fetchPostDeleteFilm(filmId, playlistId) {
-        const res = await AjaxModule.ajaxPost({ url: '/playlist/deletefilm', body: { filmId, playlistId } });
+    static async fetchPostDeleteFilm(film_id, playlist_id) {
+        const res = await AjaxModule.ajaxPost({ url: '/playlist/deletefilm', body: { film_id, playlist_id } });
         return res.status;
     }
 
