@@ -131,3 +131,12 @@ if (navigator.onLine) {
 }
 
 router.start();
+
+window.addEventListener('click', evt => {
+  if(evt.target.id.indexOf('playlist') == -1 && evt.target.id.indexOf('poster') == -1) {
+    return;
+  } else {
+    evt.preventDefault();
+    Bus.emit('Delete', evt.target.id);
+  }
+});

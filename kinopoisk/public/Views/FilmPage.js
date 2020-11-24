@@ -77,6 +77,7 @@ export default class FilmPage extends Base {
                 Bus.emit('PlaceComment', {
                   responseBody: responseBody,
                   render: this.render.bind(this),
+                  playlists: playlists,
                   buttonComment: buttonComment,
                 })
               });

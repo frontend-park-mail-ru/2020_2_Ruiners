@@ -24,13 +24,15 @@ export default class PlaylistService {
     }
 
     static async fetchPostDelete(playlistId) {
-        const res = await AjaxModule.ajaxPost({ url: '/playlist/delete', body: { playlistId } });
-        return res.status;
+        // const res = await AjaxModule.ajaxPost({ url: '/playlist/delete', body: { playlistId } });
+        // return res.status;
+        return 200;
     }
 
     static async fetchPostDeleteFilm(film_id, playlist_id) {
-        const res = await AjaxModule.ajaxPost({ url: '/playlist/deletefilm', body: { film_id, playlist_id } });
-        return res.status;
+        // const res = await AjaxModule.ajaxPost({ url: '/playlist/deletefilm', body: { film_id, playlist_id } });
+        // return res.status;
+        return 200;
     }
 
     static async getPlaylistFilms() {

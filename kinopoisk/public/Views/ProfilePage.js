@@ -71,6 +71,7 @@ export default class ProfilePage extends Base {
     playlists.forEach(element => {
         lentas.push(new FilmLenta({
             playlist: true,
+            id: element.Id,
             genre: element.Title,
             body: element.Films,
             parent: application
@@ -78,15 +79,14 @@ export default class ProfilePage extends Base {
     })
     let play = document.getElementById('play');
     let subscribe = document.getElementById('subscribe');
-    let history = document.getElementById('history');
-    let historyWatch = document.getElementById('history_watch')
+    let news = document.getElementById('lenta');
     lentas.forEach(element => {
         element.render();
     })
     let box = this.createBox();
     play.addEventListener('click', (evt) => {
       evt.preventDefault();
-      this.setClass(play, subscribe, history, historyWatch);
+      this.setClass(play, subscribe, news);
       lentas.forEach(element => {
           element.hide();
       });
@@ -99,7 +99,7 @@ export default class ProfilePage extends Base {
     });
     subscribe.addEventListener('click', (evt) => {
       evt.preventDefault();
-      this.setClass(subscribe, play, historyWatch, history);
+      this.setClass(subscribe, play, news);
         lentas.forEach(element => {
             element.hide();
         });
@@ -107,19 +107,9 @@ export default class ProfilePage extends Base {
       box = this.createBox();
       window.scroll(0, 700)
     });
-    history.addEventListener('click', (evt) => {
+    news.addEventListener('click', (evt) => {
       evt.preventDefault();
-      this.setClass(history, play, subscribe, historyWatch);
-        lentas.forEach(element => {
-            element.hide();
-        });
-      box.remove();
-      box = this.createBox();
-      window.scroll(0, 700)
-    });
-    historyWatch.addEventListener('click', (evt) => {
-      evt.preventDefault();
-      this.setClass(historyWatch, play, subscribe, history);
+      this.setClass(news, play, subscribe);
         lentas.forEach(element => {
             element.hide();
         });
@@ -129,11 +119,10 @@ export default class ProfilePage extends Base {
     });
   }
 
-  setClass(link1, link2, link3, link4) {
+  setClass(link1, link2, link3) {
     link1.className = 'profile_nav_links_aBig';
     link2.className = 'profile_nav_links_a';
     link3.className = 'profile_nav_links_a';
-    link4.className = 'profile_nav_links_a';
   }
 
   createBox() {
