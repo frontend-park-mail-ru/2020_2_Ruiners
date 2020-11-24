@@ -11,6 +11,7 @@
 @import "../../Components/Footer/Footer";
 @import "../../Components/Comments/Comments";
 @import "../../Components/PersonCard/PersonCard";
+@import "../../Components/Delete/Delete";
 @import "colors";
 @import "fonts";
 
@@ -34,6 +35,16 @@ body {
 
 .success {
     color: $color-succes;
+}
+
+.success_add {
+    color: $color-succes;
+    display: block;
+}
+
+.error_add {
+    color: $color-error;
+    display: block;
 }
 
 .succes__marginForFilmCard {
@@ -65,4 +76,17 @@ body {
 
 .invisible_box {
     min-height: 100px;
+}
+
+.headers_main {
+    color: $color-text;
+    display: block;
+    font-family: $font-info;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.input_main {
+    display: block;
+    margin-bottom: 20px;
 }

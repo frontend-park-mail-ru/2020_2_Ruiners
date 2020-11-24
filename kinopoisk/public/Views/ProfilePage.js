@@ -1,8 +1,9 @@
-import NavLink from '../modules/navLink.js';
-import { createDiv } from './Components.js';
-import Bus from '../modules/EventBus.js';
 import Base from './Base.js';
-import { domain, nav } from "../config.js";
+import {application, domain, nav} from "../config.js";
+import Button from "../Components/Button/Button";
+import Profile from "../Components/Profile/Profile.js";
+import Bus from "../modules/EventBus.js";
+import FilmLenta from "../Components/FilmLenta/FilmLenta";
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -11,10 +12,9 @@ export default class ProfilePage extends Base {
     this.data = data;
   }
 
-  render(context) {
+  render(context, playlists) {
     const { id } = context
     const responseBody = JSON.parse(this.data);
-    console.log(id);
     if(id === 1) {
       super.render(true);
     } else {
@@ -22,45 +22,115 @@ export default class ProfilePage extends Base {
     }
     const body = document.getElementById('body');
     body.className = 'main__background';
-    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(\'images/login.jpg\')`;
     this.parent.className = '';
-    const divshadow = createDiv('shadow profile', this.parent);
+    const button = new Button({
+      classname: 'buttons__forComments',
+      parent: null,
+    })
+    const profile = new Profile({
+        parent: this.parent,
+        body: {
+          id: responseBody.id,
+          Login: responseBody.Login,
+          button: button.template({
+            classname: '',
+            text: 'Настройки',
+            id: 'settings',
+            type: 'submit',
+          })
+        }
+    });
+    profile.render();
+    const settings = document.getElementById('settings');
+    settings.addEventListener('click', () => {
+      Bus.emit('Change');
+    });
 
-    const ul = document.createElement('ul');
-    ul.className = 'top-menu';
-    divshadow.appendChild(ul);
+    const headerCreate = document.createElement('span');
+    headerCreate.textContent = 'Создать плейлист';
+    headerCreate.className = 'headers_main';
+    this.parent.appendChild(headerCreate)
+    const createPlaylist = document.createElement('input');
+    createPlaylist.placeholder = 'Напишите название';
+    createPlaylist.className = 'input_main';
+    this.parent.appendChild(createPlaylist);
+    const buttonCreate = new Button({
+      classname: '',
+      text: 'Создать',
+      parent: this.parent,
+    });
+    buttonCreate.render({
+      callback: () => {
+        if(createPlaylist.value !== '') {
+          Bus.emit('CreatePlaylist', createPlaylist.value);
+        }
+      }
+    })
 
-    const menuItem0 = document.createElement('li');
-    const menuItema0 = document.createElement('span');
-
-    menuItema0.textContent = 'Профиль';
-
-    const divLeft = createDiv('profileInfoWrapLeft', divshadow);
-    const divAvatar = createDiv('avatarUserBoxP', divLeft);
-
-    const img = document.createElement('img');
-    img.src = `${domain}/user/avatar/${`${responseBody.id}?${Math.random()}`}`;
-    img.height = 300;
-    img.width = 300;
-    img.className = 'avatar__image';
-    divAvatar.appendChild(img);
-
-    const button = document.createElement('button');
-    button.className = 'button buttons__marginForSettings';
-    button.textContent = 'Изменить данные';
-    button.href = '/';
-    const buttonLink = new NavLink(button);
-    Bus.emit('profileChange', buttonLink);
-    divLeft.appendChild(button);
-
-    const divRight = createDiv('profileInfoWrapRight', divshadow);
-    const divInfo = createDiv('infoUser', divRight);
-
-    const nick = document.createElement('h1');
-    nick.className = 'profile__nickname';
-
-    nick.textContent = `${responseBody.Login}`;
-
-    divInfo.appendChild(nick);
+    let lentas = []
+    playlists.forEach(element => {
+        lentas.push(new FilmLenta({
+            playlist: true,
+            id: element.Id,
+            genre: element.Title,
+            body: element.Films,
+            parent: application
+        }));
+    })
+    let play = document.getElementById('play');
+    let subscribe = document.getElementById('subscribe');
+    let news = document.getElementById('lenta');
+    lentas.forEach(element => {
+        element.render();
+    })
+    let box = this.createBox();
+    play.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      this.setClass(play, subscribe, news);
+      lentas.forEach(element => {
+          element.hide();
+      });
+        lentas.forEach(element => {
+            element.render();
+        });
+      box.remove();
+      box = this.createBox();
+      window.scroll(0, 700)
+    });
+    subscribe.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      this.setClass(subscribe, play, news);
+        lentas.forEach(element => {
+            element.hide();
+        });
+      box.remove();
+      box = this.createBox();
+      window.scroll(0, 700)
+    });
+    news.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      this.setClass(news, play, subscribe);
+        lentas.forEach(element => {
+            element.hide();
+        });
+      box.remove();
+      box = this.createBox();
+      window.scroll(0, 700)
+    });
   }
+
+  setClass(link1, link2, link3) {
+    link1.className = 'profile_nav_links_aBig';
+    link2.className = 'profile_nav_links_a';
+    link3.className = 'profile_nav_links_a';
+  }
+
+  createBox() {
+    const box = document.createElement('div');
+    box.className = 'invisible_box';
+    box.id = 'box';
+    this.parent.appendChild(box);
+    return box;
+  }
+
 }

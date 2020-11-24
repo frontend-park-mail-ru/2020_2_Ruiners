@@ -1,0 +1,45 @@
+.delete_container {
+  width: 50px;
+  margin-left: 60px;
+  transform-origin: 0 center 0;
+  transition: all 0.5s;
+}
+
+.delete {
+  width: 30px;
+  height: 30px;
+  color: red;
+  opacity: 0.3;
+  transform-origin: 0 center 0;
+  transition: all 1s;
+}
+
+.delete:hover{
+  opacity: 1;
+}
+
+.delete_container:hover {
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.delete:before, .delete:after {
+  position: absolute;
+  content: ' ';
+  height: 30px;
+  width: 2px;
+  background-color: white;
+}
+
+.delete:hover:before, .delete:hover:after {
+  opacity: 1;
+  background-color: red;
+}
+
+.delete:before {
+  transform: rotate(45deg);
+}
+
+.delete:after {
+  transform: rotate(-45deg);
+}

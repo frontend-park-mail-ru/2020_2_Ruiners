@@ -5,6 +5,7 @@ import './static/CSS/main.scss';
 import './static/images/icons8-кинопроектор-96.png';
 import './static/images/login.jpg';
 import './static/images/offline.png'
+import './static/images/adding.png'
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import RateAndReviewService from './Services/rateAndReviewService.js';
 import { nav } from "./config.js";
@@ -130,3 +131,12 @@ if (navigator.onLine) {
 }
 
 router.start();
+
+window.addEventListener('click', evt => {
+  if(evt.target.id.indexOf('playlist') == -1 && evt.target.id.indexOf('poster') == -1) {
+    return;
+  } else {
+    evt.preventDefault();
+    Bus.emit('Delete', evt.target.id);
+  }
+});

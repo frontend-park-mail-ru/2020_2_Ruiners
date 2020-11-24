@@ -1,12 +1,22 @@
 @import "kinopoisk/public/static/CSS/fonts";
 @import "kinopoisk/public/static/CSS/colors";
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
+
+
+
 .filmCard_main {
     min-width: 100%;
     min-height: 700px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.filmCard_main_header {
+    color: $color-text;
+    font-family: $font-main;
+    font-size: 20px;
+    padding-bottom: 20px;
 }
 
 .filmCard_titleRate__title{
@@ -151,3 +161,57 @@
 .rate-area > label:active {
     position: relative;
 }
+
+.filmCard_select select {
+    border: none;
+    position: absolute;
+    background: $color-secondary;
+    color: $color-text;
+    font-family: $font-info;
+    font-size: 30px;
+}
+
+.filmCard_select select:hover {
+    cursor: pointer;
+}
+
+.filmCard_select button {
+    border: none;
+    background: $color-button;
+    color: $color-text;
+    font-family: $font-info;
+    font-size: 30px;
+}
+
+.filmCard_select button:hover {
+    cursor: pointer;
+    background-color: #F4A460;
+}
+.filmCard_select button:active {
+    outline: none;
+    box-shadow: none;
+    background-color: #009379;
+}
+
+.filmCard_select select:active {
+    outline: none;
+    box-shadow: none;
+}
+
+.filmCard_select select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.filmCard_select button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+.filmCard_select option {
+    border-radius: 10px;
+}
+
+
+

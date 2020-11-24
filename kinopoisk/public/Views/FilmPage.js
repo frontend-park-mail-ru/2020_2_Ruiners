@@ -14,7 +14,7 @@ export default class FilmPage extends Base {
     this.isAuthorized = isAuthorized;
   }
 
-  render() {
+  render(playlists) {
     super.render(false);
     const body = document.getElementById('body');
     body.className = 'main__background';
@@ -33,10 +33,32 @@ export default class FilmPage extends Base {
           const film = new FilmCard({
             isAuthorized: this.isAuthorized,
             parent: this.parent,
+            playlists: playlists,
             body: responseBody,
             actors,
           });
           film.render();
+          const addPlaylist = document.getElementById('adding');
+          const info = addPlaylist.parentNode;
+          let success = document.createElement('span');
+          let error = document.createElement('span');
+          info.appendChild(success);
+          info.appendChild(error);
+          addPlaylist.addEventListener('click', (evt) => {
+              evt.preventDefault();
+              const options = document.getElementsByTagName('option')
+              const optionsList = Array.prototype.slice.call(options);
+              optionsList.forEach((element) => {
+                  if(element.selected) {
+                      Bus.emit('addPlaylist', {
+                        playlistId: parseInt(element.id),
+                        filmId: responseBody.id,
+                        error: error,
+                        success: success,
+                      });
+                  }
+              });
+          });
         Bus.emit('GetComments', ({
           responseBody: responseBody,
           call: (comments) => {
@@ -55,10 +77,12 @@ export default class FilmPage extends Base {
                 Bus.emit('PlaceComment', {
                   responseBody: responseBody,
                   render: this.render.bind(this),
+                  playlists: playlists,
                   buttonComment: buttonComment,
                 })
               });
             }
+
           }
         }))
       }

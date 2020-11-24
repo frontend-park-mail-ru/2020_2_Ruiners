@@ -48,8 +48,10 @@ export default class Router {
       if (link.pathname.indexOf('undefined') !== -1) {
         return;
       }
-      const pathObject = this.split(link.pathname);
-      this.open(pathObject.path, { id: pathObject.param });
+      if(link.pathname !== '/default') {
+        const pathObject = this.split(link.pathname);
+        this.open(pathObject.path, {id: pathObject.param});
+      }
     });
 
     window.addEventListener('popstate', (event) => {

@@ -2,6 +2,17 @@
     <div>
         <span class="filmCard_titleRate__title">{{ title }}</span>
     </div>
+    {{#if playlistBool}}
+        <span class="filmCard_main_header">Добавить в плейлист</span>
+        <div class="filmCard_select">
+            <button class="" id="adding">Добавить</button>
+            <select>
+                {{#each playlists}}
+                    <option id={{this.Id}}>{{this.Title}}</option>
+                {{/each}}
+            </select>
+        </div>
+    {{/if}}
 </div>
 
 <div class="filmCard_secondary">
