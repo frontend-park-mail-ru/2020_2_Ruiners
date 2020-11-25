@@ -24,11 +24,17 @@ export default class Button {
       id: this.id,
     });
     if (callback) {
-      this.button.addEventListener('click', (evt) => {
+      this.listener = (evt) => {
         evt.preventDefault();
         callback(evt);
-      });
+      }
+      this.button.addEventListener('click', this.listener);
     }
+  }
+
+  hide() {
+    this.button.innerHTML = '';
+    this.button.removeEventListener('click', this.listener);
   }
 
   renderSubmit() {

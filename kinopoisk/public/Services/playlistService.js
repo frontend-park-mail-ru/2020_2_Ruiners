@@ -23,16 +23,14 @@ export default class PlaylistService {
         return res.status;
     }
 
-    static async fetchPostDelete(playlistId) {
-        // const res = await AjaxModule.ajaxPost({ url: '/playlist/delete', body: { playlistId } });
-        // return res.status;
-        return 200;
+    static async fetchPostDelete(playlist_id) {
+        const res = await AjaxModule.ajaxPost({ url: '/playlist/delete', body: { playlist_id } });
+        return res.status;
     }
 
     static async fetchPostDeleteFilm(film_id, playlist_id) {
-        // const res = await AjaxModule.ajaxPost({ url: '/playlist/deletefilm', body: { film_id, playlist_id } });
-        // return res.status;
-        return 200;
+        const res = await AjaxModule.ajaxPost({ url: '/playlist/remove', body: { film_id, playlist_id } });
+        return res.status;
     }
 
     static async getPlaylistFilms() {
@@ -86,7 +84,8 @@ export default class PlaylistService {
 
     static async PostDelete(playlistId) {
         const data = { ok: false, errmsg: undefined };
-        const res = await this.fetchPostDelete(playlistId);
+        const res = await this.fetchPostDelete(parseInt(playlistId));
+        console.log(res);
         if (res !== 200) {
             data.errmsg = 'Ошибка';
         } else {
@@ -97,7 +96,7 @@ export default class PlaylistService {
 
     static async PostDeleteFilm(filmId, playlistId) {
         const data = { ok: false, errmsg: undefined };
-        const res = await this.fetchPostDeleteFilm(filmId, playlistId);
+        const res = await this.fetchPostDeleteFilm(parseInt(filmId), parseInt(playlistId));
         if (res !== 200) {
             data.errmsg = 'Ошибка';
         } else {

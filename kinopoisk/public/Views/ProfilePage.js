@@ -4,6 +4,7 @@ import Button from "../Components/Button/Button";
 import Profile from "../Components/Profile/Profile.js";
 import Bus from "../modules/EventBus.js";
 import FilmLenta from "../Components/FilmLenta/FilmLenta";
+import FriendList from "../Components/FriendList/FriendList";
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -29,9 +30,11 @@ export default class ProfilePage extends Base {
     })
     const profile = new Profile({
         parent: this.parent,
+        isProfile: true,
         body: {
           id: responseBody.id,
           Login: responseBody.Login,
+          isAuth: true,
           button: button.template({
             classname: '',
             text: 'Настройки',
@@ -46,27 +49,27 @@ export default class ProfilePage extends Base {
       Bus.emit('Change');
     });
 
-    const headerCreate = document.createElement('span');
-    headerCreate.textContent = 'Создать плейлист';
-    headerCreate.className = 'headers_main';
-    this.parent.appendChild(headerCreate)
     const createPlaylist = document.createElement('input');
-    createPlaylist.placeholder = 'Напишите название';
-    createPlaylist.className = 'input_main';
-    this.parent.appendChild(createPlaylist);
+    const headerCreate = document.createElement('span');
     const buttonCreate = new Button({
       classname: '',
       text: 'Создать',
       parent: this.parent,
     });
-    buttonCreate.render({
-      callback: () => {
-        if(createPlaylist.value !== '') {
-          Bus.emit('CreatePlaylist', createPlaylist.value);
-        }
+    const friends = [
+      {
+        id: "55",
+        login: "Suchka",
+      },
+      {
+        id: "56",
+        login: "Arkadiy",
       }
-    })
-
+    ];                // Убрать
+    const friendList = new FriendList({
+      parent: this.parent,
+      body: friends,
+    });
     let lentas = []
     playlists.forEach(element => {
         lentas.push(new FilmLenta({
@@ -80,12 +83,16 @@ export default class ProfilePage extends Base {
     let play = document.getElementById('play');
     let subscribe = document.getElementById('subscribe');
     let news = document.getElementById('lenta');
+    this.createRender(buttonCreate, headerCreate, createPlaylist);
     lentas.forEach(element => {
         element.render();
     })
     let box = this.createBox();
     play.addEventListener('click', (evt) => {
       evt.preventDefault();
+      friendList.hide();
+      this.createHide(buttonCreate, headerCreate, createPlaylist);
+      this.createRender(buttonCreate, headerCreate, createPlaylist);
       this.setClass(play, subscribe, news);
       lentas.forEach(element => {
           element.hide();
@@ -99,6 +106,9 @@ export default class ProfilePage extends Base {
     });
     subscribe.addEventListener('click', (evt) => {
       evt.preventDefault();
+      this.createHide(buttonCreate, headerCreate, createPlaylist);
+      friendList.hide();
+      friendList.render();
       this.setClass(subscribe, play, news);
         lentas.forEach(element => {
             element.hide();
@@ -109,6 +119,8 @@ export default class ProfilePage extends Base {
     });
     news.addEventListener('click', (evt) => {
       evt.preventDefault();
+      this.createHide(buttonCreate, headerCreate, createPlaylist);
+      friendList.hide();
       this.setClass(news, play, subscribe);
         lentas.forEach(element => {
             element.hide();
@@ -117,6 +129,28 @@ export default class ProfilePage extends Base {
       box = this.createBox();
       window.scroll(0, 700)
     });
+  }
+
+  createRender(buttonCreate, headerCreate, createPlaylist) {
+    headerCreate.textContent = 'Создать плейлист';
+    headerCreate.className = 'headers_main';
+    this.parent.appendChild(headerCreate);
+    createPlaylist.placeholder = 'Напишите название';
+    createPlaylist.className = 'input_main';
+    this.parent.appendChild(createPlaylist);
+    buttonCreate.render({
+      callback: () => {
+        if(createPlaylist.value !== '') {
+          Bus.emit('CreatePlaylist', createPlaylist.value);
+        }
+      }
+    });
+  }
+
+  createHide(buttonCreate, headerCreate, createPlaylist) {
+    buttonCreate.hide();
+    headerCreate.innerHTML = '';
+    createPlaylist.remove();
   }
 
   setClass(link1, link2, link3) {

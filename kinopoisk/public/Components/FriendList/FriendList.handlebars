@@ -1,0 +1,12 @@
+{{#each friends}}
+    <div class="friendList_width">
+        <div class="friendList_container">
+            <div>
+                <img src="{{this.domain}}/user/avatar/{{this.id}}" width="200" height="200" class="profile__default_margin profile__image">
+                <a class="friendList_login" href="people/{{this.id}}">{{this.login}}</a>
+            </div>
+            <div>{{{del}}}</div>
+        </div>
+        <hr class="friendList_line">
+    </div>
+{{/each}}

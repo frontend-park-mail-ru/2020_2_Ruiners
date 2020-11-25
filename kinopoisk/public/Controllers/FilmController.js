@@ -74,14 +74,19 @@ export default function Film(params) {
                         return;
                     }
                     if (res.ok) {
-                        let playlists;
-                        playlistService.getPlaylists().then(res => {
-                            if (res.ok) {
-                                playlists = res.get;
-                                const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
-                                film.render(playlists);
-                            }
-                        })
+                        let playlists = [];
+                        if(isAuthorized) {
+                            playlistService.getPlaylists().then(res => {
+                                if (res.ok) {
+                                    playlists = res.get;
+                                    const film = new FilmPage({parent: application, body: responseBody, isAuthorized});
+                                    film.render(playlists);
+                                }
+                            })
+                        } else {
+                            const film = new FilmPage({parent: application, body: responseBody, isAuthorized});
+                            film.render(playlists);
+                        }
                     } else {
                         this.menuPage();
                     }
