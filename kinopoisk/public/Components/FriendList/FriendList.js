@@ -20,7 +20,6 @@ export default class FriendList {
 
     render() {
         this.parent.appendChild(this.friendList);
-        this.body.domain = domain;
         this.body.forEach(element => {
             element.domain = domain;
         })

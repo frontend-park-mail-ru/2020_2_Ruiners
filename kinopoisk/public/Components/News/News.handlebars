@@ -1,0 +1,26 @@
+{{#each news}}
+    {{#if this.is_rating}}
+        <div class="friendList_width">
+            <div class="news_container">
+                <img src="{{this.domain}}/user/avatar/{{this.user_id}}" width="200" height="200" class="profile__default_margin profile__image">
+                <div>
+                    <a class="news_login" href="people/{{this.user_id}}">{{this.user_login}}</a>
+                    <span class="news_info">поставил(-а) оценку</span> <span class="news_rating"> {{this.body}}/10 </span> <span class="news_info">к фильму</span>
+                    <a class="news_login" href="film/{{this.film_id}}">{{this.film_title}}</a>
+                </div>
+            </div>
+            <hr class="friendList_line">
+        </div>
+    {{/if}}
+
+
+    {{#if this.is_review}}
+        <div class="friendList_width">
+            <div class="news_container">
+                <img src="{{this.domain}}/user/avatar/{{this.user_id}}" width="200" height="200" class="profile__default_margin profile__image">
+                <h1>{{this.user_login}} оставил(-а) комментарий {{this.body}} к фильму {{this.film_title}}</h1>
+            </div>
+            <hr class="friendList_line">
+        </div>
+    {{/if}}
+{{/each}}

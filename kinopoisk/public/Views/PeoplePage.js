@@ -11,7 +11,7 @@ export default class PeoplePage extends Base{
         this.data = data;
     }
 
-    render() {
+    render(id) {
         super.render(false);
         const responseBody = this.data;
         const body = document.getElementById('body');
@@ -38,6 +38,11 @@ export default class PeoplePage extends Base{
             }
         });
         profile.render();
+        const subscribe = document.getElementById('subscribe');
+        subscribe.addEventListener('click', evt => {
+            evt.preventDefault();
+            Bus.emit('subscribe', id);
+        })
         let box = this.createBox();
     }
 

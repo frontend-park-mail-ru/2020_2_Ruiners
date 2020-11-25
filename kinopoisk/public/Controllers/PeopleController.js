@@ -3,6 +3,7 @@ import PeoplePage from "../Views/PeoplePage";
 import {application} from "../config";
 import sessionService from "../Services/sessionService.js";
 import ProfileController from "./ProfileController";
+import subscribeService from "../Services/subscribeService";
 
 export default function People(params) {
     const  { id } = params;
@@ -19,6 +20,11 @@ export default function People(params) {
                 responseBody.isAuth = false;
             }
             const people = new PeoplePage(application, responseBody);
-            people.render();
+            people.render(id);
         });
+    Bus.on('subscribe', (user_id) => {
+        subscribeService.PostFollow(user_id).then(res => {
+            console.log(res.ok);
+        });
+    });
 }
