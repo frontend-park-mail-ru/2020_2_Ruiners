@@ -215,7 +215,8 @@ textarea.question:invalid ~ input[type="submit"] {
     color: $color-text;
 }
 .comment__login:hover {
-    cursor: default;
+    cursor: pointer;
+    color: $color-secondary;
 }
 
 .comment__content {

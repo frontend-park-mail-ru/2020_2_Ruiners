@@ -125,7 +125,8 @@ if (navigator.onLine) {
       .register('/profile', Controller.profilePage)
       .register('/profileChange', Controller.profileChengePage)
       .register('/person', Controller.personPage)
-      .register('/genre', Controller.genrePage);
+      .register('/genre', Controller.genrePage)
+      .register('/people', Controller.peoplePage);
 } else {
   router.register('/', Controller.offlinePage)
 }

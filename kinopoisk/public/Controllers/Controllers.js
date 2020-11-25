@@ -7,6 +7,7 @@ import SettingsController from "./SettingsController.js";
 import ProfileController from "./ProfileController.js";
 import PersonController from "./PersonController.js";
 import GenreController from "./GenreController.js";
+import PeopleController from "./PeopleController";
 
 export default class Controller {
   static offlinePage() {
@@ -43,5 +44,9 @@ export default class Controller {
 
   static genrePage(params) {
       GenreController(params);
+  }
+
+  static  peoplePage(params) {
+        PeopleController(params);
   }
 }
