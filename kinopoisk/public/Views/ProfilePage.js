@@ -5,6 +5,7 @@ import Profile from "../Components/Profile/Profile.js";
 import Bus from "../modules/EventBus.js";
 import FilmLenta from "../Components/FilmLenta/FilmLenta";
 import FriendList from "../Components/FriendList/FriendList";
+import News from "../Components/News/News";
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -13,7 +14,7 @@ export default class ProfilePage extends Base {
     this.data = data;
   }
 
-  render(context, playlists) {
+  render(context, playlists, followers, newss) {
     const { id } = context
     const responseBody = JSON.parse(this.data);
     if(id === 1) {
@@ -56,19 +57,14 @@ export default class ProfilePage extends Base {
       text: 'Создать',
       parent: this.parent,
     });
-    const friends = [
-      {
-        id: "55",
-        login: "Suchka",
-      },
-      {
-        id: "56",
-        login: "Arkadiy",
-      }
-    ];                // Убрать
+
     const friendList = new FriendList({
       parent: this.parent,
-      body: friends,
+      body: followers,
+    });
+    const newsLenta = new News({
+      parent: this.parent,
+      body: newss,
     });
     let lentas = []
     playlists.forEach(element => {
@@ -90,6 +86,7 @@ export default class ProfilePage extends Base {
     let box = this.createBox();
     play.addEventListener('click', (evt) => {
       evt.preventDefault();
+      newsLenta.hide();
       friendList.hide();
       this.createHide(buttonCreate, headerCreate, createPlaylist);
       this.createRender(buttonCreate, headerCreate, createPlaylist);
@@ -108,6 +105,7 @@ export default class ProfilePage extends Base {
       evt.preventDefault();
       this.createHide(buttonCreate, headerCreate, createPlaylist);
       friendList.hide();
+      newsLenta.hide();
       friendList.render();
       this.setClass(subscribe, play, news);
         lentas.forEach(element => {
@@ -125,6 +123,8 @@ export default class ProfilePage extends Base {
         lentas.forEach(element => {
             element.hide();
         });
+      newsLenta.hide();
+      newsLenta.render();
       box.remove();
       box = this.createBox();
       window.scroll(0, 700)

@@ -1,0 +1,30 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+
+.news_container {
+  display: flex;
+}
+
+.news_login {
+  color: $color-text;
+  text-decoration-line: none;
+  font-family: $font-info;
+  font-size: 30px;
+}
+
+.news_login:hover {
+  cursor: pointer;
+  color: $color-secondary;
+}
+
+.news_info {
+  color: $color-text;
+  font-family: $font-info;
+  font-size: 25px;
+}
+
+.news_rating{
+  color: #666666;
+  font-family: $font-info;
+  font-size: 30px;
+}
