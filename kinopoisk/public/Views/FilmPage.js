@@ -4,6 +4,7 @@ import Comments from '../Components/Comments/Comments.js';
 import Bus from '../modules/EventBus.js';
 import personService from '../Services/personService.js';
 import { nav, domain } from "../config.js";
+import filmService from "../Services/filmService";
 
 export default class FilmPage extends Base {
   constructor(context = {}) {
@@ -25,8 +26,11 @@ export default class FilmPage extends Base {
     Bus.emit('GetPersons', {
       responseBody: responseBody,
       call: (actors) => {
+          console.log(responseBody.id);
+          filmService.getRate(responseBody.id).then( res => {
+              console.log(res.get);
           responseBody.MyRateBool = false;
-          responseBody.MyRate = 4;
+          responseBody.MyRate = res.get.rate;
           if(responseBody.MyRate > 0) {
             responseBody.MyRateBool = true
           }
@@ -87,6 +91,8 @@ export default class FilmPage extends Base {
 
           }
         }))
+      });
+
       }
     })
 

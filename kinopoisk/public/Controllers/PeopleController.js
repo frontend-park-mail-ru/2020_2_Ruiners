@@ -7,21 +7,24 @@ import subscribeService from "../Services/subscribeService";
 
 export default function People(params) {
     const  { id } = params;
-    const responseBody = { Login: 'ErikDoter', id: id};
-    sessionService.me()
-        .then((res) => {
-            if(res.ok) {
-                if(res.get.id == id) {
-                    ProfileController({id: id});
-                    return;
+    subscribeService.getLogin(id).then(resLogin => {
+        sessionService.me()
+            .then((res) => {
+                let responseBody;
+                responseBody = resLogin.get;
+                if(res.ok) {
+                    if(res.get.id == id) {
+                        ProfileController({id: id});
+                        return;
+                    }
+                    responseBody.isAuth = true;
+                } else {
+                    responseBody.isAuth = false;
                 }
-                responseBody.isAuth = true;
-            } else {
-                responseBody.isAuth = false;
-            }
-            const people = new PeoplePage(application, responseBody);
-            people.render(id);
-        });
+                const people = new PeoplePage(application, responseBody);
+                people.render(id);
+            });
+    });
     Bus.on('subscribe', (user_id) => {
         subscribeService.PostFollow(user_id).then(res => {
             if(res.ok) {

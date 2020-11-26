@@ -139,7 +139,7 @@ window.addEventListener('click', evt => {
     return;
   } else if(evt.target.id.indexOf('playlist') !== -1 || evt.target.id.indexOf('poster') !== -1) {
     evt.preventDefault();
-    Bus.emit('Delete', evt.target.id);
+    Bus.emitLast('Delete', evt.target.id);
   } else {
     evt.preventDefault();
     Bus.emitLast('unsubscribeList', evt.target.id);

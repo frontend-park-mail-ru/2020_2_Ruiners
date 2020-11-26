@@ -60,28 +60,16 @@ export default function Profile(params) {
                                         if (slices.length === 2) {   // Если удалили плэйлист
                                             playlistService.PostDelete(slices[1]).then(res => {
                                                 if (res.ok) {
-                                                    PlaylistService.getPlaylistFilms()
-                                                        .then((res) => {
-                                                            if (res.ok) {
-                                                                playlists = res.get;
-                                                                application.innerHTML = '';
-                                                                profile.render(params, playlists, followers, newsLenta);
-                                                            }
-                                                        });
+                                                    Bus.emitLast('deletePlaylist', slices[1]);
                                                 }
                                             });
                                         } else {     // Если удалили фильм
                                             playlistService.PostDeleteFilm(slices[2], slices[1]).then(res => {
-                                                console.log(res);
-                                                if (res.ok) {
-                                                    PlaylistService.getPlaylistFilms()
-                                                        .then((res) => {
-                                                            if (res.ok) {
-                                                                playlists = res.get;
-                                                                application.innerHTML = '';
-                                                                profile.render(params, playlists, followers, newsLenta);
-                                                            }
-                                                        });
+                                                if(res.ok) {
+                                                    Bus.emitLast('deleteFilm', {
+                                                        filmId: parseInt(slices[2]),
+                                                        playlistId: parseInt(slices[1]),
+                                                    });
                                                 }
                                             });
                                         }

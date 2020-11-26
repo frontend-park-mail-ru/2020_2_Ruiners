@@ -131,13 +131,55 @@ export default class ProfilePage extends Base {
       box = this.createBox();
       window.scroll(0, 700)
     });
-
+    Bus.on('deletePlaylist', playlistId => {
+        box.remove();
+        lentas.forEach(element => {
+          element.hide();
+        });
+        let rightIndex = 0;
+        lentas.forEach((element, index) => {
+          if(element.id == parseInt(playlistId)) {
+            rightIndex = index;
+          }
+        });
+        lentas.splice(rightIndex, 1);
+        lentas.forEach(element => {
+          element.render();
+        });
+        box = this.createBox();
+    });
+    Bus.on('deleteFilm', context => {
+        const { filmId, playlistId } = context;
+        box.remove()
+        let rightIndex = 0;
+        lentas.forEach(element => {
+          element.hide();
+        });
+        lentas.forEach((element, index) => {
+          if(element.id == playlistId) {
+            rightIndex = index;
+          }
+        });
+        let filmIndex = 0;
+        lentas[rightIndex].body.forEach((element, index) => {
+          if(element.id == filmId) {
+            filmIndex = index;
+          }
+        });
+        console.log(lentas[rightIndex]);
+        lentas[rightIndex].body.splice(filmIndex, 1);
+        lentas[rightIndex].posters.splice(filmIndex, 1);
+        lentas.forEach(element => {
+          element.render();
+        });
+        box = this.createBox();
+    })
     Bus.on('removeFriend', friendId => {
-          box.remove();
-          friendList.remove(friendId);
-          friendList.hide();
-          friendList.render();
-          box = this.createBox();
+        box.remove();
+        friendList.remove(friendId);
+        friendList.hide();
+        friendList.render();
+        box = this.createBox();
     });
   }
 

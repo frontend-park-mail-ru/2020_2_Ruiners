@@ -47,17 +47,25 @@
 .news_container_comment {
   background-color: rgba(0, 0, 0, 0.5);
   margin-top: 20px;
-  min-height: 150px;
   min-width: 300px;
   box-shadow: 10px 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
 }
 
 .news_comment_body {
-  margin-top: 10px;
   margin-left: 10px;
-  font-size: 30px;
+  font-size: 28px;
   font-family: $font-info;
   color: $color-text;
+}
+
+.news_comment {
+  margin-top: 20px;
+  width: 90%;
+  margin-left: 35px;
+}
+
+.news_comment hr {
+  margin-top: 10px;
 }
 
