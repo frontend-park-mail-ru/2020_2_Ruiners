@@ -6,6 +6,7 @@ import Bus from "../modules/EventBus.js";
 import FilmLenta from "../Components/FilmLenta/FilmLenta";
 import FriendList from "../Components/FriendList/FriendList";
 import News from "../Components/News/News";
+import subscribeService from "../Services/subscribeService";
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -62,6 +63,7 @@ export default class ProfilePage extends Base {
       parent: this.parent,
       body: followers,
     });
+
     const newsLenta = new News({
       parent: this.parent,
       body: newss,
@@ -128,6 +130,14 @@ export default class ProfilePage extends Base {
       box.remove();
       box = this.createBox();
       window.scroll(0, 700)
+    });
+
+    Bus.on('removeFriend', friendId => {
+          box.remove();
+          friendList.remove(friendId);
+          friendList.hide();
+          friendList.render();
+          box = this.createBox();
     });
   }
 

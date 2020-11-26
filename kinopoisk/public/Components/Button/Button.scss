@@ -12,8 +12,16 @@
     cursor: pointer;
 }
 
+.button__red {
+    background-color: red;
+}
+
 .button:hover {
     background-color: #F4A460;
+}
+
+.button__red:hover{
+    background-color: brown;
 }
 
 .button:active {

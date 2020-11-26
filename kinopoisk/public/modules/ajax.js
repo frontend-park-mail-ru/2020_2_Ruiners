@@ -24,7 +24,6 @@ export class AjaxModule {
         params.body = body;
       } else {
         params.body = JSON.stringify(body);
-        console.log(params.body);
         params.headers = {
           'Content-Type': 'application/json',
         };

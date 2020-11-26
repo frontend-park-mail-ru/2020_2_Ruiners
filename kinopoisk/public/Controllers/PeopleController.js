@@ -24,7 +24,16 @@ export default function People(params) {
         });
     Bus.on('subscribe', (user_id) => {
         subscribeService.PostFollow(user_id).then(res => {
-            console.log(res.ok);
+            if(res.ok) {
+                console.log("follow");
+            }
+        });
+    });
+    Bus.on('unsubscribe', (user_id) => {
+        subscribeService.PostUnfollow(user_id).then(res => {
+            if(res.ok) {
+                console.log("unfollow");
+            }
         });
     });
 }

@@ -38,11 +38,38 @@ export default class PeoplePage extends Base{
             }
         });
         profile.render();
-        const subscribe = document.getElementById('subscribe');
-        subscribe.addEventListener('click', evt => {
+        let subscribe = document.getElementById('subscribe');
+        let unsubscribe = document.createElement('button');
+        let subButton = document.createElement('button');
+        let par = subscribe.parentNode;
+
+        let listenerSub = evt => {
             evt.preventDefault();
+            subscribe.remove();
+            unsubscribe.className = 'button button__red';
+            unsubscribe.textContent = 'Отписаться';
+            par.appendChild(unsubscribe);
             Bus.emit('subscribe', id);
-        })
+        }
+        let listenerUnsub = evt => {
+            evt.preventDefault();
+            unsubscribe.remove();
+            subButton.className = 'button';
+            subButton.textContent = 'Подписаться'
+            par.appendChild(subButton);
+            Bus.emit('unsubscribe', id);
+        }
+        let listenerSubscribe = evt => {
+            evt.preventDefault();
+            subButton.remove()
+            unsubscribe.className = 'button button__red';
+            unsubscribe.textContent = 'Отписаться'
+            par.appendChild(unsubscribe);
+            Bus.emit('subscribe', id);
+        }
+        subscribe.addEventListener('click', listenerSub);
+        unsubscribe.addEventListener('click', listenerUnsub);
+        subButton.addEventListener('click', listenerSubscribe);
         let box = this.createBox();
     }
 

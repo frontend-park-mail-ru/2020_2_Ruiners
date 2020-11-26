@@ -18,8 +18,8 @@ export default class SubscribeService {
         return res.status;
     }
 
-    static async fetchPostUnfollow(UserId) {
-        const res = await AjaxModule.ajaxPost({ url: '/unfollow', body: { UserId } });
+    static async fetchPostUnfollow(user_id) {
+        const res = await AjaxModule.ajaxPost({ url: '/unfollow', body: { user_id } });
         return res.status;
     }
 
