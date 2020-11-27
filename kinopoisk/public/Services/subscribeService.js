@@ -7,9 +7,27 @@ export default class SubscribeService {
         return { status: res.status, json: parsedJsonObject };
     }
 
+    static async fetchGetLogin(id) {
+        const res = await AjaxModule.ajaxGet({ url: `/people/${id}` });
+        const parsedJsonObject = await res.json();
+        return { status: res.status, json: parsedJsonObject };
+    }
+
+
     static async fetchGetNews() {
         const res = await AjaxModule.ajaxGet({ url: `/news` });
         const parsedJsonObject = await res.json();
+        return { status: res.status, json: parsedJsonObject };
+    }
+
+    static async fetchGetCheck(id) {
+        const res = await AjaxModule.ajaxGet({ url: `/sub/check/${id}` });
+        let parsedJsonObject
+        try {
+            parsedJsonObject = await res.json();
+        } catch (e) {
+            return {status: res.status, json: {} };
+        }
         return { status: res.status, json: parsedJsonObject };
     }
 
@@ -18,8 +36,8 @@ export default class SubscribeService {
         return res.status;
     }
 
-    static async fetchPostUnfollow(UserId) {
-        const res = await AjaxModule.ajaxPost({ url: '/unfollow', body: { UserId } });
+    static async fetchPostUnfollow(user_id) {
+        const res = await AjaxModule.ajaxPost({ url: '/unfollow', body: { user_id } });
         return res.status;
     }
 
@@ -47,6 +65,18 @@ export default class SubscribeService {
         return data;
     }
 
+    static async getLogin(id) {
+        const data = { ok: false, errmsg: undefined, get: undefined };
+        const res = await this.fetchGetLogin(id);
+        if (res.status !== 200) {
+            data.errmsg = 'Нет логина';
+        } else {
+            data.ok = true;
+            data.get = res.json;
+        }
+        return data;
+    }
+
     static async PostFollow(id) {
         const data = { ok: false, errmsg: undefined };
         const res = await this.fetchPostFollow(parseInt(id));
@@ -65,6 +95,18 @@ export default class SubscribeService {
             data.errmsg = 'Ошибка';
         } else {
             data.ok = true;
+        }
+        return data;
+    }
+
+    static async getCheck(id) {
+        const data = { ok: false, errmsg: undefined, get: undefined };
+        const res = await this.fetchGetCheck(id);
+        if (res.status !== 200) {
+            data.errmsg = 'Нет';
+        } else {
+            data.ok = true;
+            data.get = res.json;
         }
         return data;
     }

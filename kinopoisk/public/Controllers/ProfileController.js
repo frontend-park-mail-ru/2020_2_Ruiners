@@ -5,6 +5,7 @@ import Bus from "../modules/EventBus";
 import PlaylistService from "../Services/playlistService.js";
 import playlistService from "../Services/playlistService.js";
 import SubscribeService from "../Services/subscribeService";
+import subscribeService from "../Services/subscribeService";
 
 export default function Profile(params) {
     let responseBody;
@@ -34,45 +35,41 @@ export default function Profile(params) {
                     }
                     newsLenta = res.get;
                     SubscribeService.getFollowers().then(res => {
-                        let followers;
                         if (!res.ok) {
                             Bus.emit('redirectMain');
                             return;
                         }
-                        followers = res.get;
+                        console.log("asd", res.get);
+                        const followers = res.get;
                         PlaylistService.getPlaylistFilms()
                             .then((res) => {
                                 if (res.ok) {
                                     let playlists = res.get;
                                     const profile = new ProfilePage(application, responseBody);
                                     profile.render(params, playlists, followers, newsLenta);
+                                    Bus.on('unsubscribeList', friendId => {
+                                        let array = friendId.split('/');
+                                        subscribeService.PostUnfollow(array[1]).then(res => {
+                                            if (res.ok) {
+                                                Bus.emitLast('removeFriend', array[1]);
+                                            }
+                                        });
+                                    });
                                     Bus.on('Delete', (idOf) => {
                                         const slices = idOf.split('/');
                                         if (slices.length === 2) {   // Если удалили плэйлист
                                             playlistService.PostDelete(slices[1]).then(res => {
                                                 if (res.ok) {
-                                                    PlaylistService.getPlaylistFilms()
-                                                        .then((res) => {
-                                                            if (res.ok) {
-                                                                playlists = res.get;
-                                                                application.innerHTML = '';
-                                                                profile.render(params, playlists, followers, newsLenta);
-                                                            }
-                                                        });
+                                                    Bus.emitLast('deletePlaylist', slices[1]);
                                                 }
                                             });
                                         } else {     // Если удалили фильм
                                             playlistService.PostDeleteFilm(slices[2], slices[1]).then(res => {
-                                                console.log(res);
-                                                if (res.ok) {
-                                                    PlaylistService.getPlaylistFilms()
-                                                        .then((res) => {
-                                                            if (res.ok) {
-                                                                playlists = res.get;
-                                                                application.innerHTML = '';
-                                                                profile.render(params, playlists, followers, newsLenta);
-                                                            }
-                                                        });
+                                                if(res.ok) {
+                                                    Bus.emitLast('deleteFilm', {
+                                                        filmId: parseInt(slices[2]),
+                                                        playlistId: parseInt(slices[1]),
+                                                    });
                                                 }
                                             });
                                         }

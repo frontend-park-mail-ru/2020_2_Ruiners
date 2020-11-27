@@ -31,4 +31,14 @@ export default class FriendList {
     hide() {
         this.friendList.innerHTML = '';
     }
+
+    remove(friendId) {
+        let rightIndex = 0;
+        this.body.forEach((element, index) => {
+            if(element.id == friendId) {
+                rightIndex = index;
+            }
+        });
+        this.body.splice(rightIndex, 1);
+    }
 }

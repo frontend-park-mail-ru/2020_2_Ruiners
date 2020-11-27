@@ -7,6 +7,17 @@ export default class FilmService {
     return { status: res.status, json: parsedJsonObject };
   }
 
+  static async fetchGetRate(film_id) {
+    const res = await AjaxModule.ajaxGet({ url: `/currentRating/${film_id}` });
+    let parsedJsonObject
+    try {
+      parsedJsonObject = await res.json();
+    } catch (e) {
+      return {status: res.status, json: {} };
+    }
+    return { status: res.status, json: parsedJsonObject };
+  }
+
   static async fetchGetByGenre(genre) {
     const res = await AjaxModule.ajaxGet({ url: `/film/${genre}` });
     const parsedJsonObject = await res.json();
@@ -35,6 +46,19 @@ export default class FilmService {
     const res = await this.fetchGetById(id);
     if (res.status !== 200) {
       data.errmsg = 'Нет такого фильма';
+    } else {
+      data.ok = true;
+      data.get = res.json;
+    }
+    return data;
+  }
+
+  static async getRate(id) {
+    const data = { ok: false, errmsg: undefined, get: undefined };
+    const res = await this.fetchGetRate(id);
+    console.log(res);
+    if (res.status !== 200) {
+      data.errmsg = 'Нет такой оценки';
     } else {
       data.ok = true;
       data.get = res.json;

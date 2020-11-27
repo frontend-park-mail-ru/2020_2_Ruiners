@@ -9,6 +9,7 @@ import './static/images/adding.png'
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import RateAndReviewService from './Services/rateAndReviewService.js';
 import { nav } from "./config.js";
+import subscribeService from "./Services/subscribeService";
 
 if ('serviceWorker' in navigator) {
   runtime.register();
@@ -134,10 +135,13 @@ if (navigator.onLine) {
 router.start();
 
 window.addEventListener('click', evt => {
-  if(evt.target.id.indexOf('playlist') == -1 && evt.target.id.indexOf('poster') == -1) {
+  if(evt.target.id.indexOf('playlist') == -1 && evt.target.id.indexOf('poster') == -1 && evt.target.id.indexOf('profile') == -1) {
     return;
+  } else if(evt.target.id.indexOf('playlist') !== -1 || evt.target.id.indexOf('poster') !== -1) {
+    evt.preventDefault();
+    Bus.emitLast('Delete', evt.target.id);
   } else {
     evt.preventDefault();
-    Bus.emit('Delete', evt.target.id);
+    Bus.emitLast('unsubscribeList', evt.target.id);
   }
 });

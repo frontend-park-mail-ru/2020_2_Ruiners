@@ -7,24 +7,43 @@ import subscribeService from "../Services/subscribeService";
 
 export default function People(params) {
     const  { id } = params;
-    const responseBody = { Login: 'ErikDoter', id: id};
-    sessionService.me()
-        .then((res) => {
-            if(res.ok) {
-                if(res.get.id == id) {
-                    ProfileController({id: id});
-                    return;
-                }
-                responseBody.isAuth = true;
-            } else {
-                responseBody.isAuth = false;
-            }
-            const people = new PeoplePage(application, responseBody);
-            people.render(id);
+    subscribeService.getCheck(id).then(resIsSub => {
+        subscribeService.getLogin(id).then(resLogin => {
+            sessionService.me()
+                .then((res) => {
+                    let responseBody;
+                    responseBody = resLogin.get;
+                    if(resIsSub.ok) {
+                        responseBody.isSub = resIsSub.get.check;
+                    } else {
+                        responseBody.isSub = false;
+                    }
+                    if(res.ok) {
+                        if(res.get.id == id) {
+                            ProfileController({id: id});
+                            return;
+                        }
+                        responseBody.isAuth = true;
+                    } else {
+                        responseBody.isAuth = false;
+                    }
+                    const people = new PeoplePage(application, responseBody);
+                    people.render(id);
+                });
         });
+    });
     Bus.on('subscribe', (user_id) => {
         subscribeService.PostFollow(user_id).then(res => {
-            console.log(res.ok);
+            if(res.ok) {
+                console.log("follow");
+            }
+        });
+    });
+    Bus.on('unsubscribe', (user_id) => {
+        subscribeService.PostUnfollow(user_id).then(res => {
+            if(res.ok) {
+                console.log("unfollow");
+            }
         });
     });
 }
