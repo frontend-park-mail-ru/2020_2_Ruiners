@@ -28,9 +28,12 @@ export default class FilmPage extends Base {
       call: (actors) => {
           console.log(responseBody.id);
           filmService.getRate(responseBody.id).then( res => {
-              console.log(res.get);
           responseBody.MyRateBool = false;
-          responseBody.MyRate = res.get.rate;
+          if(res.ok) {
+              responseBody.MyRate = res.get.rate;
+          } else {
+              responseBody.MyRate = 0;
+          }
           if(responseBody.MyRate > 0) {
             responseBody.MyRateBool = true
           }

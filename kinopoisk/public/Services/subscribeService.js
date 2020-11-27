@@ -7,15 +7,27 @@ export default class SubscribeService {
         return { status: res.status, json: parsedJsonObject };
     }
 
+    static async fetchGetLogin(id) {
+        const res = await AjaxModule.ajaxGet({ url: `/people/${id}` });
+        const parsedJsonObject = await res.json();
+        return { status: res.status, json: parsedJsonObject };
+    }
+
+
     static async fetchGetNews() {
         const res = await AjaxModule.ajaxGet({ url: `/news` });
         const parsedJsonObject = await res.json();
         return { status: res.status, json: parsedJsonObject };
     }
 
-    static async fetchGetLogin(id) {
-        const res = await AjaxModule.ajaxGet({ url: `/people/${id}` });
-        const parsedJsonObject = await res.json();
+    static async fetchGetCheck(id) {
+        const res = await AjaxModule.ajaxGet({ url: `/sub/check/${id}` });
+        let parsedJsonObject
+        try {
+            parsedJsonObject = await res.json();
+        } catch (e) {
+            return {status: res.status, json: {} };
+        }
         return { status: res.status, json: parsedJsonObject };
     }
 
@@ -83,6 +95,18 @@ export default class SubscribeService {
             data.errmsg = 'Ошибка';
         } else {
             data.ok = true;
+        }
+        return data;
+    }
+
+    static async getCheck(id) {
+        const data = { ok: false, errmsg: undefined, get: undefined };
+        const res = await this.fetchGetCheck(id);
+        if (res.status !== 200) {
+            data.errmsg = 'Нет';
+        } else {
+            data.ok = true;
+            data.get = res.json;
         }
         return data;
     }

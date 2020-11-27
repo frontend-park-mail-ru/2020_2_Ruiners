@@ -2,8 +2,16 @@
     <img src="{{domain}}/user/avatar/{{id}}?{{random}}" width="400" height="400" class="profile__default_margin profile__image">
     <span class="profile__default_margin profile_login">{{Login}}</span>
     <div class="profile__default_margin profile_settings">
-        {{#if isAuth}}
+        {{#if isProfile}}
             {{{button}}}
+        {{else}}
+            {{#if isAuth}}
+                {{#if isSub}}
+                    {{{buttonUnsub}}}
+                {{else}}
+                    {{{buttonSub}}}
+                {{/if}}
+            {{/if}}
         {{/if}}
     </div>
 </div>

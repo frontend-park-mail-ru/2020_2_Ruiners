@@ -20,7 +20,10 @@ export default class Profile {
             id: this.body.id,
             Login: this.body.Login,
             isAuth: this.body.isAuth,
+            isSub: this.body.isSub,
             button: this.body.button,
+            buttonSub: this.body.buttonSub,
+            buttonUnsub: this.body.buttonUnsub,
             domain: domain,
             random: Math.random(),
         });
