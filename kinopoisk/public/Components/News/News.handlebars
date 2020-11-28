@@ -2,7 +2,7 @@
     {{#if this.is_rating}}
             <div class="friendList_width">
                 <div class="news_container">
-                    <img src="{{this.domain}}/user/avatar/{{this.user_id}}" width="200" height="200" class="profile__default_margin profile__image">
+                    <img src="{{this.domain}}/user/avatar/{{this.user_id}}" width="200" height="200" class="news__default_margin news__image">
                     <div class="news_container_column">
                         <a class="news_login" href="people/{{this.user_id}}">{{this.user_login}}</a>
                         <div class="news_container_info">
@@ -20,11 +20,11 @@
     {{#if this.is_review}}
         <div class="friendList_width">
             <div class="news_container">
-                <img src="{{this.domain}}/user/avatar/{{this.user_id}}" width="200" height="200" class="profile__default_margin profile__image">
+                <img src="{{this.domain}}/user/avatar/{{this.user_id}}" width="200" height="200" class="news__default_margin news__image">
                 <div class="news_container_column">
                     <a class="news_login" href="people/{{this.user_id}}">{{this.user_login}}</a>
                     <div class="news_container_info">
-                        <span class="news_info">оставил(-а) комментарий</span><span class="news_info">к фильму</span>
+                        <span class="news_info">оставил(-а) комментарий</span><span class="news_info"> к фильму</span>
                         <a class="news_login" href="film/{{this.film_id}}">"{{this.film_title}}"</a>
                     </div>
                     <div class="news_container_comment">

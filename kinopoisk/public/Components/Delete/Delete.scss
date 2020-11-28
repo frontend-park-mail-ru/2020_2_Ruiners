@@ -1,17 +1,55 @@
-.delete_container {
-  width: 50px;
-  margin-left: 60px;
-  transform-origin: 0 center 0;
-  transition: all 0.5s;
+
+
+@media (min-width: 400px) {
+  .delete_container {
+    width: 50px;
+    margin-left: 60px;
+    transform-origin: 0 center 0;
+    transition: all 0.5s;
+  }
+
+  .delete {
+    width: 30px;
+    height: 30px;
+    color: red;
+    opacity: 0.3;
+    transform-origin: 0 center 0;
+    transition: all 1s;
+  }
+
+  .delete:before, .delete:after {
+    position: absolute;
+    content: ' ';
+    height: 30px;
+    width: 2px;
+    background-color: white;
+  }
 }
 
-.delete {
-  width: 30px;
-  height: 30px;
-  color: red;
-  opacity: 0.3;
-  transform-origin: 0 center 0;
-  transition: all 1s;
+@media (max-width: 399px) {
+  .delete_container {
+    width: 7vw;
+    margin-left: 10vw;
+    transform-origin: 0 center 0;
+    transition: all 0.5s;
+  }
+
+  .delete {
+    width: 7vw;
+    height: 7vw;
+    color: red;
+    opacity: 0.3;
+    transform-origin: 0 center 0;
+    transition: all 1s;
+  }
+
+  .delete:before, .delete:after {
+    position: absolute;
+    content: ' ';
+    height: 7vw;
+    width: 2px;
+    background-color: white;
+  }
 }
 
 .delete:hover{
@@ -21,14 +59,6 @@
 .delete_container:hover {
   transform: rotate(180deg);
   cursor: pointer;
-}
-
-.delete:before, .delete:after {
-  position: absolute;
-  content: ' ';
-  height: 30px;
-  width: 2px;
-  background-color: white;
 }
 
 .delete:hover:before, .delete:hover:after {
