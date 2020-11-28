@@ -1,14 +1,5 @@
 @import "kinopoisk/public/static/CSS/fonts";
 @import "kinopoisk/public/static/CSS/colors";
-.brand {
-    font-family: $font-main;
-    font-size: 24px;
-    text-transform: uppercase;
-    font-weight: 1000;
-    margin-right: 20px;
-    margin-top: 5px;
-}
-
 .brand a {
     text-decoration: none;
     color: $color-text;
@@ -23,35 +14,90 @@
     display: inline-block;
 }
 
-.menu-secondary a {
-    text-decoration: none;
-    font-family: 'Ubuntu Condensed', sans-serif;
-    letter-spacing: 2px;
-    margin-left: 50px;
-    font-size: 20px;
-    text-transform: uppercase;
-    color: $color-text;
-}
-
-.menu-secondary a:hover{color: orange;}
-
 .round {
     border-radius: 100px; /* Радиус скругления */
     border: 1px whitesmoke; /* Параметры рамки */
     margin-bottom: -15px;
-    margin-right: 10px;
 }
+
+@media (min-width: 930px) {
+    .brand {
+        font-family: $font-main;
+        font-size: 24px;
+        text-transform: uppercase;
+        font-weight: 1000;
+        margin-right: 20px;
+        margin-top: 5px;
+    }
+
+    .menu-secondary a {
+        text-decoration: none;
+        font-family: 'Ubuntu Condensed', sans-serif;
+        letter-spacing: 2px;
+        font-size: 20px;
+        text-transform: uppercase;
+        color: $color-text;
+    }
+
+    .right {
+        position: absolute;
+        right: 0;
+        top: 20px
+    }
+
+    .round {
+        margin-right: 10px;
+    }
+
+    .right_profile {
+        position: absolute;
+        right: 0px;
+        top: 15px
+    }
+}
+
+@media (max-width: 929px) {
+    .brand {
+        font-family: $font-main;
+        font-size: 0px;
+        text-transform: uppercase;
+        font-weight: 1000;
+        margin-top: 30px;
+    }
+
+    .menu-secondary a {
+        text-decoration: none;
+        font-family: 'Ubuntu Condensed', sans-serif;
+        letter-spacing: 2px;
+        font-size: 0vw;
+        text-transform: uppercase;
+        color: $color-text;
+    }
+
+    .right {
+        position: absolute;
+        right: 0px;
+        top: 15px
+    }
+
+
+    .right_profile {
+        position: absolute;
+        right: 0px;
+        top: 15px
+    }
+
+    .round {
+        margin-right: 0px;
+    }
+}
+
+.menu-secondary a:hover{color: orange;}
 
 .profile {
     font-family: $font-main;
     text-decoration: none;
     color: $color-text;
-}
-
-.right {
-   position: absolute;
-    right: 0;
-    top: 20px
 }
 
 .left {

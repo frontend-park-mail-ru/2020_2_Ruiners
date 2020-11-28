@@ -23,7 +23,7 @@ export default class SignupPage extends Base {
     const headLogin = {
       head: true,
       textContent: 'Регистрация',
-      style: 'color:#FFFFFF; padding: 10px 10px 0 10px',
+      style: 'color:#FFFFFF; padding: 10px 10px 0 10px; font-size: 20px',
     };
 
     const configInputLogin = [
@@ -70,7 +70,7 @@ export default class SignupPage extends Base {
     const buttonSignup = new Button({
       parent: form,
       classname: 'buttons__marginForFilmCard',
-      text: 'Зарегистрироваться',
+      text: 'Регистрация',
     });
     Bus.emit('Signup', {
       button: buttonSignup,

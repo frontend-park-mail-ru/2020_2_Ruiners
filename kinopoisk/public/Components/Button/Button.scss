@@ -2,7 +2,7 @@
 @import "kinopoisk/public/static/CSS/colors";
 .button {
     height: 32px;
-    font-size: 15px;
+    font-size: 0.9em;
     padding: 0 16px;
 
     border-radius: 100px;
@@ -10,6 +10,15 @@
     background: $color-button;
     color: $color-text;
     cursor: pointer;
+}
+
+@media (max-width: 500px) {
+    .button {
+        height: 25px;
+    }
+    .button {
+        padding: 0 10px;
+    }
 }
 
 .button__red {

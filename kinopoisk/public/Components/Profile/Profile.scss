@@ -11,16 +11,73 @@
     margin-right: 50px;
 }
 
-.profile__image {
-    border-radius: 400px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+@media (min-width: 500px) {
+    .profile__image {
+        border-radius: 400px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .profile_login {
+        padding: 20px;
+        color: $color-text;
+        font-family: $font-main;
+        font-size: 40px;
+    }
+    .profile_nav_links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .profile_nav_links_a {
+        text-decoration-line: none;
+        color: $color-text;
+        font-family: $font-info;
+        font-size: 20px;
+    }
+
+
+    .profile_nav_links_aBig {
+        text-decoration-line: none;
+        color: $color-secondary;
+        font-family: $font-info;
+        font-size: 30px;
+    }
 }
 
-.profile_login {
-    padding: 20px;
-    color: $color-text;
-    font-family: $font-main;
-    font-size: 40px;
+@media (max-width: 499px) {
+    .profile__image {
+        border-radius: 80vw;
+        width: 80vw;
+        height: 80vw;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .profile_login {
+        padding: 20px;
+        color: $color-text;
+        font-family: $font-main;
+        font-size: 10vw;
+    }
+    .profile_nav_links {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile_nav_links_a {
+        text-decoration-line: none;
+        color: $color-text;
+        font-family: $font-info;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+
+    .profile_nav_links_aBig {
+        text-decoration-line: none;
+        color: $color-secondary;
+        font-family: $font-info;
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
 }
 
 .settings_header {
@@ -35,12 +92,6 @@
     width: 90%;
 }
 
-.profile_nav_links {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .profile_nav_line {
     border: none; /* Убираем границу для браузера Firefox */
     width: 100%;
@@ -50,22 +101,8 @@
     color: $color-secondary;
 }
 
-.profile_nav_links_a {
-    text-decoration-line: none;
-    color: $color-text;
-    font-family: $font-info;
-    font-size: 20px;
-}
-
 .profile_nav_links_a:hover {
     color: $color-secondary;
     cursor: pointer;
-}
-
-.profile_nav_links_aBig {
-    text-decoration-line: none;
-    color: $color-secondary;
-    font-family: $font-info;
-    font-size: 30px;
 }
 

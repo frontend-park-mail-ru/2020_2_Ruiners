@@ -51,7 +51,7 @@ export default class Navbar {
     if (isAuthorized) {
       const profileObj = new List({
         parent: ul,
-        classname: 'right',
+        classname: 'right_profile',
       });
       const profile = profileObj.render();
 
