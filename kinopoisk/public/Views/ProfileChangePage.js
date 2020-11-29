@@ -18,7 +18,7 @@ export default class ProfileChangePage extends Base {
     super.render(false);
     const body = document.getElementById('body');
     body.className = 'main__background';
-    body.style.backgroundImage = 'linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(\'images/login.jpg\')';
+    body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const settingsBox = document.createElement('div');
     settingsBox.className = 'wrapper__form chenge margin';
     this.parent.appendChild(settingsBox);

@@ -73,6 +73,16 @@
         flex-direction: column;
         margin-right: 230px;
     }
+
+    .rating-area:not(:checked) > label {
+        float: right;
+        width: 100px;
+        padding: 0;
+        cursor: pointer;
+        font-size: 100px;
+        color: lightgrey;
+        text-shadow: 1px 1px #bbb;
+    }
 }
 
 @media (max-width: 1239px) {
@@ -125,6 +135,7 @@
         font-family: $font-info;
         font-size: 15px;
         color: gray;
+        margin-bottom: 30px;
     }
 
     .filmCard_info_more {
@@ -144,7 +155,17 @@
         display: flex;
         flex-direction: column;
         margin-left: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
+    }
+
+    .rating-area:not(:checked) > label {
+        float: right;
+        width: 8vw;
+        padding: 0;
+        cursor: pointer;
+        font-size: 8vw;
+        color: lightgrey;
+        text-shadow: 1px 1px #bbb;
     }
 }
 
@@ -210,6 +231,14 @@
     }
 }
 
+@media (max-width: 620px) {
+        iframe {
+            width: 84vw;
+            height: 47vw;
+        }
+}
+
+
 
 .filmcard_roles_link {
     margin-top: 20px;
@@ -235,15 +264,6 @@
 }
 .rating-area:not(:checked) > input {
     display: none;
-}
-.rating-area:not(:checked) > label {
-    float: right;
-    width: 100px;
-    padding: 0;
-    cursor: pointer;
-    font-size: 100px;
-    color: lightgrey;
-    text-shadow: 1px 1px #bbb;
 }
 .rating-area:not(:checked) > label:before {
     content: '★';
