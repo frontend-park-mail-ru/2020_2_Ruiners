@@ -3,7 +3,7 @@ import filmPosterT from './FilmPoster.handlebars';
 export default class FilmPoster {
   constructor(context = {}) {
     const {
-      title, MainGenre, year, SmallImg, id, del, playlist
+      title, MainGenre, year, SmallImg, id, del, playlist,
     } = context;
     this.title = title;
     this.genre = MainGenre;

@@ -9,11 +9,11 @@ export default class FilmService {
 
   static async fetchGetRate(film_id) {
     const res = await AjaxModule.ajaxGet({ url: `/currentRating/${film_id}` });
-    let parsedJsonObject
+    let parsedJsonObject;
     try {
       parsedJsonObject = await res.json();
     } catch (e) {
-      return {status: res.status, json: {} };
+      return { status: res.status, json: {} };
     }
     return { status: res.status, json: parsedJsonObject };
   }

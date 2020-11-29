@@ -1,12 +1,12 @@
 import Base from './Base.js';
-import {application, domain, nav} from "../config.js";
-import Button from "../Components/Button/Button";
-import Profile from "../Components/Profile/Profile.js";
-import Bus from "../modules/EventBus.js";
-import FilmLenta from "../Components/FilmLenta/FilmLenta";
-import FriendList from "../Components/FriendList/FriendList";
-import News from "../Components/News/News";
-import subscribeService from "../Services/subscribeService";
+import { application, domain, nav } from '../config.js';
+import Button from '../Components/Button/Button';
+import Profile from '../Components/Profile/Profile.js';
+import Bus from '../modules/EventBus.js';
+import FilmLenta from '../Components/FilmLenta/FilmLenta';
+import FriendList from '../Components/FriendList/FriendList';
+import News from '../Components/News/News';
+import subscribeService from '../Services/subscribeService';
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -16,9 +16,9 @@ export default class ProfilePage extends Base {
   }
 
   render(context, playlists, followers, newss) {
-    const { id } = context
+    const { id } = context;
     const responseBody = JSON.parse(this.data);
-    if(id === 1) {
+    if (id === 1) {
       super.render(true);
     } else {
       super.render(false);
@@ -29,21 +29,21 @@ export default class ProfilePage extends Base {
     const button = new Button({
       classname: 'buttons__forComments',
       parent: null,
-    })
+    });
     const profile = new Profile({
-        parent: this.parent,
-        isProfile: true,
-        body: {
-          id: responseBody.id,
-          Login: responseBody.Login,
-          isAuth: true,
-          button: button.template({
-            classname: '',
-            text: 'Настройки',
-            id: 'settings',
-            type: 'submit',
-          })
-        }
+      parent: this.parent,
+      isProfile: true,
+      body: {
+        id: responseBody.id,
+        Login: responseBody.Login,
+        isAuth: true,
+        button: button.template({
+          classname: '',
+          text: 'Настройки',
+          id: 'settings',
+          type: 'submit',
+        }),
+      },
     });
     profile.render();
     const settings = document.getElementById('settings');
@@ -68,23 +68,23 @@ export default class ProfilePage extends Base {
       parent: this.parent,
       body: newss,
     });
-    let lentas = []
-    playlists.forEach(element => {
-        lentas.push(new FilmLenta({
-            playlist: true,
-            id: element.Id,
-            genre: element.Title,
-            body: element.Films,
-            parent: application
-        }));
-    })
-    let play = document.getElementById('play');
-    let subscribe = document.getElementById('subscribe');
-    let news = document.getElementById('lenta');
+    const lentas = [];
+    playlists.forEach((element) => {
+      lentas.push(new FilmLenta({
+        playlist: true,
+        id: element.Id,
+        genre: element.Title,
+        body: element.Films,
+        parent: application,
+      }));
+    });
+    const play = document.getElementById('play');
+    const subscribe = document.getElementById('subscribe');
+    const news = document.getElementById('lenta');
     this.createRender(buttonCreate, headerCreate, createPlaylist);
-    lentas.forEach(element => {
-        element.render();
-    })
+    lentas.forEach((element) => {
+      element.render();
+    });
     let box = this.createBox();
     play.addEventListener('click', (evt) => {
       evt.preventDefault();
@@ -93,15 +93,15 @@ export default class ProfilePage extends Base {
       this.createHide(buttonCreate, headerCreate, createPlaylist);
       this.createRender(buttonCreate, headerCreate, createPlaylist);
       this.setClass(play, subscribe, news);
-      lentas.forEach(element => {
-          element.hide();
+      lentas.forEach((element) => {
+        element.hide();
       });
-        lentas.forEach(element => {
-            element.render();
-        });
+      lentas.forEach((element) => {
+        element.render();
+      });
       box.remove();
       box = this.createBox();
-      window.scroll(0, 700)
+      window.scroll(0, 700);
     });
     subscribe.addEventListener('click', (evt) => {
       evt.preventDefault();
@@ -110,76 +110,76 @@ export default class ProfilePage extends Base {
       newsLenta.hide();
       friendList.render();
       this.setClass(subscribe, play, news);
-        lentas.forEach(element => {
-            element.hide();
-        });
+      lentas.forEach((element) => {
+        element.hide();
+      });
       box.remove();
       box = this.createBox();
-      window.scroll(0, 700)
+      window.scroll(0, 700);
     });
     news.addEventListener('click', (evt) => {
       evt.preventDefault();
       this.createHide(buttonCreate, headerCreate, createPlaylist);
       friendList.hide();
       this.setClass(news, play, subscribe);
-        lentas.forEach(element => {
-            element.hide();
-        });
+      lentas.forEach((element) => {
+        element.hide();
+      });
       newsLenta.hide();
       newsLenta.render();
       box.remove();
       box = this.createBox();
-      window.scroll(0, 700)
+      window.scroll(0, 700);
     });
-    Bus.on('deletePlaylist', playlistId => {
-        box.remove();
-        lentas.forEach(element => {
-          element.hide();
-        });
-        let rightIndex = 0;
-        lentas.forEach((element, index) => {
-          if(element.id == parseInt(playlistId)) {
-            rightIndex = index;
-          }
-        });
-        lentas.splice(rightIndex, 1);
-        lentas.forEach(element => {
-          element.render();
-        });
-        box = this.createBox();
+    Bus.on('deletePlaylist', (playlistId) => {
+      box.remove();
+      lentas.forEach((element) => {
+        element.hide();
+      });
+      let rightIndex = 0;
+      lentas.forEach((element, index) => {
+        if (element.id == parseInt(playlistId)) {
+          rightIndex = index;
+        }
+      });
+      lentas.splice(rightIndex, 1);
+      lentas.forEach((element) => {
+        element.render();
+      });
+      box = this.createBox();
     });
-    Bus.on('deleteFilm', context => {
-        const { filmId, playlistId } = context;
-        box.remove()
-        let rightIndex = 0;
-        lentas.forEach(element => {
-          element.hide();
-        });
-        lentas.forEach((element, index) => {
-          if(element.id == playlistId) {
-            rightIndex = index;
-          }
-        });
-        let filmIndex = 0;
-        lentas[rightIndex].body.forEach((element, index) => {
-          if(element.id == filmId) {
-            filmIndex = index;
-          }
-        });
-        console.log(lentas[rightIndex]);
-        lentas[rightIndex].body.splice(filmIndex, 1);
-        lentas[rightIndex].posters.splice(filmIndex, 1);
-        lentas.forEach(element => {
-          element.render();
-        });
-        box = this.createBox();
-    })
-    Bus.on('removeFriend', friendId => {
-        box.remove();
-        friendList.remove(friendId);
-        friendList.hide();
-        friendList.render();
-        box = this.createBox();
+    Bus.on('deleteFilm', (context) => {
+      const { filmId, playlistId } = context;
+      box.remove();
+      let rightIndex = 0;
+      lentas.forEach((element) => {
+        element.hide();
+      });
+      lentas.forEach((element, index) => {
+        if (element.id == playlistId) {
+          rightIndex = index;
+        }
+      });
+      let filmIndex = 0;
+      lentas[rightIndex].body.forEach((element, index) => {
+        if (element.id == filmId) {
+          filmIndex = index;
+        }
+      });
+      console.log(lentas[rightIndex]);
+      lentas[rightIndex].body.splice(filmIndex, 1);
+      lentas[rightIndex].posters.splice(filmIndex, 1);
+      lentas.forEach((element) => {
+        element.render();
+      });
+      box = this.createBox();
+    });
+    Bus.on('removeFriend', (friendId) => {
+      box.remove();
+      friendList.remove(friendId);
+      friendList.hide();
+      friendList.render();
+      box = this.createBox();
     });
   }
 
@@ -192,10 +192,10 @@ export default class ProfilePage extends Base {
     this.parent.appendChild(createPlaylist);
     buttonCreate.render({
       callback: () => {
-        if(createPlaylist.value !== '') {
+        if (createPlaylist.value !== '') {
           Bus.emit('CreatePlaylist', createPlaylist.value);
         }
-      }
+      },
     });
   }
 
@@ -218,5 +218,4 @@ export default class ProfilePage extends Base {
     this.parent.appendChild(box);
     return box;
   }
-
 }

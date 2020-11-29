@@ -7,7 +7,7 @@ import Window from '../Components/window/Window.js';
 import navLink from '../modules/navLink.js';
 import SessionService from '../Services/sessionService.js';
 import Bus from '../modules/EventBus.js';
-import { domain, nav } from "../config.js";
+import { domain, nav } from '../config.js';
 
 export default class Navbar {
   constructor(parent) {

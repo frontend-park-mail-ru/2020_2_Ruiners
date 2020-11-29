@@ -48,9 +48,9 @@ export default class Router {
       if (link.pathname.indexOf('undefined') !== -1) {
         return;
       }
-      if(link.pathname !== '/default') {
+      if (link.pathname !== '/default') {
         const pathObject = this.split(link.pathname);
-        this.open(pathObject.path, {id: pathObject.param});
+        this.open(pathObject.path, { id: pathObject.param });
       }
     });
 
@@ -66,11 +66,11 @@ export default class Router {
 
   split(currentPath) {
     let path;
-    let array = currentPath.split('/');
+    const array = currentPath.split('/');
     path = array[1];
-    let param = array[2];
-    if(path) {
-      path = '/' + path;
+    const param = array[2];
+    if (path) {
+      path = `/${path}`;
     }
     return {
       path,

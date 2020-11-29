@@ -30,12 +30,12 @@ export default class FilmCard {
   render() {
     this.parent.appendChild(this.card);
     let playlistBool = false;
-    if(this.playlists.length > 0) {
+    if (this.playlists.length > 0) {
       playlistBool = true;
     }
     this.card.innerHTML = this.template({
       isAuth: this.isAuthorized,
-      playlistBool: playlistBool,
+      playlistBool,
       playlists: this.playlists,
       title: this.body.title,
       description: this.body.Description,

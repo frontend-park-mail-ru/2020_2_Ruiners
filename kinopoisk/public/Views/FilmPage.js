@@ -3,8 +3,8 @@ import FilmCard from '../Components/FilmCard/FilmCard.js';
 import Comments from '../Components/Comments/Comments.js';
 import Bus from '../modules/EventBus.js';
 import personService from '../Services/personService.js';
-import { nav, domain } from "../config.js";
-import filmService from "../Services/filmService";
+import { nav, domain } from '../config.js';
+import filmService from '../Services/filmService';
 
 export default class FilmPage extends Base {
   constructor(context = {}) {
@@ -24,81 +24,77 @@ export default class FilmPage extends Base {
     this.parent.innerHTML = '';
     this.parent.className = '';
     Bus.emit('GetPersons', {
-      responseBody: responseBody,
+      responseBody,
       call: (actors) => {
-          console.log(responseBody.id);
-          filmService.getRate(responseBody.id).then( res => {
+        console.log(responseBody.id);
+        filmService.getRate(responseBody.id).then((res) => {
           responseBody.MyRateBool = false;
-          if(res.ok) {
-              responseBody.MyRate = res.get.rate;
+          if (res.ok) {
+            responseBody.MyRate = res.get.rate;
           } else {
-              responseBody.MyRate = 0;
+            responseBody.MyRate = 0;
           }
-          if(responseBody.MyRate > 0) {
-            responseBody.MyRateBool = true
+          if (responseBody.MyRate > 0) {
+            responseBody.MyRateBool = true;
           }
           const film = new FilmCard({
             isAuthorized: this.isAuthorized,
             parent: this.parent,
-            playlists: playlists,
+            playlists,
             body: responseBody,
             actors,
           });
           film.render();
-          if(playlists.length !== 0) {
-              const addPlaylist = document.getElementById('adding');
-              const info = addPlaylist.parentNode;
-              let success = document.createElement('span');
-              let error = document.createElement('span');
-              info.appendChild(success);
-              info.appendChild(error);
-              addPlaylist.addEventListener('click', (evt) => {
-                  evt.preventDefault();
-                  const options = document.getElementsByTagName('option')
-                  const optionsList = Array.prototype.slice.call(options);
-                  optionsList.forEach((element) => {
-                      if (element.selected) {
-                          Bus.emit('addPlaylist', {
-                              playlistId: parseInt(element.id),
-                              filmId: responseBody.id,
-                              error: error,
-                              success: success,
-                          });
-                      }
+          if (playlists.length !== 0) {
+            const addPlaylist = document.getElementById('adding');
+            const info = addPlaylist.parentNode;
+            const success = document.createElement('span');
+            const error = document.createElement('span');
+            info.appendChild(success);
+            info.appendChild(error);
+            addPlaylist.addEventListener('click', (evt) => {
+              evt.preventDefault();
+              const options = document.getElementsByTagName('option');
+              const optionsList = Array.prototype.slice.call(options);
+              optionsList.forEach((element) => {
+                if (element.selected) {
+                  Bus.emit('addPlaylist', {
+                    playlistId: parseInt(element.id),
+                    filmId: responseBody.id,
+                    error,
+                    success,
                   });
+                }
               });
-          }
-        Bus.emit('GetComments', ({
-          responseBody: responseBody,
-          call: (comments) => {
-            for (let i = 0; i < comments.length; i++) {
-              comments[i].Image = `${domain}/user/avatar/${`${comments[i].UserId}?${Math.random()}`}`;
-            }
-            const commentsObj = new Comments({
-              isAuthorized: this.isAuthorized,
-              parent: this.parent,
-              body: comments,
             });
-            commentsObj.render();
-            if (this.isAuthorized) {
-              const buttonComment = document.getElementById('msg_button');
-              buttonComment.addEventListener('click', (event) => {
-                Bus.emit('PlaceComment', {
-                  responseBody: responseBody,
-                  render: this.render.bind(this),
-                  playlists: playlists,
-                  buttonComment: buttonComment,
-                })
-              });
-            }
-
           }
-        }))
-      });
-
-      }
-    })
-
-
+          Bus.emit('GetComments', ({
+            responseBody,
+            call: (comments) => {
+              for (let i = 0; i < comments.length; i++) {
+                comments[i].Image = `${domain}/user/avatar/${`${comments[i].UserId}?${Math.random()}`}`;
+              }
+              const commentsObj = new Comments({
+                isAuthorized: this.isAuthorized,
+                parent: this.parent,
+                body: comments,
+              });
+              commentsObj.render();
+              if (this.isAuthorized) {
+                const buttonComment = document.getElementById('msg_button');
+                buttonComment.addEventListener('click', (event) => {
+                  Bus.emit('PlaceComment', {
+                    responseBody,
+                    render: this.render.bind(this),
+                    playlists,
+                    buttonComment,
+                  });
+                });
+              }
+            },
+          }));
+        });
+      },
+    });
   }
 }
