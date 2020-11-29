@@ -38,15 +38,17 @@
     </div>
     <div class="filmCard_info_more">
         <div class="filmCard_info_header">Трейлер</div>
-        <div class="filmCard_info_header_roles">В ролях</div>
     </div>
     <div class="filmCard_info_more">
         <div><iframe width="560" height="315" src="{{ youtube }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div class="filmCard_roles">
-            {{#each actors}}
-                <div class="filmcard_roles_link"><a href="person/{{ this.Id }}" class="link">{{ this.Name }} </a></div>
-            {{/each}}
+        <div>
+            <div class="filmCard_info_header_roles">В ролях</div>
+                <div class="filmCard_roles">
+                    {{#each actors}}
+                        <div class="filmcard_roles_link"><a href="person/{{ this.Id }}" class="link">{{ this.Name }} </a></div>
+                    {{/each}}
+                </div>
         </div>
     </div>
     {{#if isAuth}}
