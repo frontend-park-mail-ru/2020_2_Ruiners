@@ -28,9 +28,11 @@ export default class SessionService {
     const data = { ok: false, errmsg: undefined };
     if (login === '') {
       data.errmsg = 'Пустой логин';
+      return data;
     }
     if (password === '') {
       data.errmsg = 'Пустой пароль';
+      return data;
     }
     const res = await this.fetchLogin(login, password);
     if (res !== 200) {
@@ -45,12 +47,15 @@ export default class SessionService {
     const data = { ok: false, errmsg: undefined };
     if (login === '') {
       data.errmsg = 'Пустой логин';
+      return data;
     }
     if (email === '') {
       data.errmsg = 'Пустой email';
+      return data;
     }
     if (password === '') {
       data.errmsg = 'Пустой пароль';
+      return data;
     }
     const res = await this.fetchSignup(login, email, password);
     if (res !== 200) {
