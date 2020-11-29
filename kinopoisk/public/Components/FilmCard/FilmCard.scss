@@ -131,7 +131,7 @@
 
     .filmCard_info__description {
         margin-top: 40px;
-        width: 100%;
+        width: 80%;
         font-family: $font-info;
         font-size: 15px;
         color: gray;
@@ -146,6 +146,7 @@
 
     .filmCard_info_header_roles{
         margin-bottom: 20px;
+        margin-left: 30px;
         font-family: 'Comfortaa', cursive;
         margin-top: 30px;
         color: white;
@@ -154,7 +155,6 @@
     .filmCard_roles {
         display: flex;
         flex-direction: column;
-        margin-left: 20px;
         margin-bottom: 30px;
     }
 
