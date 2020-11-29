@@ -56,27 +56,27 @@ export default class UserService {
     let resLog = 200;
     let resPass = 200;
     let resAvatar = 200;
-    if(login && login != '') {
+    if (login && login != '') {
       resLog = await this.fetchChangeLogin(login);
     }
-    if(resLog === 200) {
+    if (resLog === 200) {
       if (oldPass && newPass) {
         resPass = await this.fetchChangePassword(oldPass, newPass);
       }
     }
-    if(resLog === 200 && resPass === 200) {
+    if (resLog === 200 && resPass === 200) {
       if (avatar != {}) {
         resAvatar = await this.fetchChangeAvatar(avatar);
       }
     }
     if (resLog !== 200) {
-      data.errmsg = data.errmsg + '\nПользователь с таким логином уже существует';
+      data.errmsg += '\nПользователь с таким логином уже существует';
     }
-    if(resPass !== 200) {
-      data.errmsg = data.errmsg + '\nНеправильный старый пароль';
+    if (resPass !== 200) {
+      data.errmsg += '\nНеправильный старый пароль';
     }
     if (resLog === 200 && resPass === 200) {
-      data.ok = true
+      data.ok = true;
     }
     return data;
   }

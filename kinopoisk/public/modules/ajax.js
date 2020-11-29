@@ -1,4 +1,4 @@
-import { domain } from '../config.js'
+import { domain } from '../config.js';
 
 export class AjaxModule {
   static ajaxGet(ajaxArgs) {

@@ -1,7 +1,7 @@
 import Navbar from './Navbar.js';
 import sessionService from '../Services/sessionService.js';
 import Footer from '../Components/Footer/Footer.js';
-import { nav } from "../config.js";
+import { nav } from '../config.js';
 
 export default class Base {
   constructor(parent) {

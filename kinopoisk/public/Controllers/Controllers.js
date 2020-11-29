@@ -1,17 +1,17 @@
-import OfflineController from "./OfflineController.js";
-import MenuController from "./MenuController.js";
-import SignupController from "./SignupController.js";
-import FilmController from "./FilmController.js";
-import LoginController from "./LoginController.js";
-import SettingsController from "./SettingsController.js";
-import ProfileController from "./ProfileController.js";
-import PersonController from "./PersonController.js";
-import GenreController from "./GenreController.js";
-import PeopleController from "./PeopleController";
+import OfflineController from './OfflineController.js';
+import MenuController from './MenuController.js';
+import SignupController from './SignupController.js';
+import FilmController from './FilmController.js';
+import LoginController from './LoginController.js';
+import SettingsController from './SettingsController.js';
+import ProfileController from './ProfileController.js';
+import PersonController from './PersonController.js';
+import GenreController from './GenreController.js';
+import PeopleController from './PeopleController';
 
 export default class Controller {
   static offlinePage() {
-      OfflineController();
+    OfflineController();
   }
 
   static menuPage() {
@@ -19,34 +19,34 @@ export default class Controller {
   }
 
   static signupPage() {
-      SignupController();
+    SignupController();
   }
 
   static filmPage(params) {
-      FilmController(params);
+    FilmController(params);
   }
 
   static loginPage() {
-      LoginController();
+    LoginController();
   }
 
   static profileChengePage() {
-      SettingsController();
+    SettingsController();
   }
 
   static profilePage(params) {
-      ProfileController(params);
+    ProfileController(params);
   }
 
   static personPage(params) {
-      PersonController(params);
+    PersonController(params);
   }
 
   static genrePage(params) {
-      GenreController(params);
+    GenreController(params);
   }
 
-  static  peoplePage(params) {
-        PeopleController(params);
+  static peoplePage(params) {
+    PeopleController(params);
   }
 }

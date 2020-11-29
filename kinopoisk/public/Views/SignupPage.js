@@ -2,8 +2,8 @@ import Bus from '../modules/EventBus.js';
 import Base from './Base.js';
 import Link from '../Components/Link/Link.js';
 import Form from '../Components/Form/Form.js';
-import {nav} from "../config.js";
-import Button from "../Components/Button/Button";
+import { nav } from '../config.js';
+import Button from '../Components/Button/Button';
 
 export default class SignupPage extends Base {
   constructor(parent) {
@@ -16,7 +16,7 @@ export default class SignupPage extends Base {
     this.parent.innerHTML = '';
     const body = document.getElementById('body');
     body.className = 'main__background';
-    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(\'images/login.jpg\')`;
+    body.style.backgroundImage = 'linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(\'images/login.jpg\')';
     const signupBox = document.createElement('div');
     signupBox.className = 'wrapper__form__regLog register';
     this.parent.appendChild(signupBox);
@@ -74,9 +74,9 @@ export default class SignupPage extends Base {
     });
     Bus.emit('Signup', {
       button: buttonSignup,
-      formrLogin: formrLogin,
-      err: err,
-      form: form,
+      formrLogin,
+      err,
+      form,
     });
 
     const linkLogin = new Link({

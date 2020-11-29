@@ -27,7 +27,7 @@ export default class Button {
       this.listener = (evt) => {
         evt.preventDefault();
         callback(evt);
-      }
+      };
       this.button.addEventListener('click', this.listener);
     }
   }
