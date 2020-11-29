@@ -27,7 +27,7 @@ export default class ProfileChangePage extends Base {
     const headLogin = {
       head: true,
       textContent: 'Изменить логин',
-      style: 'color:#FFFFFF; margin-left: 10px',
+      style: 'color:#FFFFFF; margin-left: 10px; font-size:1.5em',
     };
 
     const configInputLogin = [
