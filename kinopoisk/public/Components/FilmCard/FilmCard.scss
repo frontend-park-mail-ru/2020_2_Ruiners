@@ -2,117 +2,100 @@
 @import "kinopoisk/public/static/CSS/colors";
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
 
-@media (min-width: 1240px) {
-    .filmCard_titleRate__title{
-        font-family: Verdana, sans-serif;
-        text-transform: uppercase;
-        font-size: 90px;
-        font-weight: bold;
-        color: white;
-    }
+.filmCard_titleRate__title{
+    font-family: Verdana, sans-serif;
+    text-transform: uppercase;
+    font-size: 90px;
+    font-weight: bold;
+    color: white;
+}
 
-    .filmCard_main_header {
-        color: $color-text;
-        font-family: $font-main;
-        font-size: 20px;
-        padding-bottom: 20px;
-    }
+.filmCard_main_header {
+    color: $color-text;
+    font-family: $font-main;
+    font-size: 20px;
+    padding-bottom: 20px;
+}
 
-    .filmCard_select button {
-        border: none;
-        background: $color-button;
-        color: $color-text;
-        font-family: $font-info;
-        font-size: 30px;
-    }
+.filmCard_select button {
+    border: none;
+    background: $color-button;
+    color: $color-text;
+    font-family: $font-info;
+    font-size: 30px;
+}
 
-    .filmCard_select select {
-        border: none;
-        position: absolute;
-        background: $color-secondary;
-        color: $color-text;
-        font-family: $font-info;
-        font-size: 30px;
-    }
+.filmCard_select select {
+    border: none;
+    position: absolute;
+    background: $color-secondary;
+    color: $color-text;
+    font-family: $font-info;
+    font-size: 30px;
+}
 
-    .filmCard_info {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .filmCard_secondary {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 90%;
-    }
+.filmCard_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.filmCard_secondary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+}
 
-    .filmCard_info__description {
-        width: 40%;
-        font-family: $font-info;
-        font-size: 15px;
-        color: gray;
-    }
+.filmCard_info__description {
+    width: 40%;
+    font-family: $font-info;
+    font-size: 15px;
+    color: gray;
+}
 
-    .filmCard_info_more {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
+.filmCard_info_more {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
-    .filmCard_info_header_roles{
-        margin-right: 200px;
-        margin-top: -90px;
-        margin-bottom: 35px;
-        font-family: 'Comfortaa', cursive;
-        color: white;
-    }
+.filmCard_info_header_roles{
+    margin-right: 200px;
+    margin-top: -90px;
+    margin-bottom: 35px;
+    font-family: 'Comfortaa', cursive;
+    color: white;
+}
 
-    .filmCard_roles {
-        display: flex;
-        flex-direction: column;
-        margin-right: 230px;
-    }
+.filmCard_roles {
+    display: flex;
+    flex-direction: column;
+    margin-right: 230px;
+}
 
-    .rating-area:not(:checked) > label {
-        float: right;
-        width: 100px;
-        padding: 0;
-        cursor: pointer;
-        font-size: 100px;
-        color: lightgrey;
-        text-shadow: 1px 1px #bbb;
-    }
+.rating-area:not(:checked) > label {
+    float: right;
+    width: 100px;
+    padding: 0;
+    cursor: pointer;
+    font-size: 100px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
 }
 
 @media (max-width: 1239px) {
     .filmCard_titleRate__title{
-        font-family: Verdana, sans-serif;
-        text-transform: uppercase;
         font-size: 10vw;
-        font-weight: bold;
-        color: white;
     }
 
     .filmCard_main_header {
-        color: $color-text;
-        font-family: $font-main;
         font-size: 1em;
         padding-bottom: 5px;
     }
     .filmCard_select button {
-        border: none;
-        background: $color-button;
-        color: $color-text;
-        font-family: $font-info;
         font-size: 1.2em;
     }
     .filmCard_select select {
-        border: none;
-        position: absolute;
-        background: $color-secondary;
-        color: $color-text;
-        font-family: $font-info;
         font-size: 1.2em;
     }
     .filmCard_info {
@@ -122,19 +105,13 @@
     }
 
     .filmCard_secondary {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 90%;
         align-items: center;
     }
 
     .filmCard_info__description {
         margin-top: 40px;
         width: 80%;
-        font-family: $font-info;
         font-size: 15px;
-        color: gray;
         margin-bottom: 30px;
     }
 
@@ -147,9 +124,7 @@
     .filmCard_info_header_roles{
         margin-bottom: 20px;
         margin-left: 30px;
-        font-family: 'Comfortaa', cursive;
         margin-top: 30px;
-        color: white;
     }
 
     .filmCard_roles {
@@ -159,13 +134,10 @@
     }
 
     .rating-area:not(:checked) > label {
-        float: right;
         width: 8vw;
         padding: 0;
-        cursor: pointer;
         font-size: 8vw;
-        color: lightgrey;
-        text-shadow: 1px 1px #bbb;
+        text-shadow: 0.5px 0.5px #bbb;
     }
 }
 
@@ -204,26 +176,23 @@
 }
 
 
-@media (min-width: 460px) {
-    .filmCard_info_header {
-        margin-top: 60px;
-        margin-bottom: 35px;
-        font-family: 'Comfortaa', cursive;
-        font-size: 50px;
-        color: white;
-    }
-    .filmCard_info_header_roles {
-        font-size: 50px;
-    }
 
+.filmCard_info_header {
+    margin-top: 60px;
+    margin-bottom: 35px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 50px;
+    color: white;
 }
+.filmCard_info_header_roles {
+    font-size: 50px;
+}
+
 @media (max-width: 459px) {
     .filmCard_info_header {
         margin-top: 30px;
         margin-bottom: 25px;
-        font-family: 'Comfortaa', cursive;
         font-size: 32px;
-        color: white;
     }
 
     .filmCard_info_header_roles {
