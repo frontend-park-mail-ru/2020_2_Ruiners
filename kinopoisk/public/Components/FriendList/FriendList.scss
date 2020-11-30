@@ -19,42 +19,29 @@
   width: 90%;
 }
 
+.friendlist__image {
+  border-radius: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.friendlist__default_margin {
+  margin-right: 50px;
+}
+
 .friendList_login {
   position: absolute;
   color: $color-text;
   text-decoration-line: none;
   font-family: $font-info;
   font-size: 30px;
-}
-
-.friendList_login:hover {
-  cursor: pointer;
-  color: $color-secondary;
-}
-
-@media (min-width: 680px) {
-  .friendlist__image {
-    border-radius: 400px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  }
-
-  .friendlist__default_margin {
-    margin-right: 50px;
-  }
-
-  .friendList_login {
-    position: absolute;
-    color: $color-text;
-    text-decoration-line: none;
-    font-family: $font-info;
-    font-size: 30px;
+  &:hover {
+    cursor: pointer;
+    color: $color-secondary;
   }
 }
 
 @media (max-width: 679px) {
   .friendlist__image {
-    border-radius: 400px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
     width: 20vw;
     height: 20vw;
   }
@@ -62,10 +49,6 @@
     margin-right: 10px;
   }
   .friendList_login {
-    position: absolute;
-    color: $color-text;
-    text-decoration-line: none;
-    font-family: $font-info;
     font-size: 1.4em;
   }
 }

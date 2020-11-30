@@ -10,6 +10,10 @@
     color: white;
 }
 
+.filmCard_info_header_roles {
+    font-size: 50px;
+}
+
 .filmCard_main_header {
     color: $color-text;
     font-family: $font-main;
@@ -83,64 +87,6 @@
     text-shadow: 1px 1px #bbb;
 }
 
-@media (max-width: 1239px) {
-    .filmCard_titleRate__title{
-        font-size: 10vw;
-    }
-
-    .filmCard_main_header {
-        font-size: 1em;
-        padding-bottom: 5px;
-    }
-    .filmCard_select button {
-        font-size: 1.2em;
-    }
-    .filmCard_select select {
-        font-size: 1.2em;
-    }
-    .filmCard_info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .filmCard_secondary {
-        align-items: center;
-    }
-
-    .filmCard_info__description {
-        margin-top: 40px;
-        width: 80%;
-        font-size: 15px;
-        margin-bottom: 30px;
-    }
-
-    .filmCard_info_more {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .filmCard_info_header_roles{
-        margin-bottom: 20px;
-        margin-left: 30px;
-        margin-top: 30px;
-    }
-
-    .filmCard_roles {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 30px;
-    }
-
-    .rating-area:not(:checked) > label {
-        width: 8vw;
-        padding: 0;
-        font-size: 8vw;
-        text-shadow: 0.5px 0.5px #bbb;
-    }
-}
-
 .filmCard_main {
     min-width: 100%;
     min-height: 700px;
@@ -184,9 +130,68 @@
     font-size: 50px;
     color: white;
 }
-.filmCard_info_header_roles {
-    font-size: 50px;
+
+@media (max-width: 1239px) {
+    .filmCard_titleRate__title{
+        font-size: 10vw;
+    }
+
+    .filmCard_main_header {
+        font-size: 1em;
+        padding-bottom: 5px;
+    }
+    .filmCard_select button {
+        font-size: 1.2em;
+    }
+    .filmCard_select select {
+        font-size: 1.2em;
+    }
+    .filmCard_info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filmCard_secondary {
+        align-items: center;
+    }
+
+    .filmCard_info__description {
+        margin-top: 40px;
+        width: 80%;
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .filmCard_info_more {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filmCard_info_header_roles{
+        margin-bottom: 20px;
+        margin-top: 30px;
+        margin-left: 150px;
+        width: 100%;
+    }
+
+    .filmCard_roles {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        margin-left: 150px;
+        width: 100%;
+    }
+
+    .rating-area:not(:checked) > label {
+        width: 8vw;
+        padding: 0;
+        font-size: 8vw;
+        text-shadow: 0.5px 0.5px #bbb;
+    }
 }
+
 
 @media (max-width: 459px) {
     .filmCard_info_header {
@@ -197,6 +202,8 @@
 
     .filmCard_info_header_roles {
         font-size: 32px;
+        margin-left: 150px;
+        width: 100%;
     }
 }
 
