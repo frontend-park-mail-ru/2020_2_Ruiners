@@ -1,96 +1,221 @@
-import NavLink from '../modules/navLink.js';
-import { createDiv } from './Components.js';
-import Bus from "../modules/EventBus.js";
 import Base from './Base.js';
-import Link from '../Components/Link/Link.js';
-
-const menuTop = {
-  rech: {
-    href: '/rech',
-    text: 'Рецензии',
-  },
-  mark: {
-    href: '/mark',
-    text: 'Оценки',
-  },
-  films: {
-    href: '/films',
-    text: 'Фильмы',
-  },
-  stars: {
-    href: '/stars',
-    text: 'Звёзды',
-  },
-};
+import { application, domain, nav } from '../config.js';
+import Button from '../Components/Button/Button';
+import Profile from '../Components/Profile/Profile.js';
+import Bus from '../modules/EventBus.js';
+import FilmLenta from '../Components/FilmLenta/FilmLenta';
+import FriendList from '../Components/FriendList/FriendList';
+import News from '../Components/News/News';
+import subscribeService from '../Services/subscribeService';
 
 export default class ProfilePage extends Base {
-    constructor(parent, data) {
-      super(nav);
-      this.parent = parent;
-      this.data = data;
-    }
+  constructor(parent, data) {
+    super(nav);
+    this.parent = parent;
+    this.data = data;
+  }
 
-    render() {
-      const responseBody = JSON.parse(this.data);
+  render(context, playlists, followers, newss) {
+    const { id } = context;
+    const responseBody = JSON.parse(this.data);
+    if (id === 1) {
+      super.render(true);
+    } else {
       super.render(false);
-      const body = document.getElementById('body');
-      body.className = 'page';
-      body.style.backgroundImage = `url('images/login.jpg')`;
-      this.parent.className = '';
-      const divshadow = createDiv('shadow profile', this.parent);
-
-      const ul = document.createElement('ul');
-      ul.className = 'top-menu';
-      divshadow.appendChild(ul);
-
-      const menuItem0 = document.createElement('li');
-      const menuItema0 = document.createElement('span');
-
-      menuItema0.textContent = 'Профиль';
-
-      // menuItem0.appendChild(menuItema0);
-      // ul.appendChild(menuItem0);
-      //
-      // Object.keys(menuTop).forEach((menuKey) => {
-      //   const { href, text } = menuTop[menuKey];
-      //   const menuItem = document.createElement('li');
-      //   const menuItema = new Link({
-      //     parent: menuItem,
-      //     classname: '',
-      //   });
-      //   menuItema.a.dataset.section = menuKey;
-      //   menuItema.render();
-      //   menuItema.placeContent(text);
-      //   ul.appendChild(menuItem);
-      // });
-
-      const divLeft = createDiv('profileInfoWrapLeft', divshadow);
-      const divAvatar = createDiv('avatarUserBoxP', divLeft);
-
-      const img = document.createElement('img');
-        img.src = `${domain}/user/avatar/${responseBody.id + '?' + Math.random()}`;
-        img.height = 300;
-        img.width = 300;
-        img.className = 'avatar__image';
-        divAvatar.appendChild(img);
-
-      const button = document.createElement('button');
-      button.className = 'button buttons__marginForSettings';
-      button.textContent = 'Изменить данные';
-      button.href = '/';
-      const buttonLink = new NavLink(button);
-      Bus.emit('profileChange', buttonLink);
-      divLeft.appendChild(button);
-
-      const divRight = createDiv('profileInfoWrapRight', divshadow);
-      const divInfo = createDiv('infoUser', divRight);
-
-      const nick = document.createElement('h1');
-      nick.className = 'profile__nickname';
-
-      nick.textContent = `${responseBody.Login}`;
-
-      divInfo.appendChild(nick);
-
     }
+    const body = document.getElementById('body');
+    body.className = 'main__background';
+    this.parent.className = '';
+    const button = new Button({
+      classname: 'buttons__forComments',
+      parent: null,
+    });
+    const profile = new Profile({
+      parent: this.parent,
+      isProfile: true,
+      body: {
+        id: responseBody.id,
+        Login: responseBody.Login,
+        isAuth: true,
+        button: button.template({
+          classname: '',
+          text: 'Настройки',
+          id: 'settings',
+          type: 'submit',
+        }),
+      },
+    });
+    profile.render();
+    const settings = document.getElementById('settings');
+    settings.addEventListener('click', () => {
+      Bus.emit('Change');
+    });
+
+    const createPlaylist = document.createElement('input');
+    const headerCreate = document.createElement('span');
+    const buttonCreate = new Button({
+      classname: '',
+      text: 'Создать',
+      parent: this.parent,
+    });
+
+    const friendList = new FriendList({
+      parent: this.parent,
+      body: followers,
+    });
+
+    const newsLenta = new News({
+      parent: this.parent,
+      body: newss,
+    });
+    const lentas = [];
+    playlists.forEach((element) => {
+      lentas.push(new FilmLenta({
+        playlist: true,
+        id: element.Id,
+        genre: element.Title,
+        body: element.Films,
+        parent: application,
+      }));
+    });
+    const play = document.getElementById('play');
+    const subscribe = document.getElementById('subscribe');
+    const news = document.getElementById('lenta');
+    this.createRender(buttonCreate, headerCreate, createPlaylist);
+    lentas.forEach((element) => {
+      element.render();
+    });
+    let box = this.createBox();
+    play.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      newsLenta.hide();
+      friendList.hide();
+      this.createHide(buttonCreate, headerCreate, createPlaylist);
+      this.createRender(buttonCreate, headerCreate, createPlaylist);
+      this.setClass(play, subscribe, news);
+      lentas.forEach((element) => {
+        element.hide();
+      });
+      lentas.forEach((element) => {
+        element.render();
+      });
+      box.remove();
+      box = this.createBox();
+      window.scroll(0, 700);
+    });
+    subscribe.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      this.createHide(buttonCreate, headerCreate, createPlaylist);
+      friendList.hide();
+      newsLenta.hide();
+      friendList.render();
+      this.setClass(subscribe, play, news);
+      lentas.forEach((element) => {
+        element.hide();
+      });
+      box.remove();
+      box = this.createBox();
+      window.scroll(0, 700);
+    });
+    news.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      this.createHide(buttonCreate, headerCreate, createPlaylist);
+      friendList.hide();
+      this.setClass(news, play, subscribe);
+      lentas.forEach((element) => {
+        element.hide();
+      });
+      newsLenta.hide();
+      newsLenta.render();
+      box.remove();
+      box = this.createBox();
+      window.scroll(0, 700);
+    });
+    Bus.on('deletePlaylist', (playlistId) => {
+      box.remove();
+      lentas.forEach((element) => {
+        element.hide();
+      });
+      let rightIndex = 0;
+      lentas.forEach((element, index) => {
+        if (element.id == parseInt(playlistId)) {
+          rightIndex = index;
+        }
+      });
+      lentas.splice(rightIndex, 1);
+      lentas.forEach((element) => {
+        element.render();
+      });
+      box = this.createBox();
+    });
+    Bus.on('deleteFilm', (context) => {
+      const { filmId, playlistId } = context;
+      box.remove();
+      let rightIndex = 0;
+      lentas.forEach((element) => {
+        element.hide();
+      });
+      lentas.forEach((element, index) => {
+        if (element.id == playlistId) {
+          rightIndex = index;
+        }
+      });
+      let filmIndex = 0;
+      lentas[rightIndex].body.forEach((element, index) => {
+        if (element.id == filmId) {
+          filmIndex = index;
+        }
+      });
+      console.log(lentas[rightIndex]);
+      lentas[rightIndex].body.splice(filmIndex, 1);
+      lentas[rightIndex].posters.splice(filmIndex, 1);
+      lentas.forEach((element) => {
+        element.render();
+      });
+      box = this.createBox();
+    });
+    Bus.on('removeFriend', (friendId) => {
+      box.remove();
+      friendList.remove(friendId);
+      friendList.hide();
+      friendList.render();
+      box = this.createBox();
+    });
+  }
+
+  createRender(buttonCreate, headerCreate, createPlaylist) {
+    headerCreate.textContent = 'Создать плейлист';
+    headerCreate.className = 'headers_main';
+    this.parent.appendChild(headerCreate);
+    createPlaylist.placeholder = 'Напишите название';
+    createPlaylist.className = 'input_main';
+    this.parent.appendChild(createPlaylist);
+    buttonCreate.render({
+      callback: () => {
+        if (createPlaylist.value !== '') {
+          Bus.emit('CreatePlaylist', createPlaylist.value);
+        }
+      },
+    });
+  }
+
+  createHide(buttonCreate, headerCreate, createPlaylist) {
+    buttonCreate.hide();
+    headerCreate.innerHTML = '';
+    createPlaylist.remove();
+  }
+
+  setClass(link1, link2, link3) {
+    link1.className = 'profile_nav_links_aBig';
+    link2.className = 'profile_nav_links_a';
+    link3.className = 'profile_nav_links_a';
+  }
+
+  createBox() {
+    const box = document.createElement('div');
+    box.className = 'invisible_box';
+    box.id = 'box';
+    this.parent.appendChild(box);
+    return box;
+  }
 }

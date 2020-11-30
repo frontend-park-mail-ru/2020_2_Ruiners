@@ -1,0 +1,128 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+
+.news_container {
+  display: flex;
+}
+
+.news_login:hover {
+  cursor: pointer;
+  color: $color-secondary;
+}
+
+.news_container_column {
+  display: flex;
+  flex-direction: column;
+}
+
+.news_container_info {
+  margin-top: 30px;
+}
+
+.news_comment {
+  margin-top: 20px;
+  width: 90%;
+  margin-left: 35px;
+}
+
+  .news_dateTime {
+    color: #888888;
+    font-size: 15px;
+    margin-top: 60px;
+  }
+
+.news__image {
+  border-radius: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.news_login {
+  color: $color-text;
+  text-decoration-line: none;
+  font-family: $font-info;
+  font-size: 30px;
+}
+
+.news__default_margin {
+  margin-right: 50px;
+}
+
+.news_info {
+  color: $color-text;
+  font-family: $font-info;
+  font-size: 25px;
+}
+
+.news_rating{
+  color: #666666;
+  font-family: $font-info;
+  font-size: 30px;
+}
+
+.news_comment_body {
+  margin-left: 10px;
+  font-size: 1em;
+  font-family: $font-info;
+  color: $color-text;
+}
+
+.news_comment hr {
+  margin-top: 10px;
+}
+
+@media (max-width: 899px) {
+
+  .news_dateTime {
+    margin-top: 15px;
+  }
+
+  .news_comment_body {
+    margin-left: 10px;
+    font-size: 28px;
+  }
+
+  .news__image {
+    border-radius: 20vw;
+    width: 20vw;
+    height: 20vw;
+  }
+
+  .news__default_margin {
+    margin-right: 10px;
+  }
+
+  .news_login {
+    font-size: 1em;
+  }
+
+  .news_info {
+    font-size: 0.8em;
+  }
+
+  .news_rating{
+    font-size: 1em;
+  }
+
+  .news_comment_body {
+    margin-left: 10px;
+    font-size: 1em;
+  }
+
+  .news_comment hr {
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .news_container_comment {
+    margin-top: 20px;
+    margin-left: -100px;
+  }
+
+  .news_dateTime {
+    color: #888888;
+    font-size: 15px;
+    margin-top: 15px;
+  }
+}

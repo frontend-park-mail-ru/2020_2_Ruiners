@@ -4,12 +4,18 @@
     background: #292929
 }
 
+.filmlenta_genre {
+    font-family: $font-main;
+    color: $color-text;
+    font-size: 30px;
+}
+
 .main__header {
-    margin-top: 50px;
-    margin-left: 40px;
+    display: inline-flex;
     color: white;
     font-family: $font-main;
     font-size: 22px;
+    padding: 40px 0 5px 0;
 }
 
 .header__lenta {

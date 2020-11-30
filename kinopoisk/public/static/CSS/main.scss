@@ -11,16 +11,25 @@
 @import "../../Components/Footer/Footer";
 @import "../../Components/Comments/Comments";
 @import "../../Components/PersonCard/PersonCard";
+@import "../../Components/Delete/Delete";
+@import "../../Components/FriendList/FriendList";
+@import "../../Components/News/News";
 @import "colors";
 @import "fonts";
-
 
 body.main__background {
     height: 100vh;
     margin: 0;
     background-repeat: no-repeat;
-    background-color: $color-gray-main;
+    background-color: $color-main;
     background-size: 100% 100%;
+}
+
+@media (max-width: 1499px) {
+    body.main__background {
+        background-size: 1500px 100vh;
+        background-position: center;
+    }
 }
 
 input:focus,
@@ -37,6 +46,16 @@ body {
     color: $color-succes;
 }
 
+.success_add {
+    color: $color-succes;
+    display: block;
+}
+
+.error_add {
+    color: $color-error;
+    display: block;
+}
+
 .succes__marginForFilmCard {
     position: absolute;
     margin-left: 60%;
@@ -47,14 +66,36 @@ body {
     margin: 0px;
 }
 
+
 .page {
     display: block;
     flex-direction: column;
     align-items: center;
     background-repeat: no-repeat;
-    background-color: $color-gray-main;
+    background-color: $color-main;
+}
+
+#app {
+    margin-left: 10vmin;
 }
 
 .margin {
     margin-top: 10%;
+}
+
+.invisible_box {
+    min-height: 100px;
+}
+
+.headers_main {
+    color: $color-text;
+    display: block;
+    font-family: $font-info;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.input_main {
+    display: block;
+    margin-bottom: 20px;
 }

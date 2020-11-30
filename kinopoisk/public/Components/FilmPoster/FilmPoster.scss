@@ -1,13 +1,30 @@
 @import "kinopoisk/public/static/CSS/fonts";
 @import "kinopoisk/public/static/CSS/colors";
-.lenta__object {
-    display: inline-flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: 430px;
-    width: 300px;
-    margin-left: 52px;
-    margin-top: 35px;
+
+.object__hidden {
+    position: absolute;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
+    min-width: 270px;
+    min-height: 420px;
+    border-radius: 25px;
+    margin-top: -427px;
+    margin-left: 5px;
+    font-family: $font-info;
+    color: white;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.object__hidden span {
+    position: absolute;
+    margin-left: 20%;
+    margin-top: 330px;
+}
+
+.poster_delete {
+    position: absolute;
+    margin-left: 180px;
+    margin-top: 12px;
 }
 
 .object__image {
@@ -26,34 +43,68 @@
     margin-left: 20px;
 }
 
-.lenta__object a:hover{
-    border-radius: 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    visibility: visible;
+@media (min-width: 400px) {
+    .lenta__object {
+        display: inline-flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 430px;
+        width: 300px;
+        padding: 10px;
+        margin-top: 30px;
+        & a:hover {
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            visibility: visible;
+        }
+    }
+
+    .object__image:hover + .object__hidden {
+        visibility: visible;
+    }
 }
 
-.object__image:hover + .object__hidden{
-    visibility: visible;
-}
+@media (max-width: 399px) {
+    .lenta__object {
+        display: inline-flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 86vw;
+        width: 60vw;
+        padding: 10px;
+        margin-top: 30px;
+    }
+
+    .object__image {
+        padding: 5px;
+        height: 86vw;
+        width: 60vw;
+        border-radius: 30px;
+    }
+
+    .image__text {
+        font-size: 1em;
+        margin-top: 90vw;
+        margin-left: 5vw;
+    }
+
+    .lenta__object a:hover {
+        border-radius: 30px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .object__image:hover + .object__hidden {
+    }
 
 
-.object__hidden {
-    position: absolute;
-    background: rgba(135, 135, 135, 0.5);
-    min-width: 270px;
-    min-height: 130px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    margin-top: -138px;
-    margin-left: 5px;
-    font-family: 'Playfair Display', serif;
-    color: black;
-    visibility: hidden;
-    pointer-events: none;
-}
+    .object__hidden span {
+        position: absolute;
+        margin-left: 20%;
+        margin-top: 330px;
+    }
 
-.object__hidden span {
-    position: absolute;
-    margin-left: 20%;
-    margin-top: 20%;
+    .poster_delete {
+        margin-left: 40vw;
+        margin-top: 5vw;
+    }
 }

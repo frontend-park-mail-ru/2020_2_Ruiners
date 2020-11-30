@@ -1,0 +1,42 @@
+{{#each news}}
+    {{#if this.is_rating}}
+            <div class="friendList_width">
+                <div class="news_container">
+                    <img src="{{this.domain}}/user/avatar/{{this.user_id}}" width="200" height="200" class="news__default_margin news__image">
+                    <div class="news_container_column">
+                        <a class="news_login" href="people/{{this.user_id}}">{{this.user_login}}</a>
+                        <div class="news_container_info">
+                            <span class="news_info">поставил(-а) оценку</span> <span class="news_rating"> "{{this.body}}/10" </span> <span class="news_info">к фильму</span>
+                            <a class="news_login" href="film/{{this.film_id}}">"{{this.film_title}}"</a>
+                        </div>
+                        <span class="news_dateTime">{{this.dateTime}}</span>
+                    </div>
+                </div>
+                <hr class="friendList_line">
+            </div>
+    {{/if}}
+
+
+    {{#if this.is_review}}
+        <div class="friendList_width">
+            <div class="news_container">
+                <img src="{{this.domain}}/user/avatar/{{this.user_id}}" width="200" height="200" class="news__default_margin news__image">
+                <div class="news_container_column">
+                    <a class="news_login" href="people/{{this.user_id}}">{{this.user_login}}</a>
+                    <div class="news_container_info">
+                        <span class="news_info">оставил(-а) комментарий</span><span class="news_info"> к фильму</span>
+                        <a class="news_login" href="film/{{this.film_id}}">"{{this.film_title}}"</a>
+                    </div>
+                    <div class="news_container_comment">
+                        <div class="news_comment">
+                            <span class="news_comment_body">{{this.body}}</span>
+                            <hr class="comment__line">
+                            <span class="news_dateTime">{{this.dateTime}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="friendList_line">
+        </div>
+    {{/if}}
+{{/each}}
