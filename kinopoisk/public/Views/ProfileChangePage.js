@@ -141,7 +141,6 @@ export default class ProfileChangePage extends Base {
       formrAvatar,
       base: super.render,
     }));
-    this.createBox();
   }
 
   createBox() {

@@ -166,7 +166,6 @@ export default class ProfilePage extends Base {
           filmIndex = index;
         }
       });
-      console.log(lentas[rightIndex]);
       lentas[rightIndex].body.splice(filmIndex, 1);
       lentas[rightIndex].posters.splice(filmIndex, 1);
       lentas.forEach((element) => {

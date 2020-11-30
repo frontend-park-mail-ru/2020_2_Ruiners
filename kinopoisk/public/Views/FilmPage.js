@@ -26,7 +26,6 @@ export default class FilmPage extends Base {
     Bus.emit('GetPersons', {
       responseBody,
       call: (actors) => {
-        console.log(responseBody.id);
         filmService.getRate(responseBody.id).then((res) => {
           responseBody.MyRateBool = false;
           if (res.ok) {

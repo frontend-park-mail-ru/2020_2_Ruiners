@@ -3,13 +3,11 @@ import { AjaxModule } from '../modules/ajax.js';
 export default class SessionService {
   static async fetchLogin(login, password) {
     const res = await AjaxModule.ajaxPost({ url: '/login', body: { login, password } });
-    // console.log(res);
     return res.status;
   }
 
   static async fetchSignup(login, email, password) {
     const res = await AjaxModule.ajaxPost({ url: '/signup', body: { login, email, password } });
-    // console.log(res);
     return res.status;
   }
 

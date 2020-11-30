@@ -85,7 +85,6 @@ export default class PlaylistService {
   static async PostDelete(playlistId) {
     const data = { ok: false, errmsg: undefined };
     const res = await this.fetchPostDelete(parseInt(playlistId));
-    console.log(res);
     if (res !== 200) {
       data.errmsg = 'Ошибка';
     } else {

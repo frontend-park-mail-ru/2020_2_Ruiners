@@ -63,7 +63,6 @@ export default function Film(params) {
 
   sessionService.me()
     .then((res) => {
-      console.log(res);
       if (!res.ok) {
         isAuthorized = false;
       } else {

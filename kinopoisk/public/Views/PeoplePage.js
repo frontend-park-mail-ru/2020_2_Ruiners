@@ -26,7 +26,6 @@ export default class PeoplePage extends Base {
       classname: 'buttons__forComments',
       parent: null,
     });
-    console.log(responseBody.isSub);
     const profile = new Profile({
       parent: this.parent,
       isProfile: false,

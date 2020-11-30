@@ -56,7 +56,6 @@ export default class FilmService {
   static async getRate(id) {
     const data = { ok: false, errmsg: undefined, get: undefined };
     const res = await this.fetchGetRate(id);
-    console.log(res);
     if (res.status !== 200) {
       data.errmsg = 'Нет такой оценки';
     } else {
