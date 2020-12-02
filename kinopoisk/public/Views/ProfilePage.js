@@ -35,7 +35,7 @@ export default class ProfilePage extends Base {
       isProfile: true,
       body: {
         id: responseBody.id,
-        Login: responseBody.Login,
+        Login: responseBody.login,
         isAuth: true,
         button: button.template({
           classname: '',
@@ -72,9 +72,9 @@ export default class ProfilePage extends Base {
     playlists.forEach((element) => {
       lentas.push(new FilmLenta({
         playlist: true,
-        id: element.Id,
-        genre: element.Title,
-        body: element.Films,
+        id: element.id,
+        genre: element.title,
+        body: element.films,
         parent: application,
       }));
     });

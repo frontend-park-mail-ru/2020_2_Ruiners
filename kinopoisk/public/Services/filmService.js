@@ -30,8 +30,8 @@ export default class FilmService {
     return { status: res.status, json: parsedJsonObject };
   }
 
-  static async fetchPostReview(filmId, body) {
-    const res = await AjaxModule.ajaxPost({ url: '/review/add', body: { filmId, body } });
+  static async fetchPostReview(film_id, body) {
+    const res = await AjaxModule.ajaxPost({ url: '/review/add', body: { film_id, body } });
     return res.status;
   }
 

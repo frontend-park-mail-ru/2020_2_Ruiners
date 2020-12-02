@@ -20,7 +20,7 @@ export default class FilmPage extends Base {
     const body = document.getElementById('body');
     body.className = 'main__background';
     const responseBody = JSON.parse(this.body);
-    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(${responseBody.BigImg})`;
+    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(${responseBody.big_img})`;
     this.parent.innerHTML = '';
     this.parent.className = '';
     Bus.emit('GetPersons', {
@@ -71,7 +71,7 @@ export default class FilmPage extends Base {
             responseBody,
             call: (comments) => {
               for (let i = 0; i < comments.length; i++) {
-                comments[i].Image = `${domain}/user/avatar/${`${comments[i].UserId}?${Math.random()}`}`;
+                comments[i].image = `${domain}/user/avatar/${`${comments[i].user_id}?${Math.random()}`}`;
               }
               const commentsObj = new Comments({
                 isAuthorized: this.isAuthorized,

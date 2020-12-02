@@ -19,14 +19,14 @@
             {{#each comments}}
                 <div class="comments__underground">
                     <div class="comment__profile">
-                        <a class="comment__login" href="people/{{this.UserId}}">{{ this.UserLogin }}</a>
-                        <img class="comment__profile__round" width="50" height="50" src="{{ this.Image }}" alt="">
+                        <a class="comment__login" href="people/{{this.user_id}}">{{ this.user_login }}</a>
+                        <img class="comment__profile__round" width="50" height="50" src="{{ this.image }}" alt="">
                     </div>
                     <div class="comment__content">
-                        {{ this.TextBody }}
+                        {{ this.text_body }}
                     </div>
                     <hr class="comment__line">
-                    <span class="comment__rate">Оценка: {{ this.Rate }}/10</span>
+                    <span class="comment__rate">Оценка: {{ this.rate }}/10</span>
                 </div>
             {{/each}}
         </div>

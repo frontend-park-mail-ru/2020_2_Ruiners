@@ -14,10 +14,10 @@ export default class PersonCard {
   render() {
     this.parent.appendChild(this.card);
     this.card.innerHTML = this.template({
-      Name: this.body.Name,
-      Image: this.body.Image,
-      BornDate: this.body.BornDate,
-      BornPlace: this.body.BornPlace,
+      Name: this.body.name,
+      Image: this.body.image,
+      BornDate: this.body.born_date,
+      BornPlace: this.body.born_place,
     });
   }
 }

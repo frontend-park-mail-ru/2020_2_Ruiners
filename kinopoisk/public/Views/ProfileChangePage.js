@@ -34,7 +34,7 @@ export default class ProfileChangePage extends Base {
       {
         type: 'login',
         name: 'login',
-        text: `${responseBody.Login}`,
+        text: `${responseBody.login}`,
         required: true,
         valid: true,
         reg: /[A-Za-z0-9]{5,15}/,

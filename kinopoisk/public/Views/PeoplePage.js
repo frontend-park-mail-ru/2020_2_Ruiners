@@ -31,7 +31,7 @@ export default class PeoplePage extends Base {
       isProfile: false,
       body: {
         id: responseBody.id,
-        Login: responseBody.Login,
+        Login: responseBody.login,
         isAuth: responseBody.isAuth,
         isSub: responseBody.isSub,
         buttonSub: buttonSub.template({

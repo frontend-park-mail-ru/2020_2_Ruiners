@@ -6,8 +6,8 @@ export default class UserService {
     return res.status;
   }
 
-  static async fetchChangePassword(PasswordOld, Password) {
-    const res = await AjaxModule.ajaxPost({ url: '/chengepass', body: { PasswordOld, Password } });
+  static async fetchChangePassword(password_old, password) {
+    const res = await AjaxModule.ajaxPost({ url: '/chengepass', body: { password_old, password } });
     return res.status;
   }
 

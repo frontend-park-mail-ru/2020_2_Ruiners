@@ -8,7 +8,7 @@
             <button class="" id="adding">Добавить</button>
             <select>
                 {{#each playlists}}
-                    <option id={{this.Id}}>{{this.Title}}</option>
+                    <option id={{this.id}}>{{this.title}}</option>
                 {{/each}}
             </select>
         </div>
@@ -46,7 +46,7 @@
             <div class="filmCard_info_header_roles">В ролях</div>
                 <div class="filmCard_roles">
                     {{#each actors}}
-                        <div class="filmcard_roles_link"><a href="person/{{ this.Id }}" class="link">{{ this.Name }} </a></div>
+                        <div class="filmcard_roles_link"><a href="person/{{ this.id }}" class="link">{{ this.name }} </a></div>
                     {{/each}}
                 </div>
         </div>
