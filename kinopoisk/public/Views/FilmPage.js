@@ -5,6 +5,7 @@ import Bus from '../modules/EventBus.js';
 import personService from '../Services/personService.js';
 import { nav, domain } from '../config.js';
 import filmService from '../Services/filmService';
+import FilmLenta from '../Components/FilmLenta/FilmLenta';
 
 export default class FilmPage extends Base {
   constructor(context = {}) {
@@ -15,7 +16,7 @@ export default class FilmPage extends Base {
     this.isAuthorized = isAuthorized;
   }
 
-  render(playlists) {
+  render(playlists, similar) {
     super.render(false);
     const body = document.getElementById('body');
     body.className = 'main__background';
@@ -44,6 +45,12 @@ export default class FilmPage extends Base {
             actors,
           });
           film.render();
+          const lenta = new FilmLenta({
+            parent: this.parent,
+            genre: 'Похожие',
+            body: similar,
+          });
+          lenta.render();
           if (playlists.length !== 0) {
             const addPlaylist = document.getElementById('adding');
             const info = addPlaylist.parentNode;

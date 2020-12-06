@@ -48,6 +48,19 @@ export default class Navbar {
     const FilmsA = FilmsAObj.render();
     FilmsAObj.placeContent('Фильмы');
 
+    const SearchObj = new List({
+      parent: ul,
+      classname: 'menu-secondary_search',
+    });
+    const Search = SearchObj.render();
+    const SearchAObj = new Link({
+      parent: Search,
+      pathname: '/search',
+      classname: '',
+    });
+    const SearchA = SearchAObj.render();
+    SearchAObj.placeContent('Поиск');
+
     if (isAuthorized) {
       const profileObj = new List({
         parent: ul,

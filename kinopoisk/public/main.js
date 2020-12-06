@@ -6,6 +6,7 @@ import './static/images/icons8-кинопроектор-96.png';
 import './static/images/login.jpg';
 import './static/images/offline.png';
 import './static/images/adding.png';
+import './static/images/search1.png';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import RateAndReviewService from './Services/rateAndReviewService.js';
 import { nav } from './config.js';
@@ -127,7 +128,8 @@ if (navigator.onLine) {
     .register('/profileChange', Controller.profileChengePage)
     .register('/person', Controller.personPage)
     .register('/genre', Controller.genrePage)
-    .register('/people', Controller.peoplePage);
+    .register('/people', Controller.peoplePage)
+    .register('/search', Controller.searchPage);
 } else {
   router.register('/', Controller.offlinePage);
 }

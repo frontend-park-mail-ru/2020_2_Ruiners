@@ -38,6 +38,16 @@
     &:hover{color: orange;}
 }
 
+.menu-secondary_search a {
+    text-decoration: none;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    letter-spacing: 2px;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: $color-text;
+    &:hover{color: orange;}
+}
+
 .right {
     position: absolute;
     right: 0;
@@ -64,6 +74,14 @@
     .menu-secondary a {
         letter-spacing: 2px;
         font-size: 0vw;
+    }
+
+    .menu-secondary_search a {
+        letter-spacing: 2px;
+        font-size: 1em;
+        position: absolute;
+        margin-top: -35px;
+        margin-left: -90px;
     }
 
     .right {

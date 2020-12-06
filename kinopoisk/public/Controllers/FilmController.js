@@ -78,18 +78,25 @@ export default function Film(params) {
           }
           if (res.ok) {
             let playlists = [];
-            if (isAuthorized) {
-              playlistService.getPlaylists().then((res) => {
-                if (res.ok) {
-                  playlists = res.get;
-                  const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
-                  film.render(playlists);
-                }
-              });
-            } else {
-              const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
-              film.render(playlists);
-            }
+            let similar = [];
+            filmService.getByGenre('fantasy').then(simRes => {
+              if (simRes.ok) {
+                similar = simRes.get;
+                console.log(similar);
+              }
+              if (isAuthorized) {
+                playlistService.getPlaylists().then((res) => {
+                  if (res.ok) {
+                    playlists = res.get;
+                    const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
+                    film.render(playlists, similar);
+                  }
+                });
+              } else {
+                const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
+                film.render(playlists, similar);
+              }
+            });
           } else {
             this.menuPage();
           }
