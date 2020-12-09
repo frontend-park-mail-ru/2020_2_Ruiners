@@ -1,4 +1,4 @@
 export const application = document.getElementById('app');
 export const nav = document.getElementById('navbar');
 
-export const domain = 'http://localhost:8000'; // 95.163.208.72
+export const domain = 'http://kino-park.online:8000'; // kino-park.online
