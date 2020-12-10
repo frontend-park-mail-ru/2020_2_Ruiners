@@ -28,7 +28,7 @@ export default class Navbar {
     });
     const Brand = BrandObj.render();
     const href = document.createElement('a');
-    href.innerHTML = 'KINO <img width="25", height="25" src="images/icons8-кинопроектор-96.png"/> PARK';
+    href.innerHTML = 'KINO <img width="25", height="25" src="images/icons8-кинопроектор-96.png"/> PARKing';
     Brand.appendChild(href);
 
     const mainLink = new NavLink(href);
