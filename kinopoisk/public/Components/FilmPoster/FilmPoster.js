@@ -1,4 +1,5 @@
 import filmPosterT from './FilmPoster.handlebars';
+import styles from './FilmPoster.scss';
 
 export default class FilmPoster {
   constructor(context = {}) {
@@ -25,6 +26,7 @@ export default class FilmPoster {
       SmallImg: this.image,
       del: this.del,
       playlist: this.playlist,
+      styles: styles,
     });
   }
 }
