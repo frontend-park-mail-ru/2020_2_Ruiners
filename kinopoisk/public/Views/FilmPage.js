@@ -93,6 +93,7 @@ export default class FilmPage extends Base {
                     responseBody,
                     render: this.render.bind(this),
                     playlists,
+                    similar: similar,
                     buttonComment,
                   });
                 });

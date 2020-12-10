@@ -22,7 +22,7 @@ export default function Film(params) {
   });
   Bus.on('PlaceComment', (context) => {
     const {
-      responseBody, render, buttonComment, playlists,
+      responseBody, render, buttonComment, playlists, similar,
     } = context;
     const form = document.getElementById('msg');
     if (form.value === '') {
@@ -33,7 +33,7 @@ export default function Film(params) {
       divError.appendChild(err);
     } else {
       filmService.PostReview(responseBody.id, form.value).then((res) => {
-        render(playlists);
+        render(playlists, similar);
       });
     }
   });

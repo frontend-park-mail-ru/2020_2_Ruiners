@@ -25,3 +25,11 @@
     margin-top: 5px;
     height: 490px;
 }
+
+.lenta_line {
+    border: none; /* Убираем границу для браузера Firefox */
+    background-color: rgba(71, 69, 69, 0.7);
+    height: 3px;
+    margin-top: 60px;
+    color: rgba(71, 69, 69, 0.7);
+}
