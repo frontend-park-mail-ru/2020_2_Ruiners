@@ -2,13 +2,13 @@ import { AjaxModule } from '../modules/ajax.js';
 
 export default class PersonService {
   static async fetchGetById(id) {
-    const res = await AjaxModule.ajaxGet({ url: `/person/${id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/person/${id}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchGetByFilmId(id, role) {
-    const res = await AjaxModule.ajaxGet({ url: `/${role}/${id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/${role}/${id}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
