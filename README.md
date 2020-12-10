@@ -2,7 +2,7 @@
 Frontend репозиторий команды Ruiners!
 
 ## Cсылка на деплой:
-http://kino-park.online/
+https://kino-park.online/
 
 ## Cсылка на репозиторий бэкенда:
 https://github.com/go-park-mail-ru/2020_2_Ruiners
