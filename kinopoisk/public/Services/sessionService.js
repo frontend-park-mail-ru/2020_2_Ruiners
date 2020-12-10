@@ -2,22 +2,22 @@ import { AjaxModule } from '../modules/ajax.js';
 
 export default class SessionService {
   static async fetchLogin(login, password) {
-    const res = await AjaxModule.ajaxPost({ url: '/login', body: { login, password } });
+    const res = await AjaxModule.ajaxPost({ url: '/api/login', body: { login, password } });
     return res.status;
   }
 
   static async fetchSignup(login, email, password) {
-    const res = await AjaxModule.ajaxPost({ url: '/signup', body: { login, email, password } });
+    const res = await AjaxModule.ajaxPost({ url: '/api/signup', body: { login, email, password } });
     return res.status;
   }
 
   static async fetchLogout() {
-    const res = await AjaxModule.ajaxGet({ url: '/logout' });
+    const res = await AjaxModule.ajaxGet({ url: '/api/logout' });
     return res.status;
   }
 
   static async fetchMe() {
-    const res = await AjaxModule.ajaxGet({ url: '/me' });
+    const res = await AjaxModule.ajaxGet({ url: '/api/me' });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }

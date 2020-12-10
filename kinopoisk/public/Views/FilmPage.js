@@ -78,7 +78,7 @@ export default class FilmPage extends Base {
             responseBody,
             call: (comments) => {
               for (let i = 0; i < comments.length; i++) {
-                comments[i].image = `${domain}/user/avatar/${`${comments[i].user_id}?${Math.random()}`}`;
+                comments[i].image = `${domain}/api/user/avatar/${`${comments[i].user_id}?${Math.random()}`}`;
               }
               const commentsObj = new Comments({
                 isAuthorized: this.isAuthorized,

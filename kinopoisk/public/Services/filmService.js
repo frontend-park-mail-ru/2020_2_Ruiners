@@ -2,13 +2,13 @@ import { AjaxModule } from '../modules/ajax.js';
 
 export default class FilmService {
   static async fetchGetById(id) {
-    const res = await AjaxModule.ajaxGet({ url: `/film/${id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/film/${id}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchGetRate(film_id) {
-    const res = await AjaxModule.ajaxGet({ url: `/currentRating/${film_id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/currentRating/${film_id}` });
     let parsedJsonObject;
     try {
       parsedJsonObject = await res.json();
@@ -19,24 +19,24 @@ export default class FilmService {
   }
 
   static async fetchGetByGenre(genre) {
-    const res = await AjaxModule.ajaxGet({ url: `/film/${genre}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/film/${genre}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchGetByPerson(id) {
-    const res = await AjaxModule.ajaxGet({ url: `/person_film/${id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/person_film/${id}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchPostReview(film_id, body) {
-    const res = await AjaxModule.ajaxPost({ url: '/review/add', body: { film_id, body } });
+    const res = await AjaxModule.ajaxPost({ url: '/api/review/add', body: { film_id, body } });
     return res.status;
   }
 
   static async fetchGetByReviews(filmId) {
-    const res = await AjaxModule.ajaxGet({ url: `/review/${filmId}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/review/${filmId}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }

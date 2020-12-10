@@ -73,7 +73,7 @@ export default class Navbar {
         className: 'profileNav',
       });
       const profileA = profileAObj.render();
-      const src = `${domain}/user/avatar/${res.get.id}?${Math.random()}`;
+      const src = `${domain}/api/user/avatar/${res.get.id}?${Math.random()}`;
       profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="round">`);
       const profileLink = new navLink(profileA);
       const window = new Window({ parent: profileA });

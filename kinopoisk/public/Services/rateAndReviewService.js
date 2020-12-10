@@ -4,7 +4,7 @@ export default class RateAndReviewService {
   static async fetchRate(film_id, rating) {
     console.log(film_id, rating);
     const res = await AjaxModule.ajaxPost({
-      url: '/rate',
+      url: '/api/rate',
       body: {
         film_id,
         rating,

@@ -2,25 +2,25 @@ import { AjaxModule } from '../modules/ajax.js';
 
 export default class SubscribeService {
   static async fetchGetFollowers() {
-    const res = await AjaxModule.ajaxGet({ url: '/authors' });
+    const res = await AjaxModule.ajaxGet({ url: '/api/authors' });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchGetLogin(id) {
-    const res = await AjaxModule.ajaxGet({ url: `/people/${id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/people/${id}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchGetNews() {
-    const res = await AjaxModule.ajaxGet({ url: '/news' });
+    const res = await AjaxModule.ajaxGet({ url: '/api/news' });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchGetCheck(id) {
-    const res = await AjaxModule.ajaxGet({ url: `/sub/check/${id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/sub/check/${id}` });
     let parsedJsonObject;
     try {
       parsedJsonObject = await res.json();
@@ -31,12 +31,12 @@ export default class SubscribeService {
   }
 
   static async fetchPostFollow(user_id) {
-    const res = await AjaxModule.ajaxPost({ url: '/follow', body: { user_id } });
+    const res = await AjaxModule.ajaxPost({ url: '/api/follow', body: { user_id } });
     return res.status;
   }
 
   static async fetchPostUnfollow(user_id) {
-    const res = await AjaxModule.ajaxPost({ url: '/unfollow', body: { user_id } });
+    const res = await AjaxModule.ajaxPost({ url: '/api/unfollow', body: { user_id } });
     return res.status;
   }
 

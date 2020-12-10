@@ -2,17 +2,17 @@ import { AjaxModule } from '../modules/ajax.js';
 
 export default class UserService {
   static async fetchChangeLogin(login) {
-    const res = await AjaxModule.ajaxPost({ url: '/chengelogin', body: { login } });
+    const res = await AjaxModule.ajaxPost({ url: '/api/chengelogin', body: { login } });
     return res.status;
   }
 
   static async fetchChangePassword(password_old, password) {
-    const res = await AjaxModule.ajaxPost({ url: '/chengepass', body: { password_old, password } });
+    const res = await AjaxModule.ajaxPost({ url: '/api/chengepass', body: { password_old, password } });
     return res.status;
   }
 
   static async fetchChangeAvatar(avatar) {
-    const res = await AjaxModule.ajaxPost({ url: '/changeAvatar', body: avatar });
+    const res = await AjaxModule.ajaxPost({ url: '/api/changeAvatar', body: avatar });
     return res.status;
   }
 
