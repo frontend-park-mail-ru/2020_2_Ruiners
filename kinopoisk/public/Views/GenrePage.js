@@ -3,6 +3,7 @@ import filmService from '../Services/filmService.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
 import Bus from '../modules/EventBus.js';
 import { nav } from '../config.js';
+import styles from '../static/CSS/main.scss';
 
 export default class LoginPage extends Base {
   constructor(context) {
@@ -19,7 +20,7 @@ export default class LoginPage extends Base {
     super.render(false);
     this.parent.innerHTML = '';
     const body = document.getElementById('body');
-    body.className = 'page';
+    body.className = styles.page;
     const lenta = new FilmLenta({
       genre: this.getRussian(this.genre),
       body: responseBody,

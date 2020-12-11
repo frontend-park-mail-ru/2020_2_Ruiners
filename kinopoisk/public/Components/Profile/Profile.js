@@ -1,5 +1,6 @@
 import profileT from './Profile.handlebars';
 import { domain } from '../../config.js';
+import styles from './Profile.scss';
 
 export default class Profile {
   constructor(context = {}) {
@@ -16,6 +17,7 @@ export default class Profile {
   render() {
     this.parent.appendChild(this.profile);
     this.profile.innerHTML = this.template({
+      styles: styles,
       isProfile: this.isProfile,
       id: this.body.id,
       Login: this.body.Login,

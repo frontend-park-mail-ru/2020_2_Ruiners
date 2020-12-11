@@ -1,6 +1,7 @@
 import Button from '../Button/Button.js';
 import Bus from '../../modules/EventBus.js';
 import windowT from './Window.handlebars';
+import styles from './Window.scss';
 
 export default class Window {
   constructor(context = {}) {
@@ -12,7 +13,7 @@ export default class Window {
 
   render(callback) {
     this.parent.appendChild(this.windowEl);
-    this.windowEl.innerHTML = this.template();
+    this.windowEl.innerHTML = this.template({styles: styles,});
     const okno = document.getElementById('okno');
     const buttonProfile = new Button({
       parent: okno,

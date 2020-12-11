@@ -1,4 +1,5 @@
 import buttonT from './Button.handlebars';
+import styles from './Button.scss';
 
 export default class Button {
   constructor(context = {}) {
@@ -22,6 +23,7 @@ export default class Button {
       type: this.type,
       text: this.text,
       id: this.id,
+      styles: styles,
     });
     if (callback) {
       this.listener = (evt) => {

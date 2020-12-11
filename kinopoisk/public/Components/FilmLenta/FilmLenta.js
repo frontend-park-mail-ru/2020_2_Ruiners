@@ -1,6 +1,9 @@
 import FilmPoster from '../FilmPoster/FilmPoster.js';
 import filmLentaT from './FilmLenta.handlebars';
 import Delete from '../Delete/Delete.js';
+import stylesDelete from '../Delete/Delete.scss';
+import stylesFPoster from '../FilmPoster/FilmPoster.scss';
+import styles from './FilmLenta.scss';
 
 export default class FilmLenta {
   constructor(context = {}) {
@@ -23,7 +26,10 @@ export default class FilmLenta {
     } else {
       for (let i = 0; i < this.body.length; i++) {
         const del = new Delete({ parent: this.parent, id: 1 });
-        this.body[i].del = del.template({ id: this.body[i].id, what: `poster/${this.id}` });
+        this.body[i].del = del.template({ id: this.body[i].id,
+          what: `poster/${this.id}`,
+          styles: stylesDelete,
+        });
         this.body[i].playlist = this.playlist;
         const poster = new FilmPoster(this.body[i]);
         posters[i] = poster.render();
@@ -39,10 +45,15 @@ export default class FilmLenta {
     });
     this.parent.appendChild(this.lenta);
     this.lenta.innerHTML = this.template({
+      stylesFPoster: stylesFPoster,
+      styles: styles,
       playlist: this.playlist,
       genre: this.genre,
       posters: this.posters,
-      del: del.template({ id: this.id, what: 'playlist' }),
+      del: del.template({ id: this.id,
+         what: 'playlist',
+         styles: stylesDelete,
+        }),
     });
   }
 

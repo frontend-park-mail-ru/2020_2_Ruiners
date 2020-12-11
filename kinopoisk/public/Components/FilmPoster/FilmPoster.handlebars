@@ -1,12 +1,12 @@
-<div class="lenta__object">
-    <a href="film/{{ id }}" class="href" id="{{ id }}"><img width="270" height="420" src="{{ SmallImg }}" alt="" class="object__image">
-        <div class="object__hidden"><span>{{ MainGenre }}, {{ year }} год</span></div>
+<div class="{{styles.lenta__object}}">
+    <a href="film/{{ id }}" class="{{styles.href}}" id="{{ id }}"><img width="270" height="420" src="{{ SmallImg }}" alt="" class="{{styles.object__image}}">
+        <div class="{{styles.object__hidden}}"><span>{{ MainGenre }}, {{ year }} год</span></div>
     </a>
 
     {{#if playlist}}
-        <div class="poster_delete">
+        <div class="{{styles.poster_delete}}">
             {{{del}}}
         </div>
     {{/if}}
-    <div class="image__text"> {{ title }} </div>
+    <div class="{{styles.image__text}}"> {{ title }} </div>
 </div>

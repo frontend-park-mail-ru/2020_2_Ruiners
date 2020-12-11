@@ -1,4 +1,5 @@
 import deleteT from './Delete.handlebars';
+import styles from './Delete.scss';
 
 export default class Delete {
   constructor(context) {
@@ -15,6 +16,7 @@ export default class Delete {
     this.delete.innerHTML = this.template({
       id: this.id,
       what: this.what,
+      styles: styles,
     });
   }
 }
