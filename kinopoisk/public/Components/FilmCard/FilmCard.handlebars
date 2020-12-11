@@ -21,7 +21,7 @@
         <div class="{{styles.filmCard_info_info}}">
             <div class="{{styles.filmCard_info_info_genre}}">
                 {{#each genres}}
-                    <a href="genre/{{this.genre}}" class="{{styles.link}}"> {{ this.rusGenre }} </a>
+                    <a href="genre/{{this.genre}}" class="{{../this.styles.link}}"> {{ this.rusGenre }} </a>
                 {{/each}}
             </div>
             <div class="{{styles.filmCard_info_info_genre}}">
@@ -46,7 +46,7 @@
             <div class="{{styles.filmCard_info_header_roles}}">В ролях</div>
                 <div class="{{styles.filmCard_roles}}">
                     {{#each actors}}
-                        <div class="{{styles.filmcard_roles_link}}"><a href="person/{{ this.id }}" class="{{styles.link}}">{{ this.name }} </a></div>
+                        <div class="{{../this.styles.filmcard_roles_link}}"><a href="person/{{ this.id }}" class="{{../this.styles.link}}">{{ this.name }} </a></div>
                     {{/each}}
                 </div>
         </div>

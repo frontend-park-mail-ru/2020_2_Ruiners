@@ -7,6 +7,9 @@ import FilmLenta from '../Components/FilmLenta/FilmLenta';
 import FriendList from '../Components/FriendList/FriendList';
 import News from '../Components/News/News';
 import subscribeService from '../Services/subscribeService';
+import styles from '../static/CSS/main.scss';
+import stylesProfile from '../Components/Profile/Profile.scss';
+import stylesButton from '../Components/Button/Button.scss';
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -24,10 +27,10 @@ export default class ProfilePage extends Base {
       super.render(false);
     }
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     this.parent.className = '';
     const button = new Button({
-      classname: 'buttons__forComments',
+      classname: stylesButton.buttons__forComments,
       parent: null,
     });
     const profile = new Profile({
@@ -42,6 +45,7 @@ export default class ProfilePage extends Base {
           text: 'Настройки',
           id: 'settings',
           type: 'submit',
+          styles: stylesButton,
         }),
       },
     });
@@ -184,10 +188,10 @@ export default class ProfilePage extends Base {
 
   createRender(buttonCreate, headerCreate, createPlaylist) {
     headerCreate.textContent = 'Создать плейлист';
-    headerCreate.className = 'headers_main';
+    headerCreate.className = styles.headers_main;
     this.parent.appendChild(headerCreate);
     createPlaylist.placeholder = 'Напишите название';
-    createPlaylist.className = 'input_main';
+    createPlaylist.className = styles.input_main;
     this.parent.appendChild(createPlaylist);
     buttonCreate.render({
       callback: () => {
@@ -205,14 +209,14 @@ export default class ProfilePage extends Base {
   }
 
   setClass(link1, link2, link3) {
-    link1.className = 'profile_nav_links_aBig';
-    link2.className = 'profile_nav_links_a';
-    link3.className = 'profile_nav_links_a';
+    link1.className = stylesProfile.profile_nav_links_aBig;
+    link2.className = stylesProfile.profile_nav_links_a;
+    link3.className = stylesProfile.profile_nav_links_a;
   }
 
   createBox() {
     const box = document.createElement('div');
-    box.className = 'invisible_box';
+    box.className = styles.invisible_box;
     box.id = 'box';
     this.parent.appendChild(box);
     return box;

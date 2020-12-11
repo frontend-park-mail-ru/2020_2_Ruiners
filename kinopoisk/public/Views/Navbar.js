@@ -8,6 +8,8 @@ import navLink from '../modules/navLink.js';
 import SessionService from '../Services/sessionService.js';
 import Bus from '../modules/EventBus.js';
 import { domain, nav } from '../config.js';
+import stylesList from '../Components/List/List.scss';
+import stylesLink from '../Components/Link/Link.scss';
 
 export default class Navbar {
   constructor(parent) {
@@ -24,7 +26,7 @@ export default class Navbar {
 
     const BrandObj = new List({
       parent: ul,
-      classname: 'brand',
+      classname: stylesList.brand,
     });
     const Brand = BrandObj.render();
     const href = document.createElement('a');
@@ -36,7 +38,7 @@ export default class Navbar {
 
     const FilmsObj = new List({
       parent: ul,
-      classname: 'menu-secondary',
+      classname: stylesList["menu-secondary"],
     });
     const Films = FilmsObj.render();
 
@@ -50,7 +52,7 @@ export default class Navbar {
 
     const SearchObj = new List({
       parent: ul,
-      classname: 'menu-secondary_search',
+      classname: stylesList["menu-secondary_search"],
     });
     const Search = SearchObj.render();
     const SearchAObj = new Link({
@@ -64,17 +66,17 @@ export default class Navbar {
     if (isAuthorized) {
       const profileObj = new List({
         parent: ul,
-        classname: 'right_profile',
+        classname: stylesList.right_profile,
       });
       const profile = profileObj.render();
 
       const profileAObj = new Link({
         parent: profile,
-        className: 'profileNav',
+        className: stylesLink.profileNav,
       });
       const profileA = profileAObj.render();
       const src = `${domain}/api/user/avatar/${res.get.id}?${Math.random()}`;
-      profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="round">`);
+      profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="${stylesList.round}">`);
       const profileLink = new navLink(profileA);
       const window = new Window({ parent: profileA });
       let isOpen = false;
@@ -109,7 +111,7 @@ export default class Navbar {
     } else {
       const loginObj = new List({
         parent: ul,
-        classname: 'right',
+        classname: stylesList.right,
       });
       const login = loginObj.render();
 

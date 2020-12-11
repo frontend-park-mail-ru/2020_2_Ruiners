@@ -17,19 +17,19 @@
         <div>
         <h1 class="{{styles.comments__header}}">Все комментарии</h1>
             {{#each comments}}
-                <div class="{{styles.comments__underground}}">
-                    <div class="{{styles.comment__profile}}">
-                        <a class="{{styles.comment__login}}" href="people/{{this.user_id}}">{{ this.user_login }}</a>
-                        <img class="{{styles.comment__profile__round}}" width="50" height="50" src="{{ this.image }}" alt="">
+                <div class="{{../this.styles.comments__underground}}">
+                    <div class="{{../this.styles.comment__profile}}">
+                        <a class="{{../this.styles.comment__login}}" href="people/{{this.user_id}}">{{ this.user_login }}</a>
+                        <img class="{{../this.styles.comment__profile__round}}" width="50" height="50" src="{{ this.image }}" alt="">
                     </div>
-                    <div class="{{styles.comment__content}}">
+                    <div class="{{../this.styles.comment__content}}">
                         {{ this.text_body }}
                     </div>
-                    <hr class="{{styles.comment__line}}">
-                    <span class="{{styles.comment__rate}}">Оценка: {{ this.rate }}/10</span>
+                    <hr class="{{../this.styles.comment__line}}">
+                    <span class="{{../this.styles.comment__rate}}">Оценка: {{ this.rate }}/10</span>
                 </div>
             {{/each}}
         </div>
     {{/if}}
 </div>
-<div class="{{styles.invisible_box}}"></div>
+<div class="{{stylesMain.invisible_box}}"></div>

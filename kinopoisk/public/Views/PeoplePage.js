@@ -3,6 +3,8 @@ import Button from '../Components/Button/Button';
 import Profile from '../Components/Profile/Profile';
 import Bus from '../modules/EventBus';
 import Base from './Base';
+import styles from '../static/CSS/main.scss';
+import stylesButton from '../Components/Button/Button.scss';
 
 export default class PeoplePage extends Base {
   constructor(parent, data) {
@@ -15,15 +17,15 @@ export default class PeoplePage extends Base {
     super.render(false);
     const responseBody = this.data;
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     this.parent.innerHTML = '';
     this.parent.className = '';
     const buttonSub = new Button({
-      classname: 'buttons__forComments',
+      classname: stylesButton.buttons__forComments,
       parent: null,
     });
     const buttonUnsub = new Button({
-      classname: 'buttons__forComments',
+      classname: stylesButton.buttons__forComments,
       parent: null,
     });
     const profile = new Profile({
@@ -39,12 +41,14 @@ export default class PeoplePage extends Base {
           text: 'Подписаться',
           id: 'subscribe',
           type: 'submit',
+          styles: stylesButton,
         }),
         buttonUnsub: buttonUnsub.template({
-          classname: 'button__red',
+          classname: stylesButton.button__red,
           text: 'Отписаться',
           id: 'Unsubscribe',
           type: 'submit',
+          styles: stylesButton,
         }),
       },
     });
@@ -58,7 +62,7 @@ export default class PeoplePage extends Base {
       const listenerSub = (evt) => {
         evt.preventDefault();
         subscribe.remove();
-        unsubscribe.className = 'button button__red';
+        unsubscribe.className = stylesButton.button + " " + stylesButton.button__red;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);
@@ -66,7 +70,7 @@ export default class PeoplePage extends Base {
       const listenerUnsub = (evt) => {
         evt.preventDefault();
         unsubscribe.remove();
-        subButton.className = 'button';
+        subButton.className = stylesButton.button;
         subButton.textContent = 'Подписаться';
         par.appendChild(subButton);
         Bus.emit('unsubscribe', id);
@@ -74,7 +78,7 @@ export default class PeoplePage extends Base {
       const listenerSubscribe = (evt) => {
         evt.preventDefault();
         subButton.remove();
-        unsubscribe.className = 'button button__red';
+        unsubscribe.className = stylesButton.button + " " + stylesButton.button__red;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);
@@ -92,7 +96,7 @@ export default class PeoplePage extends Base {
       const listenerSub = (evt) => {
         evt.preventDefault();
         unsub.remove();
-        subButton.className = 'button';
+        subButton.className = stylesButton.button;
         subButton.textContent = 'Подписаться';
         par.appendChild(subButton);
         Bus.emit('unsubscribe', id);
@@ -100,7 +104,7 @@ export default class PeoplePage extends Base {
       const listenerUnsub = (evt) => {
         evt.preventDefault();
         unsubscribe.remove();
-        subButton.className = 'button';
+        subButton.className = stylesButton.button;
         subButton.textContent = 'Подписаться';
         par.appendChild(subButton);
         Bus.emit('unsubscribe', id);
@@ -108,7 +112,7 @@ export default class PeoplePage extends Base {
       const listenerSubscribe = (evt) => {
         evt.preventDefault();
         subButton.remove();
-        unsubscribe.className = 'button button__red';
+        unsubscribe.className = stylesButton.button + " " + stylesButton.button__red;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);
@@ -122,7 +126,7 @@ export default class PeoplePage extends Base {
 
   createBox() {
     const box = document.createElement('div');
-    box.className = 'invisible_box';
+    box.className = styles.invisible_box;
     box.id = 'box';
     this.parent.appendChild(box);
     return box;

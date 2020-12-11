@@ -1,5 +1,5 @@
 import OfflinePageT from './OfflinePage.handlebars';
-import './OfflinePage.scss';
+import styles from './OfflinePage.scss';
 
 export default class OfflinePage {
   constructor(parent) {
@@ -11,8 +11,10 @@ export default class OfflinePage {
   render() {
     this.parent.innerHTML = '';
     const body = document.getElementById('body');
-    body.className = 'offline_background';
+    body.className = styles.offline_background;
     this.parent.appendChild(this.page);
-    this.page.innerHTML = this.template();
+    this.page.innerHTML = this.template({
+      styles: styles,
+    });
   }
 }

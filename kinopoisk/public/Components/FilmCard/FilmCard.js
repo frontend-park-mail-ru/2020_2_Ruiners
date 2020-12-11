@@ -64,17 +64,19 @@ export default class FilmCard {
         text: 'Оценить',
         id: 'vote',
         type: 'submit',
+        styles: stylesButton,
       }),
       ButtonPlaylist: this.playlistButton.template({
         classname: stylesButton.buttons__marginForFilmCard,
         text: 'Добавить',
         id: 'add',
         type: 'submit',
+        styles: stylesButton,
       }),
     });
     const button = document.getElementById('vote');
     const err = document.createElement('div');
-    err.className = stylesMain.success + stylesMain.succes__marginForFilmCard;
+    err.className = stylesMain.success + " " + stylesMain.succes__marginForFilmCard;
     if (this.isAuthorized) {
       button.addEventListener('click', (event) => {
         for (let i = 1; i <= 10; i++) {

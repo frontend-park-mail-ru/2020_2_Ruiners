@@ -12,7 +12,9 @@ export default class Footer {
     if (foot !== undefined) {
       foot.innerHTML = '';
     }
-    this.footer.innerHTML = this.template({styles: styles,});
+    this.footer.innerHTML = this.template({
+      styles: styles,
+    });
     const body = document.getElementById('body');
     body.appendChild(this.footer);
   }

@@ -26,7 +26,8 @@ export default class FilmLenta {
     } else {
       for (let i = 0; i < this.body.length; i++) {
         const del = new Delete({ parent: this.parent, id: 1 });
-        this.body[i].del = del.template({ id: this.body[i].id,
+        this.body[i].del = del.template({
+          id: this.body[i].id,
           what: `poster/${this.id}`,
           styles: stylesDelete,
         });
@@ -50,7 +51,8 @@ export default class FilmLenta {
       playlist: this.playlist,
       genre: this.genre,
       posters: this.posters,
-      del: del.template({ id: this.id,
+      del: del.template({
+         id: this.id,
          what: 'playlist',
          styles: stylesDelete,
         }),

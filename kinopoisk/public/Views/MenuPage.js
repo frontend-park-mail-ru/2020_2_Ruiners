@@ -3,6 +3,8 @@ import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
 import filmService from '../Services/filmService.js';
 import Bus from '../modules/EventBus.js';
 import { nav, application } from '../config.js';
+import styles from '../static/CSS/main.scss';
+import stylesFilmLenta from '../Components/FilmLenta/FilmLenta.scss';
 
 export default class MenuPage extends Base {
   constructor(parent) {
@@ -15,7 +17,7 @@ export default class MenuPage extends Base {
     this.parent.innerHTML = '';
     this.parent.className = '';
     const body = document.getElementById('body');
-    body.className = 'main__black';
+    body.className = stylesFilmLenta.main__black;
     const lentas = [
       {
         rusGenre: 'Фантастика',
@@ -50,7 +52,7 @@ export default class MenuPage extends Base {
 
   createBox() {
     const box = document.createElement('div');
-    box.className = 'invisible_box';
+    box.className = styles.invisible_box;
     this.parent.appendChild(box);
   }
 }

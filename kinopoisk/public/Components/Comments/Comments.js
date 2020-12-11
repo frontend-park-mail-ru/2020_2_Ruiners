@@ -2,6 +2,7 @@ import Button from '../Button/Button.js';
 import commentT from './Comments.handlebars';
 import stylesButton from '../Button/Button.scss';
 import styles from './Comments.scss';
+import stylesMain from '../../static/CSS/main.scss';
 
 export default class Comments {
   constructor(context = {}) {
@@ -33,8 +34,10 @@ export default class Comments {
         text: 'Отправить',
         id: 'msg_button',
         type: 'submit',
+        styles: stylesButton,
       }),
       styles: styles,
+      stylesMain: stylesMain,
     });
   }
 

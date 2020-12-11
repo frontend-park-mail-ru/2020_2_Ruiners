@@ -3,6 +3,7 @@ import { nav } from '../config';
 import Search from '../Components/Search/Search';
 import Bus from '../modules/EventBus';
 import FilmLenta from '../Components/FilmLenta/FilmLenta';
+import styles from '../static/CSS/main.scss';
 
 export default class SearchPage extends Base {
   constructor(context) {
@@ -15,7 +16,7 @@ export default class SearchPage extends Base {
     super.render(false);
     this.parent.innerHTML = '';
     const body = document.getElementById('body');
-    body.className = 'page';
+    body.className = styles.page;
     const search = new Search({
       parent: this.parent,
     });
@@ -43,7 +44,7 @@ export default class SearchPage extends Base {
 
   createBox(par) {
     const box = document.createElement('div');
-    box.className = 'invisible_box';
+    box.className = styles.invisible_box;
     box.id = 'box';
     par.appendChild(box);
     return box;
