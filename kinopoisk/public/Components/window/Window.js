@@ -14,7 +14,7 @@ export default class Window {
   render(callback) {
     this.parent.appendChild(this.windowEl);
     this.windowEl.innerHTML = this.template({
-      styles: styles,
+      styles,
     });
     const okno = document.getElementById('okno');
     const buttonProfile = new Button({

@@ -12,7 +12,7 @@ import RateAndReviewService from './Services/rateAndReviewService.js';
 import { application, nav } from './config.js';
 import subscribeService from './Services/subscribeService';
 
-application.style.marginLeft = `10vmin`;
+application.style.marginLeft = '10vmin';
 
 if ('serviceWorker' in navigator) {
   runtime.register();
@@ -139,7 +139,7 @@ if (navigator.onLine) {
 router.start();
 
 window.addEventListener('click', (evt) => {
-  if (evt.target.id.indexOf('playlist') == -1 && evt.target.id.indexOf('poster') == -1 && evt.target.id.indexOf('profile') == -1) {
+  if (evt.target.id.indexOf('playlist') === -1 && evt.target.id.indexOf('poster') === -1 && evt.target.id.indexOf('profile') === -1) {
 
   } else if (evt.target.id.indexOf('playlist') !== -1 || evt.target.id.indexOf('poster') !== -1) {
     evt.preventDefault();

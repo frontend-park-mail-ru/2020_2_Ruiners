@@ -15,7 +15,7 @@ export default class PersonCard {
   render() {
     this.parent.appendChild(this.card);
     this.card.innerHTML = this.template({
-      styles: styles,
+      styles,
       Name: this.body.name,
       Image: this.body.image,
       BornDate: this.body.born_date,

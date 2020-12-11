@@ -22,7 +22,7 @@ export default class SignupPage extends Base {
     body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const signupBox = document.createElement('div');
-    signupBox.className = stylesForm.wrapper__form__regLog + " " + stylesForm.register;
+    signupBox.className = `${stylesForm.wrapper__form__regLog} ${stylesForm.register}`;
     this.parent.appendChild(signupBox);
     const headLogin = {
       head: true,

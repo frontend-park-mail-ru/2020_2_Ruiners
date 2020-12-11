@@ -46,16 +46,16 @@ export default class FilmLenta {
     });
     this.parent.appendChild(this.lenta);
     this.lenta.innerHTML = this.template({
-      stylesFPoster: stylesFPoster,
-      styles: styles,
+      stylesFPoster,
+      styles,
       playlist: this.playlist,
       genre: this.genre,
       posters: this.posters,
       del: del.template({
-         id: this.id,
-         what: 'playlist',
-         styles: stylesDelete,
-        }),
+        id: this.id,
+        what: 'playlist',
+        styles: stylesDelete,
+      }),
     });
   }
 

@@ -22,7 +22,7 @@ export default class LoginPage extends Base {
     body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const loginBox = document.createElement('div');
-    loginBox.className = stylesForm.wrapper__form__regLog + " " + stylesForm.login;
+    loginBox.className = `${stylesForm.wrapper__form__regLog} ${stylesForm.login}`;
     this.parent.appendChild(loginBox);
     const headLogin = {
       head: true,
@@ -49,7 +49,7 @@ export default class LoginPage extends Base {
 
     const subLogin = {
       text: 'Войти',
-      className: stylesButton.button + " " + stylesButton.buttons__forRegLog,
+      className: `${stylesButton.button} ${stylesButton.buttons__forRegLog}`,
     };
 
     const formLog = new Form(headLogin, configInputLogin, subLogin);

@@ -17,7 +17,7 @@ export default class Profile {
   render() {
     this.parent.appendChild(this.profile);
     this.profile.innerHTML = this.template({
-      styles: styles,
+      styles,
       isProfile: this.isProfile,
       id: this.body.id,
       Login: this.body.Login,

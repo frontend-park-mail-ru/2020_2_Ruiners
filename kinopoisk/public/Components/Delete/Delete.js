@@ -16,7 +16,7 @@ export default class Delete {
     this.delete.innerHTML = this.template({
       id: this.id,
       what: this.what,
-      styles: styles,
+      styles,
     });
   }
 }

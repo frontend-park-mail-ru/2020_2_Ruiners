@@ -37,7 +37,7 @@ export default class FilmCard {
       playlistBool = true;
     }
     this.card.innerHTML = this.template({
-      styles: styles,
+      styles,
       isAuth: this.isAuthorized,
       playlistBool,
       playlists: this.playlists,
@@ -76,7 +76,7 @@ export default class FilmCard {
     });
     const button = document.getElementById('vote');
     const err = document.createElement('div');
-    err.className = stylesMain.success + " " + stylesMain.succes__marginForFilmCard;
+    err.className = `${stylesMain.success} ${stylesMain.succes__marginForFilmCard}`;
     if (this.isAuthorized) {
       button.addEventListener('click', (event) => {
         for (let i = 1; i <= 10; i++) {

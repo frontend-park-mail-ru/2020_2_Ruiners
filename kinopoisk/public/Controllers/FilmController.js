@@ -80,7 +80,7 @@ export default function Film(params) {
           if (res.ok) {
             let playlists = [];
             let similar = [];
-            filmService.getByGenre('fantasy').then(simRes => {
+            filmService.getByGenre('fantasy').then((simRes) => {
               if (simRes.ok) {
                 similar = simRes.get;
                 console.log(similar);

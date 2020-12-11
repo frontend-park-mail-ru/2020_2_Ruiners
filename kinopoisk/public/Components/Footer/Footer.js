@@ -13,7 +13,7 @@ export default class Footer {
       foot.innerHTML = '';
     }
     this.footer.innerHTML = this.template({
-      styles: styles,
+      styles,
     });
     const body = document.getElementById('body');
     body.appendChild(this.footer);

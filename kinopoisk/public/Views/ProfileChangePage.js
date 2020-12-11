@@ -24,7 +24,7 @@ export default class ProfileChangePage extends Base {
     body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const settingsBox = document.createElement('div');
-    settingsBox.className = styles.margin + " " + stylesForm.chenge;
+    settingsBox.className = `${styles.margin} ${stylesForm.chenge}`;
     this.parent.appendChild(settingsBox);
     const responseBody = JSON.parse(this.data);
 

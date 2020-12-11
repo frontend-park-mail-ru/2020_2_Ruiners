@@ -56,7 +56,7 @@ export default class UserService {
     let resLog = 200;
     let resPass = 200;
     let resAvatar = 200;
-    if (login && login != '') {
+    if (login && login !== '') {
       resLog = await this.fetchChangeLogin(login);
     }
     if (resLog === 200) {
@@ -65,7 +65,7 @@ export default class UserService {
       }
     }
     if (resLog === 200 && resPass === 200) {
-      if (avatar != {}) {
+      if (avatar !== {}) {
         resAvatar = await this.fetchChangeAvatar(avatar);
       }
     }

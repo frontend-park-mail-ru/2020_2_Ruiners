@@ -14,7 +14,7 @@ export default class OfflinePage {
     body.className = styles.offline_background;
     this.parent.appendChild(this.page);
     this.page.innerHTML = this.template({
-      styles: styles,
+      styles,
     });
   }
 }

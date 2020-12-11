@@ -1,5 +1,5 @@
 import Base from './Base.js';
-import { application, domain, nav } from '../config.js';
+import { application, nav } from '../config.js';
 import Button from '../Components/Button/Button';
 import Profile from '../Components/Profile/Profile.js';
 import Bus from '../modules/EventBus.js';
@@ -142,7 +142,7 @@ export default class ProfilePage extends Base {
       });
       let rightIndex = 0;
       lentas.forEach((element, index) => {
-        if (element.id == parseInt(playlistId)) {
+        if (element.id === parseInt(playlistId)) {
           rightIndex = index;
         }
       });
@@ -160,13 +160,13 @@ export default class ProfilePage extends Base {
         element.hide();
       });
       lentas.forEach((element, index) => {
-        if (element.id == playlistId) {
+        if (element.id === playlistId) {
           rightIndex = index;
         }
       });
       let filmIndex = 0;
       lentas[rightIndex].body.forEach((element, index) => {
-        if (element.id == filmId) {
+        if (element.id === filmId) {
           filmIndex = index;
         }
       });

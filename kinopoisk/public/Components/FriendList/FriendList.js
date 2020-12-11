@@ -28,7 +28,7 @@ export default class FriendList {
     });
     this.friendList.innerHTML = this.template({
       friends: this.body,
-      styles: styles,
+      styles,
     });
   }
 
@@ -39,7 +39,7 @@ export default class FriendList {
   remove(friendId) {
     let rightIndex = 0;
     this.body.forEach((element, index) => {
-      if (element.id == friendId) {
+      if (element.id === friendId) {
         rightIndex = index;
       }
     });

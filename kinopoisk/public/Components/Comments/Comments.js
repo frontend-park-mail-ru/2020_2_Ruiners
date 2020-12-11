@@ -36,8 +36,8 @@ export default class Comments {
         type: 'submit',
         styles: stylesButton,
       }),
-      styles: styles,
-      stylesMain: stylesMain,
+      styles,
+      stylesMain,
     });
   }
 

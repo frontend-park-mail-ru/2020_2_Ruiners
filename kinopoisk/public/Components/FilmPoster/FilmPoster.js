@@ -19,7 +19,7 @@ export default class FilmPoster {
 
   render() {
     return this.template({
-      styles: styles,
+      styles,
       id: this.id,
       title: this.title,
       MainGenre: this.genre,

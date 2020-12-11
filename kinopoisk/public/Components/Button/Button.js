@@ -23,7 +23,7 @@ export default class Button {
       type: this.type,
       text: this.text,
       id: this.id,
-      styles: styles,
+      styles,
     });
     if (callback) {
       this.listener = (evt) => {

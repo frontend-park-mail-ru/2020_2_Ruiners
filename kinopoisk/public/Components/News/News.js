@@ -21,9 +21,9 @@ export default class News {
       element.dateTime = `${element.date.getHours()}:${element.date.getMinutes()} ${element.date.getDate()}-${element.date.getMonth()}-${element.date.getFullYear()}`;
     });
     this.news.innerHTML = this.template({
-      stylesFriendList: stylesFriendList,
-      stylesComments: stylesComments,
-      styles: styles,
+      stylesFriendList,
+      stylesComments,
+      styles,
       news: this.body,
     });
   }

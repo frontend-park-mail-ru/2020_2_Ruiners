@@ -13,7 +13,7 @@ export default class Search {
   render() {
     this.parent.appendChild(this.search);
     this.search.innerHTML = this.template({
-      styles: styles,
+      styles,
     });
     const obj = document.getElementById('search');
     obj.style.backgroundImage = 'url(\'images/search1.png\')';

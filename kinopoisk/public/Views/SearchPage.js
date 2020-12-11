@@ -24,9 +24,9 @@ export default class SearchPage extends Base {
     const searchInput = document.getElementById('search');
     const content = document.getElementById('content');
     searchInput.addEventListener('keypress', (evt) => {
-      let str = searchInput.value + String.fromCharCode(evt.charCode);
+      const str = searchInput.value + String.fromCharCode(evt.charCode);
       Bus.emit('search', {
-        str: str,
+        str,
         call: (responseBody) => {
           console.log(responseBody);
           content.innerHTML = '';
@@ -49,5 +49,4 @@ export default class SearchPage extends Base {
     par.appendChild(box);
     return box;
   }
-
 }

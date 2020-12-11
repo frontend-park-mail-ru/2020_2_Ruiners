@@ -62,7 +62,7 @@ export default class PeoplePage extends Base {
       const listenerSub = (evt) => {
         evt.preventDefault();
         subscribe.remove();
-        unsubscribe.className = stylesButton.button + " " + stylesButton.button__red;
+        unsubscribe.className = `${stylesButton.button} ${stylesButton.button__red}`;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);
@@ -78,7 +78,7 @@ export default class PeoplePage extends Base {
       const listenerSubscribe = (evt) => {
         evt.preventDefault();
         subButton.remove();
-        unsubscribe.className = stylesButton.button + " " + stylesButton.button__red;
+        unsubscribe.className = `${stylesButton.button} ${stylesButton.button__red}`;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);
@@ -112,7 +112,7 @@ export default class PeoplePage extends Base {
       const listenerSubscribe = (evt) => {
         evt.preventDefault();
         subButton.remove();
-        unsubscribe.className = stylesButton.button + " " + stylesButton.button__red;
+        unsubscribe.className = `${stylesButton.button} ${stylesButton.button__red}`;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);
