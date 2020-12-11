@@ -6,6 +6,7 @@ import personService from '../Services/personService.js';
 import { nav, domain } from '../config.js';
 import filmService from '../Services/filmService';
 import FilmLenta from '../Components/FilmLenta/FilmLenta';
+import styles from '../static/CSS/main.scss';
 
 export default class FilmPage extends Base {
   constructor(context = {}) {
@@ -19,7 +20,7 @@ export default class FilmPage extends Base {
   render(playlists, similar) {
     super.render(false);
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     const responseBody = JSON.parse(this.body);
     body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(${responseBody.big_img})`;
     this.parent.innerHTML = '';
@@ -93,7 +94,7 @@ export default class FilmPage extends Base {
                     responseBody,
                     render: this.render.bind(this),
                     playlists,
-                    similar: similar,
+                    similar,
                     buttonComment,
                   });
                 });

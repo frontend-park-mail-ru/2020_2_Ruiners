@@ -1,6 +1,9 @@
 import Button from '../Button/Button.js';
 import filmcardT from './FilmCard.handlebars';
 import Bus from '../../modules/EventBus.js';
+import stylesButton from '../Button/Button.scss';
+import styles from './FilmCard.scss';
+import stylesMain from '../../static/CSS/main.scss';
 
 export default class FilmCard {
   constructor(context = {}) {
@@ -14,11 +17,11 @@ export default class FilmCard {
     this.actors = actors;
     this.playlists = playlists;
     this.voteButton = new Button({
-      classname: 'buttons__forComments',
+      classname: stylesButton.buttons__forComments,
       parent: null,
     });
     this.playlistButton = new Button({
-      classname: 'buttons__forComments',
+      classname: stylesButton.buttons__forComments,
       parent: null,
     });
     this.template = filmcardT;
@@ -34,6 +37,7 @@ export default class FilmCard {
       playlistBool = true;
     }
     this.card.innerHTML = this.template({
+      styles,
       isAuth: this.isAuthorized,
       playlistBool,
       playlists: this.playlists,
@@ -56,21 +60,23 @@ export default class FilmCard {
       MyRate: this.body.MyRate,
       stars: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
       Button: this.voteButton.template({
-        classname: 'buttons__marginForFilmCard',
+        classname: stylesButton.buttons__marginForFilmCard,
         text: 'Оценить',
         id: 'vote',
         type: 'submit',
+        styles: stylesButton,
       }),
       ButtonPlaylist: this.playlistButton.template({
-        classname: 'buttons__marginForFilmCard',
+        classname: stylesButton.buttons__marginForFilmCard,
         text: 'Добавить',
         id: 'add',
         type: 'submit',
+        styles: stylesButton,
       }),
     });
     const button = document.getElementById('vote');
     const err = document.createElement('div');
-    err.className = 'success succes__marginForFilmCard';
+    err.className = `${stylesMain.success} ${stylesMain.succes__marginForFilmCard}`;
     if (this.isAuthorized) {
       button.addEventListener('click', (event) => {
         for (let i = 1; i <= 10; i++) {

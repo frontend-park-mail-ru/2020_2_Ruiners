@@ -1,35 +1,35 @@
-<div class="comments_place">
+<div class="{{styles.comments_place}}">
     {{#if isAuth}}
         <div>
-            <h1 class="comments__header">Ваш комментарий</h1>
-            <div class="comments__underground">
+            <h1 class="{{styles.comments__header}}">Ваш комментарий</h1>
+            <div class="{{styles.comments__underground}}">
                 <form>
-                    <textarea name="message" rows="1" class="question" required="" autocomplete="off" id="msg"></textarea>
-                    <label class="comment" for="msg"><span class="comment">Напишите комментарий</span></label>
+                    <textarea name="message" rows="1" class="{{styles.question}}" required="" autocomplete="off" id="msg"></textarea>
+                    <label class="{{styles.comment}}" for="msg"><span class="{{styles.comment}}">Напишите комментарий</span></label>
                 </form>
                 {{{ Button }}}
             </div>
         </div>
     {{/if}}
     {{#if noComments}}
-        <h1 class="comments__header">Нет комментариев</h1>
+        <h1 class="{{styles.comments__header}}">Нет комментариев</h1>
     {{else}}
         <div>
-        <h1 class="comments__header">Все комментарии</h1>
+        <h1 class="{{styles.comments__header}}">Все комментарии</h1>
             {{#each comments}}
-                <div class="comments__underground">
-                    <div class="comment__profile">
-                        <a class="comment__login" href="people/{{this.user_id}}">{{ this.user_login }}</a>
-                        <img class="comment__profile__round" width="50" height="50" src="{{ this.image }}" alt="">
+                <div class="{{../this.styles.comments__underground}}">
+                    <div class="{{../this.styles.comment__profile}}">
+                        <a class="{{../this.styles.comment__login}}" href="people/{{this.user_id}}">{{ this.user_login }}</a>
+                        <img class="{{../this.styles.comment__profile__round}}" width="50" height="50" src="{{ this.image }}" alt="">
                     </div>
-                    <div class="comment__content">
+                    <div class="{{../this.styles.comment__content}}">
                         {{ this.text_body }}
                     </div>
-                    <hr class="comment__line">
-                    <span class="comment__rate">Оценка: {{ this.rate }}/10</span>
+                    <hr class="{{../this.styles.comment__line}}">
+                    <span class="{{../this.styles.comment__rate}}">Оценка: {{ this.rate }}/10</span>
                 </div>
             {{/each}}
         </div>
     {{/if}}
 </div>
-<div class="invisible_box"></div>
+<div class="{{stylesMain.invisible_box}}"></div>

@@ -6,6 +6,10 @@ import userService from '../Services/userService.js';
 import Button from '../Components/Button/Button.js';
 import UserService from '../Services/userService.js';
 import { nav } from '../config.js';
+import styles from '../static/CSS/main.scss';
+import stylesForm from '../Components/Form/Form.scss';
+import stylesProfile from '../Components/Profile/Profile.scss';
+import stylesButton from '../Components/Button/Button.scss';
 
 export default class ProfileChangePage extends Base {
   constructor(parent, data) {
@@ -17,10 +21,10 @@ export default class ProfileChangePage extends Base {
   render() {
     super.render(false);
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const settingsBox = document.createElement('div');
-    settingsBox.className = 'wrapper__form chenge margin';
+    settingsBox.className = `${styles.margin} ${stylesForm.chenge}`;
     this.parent.appendChild(settingsBox);
     const responseBody = JSON.parse(this.data);
 
@@ -53,7 +57,7 @@ export default class ProfileChangePage extends Base {
     const form = formrLogin[0];
     settingsBox.appendChild(form);
     const Password = document.createElement('h2');
-    Password.className = 'settings_header';
+    Password.className = stylesProfile.settings_header;
     Password.textContent = 'Изменить Пароль';
     settingsBox.appendChild(Password);
 
@@ -99,11 +103,11 @@ export default class ProfileChangePage extends Base {
     const formPass = formr[0];
     settingsBox.appendChild(formPass);
     const Avatar = document.createElement('h2');
-    Avatar.className = 'settings_header';
+    Avatar.className = stylesProfile.settings_header;
     Avatar.textContent = 'Изменить аватарку';
     settingsBox.appendChild(Avatar);
     const err = document.createElement('div');
-    err.className = 'error';
+    err.className = styles.error;
 
     const configAvatar = [
       {
@@ -127,7 +131,7 @@ export default class ProfileChangePage extends Base {
     const formData = new FormData();
     const buttonSave = new Button({
       parent: settingsBox,
-      classname: 'buttons__marginForFilmCard',
+      classname: stylesButton.buttons__marginForFilmCard,
       text: 'Сохранить',
     });
     Bus.emit('Save', ({
@@ -145,7 +149,7 @@ export default class ProfileChangePage extends Base {
 
   createBox() {
     const box = document.createElement('div');
-    box.className = 'invisible_box';
+    box.className = styles.invisible_box;
     this.parent.appendChild(box);
   }
 }

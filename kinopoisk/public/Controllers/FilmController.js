@@ -5,6 +5,7 @@ import sessionService from '../Services/sessionService.js';
 import playlistService from '../Services/playlistService.js';
 import FilmPage from '../Views/FilmPage.js';
 import { application } from '../config.js';
+import styles from '../static/CSS/main.scss';
 
 export default function Film(params) {
   const { id } = params;
@@ -29,7 +30,7 @@ export default function Film(params) {
       const divError = buttonComment.parentElement;
       const err = document.createElement('div');
       err.textContent = 'Пустой отзыв';
-      err.className = 'error';
+      err.className = styles.error;
       divError.appendChild(err);
     } else {
       filmService.PostReview(responseBody.id, form.value).then((res) => {
@@ -51,11 +52,11 @@ export default function Film(params) {
     playlistService.PostAdd(filmId, playlistId).then((res) => {
       if (res.ok) {
         success.textContent = 'Вы успешно добавили фильм в плэйлист';
-        success.className = 'success_add';
+        success.className = styles.success_add;
         error.innerHTML = '';
       } else {
         error.textContent = 'Вы уже добавили этот фильм в плэйлист';
-        error.className = 'error_add';
+        error.className = styles.error_add;
         success.innerHTML = '';
       }
     });
@@ -79,7 +80,7 @@ export default function Film(params) {
           if (res.ok) {
             let playlists = [];
             let similar = [];
-            filmService.getByGenre('fantasy').then(simRes => {
+            filmService.getByGenre('fantasy').then((simRes) => {
               if (simRes.ok) {
                 similar = simRes.get;
                 console.log(similar);

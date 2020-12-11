@@ -1,20 +1,19 @@
-<div class="main__header">
-    <div class="filmlenta_genre">{{ genre }}</div>
+<div class="{{styles.main__header}}">
+    <div class="{{styles.filmlenta_genre}}">{{ genre }}</div>
     {{#if playlist}}
         {{{del}}}
     {{/if}}
 </div>
-<div class="header__lenta">
+<div class="{{styles.header__lenta}}">
     {{#each posters}}
         {{{ this }}}
     {{/each}}
     {{#if playlist}}
-        <div class="lenta__object">
-            <a href="/" class="href"><img width="270" height="420" src="images/adding.png" alt="" class="object__image">
-                <div class="object__hidden"><span>Добавить фильм</span></div>
+        <div class="{{stylesFPoster.lenta__object}}">
+            <a href="/" class="{{stylesFPoster.href}}"><img width="270" height="420" src="images/adding.png" alt="" class="{{stylesFPoster.object__image}}">
+                <div class="{{stylesFPoster.object__hidden}}"><span>Добавить фильм</span></div>
             </a>
         </div>
     {{/if}}
-    <hr class="lenta_line">
+    <hr class="{{styles.lenta_line}}">
 </div>
-

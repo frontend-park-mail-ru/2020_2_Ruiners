@@ -1,4 +1,5 @@
 import filmPosterT from './FilmPoster.handlebars';
+import styles from './FilmPoster.scss';
 
 export default class FilmPoster {
   constructor(context = {}) {
@@ -18,6 +19,7 @@ export default class FilmPoster {
 
   render() {
     return this.template({
+      styles,
       id: this.id,
       title: this.title,
       MainGenre: this.genre,

@@ -1,5 +1,6 @@
 import searchT from './Search.handlebars';
-import './Search.scss';
+// import './Search.scss';
+import styles from './Search.scss';
 
 export default class Search {
   constructor(context) {
@@ -11,7 +12,9 @@ export default class Search {
 
   render() {
     this.parent.appendChild(this.search);
-    this.search.innerHTML = this.template();
+    this.search.innerHTML = this.template({
+      styles,
+    });
     const obj = document.getElementById('search');
     obj.style.backgroundImage = 'url(\'images/search1.png\')';
   }

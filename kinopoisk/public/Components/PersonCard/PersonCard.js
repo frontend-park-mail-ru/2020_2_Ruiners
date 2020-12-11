@@ -1,4 +1,5 @@
 import personCardT from './PersonCard.handlebars';
+import styles from './PersonCard.scss';
 
 export default class PersonCard {
   constructor(context = {}) {
@@ -14,6 +15,7 @@ export default class PersonCard {
   render() {
     this.parent.appendChild(this.card);
     this.card.innerHTML = this.template({
+      styles,
       Name: this.body.name,
       Image: this.body.image,
       BornDate: this.body.born_date,

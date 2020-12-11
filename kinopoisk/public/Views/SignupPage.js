@@ -4,6 +4,10 @@ import Link from '../Components/Link/Link.js';
 import Form from '../Components/Form/Form.js';
 import { nav } from '../config.js';
 import Button from '../Components/Button/Button';
+import styles from '../static/CSS/main.scss';
+import stylesForm from '../Components/Form/Form.scss';
+import stylesLink from '../Components/Link/Link.scss';
+import stylesButton from '../Components/Button/Button.scss';
 
 export default class SignupPage extends Base {
   constructor(parent) {
@@ -15,10 +19,10 @@ export default class SignupPage extends Base {
     super.render(false);
     this.parent.innerHTML = '';
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const signupBox = document.createElement('div');
-    signupBox.className = 'wrapper__form__regLog register';
+    signupBox.className = `${stylesForm.wrapper__form__regLog} ${stylesForm.register}`;
     this.parent.appendChild(signupBox);
     const headLogin = {
       head: true,
@@ -66,10 +70,10 @@ export default class SignupPage extends Base {
     const form = formrLogin[0];
     signupBox.appendChild(form);
     const err = document.createElement('div');
-    err.className = 'error';
+    err.className = styles.error;
     const buttonSignup = new Button({
       parent: form,
-      classname: 'buttons__marginForFilmCard',
+      classname: stylesButton.buttons__marginForFilmCard,
       text: 'Регистрация',
     });
     Bus.emit('Signup', {
@@ -81,7 +85,7 @@ export default class SignupPage extends Base {
 
     const linkLogin = new Link({
       parent: form,
-      classname: 'linkSignupLogin',
+      classname: stylesLink.linkSignupLogin,
       pathname: '/login',
     });
     linkLogin.render();
