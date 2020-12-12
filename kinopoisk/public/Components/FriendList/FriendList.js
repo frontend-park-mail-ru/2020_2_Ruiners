@@ -6,8 +6,10 @@ import styles from './FriendList.scss';
 
 export default class FriendList {
   constructor(context) {
-    const { parent, body } = context;
+    const { parent, body, search, header } = context;
     this.friendList = document.createElement('div');
+    this.search = search;
+    this.header = header;
     this.parent = parent;
     this.body = body;
     this.template = friendListT;
@@ -27,6 +29,8 @@ export default class FriendList {
       element.domain = domain;
     });
     this.friendList.innerHTML = this.template({
+      search: this.search,
+      header: this.header,
       friends: this.body,
       styles,
     });

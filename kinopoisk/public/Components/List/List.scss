@@ -104,3 +104,13 @@
     position: static;
     right: 0;
 }
+
+@media (max-width: 460px) {
+    .menu-secondary_search a{
+        width: 32px;
+        font-size: 0px;
+        background-image: url("https://www.flaticon.com/svg/static/icons/svg/751/751381.svg");
+        background-size: 32px 32px;
+        background-repeat: no-repeat;
+    }
+}

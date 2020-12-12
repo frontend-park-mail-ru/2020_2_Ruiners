@@ -1,3 +1,8 @@
+{{#if search}}
+    <div class="{{styles.friendList_header_container}}">
+        <span class="{{ styles.friendList_header}}">{{header}}</span>
+    </div>
+{{/if}}
 {{#each friends}}
     <div class="{{../this.styles.friendList_width}}">
         <div class="{{../this.styles.friendList_container}}">
@@ -5,7 +10,10 @@
                 <img src="{{this.domain}}/api/user/avatar/{{this.id}}" width="200" height="200" class="{{../this.styles.friendlist__default_margin}} {{../this.styles.friendlist__image}}">
                 <a class="{{../this.styles.friendList_login}}" href="people/{{this.id}}">{{this.login}}</a>
             </div>
-            <div>{{{del}}}</div>
+            {{#if ../this.search}}
+            {{else}}
+                <div>{{{del}}}</div>
+            {{/if}}
         </div>
         <hr class="{{../this.styles.friendList_line}}">
     </div>

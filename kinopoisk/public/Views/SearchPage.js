@@ -4,6 +4,10 @@ import Search from '../Components/Search/Search';
 import Bus from '../modules/EventBus';
 import FilmLenta from '../Components/FilmLenta/FilmLenta';
 import styles from '../static/CSS/main.scss';
+import FriendList from '../Components/FriendList/FriendList';
+import PersonLenta from '../Components/PersonLenta/PersonLenta';
+import stylesSearch from '../Components/Search/Search.scss';
+import debounce from '../modules/debounce';
 
 export default class SearchPage extends Base {
   constructor(context) {
@@ -23,23 +27,91 @@ export default class SearchPage extends Base {
     search.render();
     const searchInput = document.getElementById('search');
     const content = document.getElementById('content');
-    searchInput.addEventListener('keypress', (evt) => {
-      const str = searchInput.value + String.fromCharCode(evt.charCode);
+    let allLink = document.getElementById('all');
+    let peopleLink = document.getElementById('people');
+    let filmsLink = document.getElementById('films');
+    let actorsLink = document.getElementById('actors');
+    let allBool = true;
+    let peopleBool = false;
+    let filmsBool = false;
+    let actorsBool = false;
+    allLink.addEventListener('click', () => {
+      this.setClass(allLink, peopleLink, filmsLink, actorsLink);
+      allBool = true;
+      peopleBool = false;
+      filmsBool = false;
+      actorsBool = false;
+      searchFunction();
+    });
+    peopleLink.addEventListener('click', () => {
+      this.setClass(peopleLink, allLink, filmsLink, actorsLink);
+      peopleBool = true;
+      allBool = false;
+      filmsBool = false;
+      actorsBool = false;
+      searchFunction();
+    });
+    filmsLink.addEventListener('click', () => {
+      this.setClass(filmsLink, peopleLink, allLink, actorsLink);
+      filmsBool = true;
+      peopleBool = false;
+      allBool = false;
+      actorsBool = false;
+      searchFunction();
+    });
+    actorsLink.addEventListener('click', () => {
+      this.setClass(actorsLink, filmsLink, peopleLink, allLink);
+      actorsBool = true;
+      filmsBool = false;
+      peopleBool = false;
+      allBool = false;
+      searchFunction();
+    });
+    const searchFunction = (evt) => {
+      let str;
+      if (evt) {
+        str = searchInput.value + String.fromCharCode(evt.charCode);
+      } else {
+        str = searchInput.value;
+      }
       Bus.emit('search', {
         str,
-        call: (responseBody) => {
-          console.log(responseBody);
+        call: (films, persons, users) => {
           content.innerHTML = '';
-          const lenta = new FilmLenta({
+          const lentaFilms = new FilmLenta({
             parent: content,
-            genre: str,
-            body: responseBody,
+            genre: 'Фильмы',
+            body: films,
           });
-          lenta.render();
-          this.createBox(content);
+          const lentaUsers = new FriendList({
+            search: true,
+            header: 'Люди',
+            parent: content,
+            body: users,
+          });
+
+          const lentaPersons = new PersonLenta({
+            parent: content,
+            body: persons,
+          });
+
+          if (films.length !== 0 && (filmsBool || allBool)) {
+            lentaFilms.render();
+          }
+
+          if (persons.length !== 0 && (actorsBool || allBool)) {
+            lentaPersons.render();
+          }
+
+          if (users.length !== 0 && (peopleBool || allBool)) {
+            lentaUsers.render();
+          }
+          let box = this.createBox(content);
         },
       });
-    });
+    };
+    const listener = debounce(searchFunction, 200);
+    searchInput.addEventListener('keypress', (evt) => listener(evt));
   }
 
   createBox(par) {
@@ -48,5 +120,12 @@ export default class SearchPage extends Base {
     box.id = 'box';
     par.appendChild(box);
     return box;
+  }
+
+  setClass(link1, link2, link3, link4) {
+    link1.className = stylesSearch.search_nav_links_aBig;
+    link2.className = stylesSearch.search_nav_links_a;
+    link3.className = stylesSearch.search_nav_links_a;
+    link4.className = stylesSearch.search_nav_links_a;
   }
 }
