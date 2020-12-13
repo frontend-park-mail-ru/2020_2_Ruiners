@@ -14,6 +14,10 @@ export default class LoginPage extends Base {
     this.map = [];
     this.map.fantasy = 'Фантастика';
     this.map.comedy = 'Комедии';
+    this.map.horror = 'Ужасы';
+    this.map.drama = 'Драма';
+    this.map.war = 'Боевики';
+    this.map.triller = 'Триллеры';
   }
 
   render(responseBody) {

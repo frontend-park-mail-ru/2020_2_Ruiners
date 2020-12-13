@@ -28,6 +28,10 @@ export default class FilmCard {
     this.mapRussian = [];
     this.mapRussian['Фантастика'] = 'fantasy';
     this.mapRussian['Комедия'] = 'comedy';
+    this.mapRussian['Ужасы'] = 'horror';
+    this.mapRussian['Драма'] = 'drama';
+    this.mapRussian['Триллер'] = 'triller';
+    this.mapRussian['Боевик'] = 'war';
   }
 
   render() {

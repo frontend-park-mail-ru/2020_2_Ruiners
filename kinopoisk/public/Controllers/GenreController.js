@@ -5,6 +5,7 @@ import Bus from '../modules/EventBus.js';
 
 export default function Genre(params) {
   const { id } = params;
+  console.log(id);
   filmService.getByGenre(id)
     .then((res) => {
       if (res.ok) {

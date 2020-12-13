@@ -29,6 +29,26 @@ export default class MenuPage extends Base {
         genre: 'comedy',
         parent: this.parent,
       },
+      {
+        rusGenre: 'Ужасы',
+        genre: 'horror',
+        parent: this.parent,
+      },
+      {
+        rusGenre: 'Драма',
+        genre: 'drama',
+        parent: this.parent,
+      },
+      {
+        rusGenre: 'Боевики',
+        genre: 'war',
+        parent: this.parent,
+      },
+      {
+        rusGenre: 'Триллеры',
+        genre: 'triller',
+        parent: this.parent,
+      },
     ];
     Bus.emit('MenuFilms', {
       lentas,
