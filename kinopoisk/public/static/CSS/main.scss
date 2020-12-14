@@ -10,8 +10,20 @@ body.main__background {
     background-size: 100% 100%;
 }
 
+body.menu__background {
+    height: 80vh;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-color: $color-main;
+    background-size: 100% 100%;
+}
+
 @media (max-width: 1499px) {
     body.main__background {
+        background-size: 1500px 100vh;
+        background-position: center;
+    }
+    body.menu__background {
         background-size: 1500px 100vh;
         background-position: center;
     }

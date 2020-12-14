@@ -5,6 +5,7 @@ import Bus from '../modules/EventBus.js';
 import { nav, application } from '../config.js';
 import styles from '../static/CSS/main.scss';
 import stylesFilmLenta from '../Components/FilmLenta/FilmLenta.scss';
+import MenuFilm from '../Components/MenuFilm/MenuFilm';
 
 export default class MenuPage extends Base {
   constructor(parent) {
@@ -12,12 +13,20 @@ export default class MenuPage extends Base {
     this.parent = parent;
   }
 
-  render() {
+  render(film) {
     super.render(false);
+    console.log(film);
+
+    const body = document.getElementById('body');
+    body.className = styles.menu__background;
+    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(${film.big_img})`;
     this.parent.innerHTML = '';
     this.parent.className = '';
-    const body = document.getElementById('body');
-    body.className = stylesFilmLenta.main__black;
+    const menuFilm = new MenuFilm({
+      parent: application,
+      body: film,
+    });
+    menuFilm.render();
     const lentas = [
       {
         rusGenre: 'Фантастика',

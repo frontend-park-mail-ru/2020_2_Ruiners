@@ -4,6 +4,7 @@ import MenuPage from '../Views/MenuPage.js';
 import { application } from '../config.js';
 
 export default function Menu() {
+  let random = Math.floor(Math.random() * 20) + 1;
   Bus.on('MenuFilms', (data) => {
     const { lentas, call } = data;
     let j = 0;
@@ -17,6 +18,14 @@ export default function Menu() {
         });
     }
   });
-  const menu = new MenuPage(application);
-  menu.render();
+  filmService.getById(random).then((res) => {
+    if (res.ok) {
+      const menu = new MenuPage(application);
+      menu.render(res.get);
+      const buttonGo = document.getElementById('menuFilm');
+      buttonGo.addEventListener('click', () => {
+        Bus.emit('GoFilm', random);
+      });
+    }
+  });
 }

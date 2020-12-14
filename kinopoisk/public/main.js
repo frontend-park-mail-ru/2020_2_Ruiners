@@ -46,6 +46,10 @@ Bus.on('navbarLogin', (button) => {
   });
 });
 
+Bus.on('GoFilm', (id) => {
+  router.open('/film', { id: id });
+});
+
 Bus.on('navbarSignup', (button) => {
   button.render({
     callback: () => {
