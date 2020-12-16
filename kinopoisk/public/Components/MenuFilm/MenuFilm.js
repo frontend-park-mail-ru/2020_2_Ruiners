@@ -13,15 +13,14 @@ export default class MenuFilm {
 
   render() {
     this.parent.appendChild(this.film);
-    const button = new Button({});
+    const button = new Button({
+      id: 'menuFilm',
+      text: 'Подробнее',
+    });
     this.film.innerHTML = this.template({
       body: this.body,
       styles: styles,
-      button: button.template({
-        id: 'menuFilm',
-        text: 'Подробнее',
-        styles: button.styles,
-      }),
+      button: button.getTemplate(),
     });
   }
 }

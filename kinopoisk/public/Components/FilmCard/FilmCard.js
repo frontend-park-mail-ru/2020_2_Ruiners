@@ -17,11 +17,17 @@ export default class FilmCard {
     this.actors = actors;
     this.playlists = playlists;
     this.voteButton = new Button({
-      classname: '',
+      templateClass: 'buttons__marginForFilmCard',
+      text: 'Оценить',
+      id: 'vote',
+      type: 'submit',
       parent: null,
     });
     this.playlistButton = new Button({
-      classname: '',
+      templateClass: 'buttons__marginForFilmCard',
+      text: 'Добавить',
+      id: 'add',
+      type: 'submit',
       parent: null,
     });
     this.template = filmcardT;
@@ -56,20 +62,8 @@ export default class FilmCard {
       MyRateBool: this.body.MyRateBool,
       MyRate: this.body.MyRate,
       stars: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
-      Button: this.voteButton.template({
-        classname: this.voteButton.styles.buttons__marginForFilmCard,
-        text: 'Оценить',
-        id: 'vote',
-        type: 'submit',
-        styles: this.voteButton.styles,
-      }),
-      ButtonPlaylist: this.playlistButton.template({
-        classname: this.playlistButton.styles.buttons__marginForFilmCard,
-        text: 'Добавить',
-        id: 'add',
-        type: 'submit',
-        styles: this.playlistButton.styles,
-      }),
+      Button: this.voteButton.getTemplate(),
+      ButtonPlaylist: this.playlistButton.getTemplate(),
     });
     const button = document.getElementById('vote');
     const err = document.createElement('div');

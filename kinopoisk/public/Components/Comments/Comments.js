@@ -10,8 +10,9 @@ export default class Comments {
     this.body = body;
     this.isAuthorized = isAuthorized;
     this.msgButton = new Button({
-      classname: '',
+      templateClass: 'buttons__forComments',
       id: 'msg_button',
+      text: 'Отправить',
       parent: null,
     });
     this.template = commentT;
@@ -27,13 +28,7 @@ export default class Comments {
       noComments,
       isAuth: this.isAuthorized,
       comments: this.body,
-      Button: this.msgButton.template({
-        classname: this.msgButton.styles.buttons__forComments,
-        text: 'Отправить',
-        id: 'msg_button',
-        type: 'submit',
-        styles: this.msgButton.styles,
-      }),
+      Button: this.msgButton.getTemplate(),
       styles,
     });
   }

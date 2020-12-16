@@ -4,9 +4,10 @@ import styles from './Button.scss';
 export default class Button {
   constructor(context = {}) {
     const {
-      classname, text, parent, type, id,
+      classname, text, parent, type, id, templateClass
     } = context;
     this.button = document.createElement('div');
+    this.templateClass = templateClass;
     this.classname = classname;
     this.text = text;
     this.parent = parent;
@@ -38,6 +39,16 @@ export default class Button {
   hide() {
     this.button.innerHTML = '';
     this.button.removeEventListener('click', this.listener);
+  }
+
+  getTemplate() {
+    return this.template({
+      classname: styles[this.templateClass],
+      type: this.type,
+      text: this.text,
+      id: this.id,
+      styles,
+    });
   }
 
   renderSubmit() {
