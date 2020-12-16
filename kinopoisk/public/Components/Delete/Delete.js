@@ -12,6 +12,14 @@ export default class Delete {
     this.styles = styles;
   }
 
+  getTemplate() {
+    return this.template({
+      id: this.id,
+      what: this.what,
+      styles,
+    });
+  }
+
   render() {
     this.parent.appendChild(this.delete);
     this.delete.innerHTML = this.template({

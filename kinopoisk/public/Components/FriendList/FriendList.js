@@ -13,12 +13,8 @@ export default class FriendList {
     this.body = body;
     this.template = friendListT;
     this.body.forEach((element) => {
-      const del = new Delete({ what: 'people', id: element.id });
-      element.del = del.template({
-        id: element.id,
-        what: 'profile',
-        styles: del.styles,
-      });
+      const del = new Delete({ what: 'profile', id: element.id });
+      element.del = del.getTemplate();
     });
   }
 

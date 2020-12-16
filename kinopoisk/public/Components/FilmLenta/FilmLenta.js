@@ -24,12 +24,8 @@ export default class FilmLenta {
       }
     } else {
       for (let i = 0; i < this.body.length; i++) {
-        const del = new Delete({ parent: this.parent, id: 1 });
-        this.body[i].del = del.template({
-          id: this.body[i].id,
-          what: `poster/${this.id}`,
-          styles: del.styles,
-        });
+        const del = new Delete({ parent: this.parent, id: this.body[i].id, what: `poster/${this.id}` });
+        this.body[i].del = del.getTemplate();
         this.body[i].playlist = this.playlist;
         const poster = new FilmPoster(this.body[i]);
         posters[i] = poster.render();
@@ -40,7 +36,8 @@ export default class FilmLenta {
 
   render() {
     const del = new Delete({
-      id: 1,
+      id: this.id,
+      what: 'playlist',
       parent: this.parent,
     });
     this.parent.appendChild(this.lenta);
@@ -50,11 +47,7 @@ export default class FilmLenta {
       playlist: this.playlist,
       genre: this.genre,
       posters: this.posters,
-      del: del.template({
-        id: this.id,
-        what: 'playlist',
-        styles: del.styles,
-      }),
+      del: del.getTemplate(),
     });
   }
 
