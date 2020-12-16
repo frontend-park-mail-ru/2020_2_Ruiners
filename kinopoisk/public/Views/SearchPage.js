@@ -25,6 +25,8 @@ export default class SearchPage extends Base {
       parent: this.parent,
     });
     search.render();
+
+    // Вычленение эллементов со страницы
     const searchInput = document.getElementById('search');
     const content = document.getElementById('content');
     const allLink = document.getElementById('all');
@@ -35,6 +37,9 @@ export default class SearchPage extends Base {
     let peopleBool = false;
     let filmsBool = false;
     let actorsBool = false;
+    //
+
+    // Обработчики на нажатие вкладок (Люди, фильмы и т д)
     allLink.addEventListener('click', () => {
       this.setClass(allLink, peopleLink, filmsLink, actorsLink);
       allBool = true;
@@ -67,6 +72,9 @@ export default class SearchPage extends Base {
       allBool = false;
       searchFunction();
     });
+    //
+
+    // функция, которая по написанной строке выводит фильмы
     const searchFunction = (evt) => {
       let str;
       if (evt) {
@@ -110,6 +118,8 @@ export default class SearchPage extends Base {
         },
       });
     };
+    //
+
     const listener = debounce(searchFunction, 200);
     searchInput.addEventListener('keypress', (evt) => listener(evt));
   }
