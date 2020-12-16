@@ -27,10 +27,10 @@ export default class SearchPage extends Base {
     search.render();
     const searchInput = document.getElementById('search');
     const content = document.getElementById('content');
-    let allLink = document.getElementById('all');
-    let peopleLink = document.getElementById('people');
-    let filmsLink = document.getElementById('films');
-    let actorsLink = document.getElementById('actors');
+    const allLink = document.getElementById('all');
+    const peopleLink = document.getElementById('people');
+    const filmsLink = document.getElementById('films');
+    const actorsLink = document.getElementById('actors');
     let allBool = true;
     let peopleBool = false;
     let filmsBool = false;

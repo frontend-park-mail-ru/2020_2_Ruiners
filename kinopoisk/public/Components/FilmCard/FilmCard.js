@@ -1,9 +1,9 @@
 import Button from '../Button/Button.js';
 import filmcardT from './FilmCard.handlebars';
 import Bus from '../../modules/EventBus.js';
-import stylesButton from '../Button/Button.scss';
 import styles from './FilmCard.scss';
 import stylesMain from '../../static/CSS/main.scss';
+import mapRussian from '../../modules/mapRussian';
 
 export default class FilmCard {
   constructor(context = {}) {
@@ -17,21 +17,14 @@ export default class FilmCard {
     this.actors = actors;
     this.playlists = playlists;
     this.voteButton = new Button({
-      classname: stylesButton.buttons__forComments,
+      classname: '',
       parent: null,
     });
     this.playlistButton = new Button({
-      classname: stylesButton.buttons__forComments,
+      classname: '',
       parent: null,
     });
     this.template = filmcardT;
-    this.mapRussian = [];
-    this.mapRussian['Фантастика'] = 'fantasy';
-    this.mapRussian['Комедия'] = 'comedy';
-    this.mapRussian['Ужасы'] = 'horror';
-    this.mapRussian['Драма'] = 'drama';
-    this.mapRussian['Триллер'] = 'triller';
-    this.mapRussian['Боевик'] = 'war';
   }
 
   render() {
@@ -51,7 +44,7 @@ export default class FilmCard {
       genres: [
         {
           rusGenre: this.body.main_genre,
-          genre: this.mapRussian[this.body.main_genre],
+          genre: mapRussian.get(this.body.main_genre),
         },
       ],
       actors: this.actors,
@@ -64,18 +57,18 @@ export default class FilmCard {
       MyRate: this.body.MyRate,
       stars: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
       Button: this.voteButton.template({
-        classname: stylesButton.buttons__marginForFilmCard,
+        classname: this.voteButton.styles.buttons__marginForFilmCard,
         text: 'Оценить',
         id: 'vote',
         type: 'submit',
-        styles: stylesButton,
+        styles: this.voteButton.styles,
       }),
       ButtonPlaylist: this.playlistButton.template({
-        classname: stylesButton.buttons__marginForFilmCard,
+        classname: this.playlistButton.styles.buttons__marginForFilmCard,
         text: 'Добавить',
         id: 'add',
         type: 'submit',
-        styles: stylesButton,
+        styles: this.playlistButton.styles,
       }),
     });
     const button = document.getElementById('vote');

@@ -4,17 +4,17 @@
     </div>
 {{/if}}
 {{#each friends}}
-    <div class="{{../this.styles.friendList_width}}">
-        <div class="{{../this.styles.friendList_container}}">
+    <div class="{{../styles.friendList_width}}">
+        <div class="{{../styles.friendList_container}}">
             <div>
-                <img src="{{this.domain}}/api/user/avatar/{{this.id}}" width="200" height="200" class="{{../this.styles.friendlist__default_margin}} {{../this.styles.friendlist__image}}">
-                <a class="{{../this.styles.friendList_login}}" href="people/{{this.id}}">{{this.login}}</a>
+                <img src="{{this.domain}}/api/user/avatar/{{this.id}}" width="200" height="200" class="{{../styles.friendlist__default_margin}} {{../styles.friendlist__image}}">
+                <a class="{{../styles.friendList_login}}" href="people/{{this.id}}">{{this.login}}</a>
             </div>
-            {{#if ../this.search}}
+            {{#if ../search}}
             {{else}}
                 <div>{{{del}}}</div>
             {{/if}}
         </div>
-        <hr class="{{../this.styles.friendList_line}}">
+        <hr class="{{../styles.friendList_line}}">
     </div>
 {{/each}}

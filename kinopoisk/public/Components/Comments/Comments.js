@@ -1,8 +1,6 @@
 import Button from '../Button/Button.js';
 import commentT from './Comments.handlebars';
-import stylesButton from '../Button/Button.scss';
 import styles from './Comments.scss';
-import stylesMain from '../../static/CSS/main.scss';
 
 export default class Comments {
   constructor(context = {}) {
@@ -12,7 +10,7 @@ export default class Comments {
     this.body = body;
     this.isAuthorized = isAuthorized;
     this.msgButton = new Button({
-      classname: stylesButton.buttons__marginForFilmCar,
+      classname: '',
       id: 'msg_button',
       parent: null,
     });
@@ -30,14 +28,13 @@ export default class Comments {
       isAuth: this.isAuthorized,
       comments: this.body,
       Button: this.msgButton.template({
-        classname: stylesButton.buttons__forComments,
+        classname: this.msgButton.styles.buttons__forComments,
         text: 'Отправить',
         id: 'msg_button',
         type: 'submit',
-        styles: stylesButton,
+        styles: this.msgButton.styles,
       }),
       styles,
-      stylesMain,
     });
   }
 

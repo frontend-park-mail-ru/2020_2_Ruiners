@@ -1,7 +1,6 @@
 import friendListT from './FriendList.handlebars';
 import { domain } from '../../config.js';
 import Delete from '../Delete/Delete';
-import stylesDelete from '../Delete/Delete.scss';
 import styles from './FriendList.scss';
 
 export default class FriendList {
@@ -18,7 +17,7 @@ export default class FriendList {
       element.del = del.template({
         id: element.id,
         what: 'profile',
-        styles: stylesDelete,
+        styles: del.styles,
       });
     });
   }

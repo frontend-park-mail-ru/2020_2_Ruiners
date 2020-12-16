@@ -1,9 +1,8 @@
 import Base from './Base.js';
-import filmService from '../Services/filmService.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
-import Bus from '../modules/EventBus.js';
 import { nav } from '../config.js';
 import styles from '../static/CSS/main.scss';
+import mapRussian from '../modules/mapRussian';
 
 export default class LoginPage extends Base {
   constructor(context) {
@@ -11,13 +10,6 @@ export default class LoginPage extends Base {
     super(nav);
     this.parent = parent;
     this.genre = genre;
-    this.map = [];
-    this.map.fantasy = 'Фантастика';
-    this.map.comedy = 'Комедии';
-    this.map.horror = 'Ужасы';
-    this.map.drama = 'Драма';
-    this.map.war = 'Боевики';
-    this.map.triller = 'Триллеры';
   }
 
   render(responseBody) {
@@ -26,14 +18,10 @@ export default class LoginPage extends Base {
     const body = document.getElementById('body');
     body.className = styles.page;
     const lenta = new FilmLenta({
-      genre: this.getRussian(this.genre),
+      genre: mapRussian.get(this.genre),
       body: responseBody,
       parent: this.parent,
     });
     lenta.render();
-  }
-
-  getRussian(genre) {
-    return this.map[genre];
   }
 }

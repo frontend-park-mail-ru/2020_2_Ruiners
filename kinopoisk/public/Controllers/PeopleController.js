@@ -19,7 +19,9 @@ export default function People(params) {
             responseBody.isSub = false;
           }
           if (res.ok) {
-            if (res.get.id === id) {
+            console.log(res.get.id, id);
+            if (res.get.id == id) {
+              console.log(res.get.id, id);
               ProfileController({ id });
               return;
             }

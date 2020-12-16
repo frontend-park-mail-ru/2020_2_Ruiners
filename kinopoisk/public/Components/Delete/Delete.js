@@ -9,6 +9,7 @@ export default class Delete {
     this.template = deleteT;
     this.parent = parent;
     this.id = id;
+    this.styles = styles;
   }
 
   render() {

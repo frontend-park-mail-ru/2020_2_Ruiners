@@ -12,6 +12,7 @@ export default class Button {
     this.parent = parent;
     this.template = buttonT;
     this.type = type;
+    this.styles = styles;
     this.id = id;
   }
 

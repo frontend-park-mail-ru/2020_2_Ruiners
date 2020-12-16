@@ -1,7 +1,6 @@
 import menuFilmT from './MenuFilm.handlebars';
 import styles from './MenuFilm.scss';
 import Button from '../Button/Button';
-import stylesButton from './../Button/Button.scss';
 
 export default class MenuFilm {
   constructor(context) {
@@ -21,7 +20,7 @@ export default class MenuFilm {
       button: button.template({
         id: 'menuFilm',
         text: 'Подробнее',
-        styles: stylesButton,
+        styles: button.styles,
       }),
     });
   }

@@ -1,42 +1,42 @@
 {{#each news}}
     {{#if this.is_rating}}
-            <div class="{{../this.stylesFriendList.friendList_width}}">
-                <div class="{{../this.styles.news_container}}">
-                    <img src="{{this.domain}}/api/user/avatar/{{this.user_id}}" width="200" height="200" class="{{../this.styles.news__default_margin}} {{../this.styles.news__image}}">
-                    <div class="{{../this.styles.news_container_column}}">
-                        <a class="{{../this.styles.news_login}}" href="people/{{this.user_id}}">{{this.user_login}}</a>
+            <div class="{{../stylesFriendList.friendList_width}}">
+                <div class="{{../styles.news_container}}">
+                    <img src="{{this.domain}}/api/user/avatar/{{this.user_id}}" width="200" height="200" class="{{../styles.news__default_margin}} {{../styles.news__image}}">
+                    <div class="{{../styles.news_container_column}}">
+                        <a class="{{../styles.news_login}}" href="people/{{this.user_id}}">{{this.user_login}}</a>
                         <div class="news_container_info">
-                            <span class="{{../this.styles.news_info}}">поставил(-а) оценку</span> <span class="{{../this.styles.news_rating}}"> "{{this.body}}/10" </span> <span class="{{../this.styles.news_info}}">к фильму</span>
-                            <a class="{{../this.styles.news_login}}" href="film/{{this.film_id}}">"{{this.film_title}}"</a>
+                            <span class="{{../styles.news_info}}">поставил(-а) оценку</span> <span class="{{../styles.news_rating}}"> "{{this.body}}/10" </span> <span class="{{../styles.news_info}}">к фильму</span>
+                            <a class="{{../styles.news_login}}" href="film/{{this.film_id}}">"{{this.film_title}}"</a>
                         </div>
-                        <span class="{{../this.styles.news_dateTime}}">{{this.dateTime}}</span>
+                        <span class="{{../styles.news_dateTime}}">{{this.dateTime}}</span>
                     </div>
                 </div>
-                <hr class="{{../this.styles.friendList_line}}">
+                <hr class="{{../styles.friendList_line}}">
             </div>
     {{/if}}
 
 
     {{#if this.is_review}}
-        <div class="{{../this.stylesFriendList.friendList_width}}">
-            <div class="{{../this.styles.news_container}}">
-                <img src="{{this.domain}}/api/user/avatar/{{this.user_id}}" width="200" height="200" class="{{../this.styles.news__default_margin}} {{../this.styles.news__image}}">
-                <div class="{{../this.styles.news_container_column}}">
-                    <a class="{{../this.styles.news_login}}" href="people/{{this.user_id}}">{{this.user_login}}</a>
-                    <div class="{{../this.styles.news_container_info}}">
-                        <span class="{{../this.styles.news_info}}">оставил(-а) комментарий</span><span class="{{../this.styles.news_info}}"> к фильму</span>
-                        <a class="{{../this.styles.news_login}}" href="film/{{this.film_id}}">"{{this.film_title}}"</a>
+        <div class="{{../stylesFriendList.friendList_width}}">
+            <div class="{{../styles.news_container}}">
+                <img src="{{this.domain}}/api/user/avatar/{{this.user_id}}" width="200" height="200" class="{{../styles.news__default_margin}} {{../styles.news__image}}">
+                <div class="{{../styles.news_container_column}}">
+                    <a class="{{../styles.news_login}}" href="people/{{this.user_id}}">{{this.user_login}}</a>
+                    <div class="{{../styles.news_container_info}}">
+                        <span class="{{../styles.news_info}}">оставил(-а) комментарий</span><span class="{{../styles.news_info}}"> к фильму</span>
+                        <a class="{{../styles.news_login}}" href="film/{{this.film_id}}">"{{this.film_title}}"</a>
                     </div>
-                    <div class="{{../this.styles.news_container_comment}}">
+                    <div class="{{../styles.news_container_comment}}">
                         <div class="{{../this.styles.news_comment}}">
-                            <span class="{{../this.styles.news_comment_body}}">{{this.body}}</span>
-                            <hr class="{{../this.stylesComments.comment__line}}">
-                            <span class="{{../this.styles.news_dateTime}}">{{this.dateTime}}</span>
+                            <span class="{{../styles.news_comment_body}}">{{this.body}}</span>
+                            <hr class="{{../stylesComments.comment__line}}">
+                            <span class="{{../styles.news_dateTime}}">{{this.dateTime}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr class="{{../this.stylesFriendList.friendList_line}}">
+            <hr class="{{../stylesFriendList.friendList_line}}">
         </div>
     {{/if}}
 {{/each}}

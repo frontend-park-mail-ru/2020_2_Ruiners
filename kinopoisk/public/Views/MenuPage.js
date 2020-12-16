@@ -15,11 +15,9 @@ export default class MenuPage extends Base {
 
   render(film) {
     super.render(false);
-    console.log(film);
-
     const body = document.getElementById('body');
     body.className = styles.menu__background;
-    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(${film.big_img})`;
+    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0) 80%), url(${film.big_img})`;
     this.parent.innerHTML = '';
     this.parent.className = '';
     const menuFilm = new MenuFilm({

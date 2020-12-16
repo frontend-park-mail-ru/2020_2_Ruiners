@@ -1,5 +1,4 @@
 import searchT from './Search.handlebars';
-// import './Search.scss';
 import styles from './Search.scss';
 
 export default class Search {
