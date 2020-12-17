@@ -5,6 +5,26 @@
   display: flex;
 }
 
+.news_width {
+  width: 90%;
+}
+
+.news_object_line {
+  border: none; /* Убираем границу для браузера Firefox */
+  background-color: rgba(71, 69, 69, 0.7);
+  height: 3px;
+  margin-top: 20px;
+  color: rgba(71, 69, 69, 0.7);
+}
+
+.news__line {
+  border: none; /* Убираем границу для браузера Firefox */
+  background-color: $color-secondary;
+  height: 3px;
+  margin-top: 10px;
+  color: $color-secondary;
+}
+
 .news_login:hover {
   cursor: pointer;
   color: $color-secondary;

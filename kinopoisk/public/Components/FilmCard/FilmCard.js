@@ -3,7 +3,7 @@ import filmcardT from './FilmCard.handlebars';
 import Bus from '../../modules/EventBus.js';
 import styles from './FilmCard.scss';
 import stylesMain from '../../static/CSS/main.scss';
-import mapRussian from '../../modules/mapRussian';
+import {MapRussian} from '../../modules/mapRussian';
 
 export default class FilmCard {
   constructor(context = {}) {
@@ -50,7 +50,7 @@ export default class FilmCard {
       genres: [
         {
           rusGenre: this.body.main_genre,
-          genre: mapRussian.get(this.body.main_genre),
+          genre: MapRussian[this.body.main_genre],
         },
       ],
       actors: this.actors,

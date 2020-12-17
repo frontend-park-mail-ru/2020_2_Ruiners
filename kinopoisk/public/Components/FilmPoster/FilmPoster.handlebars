@@ -1,7 +1,13 @@
 <div class="{{styles.lenta__object}}">
-    <a href="film/{{ id }}" class="{{styles.href}}" id="{{ id }}"><img width="270" height="420" src="{{ SmallImg }}" alt="" class="{{styles.object__image}}">
-        <div class="{{styles.object__hidden}}"><span>{{ MainGenre }}, {{ year }} год</span></div>
-    </a>
+    {{#if id}}
+        <a href="film/{{ id }}" class="{{styles.href}}" id="{{ id }}"><img width="270" height="420" src="{{ SmallImg }}" alt="" class="{{styles.object__image}}">
+            <div class="{{styles.object__hidden}}"><span>{{ MainGenre }}, {{ year }} год</span></div>
+        </a>
+    {{else}}
+        <a href="/" class="{{styles.href}}" id="{{ id }}"><img width="270" height="420" src="{{ SmallImg }}" alt="" class="{{styles.object__image}}">
+            <div class="{{styles.object__hidden}}"><span>{{ MainGenre }} {{ year }}</span></div>
+        </a>
+    {{/if}}
 
     {{#if playlist}}
         <div class="{{styles.poster_delete}}">

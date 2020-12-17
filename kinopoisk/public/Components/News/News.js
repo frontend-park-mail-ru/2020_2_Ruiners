@@ -1,7 +1,5 @@
 import newsT from './News.handlebars';
 import { domain } from '../../config';
-import stylesFriendList from '../FriendList/FriendList.scss';
-import stylesComments from '../Comments/Comments.scss';
 import styles from './News.scss';
 
 export default class News {
@@ -21,8 +19,6 @@ export default class News {
       element.dateTime = `${element.date.getHours()}:${element.date.getMinutes()} ${element.date.getDate()}-${element.date.getMonth()}-${element.date.getFullYear()}`;
     });
     this.news.innerHTML = this.template({
-      stylesFriendList,
-      stylesComments,
       styles,
       news: this.body,
     });

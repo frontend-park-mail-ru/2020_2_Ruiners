@@ -1,6 +1,6 @@
 {{#each news}}
     {{#if this.is_rating}}
-            <div class="{{../stylesFriendList.friendList_width}}">
+            <div class="{{../styles.news_width}}">
                 <div class="{{../styles.news_container}}">
                     <img src="{{this.domain}}/api/user/avatar/{{this.user_id}}" width="200" height="200" class="{{../styles.news__default_margin}} {{../styles.news__image}}">
                     <div class="{{../styles.news_container_column}}">
@@ -12,13 +12,13 @@
                         <span class="{{../styles.news_dateTime}}">{{this.dateTime}}</span>
                     </div>
                 </div>
-                <hr class="{{../styles.friendList_line}}">
+                <hr class="{{../styles.news_object_line}}">
             </div>
     {{/if}}
 
 
     {{#if this.is_review}}
-        <div class="{{../stylesFriendList.friendList_width}}">
+        <div class="{{../styles.news_width}}">
             <div class="{{../styles.news_container}}">
                 <img src="{{this.domain}}/api/user/avatar/{{this.user_id}}" width="200" height="200" class="{{../styles.news__default_margin}} {{../styles.news__image}}">
                 <div class="{{../styles.news_container_column}}">
@@ -30,13 +30,13 @@
                     <div class="{{../styles.news_container_comment}}">
                         <div class="{{../this.styles.news_comment}}">
                             <span class="{{../styles.news_comment_body}}">{{this.body}}</span>
-                            <hr class="{{../stylesComments.comment__line}}">
+                            <hr class="{{../styles.news__line}}">
                             <span class="{{../styles.news_dateTime}}">{{this.dateTime}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr class="{{../stylesFriendList.friendList_line}}">
+            <hr class="{{../styles.news_object_line}}">
         </div>
     {{/if}}
 {{/each}}

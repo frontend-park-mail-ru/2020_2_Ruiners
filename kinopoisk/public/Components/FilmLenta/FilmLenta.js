@@ -1,7 +1,6 @@
 import FilmPoster from '../FilmPoster/FilmPoster.js';
 import filmLentaT from './FilmLenta.handlebars';
 import Delete from '../Delete/Delete.js';
-import stylesFPoster from '../FilmPoster/FilmPoster.scss';
 import styles from './FilmLenta.scss';
 
 export default class FilmLenta {
@@ -32,6 +31,8 @@ export default class FilmLenta {
       }
     }
     this.posters = posters;
+    const bodyNew = { title: 'Добавить фильм', small_img: 'images/adding.png'};
+    this.posterNew = new FilmPoster(bodyNew);
   }
 
   render() {
@@ -42,7 +43,7 @@ export default class FilmLenta {
     });
     this.parent.appendChild(this.lenta);
     this.lenta.innerHTML = this.template({
-      stylesFPoster,
+      posterNew: this.posterNew.render(),
       styles,
       playlist: this.playlist,
       genre: this.genre,

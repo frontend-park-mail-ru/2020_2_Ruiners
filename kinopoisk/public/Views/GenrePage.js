@@ -2,7 +2,7 @@ import Base from './Base.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
 import { nav } from '../config.js';
 import styles from '../static/CSS/main.scss';
-import mapRussian from '../modules/mapRussian';
+import { MapRussian } from '../modules/mapRussian';
 
 export default class LoginPage extends Base {
   constructor(context) {
@@ -18,7 +18,7 @@ export default class LoginPage extends Base {
     const body = document.getElementById('body');
     body.className = styles.page;
     const lenta = new FilmLenta({
-      genre: mapRussian.get(this.genre),
+      genre: MapRussian[this.genre],
       body: responseBody,
       parent: this.parent,
     });
