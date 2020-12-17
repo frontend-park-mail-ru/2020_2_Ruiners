@@ -2,7 +2,6 @@ import Base from './Base.js';
 import FilmCard from '../Components/FilmCard/FilmCard.js';
 import Comments from '../Components/Comments/Comments.js';
 import Bus from '../modules/EventBus.js';
-import personService from '../Services/personService.js';
 import { nav, domain } from '../config.js';
 import filmService from '../Services/filmService';
 import FilmLenta from '../Components/FilmLenta/FilmLenta';

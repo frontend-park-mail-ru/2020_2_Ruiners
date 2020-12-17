@@ -8,7 +8,6 @@ import SessionService from '../Services/sessionService.js';
 import Bus from '../modules/EventBus.js';
 import { domain, nav } from '../config.js';
 import stylesList from '../Components/List/List.scss';
-import stylesLink from '../Components/Link/Link.scss';
 
 export default class Navbar {
   constructor(parent) {
@@ -25,7 +24,7 @@ export default class Navbar {
 
     const BrandObj = new List({
       parent: ul,
-      classname: stylesList.brand,
+      classname: 'brand',
     });
     const Brand = BrandObj.render();
     const href = document.createElement('a');
@@ -37,7 +36,7 @@ export default class Navbar {
 
     const FilmsObj = new List({
       parent: ul,
-      classname: stylesList['menu-secondary'],
+      classname: 'menu-secondary',
     });
     const Films = FilmsObj.render();
 
@@ -51,7 +50,7 @@ export default class Navbar {
 
     const SearchObj = new List({
       parent: ul,
-      classname: stylesList['menu-secondary_search'],
+      classname: 'menu-secondary_search',
     });
     const Search = SearchObj.render();
     const SearchAObj = new Link({
@@ -65,13 +64,13 @@ export default class Navbar {
     if (isAuthorized) {
       const profileObj = new List({
         parent: ul,
-        classname: stylesList.right_profile,
+        classname: 'right_profile',
       });
       const profile = profileObj.render();
 
       const profileAObj = new Link({
         parent: profile,
-        className: stylesLink.profileNav,
+        className: 'profileNav',
       });
       const profileA = profileAObj.render();
       const src = `${domain}/api/user/avatar/${res.get.id}?${Math.random()}`;
@@ -110,7 +109,7 @@ export default class Navbar {
     } else {
       const loginObj = new List({
         parent: ul,
-        classname: stylesList.right,
+        classname: 'right',
       });
       const login = loginObj.render();
 

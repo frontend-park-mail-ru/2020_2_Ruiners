@@ -1,3 +1,5 @@
+import styles from './Link.scss';
+
 export default class Link {
   constructor(context) {
     const { parent, classname, pathname } = context;
@@ -8,7 +10,7 @@ export default class Link {
   }
 
   render() {
-    this.a.className = this.classname;
+    this.a.className = styles[this.classname];
     this.a.href = this.pathname;
     this.parent.appendChild(this.a);
     return this.a;

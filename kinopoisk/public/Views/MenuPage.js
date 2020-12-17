@@ -1,10 +1,8 @@
 import Base from './Base.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
-import filmService from '../Services/filmService.js';
 import Bus from '../modules/EventBus.js';
 import { nav, application } from '../config.js';
 import styles from '../static/CSS/main.scss';
-import stylesFilmLenta from '../Components/FilmLenta/FilmLenta.scss';
 import MenuFilm from '../Components/MenuFilm/MenuFilm';
 
 export default class MenuPage extends Base {

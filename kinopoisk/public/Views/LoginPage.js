@@ -6,7 +6,6 @@ import { nav } from '../config.js';
 import Button from '../Components/Button/Button';
 import styles from '../static/CSS/main.scss';
 import stylesForm from '../Components/Form/Form.scss';
-import stylesLink from '../Components/Link/Link.scss';
 import stylesButton from '../Components/Button/Button.scss';
 
 export default class LoginPage extends Base {
@@ -62,7 +61,7 @@ export default class LoginPage extends Base {
     err.className = styles.error;
     const buttonLogin = new Button({
       parent: form,
-      classname: stylesButton.buttons__marginForFilmCard,
+      classname: 'buttons__marginForFilmCard',
       text: 'Войти',
     });
     Bus.emit('Login', {
@@ -73,7 +72,7 @@ export default class LoginPage extends Base {
     });
     const linkSignup = new Link({
       parent: form,
-      classname: stylesLink.linkSignupLogin,
+      classname: 'linkSignupLogin',
       pathname: '/signup',
     });
     linkSignup.render();

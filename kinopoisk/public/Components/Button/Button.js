@@ -21,7 +21,7 @@ export default class Button {
     const { callback } = context;
     this.parent.appendChild(this.button);
     this.button.innerHTML = this.template({
-      classname: this.classname,
+      classname: styles[this.classname],
       type: this.type,
       text: this.text,
       id: this.id,

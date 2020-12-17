@@ -37,7 +37,7 @@ export default class SearchPage extends Base {
     let peopleBool = false;
     let filmsBool = false;
     let actorsBool = false;
-    //
+
 
     // Обработчики на нажатие вкладок (Люди, фильмы и т д)
     allLink.addEventListener('click', () => {
@@ -72,7 +72,7 @@ export default class SearchPage extends Base {
       allBool = false;
       searchFunction();
     });
-    //
+
 
     // функция, которая по написанной строке выводит фильмы
     const searchFunction = (evt) => {
@@ -118,8 +118,6 @@ export default class SearchPage extends Base {
         },
       });
     };
-    //
-
     const listener = debounce(searchFunction, 200);
     searchInput.addEventListener('keypress', (evt) => listener(evt));
   }

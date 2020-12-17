@@ -1,4 +1,3 @@
-import Button from '../Button/Button.js';
 import { createDiv } from '../../Views/Components.js';
 import styles from '../../static/CSS/main.scss';
 

@@ -21,12 +21,18 @@ export default class PeoplePage extends Base {
     this.parent.innerHTML = '';
     this.parent.className = '';
     const buttonSub = new Button({
-      classname: stylesButton.buttons__forComments,
+      templateClass: '',
       parent: null,
+      text: 'Подписаться',
+      id: 'subscribe',
+      type: 'submit',
     });
     const buttonUnsub = new Button({
-      classname: stylesButton.buttons__forComments,
+      templateClass: 'button__red',
       parent: null,
+      text: 'Отписаться',
+      id: 'Unsubscribe',
+      type: 'submit',
     });
     const profile = new Profile({
       parent: this.parent,
@@ -36,20 +42,8 @@ export default class PeoplePage extends Base {
         Login: responseBody.login,
         isAuth: responseBody.isAuth,
         isSub: responseBody.isSub,
-        buttonSub: buttonSub.template({
-          classname: '',
-          text: 'Подписаться',
-          id: 'subscribe',
-          type: 'submit',
-          styles: stylesButton,
-        }),
-        buttonUnsub: buttonUnsub.template({
-          classname: stylesButton.button__red,
-          text: 'Отписаться',
-          id: 'Unsubscribe',
-          type: 'submit',
-          styles: stylesButton,
-        }),
+        buttonSub: buttonSub.getTemplate(),
+        buttonUnsub: buttonUnsub.getTemplate(),
       },
     });
     profile.render();

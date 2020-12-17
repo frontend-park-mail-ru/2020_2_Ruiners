@@ -6,10 +6,8 @@ import Bus from '../modules/EventBus.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta';
 import FriendList from '../Components/FriendList/FriendList';
 import News from '../Components/News/News';
-import subscribeService from '../Services/subscribeService';
 import styles from '../static/CSS/main.scss';
 import stylesProfile from '../Components/Profile/Profile.scss';
-import stylesButton from '../Components/Button/Button.scss';
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -30,7 +28,10 @@ export default class ProfilePage extends Base {
     body.className = styles.main__background;
     this.parent.className = '';
     const button = new Button({
-      classname: stylesButton.buttons__forComments,
+      templateClass: '',
+      text: 'Настройки',
+      id: 'settings',
+      type: 'submit',
       parent: null,
     });
     const profile = new Profile({
@@ -40,13 +41,7 @@ export default class ProfilePage extends Base {
         id: responseBody.id,
         Login: responseBody.login,
         isAuth: true,
-        button: button.template({
-          classname: '',
-          text: 'Настройки',
-          id: 'settings',
-          type: 'submit',
-          styles: stylesButton,
-        }),
+        button: button.getTemplate(),
       },
     });
     profile.render();

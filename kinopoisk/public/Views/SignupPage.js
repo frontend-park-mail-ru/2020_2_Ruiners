@@ -6,8 +6,6 @@ import { nav } from '../config.js';
 import Button from '../Components/Button/Button';
 import styles from '../static/CSS/main.scss';
 import stylesForm from '../Components/Form/Form.scss';
-import stylesLink from '../Components/Link/Link.scss';
-import stylesButton from '../Components/Button/Button.scss';
 
 export default class SignupPage extends Base {
   constructor(parent) {
@@ -73,7 +71,7 @@ export default class SignupPage extends Base {
     err.className = styles.error;
     const buttonSignup = new Button({
       parent: form,
-      classname: stylesButton.buttons__marginForFilmCard,
+      classname: 'buttons__marginForFilmCard',
       text: 'Регистрация',
     });
     Bus.emit('Signup', {
@@ -85,7 +83,7 @@ export default class SignupPage extends Base {
 
     const linkLogin = new Link({
       parent: form,
-      classname: stylesLink.linkSignupLogin,
+      classname: 'linkSignupLogin',
       pathname: '/login',
     });
     linkLogin.render();
