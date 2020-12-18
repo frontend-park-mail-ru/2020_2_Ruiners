@@ -1,6 +1,6 @@
 import Bus from '../modules/EventBus.js';
 import sessionService from '../Services/sessionService.js';
-import LoginPage from '../Views/LoginPage.js';
+import LoginPage from '../Views/LoginPage/LoginPage.js';
 import { application } from '../config.js';
 
 export default function Login() {

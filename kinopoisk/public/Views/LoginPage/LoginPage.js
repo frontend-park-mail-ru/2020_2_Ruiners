@@ -1,12 +1,11 @@
-import Form from '../Components/Form/Form.js';
-import Base from './Base.js';
-import Link from '../Components/Link/Link.js';
-import Bus from '../modules/EventBus.js';
-import { nav } from '../config.js';
-import Button from '../Components/Button/Button';
-import styles from '../static/CSS/main.scss';
-import stylesForm from '../Components/Form/Form.scss';
-import stylesButton from '../Components/Button/Button.scss';
+import Form from '../../Components/Form/Form.js';
+import Base from '../Base.js';
+import Link from '../../Components/Link/Link.js';
+import Bus from '../../modules/EventBus.js';
+import { nav } from '../../config.js';
+import Button from '../../Components/Button/Button';
+import styles from '../../static/CSS/main.scss';
+import stylesLogin from './LoginPage.scss';
 
 export default class LoginPage extends Base {
   constructor(parent) {
@@ -21,7 +20,7 @@ export default class LoginPage extends Base {
     body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const loginBox = document.createElement('div');
-    loginBox.className = `${stylesForm.wrapper__form__regLog} ${stylesForm.login}`;
+    loginBox.className = `${stylesLogin.wrapper__form__regLog} ${stylesLogin.login}`;
     this.parent.appendChild(loginBox);
     const headLogin = {
       head: true,
@@ -48,7 +47,7 @@ export default class LoginPage extends Base {
 
     const subLogin = {
       text: 'Войти',
-      className: `${stylesButton.button} ${stylesButton.buttons__forRegLog}`,
+      className: `${stylesLogin.button} ${stylesLogin.buttons__forRegLog}`,
     };
 
     const formLog = new Form(headLogin, configInputLogin, subLogin);

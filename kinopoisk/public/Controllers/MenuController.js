@@ -4,7 +4,7 @@ import MenuPage from '../Views/MenuPage.js';
 import { application } from '../config.js';
 
 export default function Menu() {
-  let random = Math.floor(Math.random() * 20) + 1;
+  const random = Math.floor(Math.random() * 20) + 1;
   Bus.on('MenuFilms', (data) => {
     const { lentas, call } = data;
     let j = 0;

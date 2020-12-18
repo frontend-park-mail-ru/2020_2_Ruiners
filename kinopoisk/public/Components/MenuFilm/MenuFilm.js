@@ -19,7 +19,7 @@ export default class MenuFilm {
     });
     this.film.innerHTML = this.template({
       body: this.body,
-      styles: styles,
+      styles,
       button: button.getTemplate(),
     });
   }

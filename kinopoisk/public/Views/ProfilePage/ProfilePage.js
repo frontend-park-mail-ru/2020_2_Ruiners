@@ -1,13 +1,13 @@
-import Base from './Base.js';
-import { application, nav } from '../config.js';
-import Button from '../Components/Button/Button';
-import Profile from '../Components/Profile/Profile.js';
-import Bus from '../modules/EventBus.js';
-import FilmLenta from '../Components/FilmLenta/FilmLenta';
-import FriendList from '../Components/FriendList/FriendList';
-import News from '../Components/News/News';
-import styles from '../static/CSS/main.scss';
-import stylesProfile from '../Components/Profile/Profile.scss';
+import Base from '../Base.js';
+import { application, nav } from '../../config.js';
+import Button from '../../Components/Button/Button';
+import Profile from '../../Components/Profile/Profile.js';
+import Bus from '../../modules/EventBus.js';
+import FilmLenta from '../../Components/FilmLenta/FilmLenta';
+import FriendList from '../../Components/FriendList/FriendList';
+import News from '../../Components/News/News';
+import styles from '../../static/CSS/main.scss';
+import stylesProfilePage from './ProfilePage.scss';
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -204,9 +204,9 @@ export default class ProfilePage extends Base {
   }
 
   setClass(link1, link2, link3) {
-    link1.className = stylesProfile.profile_nav_links_aBig;
-    link2.className = stylesProfile.profile_nav_links_a;
-    link3.className = stylesProfile.profile_nav_links_a;
+    link1.className = stylesProfilePage.profile_nav_links_aBig;
+    link2.className = stylesProfilePage.profile_nav_links_a;
+    link3.className = stylesProfilePage.profile_nav_links_a;
   }
 
   createBox() {

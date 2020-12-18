@@ -4,7 +4,7 @@ import styles from './Button.scss';
 export default class Button {
   constructor(context = {}) {
     const {
-      classname, text, parent, type, id, templateClass
+      classname, text, parent, type, id, templateClass,
     } = context;
     this.button = document.createElement('div');
     this.templateClass = templateClass;

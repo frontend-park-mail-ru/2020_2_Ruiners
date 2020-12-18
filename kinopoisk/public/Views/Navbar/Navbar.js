@@ -1,13 +1,13 @@
-import NavLink from '../modules/navLink.js';
-import List from '../Components/List/List.js';
-import Link from '../Components/Link/Link.js';
-import Navigate from '../Components/Nav/Nav.js';
-import Button from '../Components/Button/Button.js';
-import Window from '../Components/window/Window.js';
-import SessionService from '../Services/sessionService.js';
-import Bus from '../modules/EventBus.js';
-import { domain, nav } from '../config.js';
-import stylesList from '../Components/List/List.scss';
+import NavLink from '../../modules/navLink.js';
+import List from '../../Components/List/List.js';
+import Link from '../../Components/Link/Link.js';
+import Navigate from '../../Components/Nav/Nav.js';
+import Button from '../../Components/Button/Button.js';
+import Window from '../../Components/window/Window.js';
+import SessionService from '../../Services/sessionService.js';
+import Bus from '../../modules/EventBus.js';
+import { domain, nav } from '../../config.js';
+import stylesNavbar from './Navbar.scss';
 
 export default class Navbar {
   constructor(parent) {
@@ -74,7 +74,7 @@ export default class Navbar {
       });
       const profileA = profileAObj.render();
       const src = `${domain}/api/user/avatar/${res.get.id}?${Math.random()}`;
-      profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="${stylesList.round}">`);
+      profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="${stylesNavbar.round}">`);
       const profileLink = new NavLink(profileA);
       const window = new Window({ parent: profileA });
       let isOpen = false;

@@ -31,7 +31,7 @@ export default class FilmLenta {
       }
     }
     this.posters = posters;
-    const bodyNew = { title: 'Добавить фильм', small_img: 'images/adding.png'};
+    const bodyNew = { title: 'Добавить фильм', small_img: 'images/adding.png' };
     this.posterNew = new FilmPoster(bodyNew);
   }
 

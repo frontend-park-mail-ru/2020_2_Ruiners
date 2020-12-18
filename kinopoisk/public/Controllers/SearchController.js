@@ -1,4 +1,4 @@
-import SearchPage from '../Views/SearchPage';
+import SearchPage from '../Views/SearchPage/SearchPage';
 import { application } from '../config';
 import Bus from '../modules/EventBus';
 import FilmService from '../Services/filmService';

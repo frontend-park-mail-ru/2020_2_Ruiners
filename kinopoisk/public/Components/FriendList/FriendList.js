@@ -5,7 +5,9 @@ import styles from './FriendList.scss';
 
 export default class FriendList {
   constructor(context) {
-    const { parent, body, search, header } = context;
+    const {
+      parent, body, search, header,
+    } = context;
     this.friendList = document.createElement('div');
     this.search = search;
     this.header = header;

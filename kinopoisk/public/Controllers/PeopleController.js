@@ -1,5 +1,5 @@
 import Bus from '../modules/EventBus';
-import PeoplePage from '../Views/PeoplePage';
+import PeoplePage from '../Views/PeoplePage/PeoplePage';
 import { application } from '../config';
 import sessionService from '../Services/sessionService.js';
 import ProfileController from './ProfileController';

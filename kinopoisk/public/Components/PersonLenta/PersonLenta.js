@@ -13,7 +13,7 @@ export default class PersonLenta {
   render() {
     this.parent.appendChild(this.lenta);
     this.lenta.innerHTML = this.template({
-      styles: styles,
+      styles,
       persons: this.body,
     });
   }

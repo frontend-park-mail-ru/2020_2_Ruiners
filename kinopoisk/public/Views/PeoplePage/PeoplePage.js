@@ -1,10 +1,10 @@
-import { application, nav } from '../config';
-import Button from '../Components/Button/Button';
-import Profile from '../Components/Profile/Profile';
-import Bus from '../modules/EventBus';
-import Base from './Base';
-import styles from '../static/CSS/main.scss';
-import stylesButton from '../Components/Button/Button.scss';
+import { nav } from '../../config';
+import Button from '../../Components/Button/Button';
+import Profile from '../../Components/Profile/Profile';
+import Bus from '../../modules/EventBus';
+import Base from '../Base';
+import styles from '../../static/CSS/main.scss';
+import stylesPeople from './PeoplePage.scss';
 
 export default class PeoplePage extends Base {
   constructor(parent, data) {
@@ -56,7 +56,7 @@ export default class PeoplePage extends Base {
       const listenerSub = (evt) => {
         evt.preventDefault();
         subscribe.remove();
-        unsubscribe.className = `${stylesButton.button} ${stylesButton.button__red}`;
+        unsubscribe.className = `${stylesPeople.button} ${stylesPeople.button__red}`;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);
@@ -64,7 +64,7 @@ export default class PeoplePage extends Base {
       const listenerUnsub = (evt) => {
         evt.preventDefault();
         unsubscribe.remove();
-        subButton.className = stylesButton.button;
+        subButton.className = stylesPeople.button;
         subButton.textContent = 'Подписаться';
         par.appendChild(subButton);
         Bus.emit('unsubscribe', id);
@@ -72,7 +72,7 @@ export default class PeoplePage extends Base {
       const listenerSubscribe = (evt) => {
         evt.preventDefault();
         subButton.remove();
-        unsubscribe.className = `${stylesButton.button} ${stylesButton.button__red}`;
+        unsubscribe.className = `${stylesPeople.button} ${stylesPeople.button__red}`;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);
@@ -90,7 +90,7 @@ export default class PeoplePage extends Base {
       const listenerSub = (evt) => {
         evt.preventDefault();
         unsub.remove();
-        subButton.className = stylesButton.button;
+        subButton.className = stylesPeople.button;
         subButton.textContent = 'Подписаться';
         par.appendChild(subButton);
         Bus.emit('unsubscribe', id);
@@ -98,7 +98,7 @@ export default class PeoplePage extends Base {
       const listenerUnsub = (evt) => {
         evt.preventDefault();
         unsubscribe.remove();
-        subButton.className = stylesButton.button;
+        subButton.className = stylesPeople.button;
         subButton.textContent = 'Подписаться';
         par.appendChild(subButton);
         Bus.emit('unsubscribe', id);
@@ -106,7 +106,7 @@ export default class PeoplePage extends Base {
       const listenerSubscribe = (evt) => {
         evt.preventDefault();
         subButton.remove();
-        unsubscribe.className = `${stylesButton.button} ${stylesButton.button__red}`;
+        unsubscribe.className = `${stylesPeople.button} ${stylesPeople.button__red}`;
         unsubscribe.textContent = 'Отписаться';
         par.appendChild(unsubscribe);
         Bus.emit('subscribe', id);

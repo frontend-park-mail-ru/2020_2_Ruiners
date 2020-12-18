@@ -1,6 +1,6 @@
 import { application } from '../config.js';
 import sessionService from '../Services/sessionService.js';
-import ProfilePage from '../Views/ProfilePage.js';
+import ProfilePage from '../Views/ProfilePage/ProfilePage.js';
 import Bus from '../modules/EventBus';
 import PlaylistService from '../Services/playlistService.js';
 import playlistService from '../Services/playlistService.js';

@@ -1,0 +1,59 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+
+input {
+  height: 32px;
+  font-size: 15px;
+  padding: 0 10px;
+
+  border-radius: 100px;
+  border: none;
+  outline: 0;
+  background-color: #DCDCDC;
+
+  box-shadow: 0 0 0 2px #696969,
+  0 0 0 4px #000000;
+
+  margin: 4px;
+  margin-top: 20px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  border: 1px dotted #63476f;
+  box-shadow: 0 0 0 1000px #edf8f6 inset,
+  0 0 0 4px #edf8f6;
+}
+
+.search_nav_links_a {
+  text-decoration-line: none;
+  color: $color-text;
+  font-family: $font-info;
+  font-size: 20px;
+  &:hover {
+    color: $color-secondary;
+    cursor: pointer;
+  }
+}
+
+
+.search_nav_links_aBig {
+  text-decoration-line: none;
+  color: $color-secondary;
+  font-family: $font-info;
+  font-size: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+@media (max-width: 800px) {
+  .search_nav_links_aBig {
+    margin-top: 10px;
+  }
+
+  .search_nav_links_a {
+    margin-top: 10px;
+  }
+}

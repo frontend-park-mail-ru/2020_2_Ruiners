@@ -1,0 +1,39 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+
+.button {
+  height: 32px;
+  font-size: 0.9em;
+  padding: 0 16px;
+
+  border-radius: 100px;
+  border: none;
+  background: $color-button;
+  color: $color-text;
+  cursor: pointer;
+  &:hover {
+    background-color: #F4A460;
+  }
+  &:active {
+    background-color: #009379;
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.button__red {
+  background-color: red;
+  &:hover{
+    background-color: brown;
+  }
+}
+
+@media (max-width: 500px) {
+  .button {
+    height: 25px;
+    padding: 0 10px;
+  }
+}

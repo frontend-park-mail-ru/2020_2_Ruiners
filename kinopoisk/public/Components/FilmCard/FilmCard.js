@@ -3,7 +3,7 @@ import filmcardT from './FilmCard.handlebars';
 import Bus from '../../modules/EventBus.js';
 import styles from './FilmCard.scss';
 import stylesMain from '../../static/CSS/main.scss';
-import {MapRussian} from '../../modules/mapRussian';
+import { MapRussian } from '../../modules/mapRussian';
 
 export default class FilmCard {
   constructor(context = {}) {

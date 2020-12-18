@@ -1,13 +1,13 @@
-import Base from './Base';
-import { nav } from '../config';
-import Search from '../Components/Search/Search';
-import Bus from '../modules/EventBus';
-import FilmLenta from '../Components/FilmLenta/FilmLenta';
-import styles from '../static/CSS/main.scss';
-import FriendList from '../Components/FriendList/FriendList';
-import PersonLenta from '../Components/PersonLenta/PersonLenta';
-import stylesSearch from '../Components/Search/Search.scss';
-import debounce from '../modules/debounce';
+import Base from '../Base';
+import { nav } from '../../config';
+import Search from '../../Components/Search/Search';
+import Bus from '../../modules/EventBus';
+import FilmLenta from '../../Components/FilmLenta/FilmLenta';
+import styles from '../../static/CSS/main.scss';
+import FriendList from '../../Components/FriendList/FriendList';
+import PersonLenta from '../../Components/PersonLenta/PersonLenta';
+import stylesSearchPage from './SearchPage.scss';
+import debounce from '../../modules/debounce';
 
 export default class SearchPage extends Base {
   constructor(context) {
@@ -37,7 +37,6 @@ export default class SearchPage extends Base {
     let peopleBool = false;
     let filmsBool = false;
     let actorsBool = false;
-
 
     // Обработчики на нажатие вкладок (Люди, фильмы и т д)
     allLink.addEventListener('click', () => {
@@ -72,7 +71,6 @@ export default class SearchPage extends Base {
       allBool = false;
       searchFunction();
     });
-
 
     // функция, которая по написанной строке выводит фильмы
     const searchFunction = (evt) => {
@@ -114,7 +112,7 @@ export default class SearchPage extends Base {
           if (users.length !== 0 && (peopleBool || allBool)) {
             lentaUsers.render();
           }
-          let box = this.createBox(content);
+          const box = this.createBox(content);
         },
       });
     };
@@ -131,9 +129,9 @@ export default class SearchPage extends Base {
   }
 
   setClass(link1, link2, link3, link4) {
-    link1.className = stylesSearch.search_nav_links_aBig;
-    link2.className = stylesSearch.search_nav_links_a;
-    link3.className = stylesSearch.search_nav_links_a;
-    link4.className = stylesSearch.search_nav_links_a;
+    link1.className = stylesSearchPage.search_nav_links_aBig;
+    link2.className = stylesSearchPage.search_nav_links_a;
+    link3.className = stylesSearchPage.search_nav_links_a;
+    link4.className = stylesSearchPage.search_nav_links_a;
   }
 }

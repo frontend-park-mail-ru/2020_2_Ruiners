@@ -1,11 +1,11 @@
-import Bus from '../modules/EventBus.js';
-import Base from './Base.js';
-import Link from '../Components/Link/Link.js';
-import Form from '../Components/Form/Form.js';
-import { nav } from '../config.js';
-import Button from '../Components/Button/Button';
-import styles from '../static/CSS/main.scss';
-import stylesForm from '../Components/Form/Form.scss';
+import Bus from '../../modules/EventBus.js';
+import Base from '../Base.js';
+import Link from '../../Components/Link/Link.js';
+import Form from '../../Components/Form/Form.js';
+import { nav } from '../../config.js';
+import Button from '../../Components/Button/Button';
+import styles from '../../static/CSS/main.scss';
+import stylesSignup from './SignupPage.scss';
 
 export default class SignupPage extends Base {
   constructor(parent) {
@@ -20,7 +20,7 @@ export default class SignupPage extends Base {
     body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const signupBox = document.createElement('div');
-    signupBox.className = `${stylesForm.wrapper__form__regLog} ${stylesForm.register}`;
+    signupBox.className = `${stylesSignup.wrapper__form__regLog} ${stylesSignup.register}`;
     this.parent.appendChild(signupBox);
     const headLogin = {
       head: true,

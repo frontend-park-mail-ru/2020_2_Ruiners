@@ -1,5 +1,4 @@
 export default function debounce(f, ms) {
-
   let isCooldown = false;
 
   return function () {
