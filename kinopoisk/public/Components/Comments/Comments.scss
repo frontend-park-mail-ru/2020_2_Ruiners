@@ -10,6 +10,10 @@
     width: 90%;
 }
 
+.invisible_box {
+    min-height: 100px;
+}
+
 @media (max-width: 1449px) {
     .comments_place {
         display: flex;
@@ -275,3 +279,5 @@ textarea.question:invalid ~ input[type="submit"] {
     cursor: pointer;
     color: $color-secondary;
 }
+
+

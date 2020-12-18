@@ -172,15 +172,15 @@
     .filmCard_info_header_roles{
         margin-bottom: 20px;
         margin-top: 30px;
-        margin-left: 150px;
+        margin-right: 0;
         width: 100%;
     }
 
     .filmCard_roles {
         display: flex;
         flex-direction: column;
+        align-items: center;
         margin-bottom: 30px;
-        margin-left: 150px;
         width: 100%;
     }
 
@@ -201,9 +201,10 @@
     }
 
     .filmCard_info_header_roles {
+        align-content: center;
         font-size: 32px;
-        margin-left: 150px;
         width: 100%;
+        margin-right: 0;
     }
 }
 

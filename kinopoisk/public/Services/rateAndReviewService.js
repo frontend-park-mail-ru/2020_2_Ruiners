@@ -1,11 +1,12 @@
 import { AjaxModule } from '../modules/ajax.js';
 
 export default class RateAndReviewService {
-  static async fetchRate(filmId, rating) {
+  static async fetchRate(film_id, rating) {
+    console.log(film_id, rating);
     const res = await AjaxModule.ajaxPost({
-      url: '/rate',
+      url: '/api/rate',
       body: {
-        filmId,
+        film_id,
         rating,
       },
     });

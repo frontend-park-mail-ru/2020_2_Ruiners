@@ -1,7 +1,7 @@
-<div class="profile_main">
-    <img src="{{domain}}/user/avatar/{{id}}?{{random}}" width="400" height="400" class="profile__default_margin profile__image">
-    <span class="profile__default_margin profile_login">{{Login}}</span>
-    <div class="profile__default_margin profile_settings">
+<div class="{{styles.profile_main}}">
+    <img src="{{domain}}/api/user/avatar/{{id}}?{{random}}" width="400" height="400" class="{{styles.profile__default_margin}} {{styles.profile__image}}">
+    <span class="{{styles.profile__default_margin}} {{styles.profile_login}}">{{Login}}</span>
+    <div class="{{styles.profile__default_margin}} {{styles.profile_settings}}">
         {{#if isProfile}}
             {{{button}}}
         {{else}}
@@ -17,12 +17,12 @@
 </div>
 
 {{#if isProfile}}
-    <div class="profile_nav">
-        <div class="profile_nav_links">
-            <a href="/default" class="profile_nav_links_aBig" id="play">Плэйлисты</a>
-            <a href="/default" class="profile_nav_links_a" id="subscribe">Подписки</a>
-            <a href="/default" class="profile_nav_links_a" id="lenta">Лента</a>
+    <div class="{{styles.profile_nav}}">
+        <div class="{{styles.profile_nav_links}}">
+            <a href="/default" class="{{styles.profile_nav_links_aBig}}" id="play">Плэйлисты</a>
+            <a href="/default" class="{{styles.profile_nav_links_a}}" id="subscribe">Подписки</a>
+            <a href="/default" class="{{styles.profile_nav_links_a}}" id="lenta">Лента</a>
         </div>
-        <hr class="profile_nav_line">
+        <hr class="{{styles.profile_nav_line}}">
     </div>
 {{/if}}

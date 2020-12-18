@@ -1,6 +1,6 @@
 import Bus from '../modules/EventBus.js';
 import sessionService from '../Services/sessionService.js';
-import SignupPage from '../Views/SignupPage.js';
+import SignupPage from '../Views/SignupPage/SignupPage.js';
 import { application } from '../config.js';
 
 export default function Signup() {

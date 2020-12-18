@@ -1,12 +1,13 @@
-import Base from './Base.js';
-import { application, domain, nav } from '../config.js';
-import Button from '../Components/Button/Button';
-import Profile from '../Components/Profile/Profile.js';
-import Bus from '../modules/EventBus.js';
-import FilmLenta from '../Components/FilmLenta/FilmLenta';
-import FriendList from '../Components/FriendList/FriendList';
-import News from '../Components/News/News';
-import subscribeService from '../Services/subscribeService';
+import Base from '../Base.js';
+import { application, nav } from '../../config.js';
+import Button from '../../Components/Button/Button';
+import Profile from '../../Components/Profile/Profile.js';
+import Bus from '../../modules/EventBus.js';
+import FilmLenta from '../../Components/FilmLenta/FilmLenta';
+import FriendList from '../../Components/FriendList/FriendList';
+import News from '../../Components/News/News';
+import styles from '../../static/CSS/main.scss';
+import stylesProfilePage from './ProfilePage.scss';
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -24,10 +25,13 @@ export default class ProfilePage extends Base {
       super.render(false);
     }
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     this.parent.className = '';
     const button = new Button({
-      classname: 'buttons__forComments',
+      templateClass: '',
+      text: 'Настройки',
+      id: 'settings',
+      type: 'submit',
       parent: null,
     });
     const profile = new Profile({
@@ -35,14 +39,9 @@ export default class ProfilePage extends Base {
       isProfile: true,
       body: {
         id: responseBody.id,
-        Login: responseBody.Login,
+        Login: responseBody.login,
         isAuth: true,
-        button: button.template({
-          classname: '',
-          text: 'Настройки',
-          id: 'settings',
-          type: 'submit',
-        }),
+        button: button.getTemplate(),
       },
     });
     profile.render();
@@ -72,9 +71,9 @@ export default class ProfilePage extends Base {
     playlists.forEach((element) => {
       lentas.push(new FilmLenta({
         playlist: true,
-        id: element.Id,
-        genre: element.Title,
-        body: element.Films,
+        id: element.id,
+        genre: element.title,
+        body: element.films,
         parent: application,
       }));
     });
@@ -138,7 +137,7 @@ export default class ProfilePage extends Base {
       });
       let rightIndex = 0;
       lentas.forEach((element, index) => {
-        if (element.id == parseInt(playlistId)) {
+        if (element.id === parseInt(playlistId)) {
           rightIndex = index;
         }
       });
@@ -156,17 +155,16 @@ export default class ProfilePage extends Base {
         element.hide();
       });
       lentas.forEach((element, index) => {
-        if (element.id == playlistId) {
+        if (element.id === playlistId) {
           rightIndex = index;
         }
       });
       let filmIndex = 0;
       lentas[rightIndex].body.forEach((element, index) => {
-        if (element.id == filmId) {
+        if (element.id === filmId) {
           filmIndex = index;
         }
       });
-      console.log(lentas[rightIndex]);
       lentas[rightIndex].body.splice(filmIndex, 1);
       lentas[rightIndex].posters.splice(filmIndex, 1);
       lentas.forEach((element) => {
@@ -185,10 +183,10 @@ export default class ProfilePage extends Base {
 
   createRender(buttonCreate, headerCreate, createPlaylist) {
     headerCreate.textContent = 'Создать плейлист';
-    headerCreate.className = 'headers_main';
+    headerCreate.className = styles.headers_main;
     this.parent.appendChild(headerCreate);
     createPlaylist.placeholder = 'Напишите название';
-    createPlaylist.className = 'input_main';
+    createPlaylist.className = styles.input_main;
     this.parent.appendChild(createPlaylist);
     buttonCreate.render({
       callback: () => {
@@ -206,14 +204,14 @@ export default class ProfilePage extends Base {
   }
 
   setClass(link1, link2, link3) {
-    link1.className = 'profile_nav_links_aBig';
-    link2.className = 'profile_nav_links_a';
-    link3.className = 'profile_nav_links_a';
+    link1.className = stylesProfilePage.profile_nav_links_aBig;
+    link2.className = stylesProfilePage.profile_nav_links_a;
+    link3.className = stylesProfilePage.profile_nav_links_a;
   }
 
   createBox() {
     const box = document.createElement('div');
-    box.className = 'invisible_box';
+    box.className = styles.invisible_box;
     box.id = 'box';
     this.parent.appendChild(box);
     return box;

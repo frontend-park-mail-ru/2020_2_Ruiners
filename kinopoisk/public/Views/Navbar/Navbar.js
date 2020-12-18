@@ -1,13 +1,13 @@
-import NavLink from '../modules/navLink.js';
-import List from '../Components/List/List.js';
-import Link from '../Components/Link/Link.js';
-import Navigate from '../Components/Nav/Nav.js';
-import Button from '../Components/Button/Button.js';
-import Window from '../Components/window/Window.js';
-import navLink from '../modules/navLink.js';
-import SessionService from '../Services/sessionService.js';
-import Bus from '../modules/EventBus.js';
-import { domain, nav } from '../config.js';
+import NavLink from '../../modules/navLink.js';
+import List from '../../Components/List/List.js';
+import Link from '../../Components/Link/Link.js';
+import Navigate from '../../Components/Nav/Nav.js';
+import Button from '../../Components/Button/Button.js';
+import Window from '../../Components/window/Window.js';
+import SessionService from '../../Services/sessionService.js';
+import Bus from '../../modules/EventBus.js';
+import { domain, nav } from '../../config.js';
+import stylesNavbar from './Navbar.scss';
 
 export default class Navbar {
   constructor(parent) {
@@ -48,6 +48,19 @@ export default class Navbar {
     const FilmsA = FilmsAObj.render();
     FilmsAObj.placeContent('Фильмы');
 
+    const SearchObj = new List({
+      parent: ul,
+      classname: 'menu-secondary_search',
+    });
+    const Search = SearchObj.render();
+    const SearchAObj = new Link({
+      parent: Search,
+      pathname: '/search',
+      classname: '',
+    });
+    const SearchA = SearchAObj.render();
+    SearchAObj.placeContent('Поиск');
+
     if (isAuthorized) {
       const profileObj = new List({
         parent: ul,
@@ -60,9 +73,9 @@ export default class Navbar {
         className: 'profileNav',
       });
       const profileA = profileAObj.render();
-      const src = `${domain}/user/avatar/${res.get.id}?${Math.random()}`;
-      profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="round">`);
-      const profileLink = new navLink(profileA);
+      const src = `${domain}/api/user/avatar/${res.get.id}?${Math.random()}`;
+      profileAObj.placeContent(`<img width="50" height="50" src="${src}" alt="" class="${stylesNavbar.round}">`);
+      const profileLink = new NavLink(profileA);
       const window = new Window({ parent: profileA });
       let isOpen = false;
       profileLink.render('click', () => {

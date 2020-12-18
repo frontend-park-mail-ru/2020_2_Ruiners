@@ -2,13 +2,13 @@ import { AjaxModule } from '../modules/ajax.js';
 
 export default class FilmService {
   static async fetchGetById(id) {
-    const res = await AjaxModule.ajaxGet({ url: `/film/${id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/film/${id}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchGetRate(film_id) {
-    const res = await AjaxModule.ajaxGet({ url: `/currentRating/${film_id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/currentRating/${film_id}` });
     let parsedJsonObject;
     try {
       parsedJsonObject = await res.json();
@@ -19,26 +19,62 @@ export default class FilmService {
   }
 
   static async fetchGetByGenre(genre) {
-    const res = await AjaxModule.ajaxGet({ url: `/film/${genre}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/film/${genre}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
   static async fetchGetByPerson(id) {
-    const res = await AjaxModule.ajaxGet({ url: `/person_film/${id}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/person_film/${id}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
   }
 
-  static async fetchPostReview(filmId, body) {
-    const res = await AjaxModule.ajaxPost({ url: '/review/add', body: { filmId, body } });
+  static async fetchPostReview(film_id, body) {
+    const res = await AjaxModule.ajaxPost({ url: '/api/review/add', body: { film_id, body } });
     return res.status;
   }
 
   static async fetchGetByReviews(filmId) {
-    const res = await AjaxModule.ajaxGet({ url: `/review/${filmId}` });
+    const res = await AjaxModule.ajaxGet({ url: `/api/review/${filmId}` });
     const parsedJsonObject = await res.json();
     return { status: res.status, json: parsedJsonObject };
+  }
+
+  static async fetchGetSimilar(filmId) {
+    const res = await AjaxModule.ajaxGet({ url: `/api/similar/${filmId}` });
+    const parsedJsonObject = await res.json();
+    return { status: res.status, json: parsedJsonObject };
+  }
+
+  static async fetchSearch(body) {
+    const res = await AjaxModule.ajaxGet({ url: `/api/films/search?key=${body}` });
+    const parsedJsonObject = await res.json();
+    return { status: res.status, json: parsedJsonObject };
+  }
+
+  static async getSearch(body) {
+    const data = { ok: false, errmsg: undefined, get: undefined };
+    const res = await this.fetchSearch(body);
+    if (res.status !== 200) {
+      data.errmsg = 'Ошибка';
+    } else {
+      data.ok = true;
+      data.get = res.json;
+    }
+    return data;
+  }
+
+  static async getSimilar(id) {
+    const data = { ok: false, errmsg: undefined, get: undefined };
+    const res = await this.fetchGetSimilar(id);
+    if (res.status !== 200) {
+      data.errmsg = 'Ошибка';
+    } else {
+      data.ok = true;
+      data.get = res.json;
+    }
+    return data;
   }
 
   static async getById(id) {
@@ -56,7 +92,6 @@ export default class FilmService {
   static async getRate(id) {
     const data = { ok: false, errmsg: undefined, get: undefined };
     const res = await this.fetchGetRate(id);
-    console.log(res);
     if (res.status !== 200) {
       data.errmsg = 'Нет такой оценки';
     } else {

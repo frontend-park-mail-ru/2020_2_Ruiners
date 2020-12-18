@@ -1,5 +1,6 @@
 import newsT from './News.handlebars';
 import { domain } from '../../config';
+import styles from './News.scss';
 
 export default class News {
   constructor(context) {
@@ -18,6 +19,7 @@ export default class News {
       element.dateTime = `${element.date.getHours()}:${element.date.getMinutes()} ${element.date.getDate()}-${element.date.getMonth()}-${element.date.getFullYear()}`;
     });
     this.news.innerHTML = this.template({
+      styles,
       news: this.body,
     });
   }

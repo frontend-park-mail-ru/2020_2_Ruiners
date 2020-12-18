@@ -1,13 +1,14 @@
 import filmPosterT from './FilmPoster.handlebars';
+import styles from './FilmPoster.scss';
 
 export default class FilmPoster {
   constructor(context = {}) {
     const {
-      title, MainGenre, year, SmallImg, id, del, playlist,
+      title, main_genre, year, small_img, id, del, playlist,
     } = context;
     this.title = title;
-    this.genre = MainGenre;
-    this.image = SmallImg;
+    this.genre = main_genre;
+    this.image = small_img;
     this.year = year;
     this.id = id;
     this.poster = document.createElement('div');
@@ -18,6 +19,7 @@ export default class FilmPoster {
 
   render() {
     return this.template({
+      styles,
       id: this.id,
       title: this.title,
       MainGenre: this.genre,

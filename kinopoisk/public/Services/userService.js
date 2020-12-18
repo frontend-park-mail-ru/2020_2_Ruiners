@@ -2,18 +2,36 @@ import { AjaxModule } from '../modules/ajax.js';
 
 export default class UserService {
   static async fetchChangeLogin(login) {
-    const res = await AjaxModule.ajaxPost({ url: '/chengelogin', body: { login } });
+    const res = await AjaxModule.ajaxPost({ url: '/api/chengelogin', body: { login } });
     return res.status;
   }
 
-  static async fetchChangePassword(PasswordOld, Password) {
-    const res = await AjaxModule.ajaxPost({ url: '/chengepass', body: { PasswordOld, Password } });
+  static async fetchChangePassword(password_old, password) {
+    const res = await AjaxModule.ajaxPost({ url: '/api/chengepass', body: { password_old, password } });
     return res.status;
   }
 
   static async fetchChangeAvatar(avatar) {
-    const res = await AjaxModule.ajaxPost({ url: '/changeAvatar', body: avatar });
+    const res = await AjaxModule.ajaxPost({ url: '/api/changeAvatar', body: avatar });
     return res.status;
+  }
+
+  static async fetchSearch(body) {
+    const res = await AjaxModule.ajaxGet({ url: `/api/users/search?key=${body}` });
+    const parsedJsonObject = await res.json();
+    return { status: res.status, json: parsedJsonObject };
+  }
+
+  static async getSearch(body) {
+    const data = { ok: false, errmsg: undefined, get: undefined };
+    const res = await this.fetchSearch(body);
+    if (res.status !== 200) {
+      data.errmsg = 'Ошибка';
+    } else {
+      data.ok = true;
+      data.get = res.json;
+    }
+    return data;
   }
 
   static async ChangeLogin(login) {
@@ -56,7 +74,7 @@ export default class UserService {
     let resLog = 200;
     let resPass = 200;
     let resAvatar = 200;
-    if (login && login != '') {
+    if (login && login !== '') {
       resLog = await this.fetchChangeLogin(login);
     }
     if (resLog === 200) {
@@ -65,7 +83,7 @@ export default class UserService {
       }
     }
     if (resLog === 200 && resPass === 200) {
-      if (avatar != {}) {
+      if (avatar !== {}) {
         resAvatar = await this.fetchChangeAvatar(avatar);
       }
     }

@@ -1,11 +1,10 @@
-import NavLink from '../modules/navLink.js';
-import Bus from '../modules/EventBus.js';
-import Form from '../Components/Form/Form.js';
-import Base from './Base.js';
-import userService from '../Services/userService.js';
-import Button from '../Components/Button/Button.js';
-import UserService from '../Services/userService.js';
-import { nav } from '../config.js';
+import Bus from '../../modules/EventBus.js';
+import Form from '../../Components/Form/Form.js';
+import Base from '../Base.js';
+import Button from '../../Components/Button/Button.js';
+import { nav } from '../../config.js';
+import styles from '../../static/CSS/main.scss';
+import stylesSettings from './ProfileChangePage.scss';
 
 export default class ProfileChangePage extends Base {
   constructor(parent, data) {
@@ -17,10 +16,10 @@ export default class ProfileChangePage extends Base {
   render() {
     super.render(false);
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const settingsBox = document.createElement('div');
-    settingsBox.className = 'wrapper__form chenge margin';
+    settingsBox.className = `${styles.margin} ${stylesSettings.chenge}`;
     this.parent.appendChild(settingsBox);
     const responseBody = JSON.parse(this.data);
 
@@ -34,7 +33,7 @@ export default class ProfileChangePage extends Base {
       {
         type: 'login',
         name: 'login',
-        text: `${responseBody.Login}`,
+        text: `${responseBody.login}`,
         required: true,
         valid: true,
         reg: /[A-Za-z0-9]{5,15}/,
@@ -53,7 +52,7 @@ export default class ProfileChangePage extends Base {
     const form = formrLogin[0];
     settingsBox.appendChild(form);
     const Password = document.createElement('h2');
-    Password.className = 'settings_header';
+    Password.className = stylesSettings.settings_header;
     Password.textContent = 'Изменить Пароль';
     settingsBox.appendChild(Password);
 
@@ -99,11 +98,11 @@ export default class ProfileChangePage extends Base {
     const formPass = formr[0];
     settingsBox.appendChild(formPass);
     const Avatar = document.createElement('h2');
-    Avatar.className = 'settings_header';
+    Avatar.className = stylesSettings.settings_header;
     Avatar.textContent = 'Изменить аватарку';
     settingsBox.appendChild(Avatar);
     const err = document.createElement('div');
-    err.className = 'error';
+    err.className = styles.error;
 
     const configAvatar = [
       {
@@ -141,12 +140,11 @@ export default class ProfileChangePage extends Base {
       formrAvatar,
       base: super.render,
     }));
-    this.createBox();
   }
 
   createBox() {
     const box = document.createElement('div');
-    box.className = 'invisible_box';
+    box.className = styles.invisible_box;
     this.parent.appendChild(box);
   }
 }

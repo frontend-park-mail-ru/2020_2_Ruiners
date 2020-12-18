@@ -1,9 +1,11 @@
-import Bus from '../modules/EventBus.js';
-import Base from './Base.js';
-import Link from '../Components/Link/Link.js';
-import Form from '../Components/Form/Form.js';
-import { nav } from '../config.js';
-import Button from '../Components/Button/Button';
+import Bus from '../../modules/EventBus.js';
+import Base from '../Base.js';
+import Link from '../../Components/Link/Link.js';
+import Form from '../../Components/Form/Form.js';
+import { nav } from '../../config.js';
+import Button from '../../Components/Button/Button';
+import styles from '../../static/CSS/main.scss';
+import stylesSignup from './SignupPage.scss';
 
 export default class SignupPage extends Base {
   constructor(parent) {
@@ -15,10 +17,10 @@ export default class SignupPage extends Base {
     super.render(false);
     this.parent.innerHTML = '';
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     body.style.backgroundImage = 'url(\'images/login.jpg\')';
     const signupBox = document.createElement('div');
-    signupBox.className = 'wrapper__form__regLog register';
+    signupBox.className = `${stylesSignup.wrapper__form__regLog} ${stylesSignup.register}`;
     this.parent.appendChild(signupBox);
     const headLogin = {
       head: true,
@@ -66,7 +68,7 @@ export default class SignupPage extends Base {
     const form = formrLogin[0];
     signupBox.appendChild(form);
     const err = document.createElement('div');
-    err.className = 'error';
+    err.className = styles.error;
     const buttonSignup = new Button({
       parent: form,
       classname: 'buttons__marginForFilmCard',

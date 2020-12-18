@@ -1,5 +1,5 @@
 import Bus from '../modules/EventBus';
-import PeoplePage from '../Views/PeoplePage';
+import PeoplePage from '../Views/PeoplePage/PeoplePage';
 import { application } from '../config';
 import sessionService from '../Services/sessionService.js';
 import ProfileController from './ProfileController';
@@ -19,7 +19,9 @@ export default function People(params) {
             responseBody.isSub = false;
           }
           if (res.ok) {
+            console.log(res.get.id, id);
             if (res.get.id == id) {
+              console.log(res.get.id, id);
               ProfileController({ id });
               return;
             }

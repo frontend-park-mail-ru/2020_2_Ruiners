@@ -1,8 +1,9 @@
 import Base from './Base.js';
 import FilmLenta from '../Components/FilmLenta/FilmLenta.js';
-import filmService from '../Services/filmService.js';
 import Bus from '../modules/EventBus.js';
 import { nav, application } from '../config.js';
+import styles from '../static/CSS/main.scss';
+import MenuFilm from '../Components/MenuFilm/MenuFilm';
 
 export default class MenuPage extends Base {
   constructor(parent) {
@@ -10,12 +11,18 @@ export default class MenuPage extends Base {
     this.parent = parent;
   }
 
-  render() {
+  render(film) {
     super.render(false);
+    const body = document.getElementById('body');
+    body.className = styles.menu__background;
+    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0) 80%), url(${film.big_img})`;
     this.parent.innerHTML = '';
     this.parent.className = '';
-    const body = document.getElementById('body');
-    body.className = 'main__black';
+    const menuFilm = new MenuFilm({
+      parent: application,
+      body: film,
+    });
+    menuFilm.render();
     const lentas = [
       {
         rusGenre: 'Фантастика',
@@ -25,6 +32,26 @@ export default class MenuPage extends Base {
       {
         rusGenre: 'Комедии',
         genre: 'comedy',
+        parent: this.parent,
+      },
+      {
+        rusGenre: 'Ужасы',
+        genre: 'horror',
+        parent: this.parent,
+      },
+      {
+        rusGenre: 'Драма',
+        genre: 'drama',
+        parent: this.parent,
+      },
+      {
+        rusGenre: 'Боевики',
+        genre: 'war',
+        parent: this.parent,
+      },
+      {
+        rusGenre: 'Триллеры',
+        genre: 'triller',
         parent: this.parent,
       },
     ];
@@ -50,7 +77,7 @@ export default class MenuPage extends Base {
 
   createBox() {
     const box = document.createElement('div');
-    box.className = 'invisible_box';
+    box.className = styles.invisible_box;
     this.parent.appendChild(box);
   }
 }

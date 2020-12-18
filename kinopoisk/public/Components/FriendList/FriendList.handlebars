@@ -1,12 +1,20 @@
+{{#if search}}
+    <div class="{{styles.friendList_header_container}}">
+        <span class="{{ styles.friendList_header}}">{{header}}</span>
+    </div>
+{{/if}}
 {{#each friends}}
-    <div class="friendList_width">
-        <div class="friendList_container">
+    <div class="{{../styles.friendList_width}}">
+        <div class="{{../styles.friendList_container}}">
             <div>
-                <img src="{{this.domain}}/user/avatar/{{this.id}}" width="200" height="200" class="friendlist__default_margin friendlist__image">
-                <a class="friendList_login" href="people/{{this.id}}">{{this.Login}}</a>
+                <img src="{{this.domain}}/api/user/avatar/{{this.id}}" width="200" height="200" class="{{../styles.friendlist__default_margin}} {{../styles.friendlist__image}}">
+                <a class="{{../styles.friendList_login}}" href="people/{{this.id}}">{{this.login}}</a>
             </div>
-            <div>{{{del}}}</div>
+            {{#if ../search}}
+            {{else}}
+                <div>{{{del}}}</div>
+            {{/if}}
         </div>
-        <hr class="friendList_line">
+        <hr class="{{../styles.friendList_line}}">
     </div>
 {{/each}}

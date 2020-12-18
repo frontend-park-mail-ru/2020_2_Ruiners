@@ -15,6 +15,20 @@
   color: rgba(71, 69, 69, 0.7);
 }
 
+.friendList_header {
+  margin-top: 100px;
+  color: white;
+  font-size: 30px;
+  font-family: $font-main;
+}
+
+.friendList_header_container {
+  display: block;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
 .friendList_width {
   width: 90%;
 }

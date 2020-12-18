@@ -1,6 +1,6 @@
 import { application } from '../config.js';
 import sessionService from '../Services/sessionService.js';
-import ProfilePage from '../Views/ProfilePage.js';
+import ProfilePage from '../Views/ProfilePage/ProfilePage.js';
 import Bus from '../modules/EventBus';
 import PlaylistService from '../Services/playlistService.js';
 import playlistService from '../Services/playlistService.js';
@@ -11,7 +11,6 @@ export default function Profile(params) {
   let responseBody;
   application.innerHTML = '';
   Bus.on('CreatePlaylist', (title) => {
-    console.log(title);
     PlaylistService.PostCreate(title).then((res) => {
       if (res.ok) {
         Bus.emit('ProfilePage');
@@ -39,7 +38,6 @@ export default function Profile(params) {
               Bus.emit('redirectMain');
               return;
             }
-            console.log('asd', res.get);
             const followers = res.get;
             PlaylistService.getPlaylistFilms()
               .then((res) => {

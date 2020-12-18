@@ -1,5 +1,6 @@
 import Button from '../Button/Button.js';
 import commentT from './Comments.handlebars';
+import styles from './Comments.scss';
 
 export default class Comments {
   constructor(context = {}) {
@@ -9,8 +10,9 @@ export default class Comments {
     this.body = body;
     this.isAuthorized = isAuthorized;
     this.msgButton = new Button({
-      classname: 'buttons__marginForFilmCard',
+      templateClass: 'buttons__forComments',
       id: 'msg_button',
+      text: 'Отправить',
       parent: null,
     });
     this.template = commentT;
@@ -26,12 +28,8 @@ export default class Comments {
       noComments,
       isAuth: this.isAuthorized,
       comments: this.body,
-      Button: this.msgButton.template({
-        classname: 'buttons__forComments',
-        text: 'Отправить',
-        id: 'msg_button',
-        type: 'submit',
-      }),
+      Button: this.msgButton.getTemplate(),
+      styles,
     });
   }
 

@@ -1,3 +1,5 @@
+import styles from './List.scss';
+
 export default class List {
   constructor(context) {
     const { parent, classname } = context;
@@ -8,7 +10,7 @@ export default class List {
 
   render() {
     this.parent.appendChild(this.li);
-    this.li.className = this.classname;
+    this.li.className = styles[this.classname];
     return this.li;
   }
 

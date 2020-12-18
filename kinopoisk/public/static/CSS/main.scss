@@ -1,19 +1,4 @@
-@import "../../Components/Link/Link";
 @import "../../Components/Nav/Nav";
-@import "../../Components/List/List";
-@import "../../Components/Form/Form";
-@import "../../Components/Button/Button";
-@import "../../Components/window/Window";
-@import "../../Components/FilmCard/FilmCard";
-@import "../../Components/FilmLenta/FilmLenta";
-@import "../../Components/FilmPoster/FilmPoster";
-@import "../../Components/Profile/Profile";
-@import "../../Components/Footer/Footer";
-@import "../../Components/Comments/Comments";
-@import "../../Components/PersonCard/PersonCard";
-@import "../../Components/Delete/Delete";
-@import "../../Components/FriendList/FriendList";
-@import "../../Components/News/News";
 @import "colors";
 @import "fonts";
 
@@ -25,8 +10,21 @@ body.main__background {
     background-size: 100% 100%;
 }
 
+body.menu__background {
+    height: 80vh;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-color: $color-main;
+    background-size: 1920px 1080px;
+    background-position: center;
+}
+
 @media (max-width: 1499px) {
     body.main__background {
+        background-size: 1500px 100vh;
+        background-position: center;
+    }
+    body.menu__background {
         background-size: 1500px 100vh;
         background-position: center;
     }
@@ -66,7 +64,6 @@ body {
     margin: 0px;
 }
 
-
 .page {
     display: block;
     flex-direction: column;
@@ -75,7 +72,7 @@ body {
     background-color: $color-main;
 }
 
-#app {
+.app_margin {
     margin-left: 10vmin;
 }
 

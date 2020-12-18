@@ -2,7 +2,8 @@ import { application } from '../config.js';
 import Bus from '../modules/EventBus.js';
 import userService from '../Services/userService.js';
 import sessionService from '../Services/sessionService.js';
-import ProfileChangePage from '../Views/ProfileChangePage.js';
+import ProfileChangePage from '../Views/ProfileChangePage/ProfileChangePage.js';
+import styles from '../static/CSS/main.scss';
 
 export default function Settings() {
   let responseBody;
@@ -33,13 +34,13 @@ export default function Settings() {
             } else {
               console.log(res.errmsg);
               err.innerHTML = res.errmsg;
-              err.className = 'error';
+              err.className = styles.error;
               formAvatar.appendChild(err);
             }
           });
         } else {
           err.innerHTML = 'Пароли не совпадают';
-          err.className = 'error';
+          err.className = styles.error;
           formPass.appendChild(err);
         }
       },

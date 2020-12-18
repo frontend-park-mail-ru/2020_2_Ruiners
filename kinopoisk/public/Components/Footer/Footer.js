@@ -1,4 +1,5 @@
 import footerT from './Footer.handlebars';
+import styles from './Footer.scss';
 
 export default class Footer {
   constructor() {
@@ -11,7 +12,9 @@ export default class Footer {
     if (foot !== undefined) {
       foot.innerHTML = '';
     }
-    this.footer.innerHTML = this.template();
+    this.footer.innerHTML = this.template({
+      styles,
+    });
     const body = document.getElementById('body');
     body.appendChild(this.footer);
   }

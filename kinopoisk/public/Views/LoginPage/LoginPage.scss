@@ -1,0 +1,91 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+input {
+  height: 32px;
+  font-size: 15px;
+  padding: 0 10px;
+
+  border-radius: 100px;
+  border: none;
+  outline: 0;
+  background-color: #DCDCDC;
+
+  box-shadow: 0 0 0 2px #696969,
+  0 0 0 4px #000000;
+
+  margin: 4px;
+  margin-top: 20px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  border: 1px dotted #63476f;
+  box-shadow: 0 0 0 1000px #edf8f6 inset,
+  0 0 0 4px #edf8f6;
+}
+
+.button {
+  height: 32px;
+  font-size: 0.9em;
+  padding: 0 16px;
+
+  border-radius: 100px;
+  border: none;
+  background: $color-button;
+  color: $color-text;
+  cursor: pointer;
+  &:hover {
+    background-color: #F4A460;
+  }
+  &:active {
+    background-color: #009379;
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.buttons__forRegLog {
+  margin: 10px;
+}
+
+@media (max-width: 500px) {
+  .button {
+    height: 25px;
+    padding: 0 10px;
+  }
+}
+
+.wrapper__form__regLog {
+  display: block;
+  margin-left: 38%;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  border-radius: 20px;
+  margin-top: 140px;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 1px 2px 10px 0 black;
+  padding: 0 20px 0;
+  opacity: 100%;
+}
+
+@media (max-width: 949px) {
+  .wrapper__form__regLog {
+    margin-left: 10vw;
+  }
+
+  .login {
+    width: 70%;
+    border-radius: 20px;
+    margin-top: 140px;
+    box-shadow: 1px 2px 10px 0 black;
+    padding: 0 20px 0;
+    opacity: 100%;
+  }
+}

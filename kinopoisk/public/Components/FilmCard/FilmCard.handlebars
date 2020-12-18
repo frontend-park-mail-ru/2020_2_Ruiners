@@ -1,62 +1,62 @@
-<div class="filmCard_main">
+<div class="{{styles.filmCard_main}}">
     <div>
-        <span class="filmCard_titleRate__title">{{ title }}</span>
+        <span class="{{styles.filmCard_titleRate__title}}">{{ title }}</span>
     </div>
     {{#if playlistBool}}
-        <span class="filmCard_main_header">Добавить в плейлист</span>
-        <div class="filmCard_select">
+        <span class="{{styles.filmCard_main_header}}">Добавить в плейлист</span>
+        <div class="{{styles.filmCard_select}}">
             <button class="" id="adding">Добавить</button>
             <select>
                 {{#each playlists}}
-                    <option id={{this.Id}}>{{this.Title}}</option>
+                    <option id={{this.id}}>{{this.title}}</option>
                 {{/each}}
             </select>
         </div>
     {{/if}}
 </div>
 
-<div class="filmCard_secondary">
-    <div class="filmCard_info_header">Информация</div>
-    <div class="filmCard_info">
-        <div class="filmCard_info_info">
-            <div class="filmCard_info_info_genre">
+<div class="{{styles.filmCard_secondary}}">
+    <div class="{{styles.filmCard_info_header}}">Информация</div>
+    <div class="{{styles.filmCard_info}}">
+        <div class="{{styles.filmCard_info_info}}">
+            <div class="{{styles.filmCard_info_info_genre}}">
                 {{#each genres}}
-                    <a href="genre/{{this.genre}}" class="link"> {{ this.rusGenre }} </a>
+                    <a href="genre/{{this.genre}}" class="{{../styles.link}}"> {{ this.rusGenre }} </a>
                 {{/each}}
             </div>
-            <div class="filmCard_info_info_genre">
+            <div class="{{styles.filmCard_info_info_genre}}">
                 {{#each countries}}
                     {{ this }}
                 {{/each}}
             </div>
-            <div class="filmCard_info__rate">
-                <span class="filmCard_info__rate">Рейтинг: {{ rate }}</span>
-                <span class="filmCard_info__votes">{{ votes }} голосов</span>
+            <div class="{{styles.filmCard_info__rate}}">
+                <span class="{{styles.filmCard_info__rate}}">Рейтинг: {{ rate }}</span>
+                <span class="{{styles.filmCard_info__votes}}">{{ votes }} голосов</span>
             </div>
         </div>
-        <div class="filmCard_info__description">{{ description }} </div>
+        <div class="{{styles.filmCard_info__description}}">{{ description }} </div>
     </div>
-    <div class="filmCard_info_more">
-        <div class="filmCard_info_header">Трейлер</div>
+    <div class="{{styles.filmCard_info_more}}">
+        <div class="{{styles.filmCard_info_header}}">Трейлер</div>
     </div>
-    <div class="filmCard_info_more">
+    <div class="{{styles.filmCard_info_more}}">
         <div><iframe width="560" height="315" src="{{ youtube }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div>
-            <div class="filmCard_info_header_roles">В ролях</div>
-                <div class="filmCard_roles">
+            <div class="{{styles.filmCard_info_header_roles}}">В ролях</div>
+                <div class="{{styles.filmCard_roles}}">
                     {{#each actors}}
-                        <div class="filmcard_roles_link"><a href="person/{{ this.Id }}" class="link">{{ this.Name }} </a></div>
+                        <div class="{{../styles.filmcard_roles_link}}"><a href="person/{{ this.id }}" class="{{../this.styles.link}}">{{ this.name }} </a></div>
                     {{/each}}
                 </div>
         </div>
     </div>
     {{#if isAuth}}
-    <div class="filmCard_info_header">Оценить</div>
+    <div class="{{styles.filmCard_info_header}}">Оценить</div>
         {{#if MyRateBool}}
-            <span class="filmCard_info__rate">Ваша текущая оценка: {{ MyRate }}/10</span>
+            <span class="{{styles.filmCard_info__rate}}">Ваша текущая оценка: {{ MyRate }}/10</span>
         {{/if}}
-        <div class="rating-area">
+        <div class="{{styles.rating-area}}">
             {{#each stars}}
                 <input type="radio" id="star-{{this}}" name="rating" value="{{this}}">
                 <label for="star-{{this}}" title="Оценка «{{this}}»"></label>

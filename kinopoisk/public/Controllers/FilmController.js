@@ -5,6 +5,7 @@ import sessionService from '../Services/sessionService.js';
 import playlistService from '../Services/playlistService.js';
 import FilmPage from '../Views/FilmPage.js';
 import { application } from '../config.js';
+import styles from '../static/CSS/main.scss';
 
 export default function Film(params) {
   const { id } = params;
@@ -22,18 +23,18 @@ export default function Film(params) {
   });
   Bus.on('PlaceComment', (context) => {
     const {
-      responseBody, render, buttonComment, playlists,
+      responseBody, render, buttonComment, playlists, similar,
     } = context;
     const form = document.getElementById('msg');
     if (form.value === '') {
       const divError = buttonComment.parentElement;
       const err = document.createElement('div');
       err.textContent = 'Пустой отзыв';
-      err.className = 'error';
+      err.className = styles.error;
       divError.appendChild(err);
     } else {
       filmService.PostReview(responseBody.id, form.value).then((res) => {
-        render(playlists);
+        render(playlists, similar);
       });
     }
   });
@@ -51,11 +52,11 @@ export default function Film(params) {
     playlistService.PostAdd(filmId, playlistId).then((res) => {
       if (res.ok) {
         success.textContent = 'Вы успешно добавили фильм в плэйлист';
-        success.className = 'success_add';
+        success.className = styles.success_add;
         error.innerHTML = '';
       } else {
         error.textContent = 'Вы уже добавили этот фильм в плэйлист';
-        error.className = 'error_add';
+        error.className = styles.error_add;
         success.innerHTML = '';
       }
     });
@@ -63,7 +64,6 @@ export default function Film(params) {
 
   sessionService.me()
     .then((res) => {
-      console.log(res);
       if (!res.ok) {
         isAuthorized = false;
       } else {
@@ -79,18 +79,24 @@ export default function Film(params) {
           }
           if (res.ok) {
             let playlists = [];
-            if (isAuthorized) {
-              playlistService.getPlaylists().then((res) => {
-                if (res.ok) {
-                  playlists = res.get;
-                  const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
-                  film.render(playlists);
-                }
-              });
-            } else {
-              const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
-              film.render(playlists);
-            }
+            let similar = [];
+            filmService.getSimilar(id).then((simRes) => {
+              if (simRes.ok) {
+                similar = simRes.get;
+              }
+              if (isAuthorized) {
+                playlistService.getPlaylists().then((res) => {
+                  if (res.ok) {
+                    playlists = res.get;
+                    const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
+                    film.render(playlists, similar);
+                  }
+                });
+              } else {
+                const film = new FilmPage({ parent: application, body: responseBody, isAuthorized });
+                film.render(playlists, similar);
+              }
+            });
           } else {
             this.menuPage();
           }

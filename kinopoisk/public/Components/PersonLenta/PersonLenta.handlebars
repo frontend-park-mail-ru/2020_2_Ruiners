@@ -1,0 +1,14 @@
+<div class="{{styles.personLenta_main__header}}">
+    <div class="{{styles.personLenta_genre}}">Актеры</div>
+</div>
+
+<div class="{{styles.personLenta_header__lenta}}">
+    {{#each persons}}
+        <div class="{{../styles.personLenta__object}}">
+            <a href="person/{{ this.id }}" class="{{../styles.personLenta_href}}" id="{{ id }}"><img width="270" height="420" src="{{ this.image }}" alt="" class="{{../styles.personLenta_object__image}}">
+            </a>
+            <div class="{{../styles.personLenta_image__text}}"> {{ this.name }} </div>
+        </div>
+    {{/each}}
+    <hr class="{{styles.personLenta_lenta_line}}">
+</div>

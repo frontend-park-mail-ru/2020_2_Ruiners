@@ -1,5 +1,5 @@
-import Button from '../Button/Button.js';
 import { createDiv } from '../../Views/Components.js';
+import styles from '../../static/CSS/main.scss';
 
 export default class Form {
   createInput(type, name, text) {
@@ -11,7 +11,7 @@ export default class Form {
   }
 
   valid(form, reg, input, text) {
-    const diver = createDiv('error', form);
+    const diver = createDiv(styles.error, form);
     input.onblur = function () {
       if (!reg.test(this.value)) {
         this.classList.add('invalid');

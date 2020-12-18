@@ -1,4 +1,5 @@
 import deleteT from './Delete.handlebars';
+import styles from './Delete.scss';
 
 export default class Delete {
   constructor(context) {
@@ -8,6 +9,15 @@ export default class Delete {
     this.template = deleteT;
     this.parent = parent;
     this.id = id;
+    this.styles = styles;
+  }
+
+  getTemplate() {
+    return this.template({
+      id: this.id,
+      what: this.what,
+      styles,
+    });
   }
 
   render() {
@@ -15,6 +25,7 @@ export default class Delete {
     this.delete.innerHTML = this.template({
       id: this.id,
       what: this.what,
+      styles,
     });
   }
 }

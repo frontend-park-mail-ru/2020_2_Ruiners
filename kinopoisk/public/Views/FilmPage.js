@@ -2,9 +2,10 @@ import Base from './Base.js';
 import FilmCard from '../Components/FilmCard/FilmCard.js';
 import Comments from '../Components/Comments/Comments.js';
 import Bus from '../modules/EventBus.js';
-import personService from '../Services/personService.js';
 import { nav, domain } from '../config.js';
 import filmService from '../Services/filmService';
+import FilmLenta from '../Components/FilmLenta/FilmLenta';
+import styles from '../static/CSS/main.scss';
 
 export default class FilmPage extends Base {
   constructor(context = {}) {
@@ -15,18 +16,17 @@ export default class FilmPage extends Base {
     this.isAuthorized = isAuthorized;
   }
 
-  render(playlists) {
+  render(playlists, similar) {
     super.render(false);
     const body = document.getElementById('body');
-    body.className = 'main__background';
+    body.className = styles.main__background;
     const responseBody = JSON.parse(this.body);
-    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(${responseBody.BigImg})`;
+    body.style.backgroundImage = `linear-gradient(to top, rgba(46, 46, 46, 1) 0%, rgba(46, 46, 46, 0.8) 20%, rgba(46, 46, 46, 0.6) 40%, rgba(46, 46, 46, 0.4) 60%, rgba(46, 46, 46, 0.2) 80%, rgba(46, 46, 46, 0) 100%), url(${responseBody.big_img})`;
     this.parent.innerHTML = '';
     this.parent.className = '';
     Bus.emit('GetPersons', {
       responseBody,
       call: (actors) => {
-        console.log(responseBody.id);
         filmService.getRate(responseBody.id).then((res) => {
           responseBody.MyRateBool = false;
           if (res.ok) {
@@ -45,6 +45,12 @@ export default class FilmPage extends Base {
             actors,
           });
           film.render();
+          const lenta = new FilmLenta({
+            parent: this.parent,
+            genre: 'Похожие',
+            body: similar,
+          });
+          lenta.render();
           if (playlists.length !== 0) {
             const addPlaylist = document.getElementById('adding');
             const info = addPlaylist.parentNode;
@@ -72,7 +78,7 @@ export default class FilmPage extends Base {
             responseBody,
             call: (comments) => {
               for (let i = 0; i < comments.length; i++) {
-                comments[i].Image = `${domain}/user/avatar/${`${comments[i].UserId}?${Math.random()}`}`;
+                comments[i].image = `${domain}/api/user/avatar/${`${comments[i].user_id}?${Math.random()}`}`;
               }
               const commentsObj = new Comments({
                 isAuthorized: this.isAuthorized,
@@ -87,6 +93,7 @@ export default class FilmPage extends Base {
                     responseBody,
                     render: this.render.bind(this),
                     playlists,
+                    similar,
                     buttonComment,
                   });
                 });

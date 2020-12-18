@@ -8,6 +8,7 @@ import ProfileController from './ProfileController.js';
 import PersonController from './PersonController.js';
 import GenreController from './GenreController.js';
 import PeopleController from './PeopleController';
+import SearchController from './SearchController';
 
 export default class Controller {
   static offlinePage() {
@@ -48,5 +49,9 @@ export default class Controller {
 
   static peoplePage(params) {
     PeopleController(params);
+  }
+
+  static searchPage() {
+    SearchController();
   }
 }

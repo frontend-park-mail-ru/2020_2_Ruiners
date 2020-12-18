@@ -1,15 +1,18 @@
 import Controller from './Controllers/Controllers.js';
 import Bus from './modules/EventBus.js';
 import Router from './modules/Router.js';
-import './static/CSS/main.scss';
+import styles from './static/CSS/main.scss';
 import './static/images/icons8-кинопроектор-96.png';
 import './static/images/login.jpg';
 import './static/images/offline.png';
 import './static/images/adding.png';
+import './static/images/search1.png';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import RateAndReviewService from './Services/rateAndReviewService.js';
-import { nav } from './config.js';
+import { application, nav } from './config.js';
 import subscribeService from './Services/subscribeService';
+
+application.style.marginLeft = '10vmin';
 
 if ('serviceWorker' in navigator) {
   runtime.register();
@@ -41,6 +44,10 @@ Bus.on('navbarLogin', (button) => {
       router.open('/login');
     },
   });
+});
+
+Bus.on('GoFilm', (id) => {
+  router.open('/film', { id });
 });
 
 Bus.on('navbarSignup', (button) => {
@@ -127,7 +134,8 @@ if (navigator.onLine) {
     .register('/profileChange', Controller.profileChengePage)
     .register('/person', Controller.personPage)
     .register('/genre', Controller.genrePage)
-    .register('/people', Controller.peoplePage);
+    .register('/people', Controller.peoplePage)
+    .register('/search', Controller.searchPage);
 } else {
   router.register('/', Controller.offlinePage);
 }
@@ -135,7 +143,7 @@ if (navigator.onLine) {
 router.start();
 
 window.addEventListener('click', (evt) => {
-  if (evt.target.id.indexOf('playlist') == -1 && evt.target.id.indexOf('poster') == -1 && evt.target.id.indexOf('profile') == -1) {
+  if (evt.target.id.indexOf('playlist') === -1 && evt.target.id.indexOf('poster') === -1 && evt.target.id.indexOf('profile') === -1) {
 
   } else if (evt.target.id.indexOf('playlist') !== -1 || evt.target.id.indexOf('poster') !== -1) {
     evt.preventDefault();
