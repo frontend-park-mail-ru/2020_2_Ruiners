@@ -1,7 +1,6 @@
 import Controller from './Controllers/Controllers.js';
 import Bus from './modules/EventBus.js';
 import Router from './modules/Router.js';
-import styles from './static/CSS/main.scss';
 import './static/images/icons8-кинопроектор-96.png';
 import './static/images/login.jpg';
 import './static/images/offline.png';
@@ -10,7 +9,6 @@ import './static/images/search1.png';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import RateAndReviewService from './Services/rateAndReviewService.js';
 import { application, nav } from './config.js';
-import subscribeService from './Services/subscribeService';
 
 application.style.marginLeft = '10vmin';
 
@@ -66,10 +64,7 @@ Bus.on('logout', (res) => {
   }
 });
 
-Bus.on('navbarClick', (mainLink) => {
-  mainLink.render('click', () => {
-  });
-});
+
 
 Bus.on('loginSignup', (data) => {
   const {
@@ -119,6 +114,9 @@ Bus.on('Back', (button) => {
 
 Bus.on('redirectMain', () => {
   router.open('/');
+});
+
+Bus.on('navbarClick', (href) => {
 });
 
 const body = document.getElementById('body');

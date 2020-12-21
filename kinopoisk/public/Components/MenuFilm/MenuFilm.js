@@ -17,7 +17,12 @@ export default class MenuFilm {
       id: 'menuFilm',
       text: 'Подробнее',
     });
+    let isZero = false;
+    if (this.body.rating === 0) {
+      isZero = true;
+    }
     this.film.innerHTML = this.template({
+      isZero: isZero,
       body: this.body,
       styles,
       button: button.getTemplate(),
