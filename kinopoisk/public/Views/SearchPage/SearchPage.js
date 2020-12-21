@@ -75,10 +75,13 @@ export default class SearchPage extends Base {
     // функция, которая по написанной строке выводит фильмы
     const searchFunction = (evt) => {
       let str;
-      if (evt) {
+      if (evt && evt.charCode) {
         str = searchInput.value + String.fromCharCode(evt.charCode);
       } else {
         str = searchInput.value;
+      }
+      if (str === '') {
+        content.innerHTML = '';
       }
       Bus.emit('search', {
         str,
@@ -117,7 +120,7 @@ export default class SearchPage extends Base {
       });
     };
     const listener = debounce(searchFunction, 200);
-    searchInput.addEventListener('keypress', (evt) => listener(evt));
+    searchInput.addEventListener('input', (evt) => listener(evt));
   }
 
   createBox(par) {

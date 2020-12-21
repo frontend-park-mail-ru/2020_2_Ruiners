@@ -30,9 +30,10 @@ export default class Navbar {
     const href = document.createElement('a');
     href.innerHTML = 'KINO <img width="25", height="25" src="images/icons8-кинопроектор-96.png"/> PARK';
     Brand.appendChild(href);
-
-    const mainLink = new NavLink(href);
-    Bus.emit('navbarClick', mainLink);
+    href.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      Bus.emit('navbarClick', href);
+    });
 
     const FilmsObj = new List({
       parent: ul,

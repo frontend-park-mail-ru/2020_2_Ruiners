@@ -2,7 +2,11 @@
     <div class="{{ styles.menuFilm_titleContainer }}">
         <span class="{{ styles.menuFilm_title }}">{{ body.title }}</span>
         <span class="{{styles.menuFilm_description}}">{{body.description}}</span>
-        <span class="{{styles.menuFilm_rate}}">{{body.rating}}/10</span>
+        {{#if isZero}}
+            <span class="{{styles.menuFilm_rate}}">Нет оценок</span>
+        {{else}}
+            <span class="{{styles.menuFilm_rate}}">{{body.rating}}/10</span>
+        {{/if}}
         <div class="{{styles.menuFilm_button}}"> {{{button}}} </div>
     </div>
 </div>
