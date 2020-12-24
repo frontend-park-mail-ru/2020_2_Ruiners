@@ -22,13 +22,25 @@
   color: white;
 }
 
+.description_container {
+  border-radius: 10px;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 25%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.4) 75%, rgba(0, 0, 0, 0.6) 100%);
+  backdrop-filter: blur(6px);
+  margin-top: 20px;
+  width: 500px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
 .menuFilm_description {
   margin-top: 20px;
   margin-left: 20px;
   font-family: $font-info;
   font-size: 15px;
   color: $color-text;
-  width: 40%;
 }
 
 .menuFilm_button {
@@ -41,7 +53,7 @@
   margin-left: 20px;
   font-family: $font-info;
   font-size: 30px;
-  color: green;
+  color: $color-text;
   font-weight: bold;
 }
 

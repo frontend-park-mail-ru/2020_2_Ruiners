@@ -1,11 +1,15 @@
 import { createDiv } from '../../Views/Components.js';
 import styles from '../../static/CSS/main.scss';
+import stylesForm from './Form.scss';
 
 export default class Form {
   createInput(type, name, text) {
     const input = document.createElement('input');
     input.type = type;
     input.name = name;
+    if (type === 'file') {
+      input.className = stylesForm.Avatar;
+    }
     input.placeholder = text;
     return input;
   }

@@ -1,3 +1,6 @@
+@import "kinopoisk/public/static/CSS/fonts";
+@import "kinopoisk/public/static/CSS/colors";
+
 input {
     height: 32px;
     font-size: 15px;
@@ -20,6 +23,12 @@ input:-webkit-autofill:focus {
     border: 1px dotted #63476f;
     box-shadow: 0 0 0 1000px #edf8f6 inset,
     0 0 0 4px #edf8f6;
+}
+
+.Avatar {
+    box-shadow: none;
+    background-color: rgba(0,0,0,0);
+    color: white;
 }
 
 form main {

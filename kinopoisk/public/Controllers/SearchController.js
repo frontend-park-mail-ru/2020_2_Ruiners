@@ -5,7 +5,9 @@ import FilmService from '../Services/filmService';
 import PersonService from '../Services/personService';
 import UserService from '../Services/userService';
 
-export default function SearchController() {
+export default function SearchController(params) {
+  const { id } = params;
+  console.log(id);
   Bus.on('search', async (context) => {
     let { str, call } = context;
     str = str.trim();
@@ -38,5 +40,5 @@ export default function SearchController() {
   const page = new SearchPage({
     parent: application,
   });
-  page.render();
+  page.render(id);
 }

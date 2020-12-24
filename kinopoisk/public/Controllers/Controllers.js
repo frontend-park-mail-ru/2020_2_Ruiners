@@ -51,7 +51,7 @@ export default class Controller {
     PeopleController(params);
   }
 
-  static searchPage() {
-    SearchController();
+  static searchPage(params) {
+    SearchController(params);
   }
 }

@@ -8,6 +8,7 @@ import FriendList from '../../Components/FriendList/FriendList';
 import PersonLenta from '../../Components/PersonLenta/PersonLenta';
 import stylesSearchPage from './SearchPage.scss';
 import debounce from '../../modules/debounce';
+import unicodeToWin1251_UrlEncoded from '../../modules/enCode';
 
 export default class SearchPage extends Base {
   constructor(context) {
@@ -16,7 +17,7 @@ export default class SearchPage extends Base {
     this.parent = parent;
   }
 
-  render() {
+  render(value) {
     super.render(false);
     this.parent.innerHTML = '';
     const body = document.getElementById('body');
@@ -121,6 +122,10 @@ export default class SearchPage extends Base {
     };
     const listener = debounce(searchFunction, 200);
     searchInput.addEventListener('input', (evt) => listener(evt));
+    if (value) {
+      searchInput.value = unicodeToWin1251_UrlEncoded(value);
+      searchFunction();
+    }
   }
 
   createBox(par) {
