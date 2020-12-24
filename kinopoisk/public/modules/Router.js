@@ -31,6 +31,10 @@ export default class Router {
     route({ id });
   }
 
+  replaceSearch(path, value) {
+    window.history.replaceState(null, '', `${path}/${value}`);
+  }
+
   start() {
     this.root.addEventListener('click', (event) => {
       if (!(event.target instanceof HTMLAnchorElement)
