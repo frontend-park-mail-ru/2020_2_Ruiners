@@ -54,6 +54,11 @@ export default class MenuPage extends Base {
         genre: 'triller',
         parent: this.parent,
       },
+      {
+        rusGenre: 'Мультфильмы',
+        genre: 'mult',
+        parent: this.parent,
+      },
     ];
     Bus.emit('MenuFilms', {
       lentas,

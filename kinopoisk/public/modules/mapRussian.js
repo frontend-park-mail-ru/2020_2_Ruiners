@@ -5,10 +5,12 @@ export const MapRussian = {
   drama: 'Драма',
   war: 'Боевики',
   triller: 'Триллеры',
+  mult: 'Мультфильмы',
   Фантастика: 'fantasy',
   Комедия: 'comedy',
   Ужасы: 'horror',
   Драма: 'drama',
   Триллер: 'triller',
   Боевик: 'war',
+  Мультфильм: 'mult',
 };
