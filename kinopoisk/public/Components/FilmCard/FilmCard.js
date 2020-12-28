@@ -65,6 +65,10 @@ export default class FilmCard {
       Button: this.voteButton.getTemplate(),
       ButtonPlaylist: this.playlistButton.getTemplate(),
     });
+    if (this.body.MyRateBool) {
+      const starValue = document.getElementById(`star-${this.body.MyRate}`);
+      starValue.checked = true;
+    }
     const button = document.getElementById('vote');
     const err = document.createElement('div');
     err.className = `${stylesMain.success} ${stylesMain.succes__marginForFilmCard}`;

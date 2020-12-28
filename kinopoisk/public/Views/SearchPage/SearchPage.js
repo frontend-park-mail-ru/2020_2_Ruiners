@@ -8,6 +8,7 @@ import FriendList from '../../Components/FriendList/FriendList';
 import PersonLenta from '../../Components/PersonLenta/PersonLenta';
 import stylesSearchPage from './SearchPage.scss';
 import debounce from '../../modules/debounce';
+import unicodeToWin1251_UrlEncoded from '../../modules/enCode';
 
 export default class SearchPage extends Base {
   constructor(context) {
@@ -16,7 +17,7 @@ export default class SearchPage extends Base {
     this.parent = parent;
   }
 
-  render() {
+  render(value) {
     super.render(false);
     this.parent.innerHTML = '';
     const body = document.getElementById('body');
@@ -83,44 +84,105 @@ export default class SearchPage extends Base {
       if (str === '') {
         content.innerHTML = '';
       }
-      Bus.emit('search', {
-        str,
-        call: (films, persons, users) => {
-          content.innerHTML = '';
-          const lentaFilms = new FilmLenta({
-            parent: content,
-            genre: 'Фильмы',
-            body: films,
-          });
-          const lentaUsers = new FriendList({
-            search: true,
-            header: 'Люди',
-            parent: content,
-            body: users,
-          });
+      if (allBool) {
+        Bus.emit('search', {
+          str,
+          call: (films, persons, users) => {
+            content.innerHTML = '';
+            const lentaFilms = new FilmLenta({
+              parent: content,
+              genre: 'Фильмы',
+              body: films,
+            });
+            const lentaUsers = new FriendList({
+              search: true,
+              header: 'Люди',
+              parent: content,
+              body: users,
+            });
 
-          const lentaPersons = new PersonLenta({
-            parent: content,
-            body: persons,
-          });
+            const lentaPersons = new PersonLenta({
+              parent: content,
+              body: persons,
+            });
 
-          if (films.length !== 0 && (filmsBool || allBool)) {
-            lentaFilms.render();
-          }
+            if (films.length !== 0 && (filmsBool || allBool)) {
+              lentaFilms.render();
+            }
 
-          if (persons.length !== 0 && (actorsBool || allBool)) {
-            lentaPersons.render();
-          }
+            if (persons.length !== 0 && (actorsBool || allBool)) {
+              lentaPersons.render();
+            }
 
-          if (users.length !== 0 && (peopleBool || allBool)) {
-            lentaUsers.render();
-          }
-          const box = this.createBox(content);
-        },
-      });
+            if (users.length !== 0 && (peopleBool || allBool)) {
+              lentaUsers.render();
+            }
+            const box = this.createBox(content);
+          },
+        });
+      }
+      if (filmsBool) {
+        Bus.emit('searchFilm', {
+          str,
+          call: (films) => {
+            content.innerHTML = '';
+            const lentaFilms = new FilmLenta({
+              parent: content,
+              genre: 'Фильмы',
+              body: films,
+            });
+            if (films.length !== 0 && (filmsBool || allBool)) {
+              lentaFilms.render();
+            }
+            const box = this.createBox(content);
+          },
+        });
+      }
+      if (actorsBool) {
+        Bus.emit('searchActors', {
+          str,
+          call: (persons) => {
+            content.innerHTML = '';
+            const lentaPersons = new PersonLenta({
+              parent: content,
+              body: persons,
+            });
+            if (persons.length !== 0 && (actorsBool || allBool)) {
+              lentaPersons.render();
+            }
+            const box = this.createBox(content);
+          },
+        });
+      }
+      if (peopleBool) {
+        Bus.emit('searchPeople', {
+          str,
+          call: (users) => {
+            content.innerHTML = '';
+            const lentaUsers = new FriendList({
+              search: true,
+              header: 'Люди',
+              parent: content,
+              body: users,
+            });
+            if (users.length !== 0 && (peopleBool || allBool)) {
+              lentaUsers.render();
+            }
+            const box = this.createBox(content);
+          },
+        });
+      }
     };
     const listener = debounce(searchFunction, 200);
     searchInput.addEventListener('input', (evt) => listener(evt));
+    searchInput.addEventListener('focusout', () => {
+      window.history.replaceState(null, '', `/search/${searchInput.value}`);
+    });
+    if (value) {
+      const s = decodeURIComponent(value);
+      searchInput.value = s;
+      searchFunction();
+    }
   }
 
   createBox(par) {

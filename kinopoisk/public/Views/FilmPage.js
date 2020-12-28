@@ -88,14 +88,23 @@ export default class FilmPage extends Base {
               commentsObj.render();
               if (this.isAuthorized) {
                 const buttonComment = document.getElementById('msg_button');
-                buttonComment.addEventListener('click', (event) => {
+                const listener = () => {
                   Bus.emit('PlaceComment', {
                     responseBody,
-                    render: this.render.bind(this),
-                    playlists,
-                    similar,
                     buttonComment,
+                    call: (commentsBody) => {
+                      for (let i = 0; i < commentsBody.length; i++) {
+                        commentsBody[i].image = `${domain}/api/user/avatar/${`${commentsBody[i].user_id}?${Math.random()}`}`;
+                      }
+                      commentsObj.setBody(commentsBody);
+                      commentsObj.render();
+                      const buttonComm = document.getElementById('msg_button');
+                      buttonComm.addEventListener('click', () => { listener(); });
+                    },
                   });
+                };
+                buttonComment.addEventListener('click', (event) => {
+                  listener();
                 });
               }
             },

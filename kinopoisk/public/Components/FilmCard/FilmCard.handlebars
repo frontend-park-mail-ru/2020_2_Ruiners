@@ -53,16 +53,15 @@
     </div>
     {{#if isAuth}}
     <div class="{{styles.filmCard_info_header}}">Оценить</div>
-        {{#if MyRateBool}}
-            <span class="{{styles.filmCard_info__rate}}">Ваша текущая оценка: {{ MyRate }}/10</span>
-        {{/if}}
         <div class="{{styles.rating-area}}">
             {{#each stars}}
                 <input type="radio" id="star-{{this}}" name="rating" value="{{this}}">
                 <label for="star-{{this}}" title="Оценка «{{this}}»"></label>
             {{/each}}
         </div>
+    <div class="{{styles.rate_button}}">
         {{{ Button }}}
+    </div>
     {{/if}}
 
 </div>

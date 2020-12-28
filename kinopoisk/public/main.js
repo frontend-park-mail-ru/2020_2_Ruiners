@@ -9,6 +9,8 @@ import './static/images/search1.png';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import RateAndReviewService from './Services/rateAndReviewService.js';
 import { application, nav } from './config.js';
+import Notes from './Components/Notification/Notification';
+import debounce from './modules/debounce';
 
 application.style.marginLeft = '10vmin';
 
@@ -79,15 +81,25 @@ Bus.on('loginSignup', (data) => {
   }
 });
 
+const listen = function () {
+  const Note = new Notes({ body: 'Вы успешно проголосвали!', parent: application, success: true });
+  Note.render();
+  const f = function () {
+    Note.hide();
+  };
+  window.setTimeout(f, 2000);
+};
+
+const debounceListen = debounce(listen, 2000);
+
 Bus.on('Rate', (context) => {
   const {
-    id, index, err, card,
+    id, index,
   } = context;
   RateAndReviewService.Rate(id, index)
     .then((res) => {
       if (res.ok) {
-        err.textContent = 'Вы успешно проголосовали!';
-        card.appendChild(err);
+        debounceListen();
       }
     });
 });

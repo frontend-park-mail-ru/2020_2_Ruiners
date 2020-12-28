@@ -6,6 +6,7 @@ import playlistService from '../Services/playlistService.js';
 import FilmPage from '../Views/FilmPage.js';
 import { application } from '../config.js';
 import styles from '../static/CSS/main.scss';
+import Notes from '../Components/Notification/Notification';
 
 export default function Film(params) {
   const { id } = params;
@@ -23,7 +24,7 @@ export default function Film(params) {
   });
   Bus.on('PlaceComment', (context) => {
     const {
-      responseBody, render, buttonComment, playlists, similar,
+      responseBody, call, buttonComment,
     } = context;
     const form = document.getElementById('msg');
     if (form.value === '') {
@@ -34,7 +35,10 @@ export default function Film(params) {
       divError.appendChild(err);
     } else {
       filmService.PostReview(responseBody.id, form.value).then((res) => {
-        render(playlists, similar);
+        filmService.getByReviews(responseBody.id).then((result) => {
+          const comments = result.get;
+          call(comments);
+        });
       });
     }
   });
@@ -45,19 +49,29 @@ export default function Film(params) {
       call(comments);
     });
   });
+  const success = new Notes({ body: 'Вы успешно добавили фильм в плэйлист', parent: application, success: true });
+  const fail = new Notes({ body: 'Вы уже добавили этот фильм в плэйлист', parent: application, success: false });
+  const fSuccess = function () {
+    success.hide();
+  };
+  const fFail = function () {
+    fail.hide();
+  };
   Bus.on('addPlaylist', (context) => {
     const {
-      filmId, playlistId, error, success,
+      filmId, playlistId,
     } = context;
     playlistService.PostAdd(filmId, playlistId).then((res) => {
       if (res.ok) {
-        success.textContent = 'Вы успешно добавили фильм в плэйлист';
-        success.className = styles.success_add;
-        error.innerHTML = '';
+        fail.hide();
+        success.hide();
+        success.render();
+        window.setTimeout(fSuccess, 2000);
       } else {
-        error.textContent = 'Вы уже добавили этот фильм в плэйлист';
-        error.className = styles.error_add;
-        success.innerHTML = '';
+        success.hide();
+        fail.hide();
+        fail.render();
+        window.setTimeout(fFail, 2000);
       }
     });
   });
