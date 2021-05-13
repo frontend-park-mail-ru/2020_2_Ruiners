@@ -9,6 +9,7 @@ import News from '../../Components/News/News';
 import styles from '../../static/CSS/main.scss';
 import stylesProfilePage from './ProfilePage.scss';
 import SessionService from '../../Services/sessionService';
+import Notes from '../../Components/Notification/Notification';
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -208,6 +209,13 @@ export default class ProfilePage extends Base {
       callback: () => {
         if (createPlaylist.value !== '') {
           Bus.emit('CreatePlaylist', createPlaylist.value);
+        } else {
+          const fail = new Notes({ body: 'Пустое название!', parent: application, success: false });
+          const fFail = function () {
+            fail.hide();
+          };
+          fail.render();
+          window.setTimeout(fFail, 2000);
         }
       },
     });
