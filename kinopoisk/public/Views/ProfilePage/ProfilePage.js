@@ -61,7 +61,7 @@ export default class ProfilePage extends Base {
     const deleteUser = document.getElementById('deleteProfile');
     deleteUser.addEventListener('click', () => {
       SessionService.deleteUser().then((res) => {
-        super.render(false, 0);
+        super.render(true, 0);
         Bus.emit('DeleteUser', res);
       });
     });
