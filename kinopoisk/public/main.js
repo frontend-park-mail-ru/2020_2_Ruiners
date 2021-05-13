@@ -108,6 +108,14 @@ Bus.on('loginPasswordChange', (button) => {
   router.open('/profile');
 });
 
+Bus.on('DeleteUser', (res) => {
+  if (res.ok) {
+    router.open('/');
+  } else {
+    console.log(res.errmsg);
+  }
+});
+
 Bus.on('ProfilePage', () => {
   router.open('/profile', { id: 1 });
 });

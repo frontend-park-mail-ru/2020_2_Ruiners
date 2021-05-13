@@ -24,6 +24,7 @@ export default class Profile {
       isAuth: this.body.isAuth,
       isSub: this.body.isSub,
       button: this.body.button,
+      buttonDelete: this.body.buttonDelete,
       buttonSub: this.body.buttonSub,
       buttonUnsub: this.body.buttonUnsub,
       domain,

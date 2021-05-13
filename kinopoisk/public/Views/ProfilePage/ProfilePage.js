@@ -8,6 +8,7 @@ import FriendList from '../../Components/FriendList/FriendList';
 import News from '../../Components/News/News';
 import styles from '../../static/CSS/main.scss';
 import stylesProfilePage from './ProfilePage.scss';
+import SessionService from '../../Services/sessionService';
 
 export default class ProfilePage extends Base {
   constructor(parent, data) {
@@ -34,6 +35,13 @@ export default class ProfilePage extends Base {
       type: 'submit',
       parent: null,
     });
+    const buttonDeleteProfile = new Button({
+      templateClass: '',
+      text: 'Удалить аккаунт',
+      id: 'deleteProfile',
+      type: 'submit',
+      parent: null,
+    });
     const profile = new Profile({
       parent: this.parent,
       isProfile: true,
@@ -42,12 +50,20 @@ export default class ProfilePage extends Base {
         Login: responseBody.login,
         isAuth: true,
         button: button.getTemplate(),
+        buttonDelete: buttonDeleteProfile.getTemplate(),
       },
     });
     profile.render();
     const settings = document.getElementById('settings');
     settings.addEventListener('click', () => {
       Bus.emit('Change');
+    });
+    const deleteUser = document.getElementById('deleteProfile');
+    deleteUser.addEventListener('click', () => {
+      SessionService.deleteUser().then((res) => {
+        super.render(false, 0);
+        Bus.emit('DeleteUser', res);
+      });
     });
 
     const createPlaylist = document.createElement('input');

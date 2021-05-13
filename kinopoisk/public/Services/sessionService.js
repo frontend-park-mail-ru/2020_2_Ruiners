@@ -16,6 +16,11 @@ export default class SessionService {
     return res.status;
   }
 
+  static async fetchDelete() {
+    const res = await AjaxModule.ajaxGet({ url: '/api/user/delete' });
+    return res.status;
+  }
+
   static async fetchMe() {
     const res = await AjaxModule.ajaxGet({ url: '/api/me' });
     const parsedJsonObject = await res.json();
@@ -67,6 +72,17 @@ export default class SessionService {
   static async logout() {
     const data = { ok: false, errmsg: undefined };
     const res = await this.fetchLogout();
+    if (res !== 200) {
+      data.errmsg = 'bad request';
+    } else {
+      data.ok = true;
+    }
+    return data;
+  }
+
+  static async deleteUser() {
+    const data = { ok: false, errmsg: undefined };
+    const res = await this.fetchDelete();
     if (res !== 200) {
       data.errmsg = 'bad request';
     } else {
