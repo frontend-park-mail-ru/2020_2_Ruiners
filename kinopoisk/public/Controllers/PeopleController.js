@@ -34,16 +34,20 @@ export default function People(params) {
         });
     });
   });
-  Bus.on('subscribe', (user_id) => {
-    subscribeService.PostFollow(user_id).then((res) => {
+  Bus.on('subscribe', (data) => {
+    let {id, unsubscribe, par} = data;
+    subscribeService.PostFollow(id).then((res) => {
       if (res.ok) {
+        par.appendChild(unsubscribe);
         console.log('follow');
       }
     });
   });
-  Bus.on('unsubscribe', (user_id) => {
-    subscribeService.PostUnfollow(user_id).then((res) => {
+  Bus.on('unsubscribe', (data) => {
+    let {id, unsubscribe, par} = data;
+    subscribeService.PostUnfollow(id).then((res) => {
       if (res.ok) {
+        par.appendChild(unsubscribe);
         console.log('unfollow');
       }
     });

@@ -58,24 +58,21 @@ export default class PeoplePage extends Base {
         subscribe.remove();
         unsubscribe.className = `${stylesPeople.button} ${stylesPeople.button__red}`;
         unsubscribe.textContent = 'Отписаться';
-        par.appendChild(unsubscribe);
-        Bus.emit('subscribe', id);
+        Bus.emit('subscribe', {id: id, unsubscribe: unsubscribe, par: par });
       };
       const listenerUnsub = (evt) => {
         evt.preventDefault();
         unsubscribe.remove();
         subButton.className = stylesPeople.button;
         subButton.textContent = 'Подписаться';
-        par.appendChild(subButton);
-        Bus.emit('unsubscribe', id);
+        Bus.emit('unsubscribe', {id: id, unsubscribe: subButton, par: par });
       };
       const listenerSubscribe = (evt) => {
         evt.preventDefault();
         subButton.remove();
         unsubscribe.className = `${stylesPeople.button} ${stylesPeople.button__red}`;
         unsubscribe.textContent = 'Отписаться';
-        par.appendChild(unsubscribe);
-        Bus.emit('subscribe', id);
+        Bus.emit('subscribe', {id: id, unsubscribe: unsubscribe, par: par });
       };
       subscribe.addEventListener('click', listenerSub);
       unsubscribe.addEventListener('click', listenerUnsub);
@@ -92,8 +89,7 @@ export default class PeoplePage extends Base {
         unsub.remove();
         subButton.className = stylesPeople.button;
         subButton.textContent = 'Подписаться';
-        par.appendChild(subButton);
-        Bus.emit('unsubscribe', id);
+        Bus.emit('unsubscribe', {id: id, unsubscribe: subButton, par: par });
       };
       const listenerUnsub = (evt) => {
         evt.preventDefault();
@@ -108,8 +104,7 @@ export default class PeoplePage extends Base {
         subButton.remove();
         unsubscribe.className = `${stylesPeople.button} ${stylesPeople.button__red}`;
         unsubscribe.textContent = 'Отписаться';
-        par.appendChild(unsubscribe);
-        Bus.emit('subscribe', id);
+        Bus.emit('subscribe', {id: id, unsubscribe: unsubscribe, par: par });
       };
       unsub.addEventListener('click', listenerSub);
       unsubscribe.addEventListener('click', listenerUnsub);
