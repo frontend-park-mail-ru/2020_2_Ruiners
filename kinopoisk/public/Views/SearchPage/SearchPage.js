@@ -174,7 +174,11 @@ export default class SearchPage extends Base {
       }
     };
     const listener = debounce(searchFunction, 200);
-    searchInput.addEventListener('input', (evt) => listener(evt));
+    const listenerSearch = (evt) => {
+      listener(evt);
+      window.setTimeout(searchFunction, 500, evt);
+    };
+    searchInput.addEventListener('input', (evt) => listenerSearch(evt));
     searchInput.addEventListener('focusout', () => {
       window.history.replaceState(null, '', `/search/${searchInput.value}`);
     });
