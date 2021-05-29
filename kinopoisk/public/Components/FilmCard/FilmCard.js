@@ -4,6 +4,8 @@ import Bus from '../../modules/EventBus.js';
 import styles from './FilmCard.scss';
 import stylesMain from '../../static/CSS/main.scss';
 import { MapRussian } from '../../modules/mapRussian';
+import Notes from '../Notification/Notification';
+import { application } from '../../config';
 
 export default class FilmCard {
   constructor(context = {}) {
@@ -74,9 +76,11 @@ export default class FilmCard {
     err.className = `${stylesMain.success} ${stylesMain.succes__marginForFilmCard}`;
     if (this.isAuthorized) {
       button.addEventListener('click', (event) => {
+        let flag = true;
         for (let i = 1; i <= 10; i++) {
           const star = document.getElementById(`star-${i}`);
           if (star.checked) {
+            flag = false;
             Bus.emit('Rate', {
               id: this.body.id,
               index: i,
@@ -84,6 +88,14 @@ export default class FilmCard {
               card: this.card,
             });
           }
+        }
+        if (flag) {
+          const Note = new Notes({ body: 'Вы не выбрали голос!', parent: application, success: false });
+          Note.render();
+          const f = function () {
+            Note.hide();
+          };
+          window.setTimeout(f, 2000);
         }
       });
     }
