@@ -1,9 +1,9 @@
 {{#if success}}
     <div class="{{styles.notificationSuccess}}">
-        <span class="{{styles.text}}">{{body}}</span>
+        <span class="{{styles.text}}" id="notification">{{body}}</span>
     </div>
 {{else}}
     <div class="{{styles.notificationFail}}">
-        <span class="{{styles.text}}">{{body}}</span>
+        <span class="{{styles.text}}" id="notification">{{body}}</span>
     </div>
 {{/if}}
