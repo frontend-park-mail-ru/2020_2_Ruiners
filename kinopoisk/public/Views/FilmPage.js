@@ -2,10 +2,11 @@ import Base from './Base.js';
 import FilmCard from '../Components/FilmCard/FilmCard.js';
 import Comments from '../Components/Comments/Comments.js';
 import Bus from '../modules/EventBus.js';
-import { nav, domain } from '../config.js';
+import { nav, domain, application } from '../config.js';
 import filmService from '../Services/filmService';
 import FilmLenta from '../Components/FilmLenta/FilmLenta';
 import styles from '../static/CSS/main.scss';
+import Notes from '../Components/Notification/Notification';
 
 export default class FilmPage extends Base {
   constructor(context = {}) {
@@ -100,6 +101,12 @@ export default class FilmPage extends Base {
                       commentsObj.render();
                       const buttonComm = document.getElementById('msg_button');
                       buttonComm.addEventListener('click', () => { listener(); });
+                      const Note = new Notes({ body: 'Вы успешно оставили комментарий!', parent: application, success: true });
+                      Note.render();
+                      const f = function () {
+                        Note.hide();
+                      };
+                      window.setTimeout(f, 2000);
                     },
                   });
                 };
