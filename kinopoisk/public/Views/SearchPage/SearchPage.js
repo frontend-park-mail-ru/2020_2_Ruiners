@@ -175,6 +175,10 @@ export default class SearchPage extends Base {
     };
     const listener = debounce(searchFunction, 200);
     const endOfSearch = () => {
+      let element;
+      while ((element = document.getElementById('endOfSearch')) != null) {
+        element.remove();
+      }
       const end = document.createElement('span');
       end.textContent = 'Поиск окончен';
       end.id = 'endOfSearch';
