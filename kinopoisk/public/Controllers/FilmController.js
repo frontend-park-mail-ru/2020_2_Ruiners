@@ -28,11 +28,12 @@ export default function Film(params) {
     } = context;
     const form = document.getElementById('msg');
     if (form.value === '') {
-      const divError = buttonComment.parentElement;
-      const err = document.createElement('div');
-      err.textContent = 'Пустой отзыв';
-      err.className = styles.error;
-      divError.appendChild(err);
+      const Note = new Notes({ body: 'Пустой отзыв!', parent: application, success: false });
+      Note.render();
+      const f = function () {
+        Note.hide();
+      };
+      window.setTimeout(f, 2000);
     } else {
       filmService.PostReview(responseBody.id, form.value).then((res) => {
         filmService.getByReviews(responseBody.id).then((result) => {
