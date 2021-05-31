@@ -182,12 +182,12 @@ export default class SearchPage extends Base {
       content.appendChild(end);
     };
     const listenerSearch = (evt) => {
-      listener(evt);
       try {
         const e = document.getElementById('endOfSearch');
         e.remove();
       } catch (exeption) {
       }
+      listener(evt);
       window.setTimeout(searchFunction, 500, evt);
       try {
         const e = document.getElementById('endOfSearch');
