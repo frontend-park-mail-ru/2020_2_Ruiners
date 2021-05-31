@@ -174,9 +174,22 @@ export default class SearchPage extends Base {
       }
     };
     const listener = debounce(searchFunction, 200);
+    const endOfSearch = () => {
+      const end = document.createElement('span');
+      end.textContent = 'Поиск окончен';
+      end.id = 'endOfSearch';
+      end.className = styles.success;
+      content.appendChild(end);
+    };
     const listenerSearch = (evt) => {
+      try {
+        const e = document.getElementById('endOfSearch');
+        e.remove();
+      } catch (exeption) {
+      }
       listener(evt);
       window.setTimeout(searchFunction, 500, evt);
+      window.setTimeout(endOfSearch, 500);
     };
     searchInput.addEventListener('input', (evt) => listenerSearch(evt));
     searchInput.addEventListener('focusout', () => {
