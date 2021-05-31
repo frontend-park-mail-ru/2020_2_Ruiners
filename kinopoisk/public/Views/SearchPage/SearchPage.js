@@ -182,14 +182,19 @@ export default class SearchPage extends Base {
       content.appendChild(end);
     };
     const listenerSearch = (evt) => {
+      listener(evt);
       try {
         const e = document.getElementById('endOfSearch');
         e.remove();
       } catch (exeption) {
       }
-      listener(evt);
       window.setTimeout(searchFunction, 500, evt);
-      window.setTimeout(endOfSearch, 500);
+      try {
+        const e = document.getElementById('endOfSearch');
+        e.remove();
+      } catch (exeption) {
+      }
+      window.setTimeout(endOfSearch, 1000);
     };
     searchInput.addEventListener('input', (evt) => listenerSearch(evt));
     searchInput.addEventListener('focusout', () => {
