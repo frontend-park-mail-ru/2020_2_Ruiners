@@ -198,7 +198,7 @@ export default class SearchPage extends Base {
         e.remove();
       } catch (exeption) {
       }
-      window.setTimeout(endOfSearch, 1000);
+      window.setTimeout(endOfSearch, 2000);
     };
     searchInput.addEventListener('input', (evt) => listenerSearch(evt));
     searchInput.addEventListener('focusout', () => {
