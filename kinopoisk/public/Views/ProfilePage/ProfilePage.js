@@ -163,6 +163,12 @@ export default class ProfilePage extends Base {
         element.render();
       });
       box = this.createBox();
+      const Note = new Notes({ body: 'Плейлист удалён', parent: application, success: true });
+      Note.render();
+      const f = function () {
+        Note.hide();
+      };
+      window.setTimeout(f, 2000);
     });
     Bus.on('deleteFilm', (context) => {
       const { filmId, playlistId } = context;
@@ -188,6 +194,12 @@ export default class ProfilePage extends Base {
         element.render();
       });
       box = this.createBox();
+      const Note = new Notes({ body: 'Фильм удален', parent: application, success: true });
+      Note.render();
+      const f = function () {
+        Note.hide();
+      };
+      window.setTimeout(f, 2000);
     });
     Bus.on('removeFriend', (friendId) => {
       box.remove();
