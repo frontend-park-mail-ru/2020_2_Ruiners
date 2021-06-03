@@ -17,7 +17,7 @@ export default class Form {
   valid(form, reg, input, text) {
     const diver = createDiv(styles.error, form);
     input.onblur = function () {
-      if (!reg.test(this.value)) {
+      if (this.value.length < reg.min || this.value.length > reg.max) {
         this.classList.add('invalid');
         diver.innerHTML = text;
       }
