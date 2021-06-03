@@ -42,6 +42,7 @@ export default function Settings() {
               console.log(res.errmsg);
               err.innerHTML = res.errmsg;
               err.className = styles.error;
+              err.id = 'badMain';
               formAvatar.appendChild(err);
             }
           });

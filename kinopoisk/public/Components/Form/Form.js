@@ -14,12 +14,13 @@ export default class Form {
     return input;
   }
 
-  valid(form, reg, input, text) {
+  valid(form, reg, input, text, id) {
     const diver = createDiv(styles.error, form);
     input.onblur = function () {
       if (this.value.length < reg.min || this.value.length > reg.max) {
         this.classList.add('invalid');
         diver.innerHTML = text;
+        diver.id = id;
       }
     };
 
@@ -65,9 +66,9 @@ export default class Form {
 
     let i = 1;
     this.configInput.forEach((menuKey) => {
-      const { reg, errorVal } = menuKey;
+      const { reg, errorVal, id } = menuKey;
       if (menuKey.valid) {
-        this.valid(form, reg, formr[i], errorVal);
+        this.valid(form, reg, formr[i], errorVal, id);
       }
       i += 1;
     });

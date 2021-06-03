@@ -41,6 +41,7 @@ export default class ProfileChangePage extends Base {
           max: 15,
         },
         errorVal: 'Недопустимый логин(Должен быть от 5 до 15 символов)',
+        id: 'badLogin',
       },
     ];
 
@@ -82,6 +83,7 @@ export default class ProfileChangePage extends Base {
           max: 16,
         },
         errorVal: 'Недопустимый первый пароль(Должен быть от 8 до 16 символов)',
+        id: 'badNewPassword',
       },
       {
         type: 'password',
@@ -94,6 +96,7 @@ export default class ProfileChangePage extends Base {
           max: 16,
         },
         errorVal: '',
+        id: 'badNewSecondPassword',
       },
     ];
 
