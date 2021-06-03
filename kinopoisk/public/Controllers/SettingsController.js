@@ -47,6 +47,7 @@ export default function Settings() {
             }
           });
         } else {
+          err.id = 'differentPassword';
           err.innerHTML = 'Пароли не совпадают';
           err.className = styles.error;
           formPass.appendChild(err);
