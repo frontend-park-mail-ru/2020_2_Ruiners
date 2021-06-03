@@ -6,6 +6,7 @@ import PlaylistService from '../Services/playlistService.js';
 import playlistService from '../Services/playlistService.js';
 import SubscribeService from '../Services/subscribeService';
 import subscribeService from '../Services/subscribeService';
+import Notes from '../Components/Notification/Notification';
 
 export default function Profile(params) {
   let responseBody;
@@ -14,6 +15,12 @@ export default function Profile(params) {
     PlaylistService.PostCreate(title).then((res) => {
       if (res.ok) {
         Bus.emit('ProfilePage');
+        const Note = new Notes({ body: 'Плэйлист успешно создан!', parent: application, success: true });
+        Note.render();
+        const f = function () {
+          Note.hide();
+        };
+        window.setTimeout(f, 2000);
       }
     });
   });

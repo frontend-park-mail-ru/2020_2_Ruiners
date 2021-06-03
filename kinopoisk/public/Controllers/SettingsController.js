@@ -4,6 +4,7 @@ import userService from '../Services/userService.js';
 import sessionService from '../Services/sessionService.js';
 import ProfileChangePage from '../Views/ProfileChangePage/ProfileChangePage.js';
 import styles from '../static/CSS/main.scss';
+import Notes from '../Components/Notification/Notification';
 
 export default function Settings() {
   let responseBody;
@@ -31,6 +32,12 @@ export default function Settings() {
           userService.Change(login, PasswordOld, Password, formData).then((res) => {
             if (res.ok) {
               Bus.emit('ProfilePage');
+              const Note = new Notes({ body: 'Данные сохранены', parent: application, success: true });
+              Note.render();
+              const f = function () {
+                Note.hide();
+              };
+              window.setTimeout(f, 2000);
             } else {
               console.log(res.errmsg);
               err.innerHTML = res.errmsg;
