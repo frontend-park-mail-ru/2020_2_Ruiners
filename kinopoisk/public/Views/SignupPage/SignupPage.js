@@ -35,7 +35,10 @@ export default class SignupPage extends Base {
         text: 'Логин',
         required: true,
         valid: true,
-        reg: /[A-Za-z0-9]{5,15}/,
+        reg: {
+          min: 5,
+          max: 15,
+        },
         errorVal: 'Недопустимый логин(Должен быть от 5 до 15 символов)',
       },
       {
@@ -51,7 +54,10 @@ export default class SignupPage extends Base {
         text: 'Пароль',
         required: true,
         valid: true,
-        reg: /.{8,16}/,
+        reg: {
+          min: 8,
+          max: 16,
+        },
         errorVal: 'Недопустимый пароль(Должен быть от 8 до 16 символов)',
       },
     ];
